@@ -8,7 +8,7 @@
         "watch": "node scripts/build-bundles.js --watch"
     },
     "license": "Private",
-    "devDependencies": {
+    "dependencies": {
         "terser": "^5.48.0"
     }
 }
