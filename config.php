@@ -94,4 +94,3 @@ if (file_exists(__DIR__ . '/dev-config.php')) {
 define('LANG', 'en');
 define('IS_MOBILE', FALSE);
 define('IS_DESKTOP', TRUE);
-define('VERSION_AND_DEVICE', RELEASE . 'desktop');
