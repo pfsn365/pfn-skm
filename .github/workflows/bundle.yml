@@ -1,0 +1,82 @@
+name: Handle Bundle Workflow
+
+# When a PR is labelled "Bundle"/"bundle", build the 3 tool JS bundles
+# (content-hashed), upload them to S3, commit the regenerated
+# js-side-menu-config.php back to the PR, and comment the S3 URLs.
+#
+# Requires these repo secrets (same as skm): AWS_ACCESS_KEY_ID,
+# AWS_SECRET_ACCESS_KEY, AWS_REGION_SK. GITHUB_TOKEN is provided automatically.
+
+on:
+  pull_request:
+    types: [labeled]
+  workflow_dispatch:
+
+jobs:
+  build:
+    if: contains(github.event.label.name, 'Bundle') || contains(github.event.label.name, 'bundle')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build the bundles (hashed) + regenerate js-side-menu-config.php
+        run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION_SK }}
+
+      - name: Upload bundles to S3
+        id: upload
+        run: |
+          S3_URLS=""
+          for FILE in js/production/pfn-proxy/*-bundle-*.js; do
+            KEY="s3://static.sportskeeda.com/$FILE"
+            if aws s3 ls "$KEY" > /dev/null 2>&1; then
+              echo "$FILE already on S3 — skipping."
+            else
+              aws s3 cp "$FILE" "$KEY"
+              echo "Uploaded $FILE"
+            fi
+            S3_URLS="$S3_URLS"$'\n'"https://static.sportskeeda.com/$FILE"
+          done
+          # stash URLs for the PR comment
+          echo "urls<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$S3_URLS" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Commit regenerated config back to the PR
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git add js-side-menu-config.php
+          if git diff --cached --quiet; then
+            echo "js-side-menu-config.php unchanged — nothing to commit."
+          else
+            git commit -m "chore: update bundle hashes [skip ci]"
+            git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
+          fi
+
+      - name: Comment bundle URLs on the PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment "${{ github.event.pull_request.number }}" --body "## Bundle files uploaded to S3:
+          ${{ steps.upload.outputs.urls }}"

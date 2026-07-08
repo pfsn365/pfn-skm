@@ -13,6 +13,8 @@
  * Reach a tool with ?debug__proxy_tools=true (restrictAccess guard).
  */
 
+define('PFN_NFL_WEEK_NUMBER', "18");
+define('PFN_NFL_LOGO_CACHE_BUSTER', "00008");
 // ===== playoff-predictor (sk-proxy.php:1450-1510) =====
 
 $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
