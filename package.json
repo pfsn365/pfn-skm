@@ -1,0 +1,12 @@
+{
+    "name": "pfn-skm",
+    "version": "1.0.0",
+    "description": "Standalone extraction of 4 PFN tools (mock draft simulator, mock draft widget, playoff predictor, ultimate GM simulator) from the skm codebase.",
+    "scripts": {
+        "build": "node scripts/build-bundles.js"
+    },
+    "license": "Private",
+    "devDependencies": {
+        "terser": "^5.48.0"
+    }
+}

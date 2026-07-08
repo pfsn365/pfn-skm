@@ -1,0 +1,8 @@
+/vendor/
+/node_modules/
+/templates/_compiled/
+/templates/_cache/
+composer.phar
+*.log
+.DS_Store
+/js/production/

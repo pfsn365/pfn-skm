@@ -1,0 +1,12 @@
+const pickstart = 0;
+const roundends = [10, 32, 64, 97, 129, 161, 193, 225];
+const tradeinittoppick = [1.1, 1.3, 100];
+const tradeinittopten = [1, 1.5, 16];
+const tradeinitfirst = [1, 1.15, 15];
+const tradeinitallelse = [0.95, 1.1, 10];
+const maxPicksInPackage = 5; 
+const blockTradeUpPick = 0;
+const poolslice = [6,10,20,40];
+const highpickvalues = [40,20,15,12,8,5];
+const midpickvalues = [30,21,15,10,8,6,4,3,2,1];
+const lowpickvalues = [20,14,10,9,7,6,5,4,4,3,3,3,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];

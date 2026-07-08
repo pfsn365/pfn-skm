@@ -1,0 +1,1690 @@
+{
+  "Tools": [
+    {
+      "label": "NFL Mock Draft Simulator",
+      "url": "https://www.profootballnetwork.com/mockdraft"
+    },
+    {
+      "label": "NFL Playoff Predictor",
+      "url": "https://www.profootballnetwork.com/nfl-playoff-predictor/"
+    },
+    {
+      "label": "CFB Playoff Predictor",
+      "url": "https://www.profootballnetwork.com/college-football-playoff-predictor"
+    },
+    {
+      "label": "NFL Ultimate GM Simulator",
+      "url": "https://www.profootballnetwork.com/nfl-ultimate-gm-simulator/"
+    },
+    {
+      "label": "NBA Playoff Predictor",
+      "url": "https://www.profootballnetwork.com/nba-playoff-predictor/"
+    },
+    {
+      "label": "NBA Mock Draft Simulator",
+      "url": "https://www.profootballnetwork.com/nba-mock-draft-simulator"
+    },
+    {
+      "label": "Fantasy Mock Draft Simulator",
+      "url": "https://www.profootballnetwork.com/fantasy-football-mock-draft-simulator/"
+    },
+    {
+      "label": "MLB Playoff Predictor",
+      "url": "https://www.profootballnetwork.com/mlb-playoff-predictor/"
+    },
+    {
+      "label": "Power Rankings Builder",
+      "url": "https://www.profootballnetwork.com/nfl-power-rankings-builder/"
+    },
+    {
+      "label": "Team Name Generator",
+      "url": "https://www.profootballnetwork.com/fantasy-football-team-name-generator/"
+    },
+    {
+      "label": "NFL Player Guessing Game",
+      "url": "https://www.profootballnetwork.com/nfl-player-guessing-game/"
+    },
+    {
+      "label": "NFL Player Rankings Tool",
+      "url": "https://www.profootballnetwork.com/nfl-player-rankings-tool"
+    },
+    {
+      "label": "MLB Trade Analyzer",
+      "url": "https://www.profootballnetwork.com/fantasy-baseball-trade-analyzer/"
+    },
+    {
+      "label": "NFL Trade Analyzer",
+      "url": "https://www.profootballnetwork.com/fantasy-football-trade-analyzer/"
+    },
+    {
+      "label": "NFL Word Search Game",
+      "url": "https://www.profootballnetwork.com/nfl-wordsearch"
+    },
+    {
+      "label": "WWE Player Guessing Game",
+      "url": "https://www.profootballnetwork.com/wwe-player-guessing-game"
+    },
+    {
+      "label": "NBA Player Guessing Game",
+      "url": "https://www.profootballnetwork.com/nba-player-guessing-game"
+    },
+    {
+      "label": "Draft Prospect Guessing Game",
+      "url": "https://www.profootballnetwork.com/nfl-draft-prospect-guessing-game/"
+    },
+    {
+      "label": "Offseason Manager",
+      "url": "https://www.profootballnetwork.com/nfl-offseason-salary-cap-free-agency-manager"
+    },
+    {
+      "label": "Who Should I Draft",
+      "url": "https://www.profootballnetwork.com/who-should-i-draft-fantasy-football/"
+    },
+    {
+      "label": "NFL Wordle",
+      "url": "https://www.profootballnetwork.com/nfl-word-fumble-player-name-game/"
+    },
+    {
+      "label": "Who Should I Start",
+      "url": "https://www.profootballnetwork.com/who-should-i-start-fantasy-optimizer/"
+    },
+    {
+      "label": "DFS Lineup Optimizer",
+      "url": "https://www.profootballnetwork.com/nfl-dfs-optimizer-lineup-generator/"
+    },
+    {
+      "label": "Fantasy Football News Tracker",
+      "url": "https://www.profootballnetwork.com/nfl-player-news-injuries-transactions-fantasy/"
+    },
+    {
+      "label": "Fantasy Waiver Wire Tool",
+      "url": "https://www.profootballnetwork.com/fantasy-football-waiver-wire/"
+    },
+    {
+      "label": "Draft Order Generator",
+      "url": "https://www.profootballnetwork.com/fantasy-football-draft-order-generator-randomizer/"
+    },
+    {
+      "label": "Odds Calculator",
+      "url": "https://www.profootballnetwork.com/nfl-betting/betting-odds-calculator/"
+    },
+    {
+      "label": "Parlay Calculator",
+      "url": "https://www.profootballnetwork.com/nfl-betting/parlays-calculator/"
+    },
+    {
+      "label": "All Tools",
+      "url": "https://www.profootballnetwork.com/free-interactive-tools/"
+    }
+  ],
+  "Redraft Rankings": [
+    {
+      "label": "PPR Rankings",
+      "url": "https://www.profootballnetwork.com/ros-rest-of-season-fantasy-ppr-rankings/"
+    },
+    {
+      "label": "Half-PPR Rankings",
+      "url": "https://www.profootballnetwork.com/ros-rest-of-season-fantasy-half-ppr-rankings/"
+    },
+    {
+      "label": "Non-PPR Rankings",
+      "url": "https://www.profootballnetwork.com/ros-rest-of-season-fantasy-non-ppr-rankings/"
+    },
+    {
+      "label": "QB Rankings",
+      "url": "https://www.profootballnetwork.com/ros-rest-of-season-fantasy-qb-rankings/"
+    },
+    {
+      "label": "WR Rankings",
+      "url": "https://www.profootballnetwork.com/ros-rest-of-season-fantasy-wr-rankings/"
+    },
+    {
+      "label": "RB Rankings",
+      "url": "https://www.profootballnetwork.com/ros-rest-of-season-fantasy-rb-rankings/"
+    },
+    {
+      "label": "TE Rankings",
+      "url": "https://www.profootballnetwork.com/ros-rest-of-season-fantasy-te-rankings/"
+    },
+    {
+      "label": "Defense Rankings",
+      "url": "https://www.profootballnetwork.com/ros-rest-of-season-fantasy-defense-rankings/"
+    },
+    {
+      "label": "Kicker Rankings",
+      "url": "https://www.profootballnetwork.com/ros-rest-of-season-fantasy-kicker-rankings/"
+    },
+    {
+      "label": "Overall Rankings",
+      "url": "https://www.profootballnetwork.com/ros-rest-of-season-fantasy-football-rankings/"
+    }
+  ],
+  "Dynasty Rankings": [
+    {
+      "label": "PPR Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-ppr-fantasy-football-rankings/"
+    },
+    {
+      "label": "Half-PPR Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-half-ppr-fantasy-football-rankings/"
+    },
+    {
+      "label": "Non-PPR Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-non-ppr-fantasy-football-rankings/"
+    },
+    {
+      "label": "QB Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-fantasy-football-qb-rankings/"
+    },
+    {
+      "label": "WR Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-fantasy-football-wr-rankings/"
+    },
+    {
+      "label": "RB Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-fantasy-football-rb-rankings/"
+    },
+    {
+      "label": "TE Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-fantasy-football-te-rankings/"
+    },
+    {
+      "label": "Overall Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-fantasy-football-rankings/"
+    }
+  ],
+  "Weekly Rankings": [
+    {
+      "label": "PPR Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-ppr-rankings/"
+    },
+    {
+      "label": "Half-PPR Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-half-ppr-rankings/"
+    },
+    {
+      "label": "Non-PPR Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-non-ppr-rankings/"
+    },
+    {
+      "label": "QB Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-qb-rankings/"
+    },
+    {
+      "label": "WR Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-wr-rankings/"
+    },
+    {
+      "label": "RB Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-rb-rankings/"
+    },
+    {
+      "label": "TE Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-te-rankings/"
+    },
+    {
+      "label": "Defense Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-defense-rankings/"
+    },
+    {
+      "label": "Kicker Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-kicker-rankings/"
+    },
+    {
+      "label": "Overall Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-rankings/"
+    }
+  ],
+  "Teams": [
+    {
+      "label": "Arizona Cardinals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/arizona-cardinals/"
+    },
+    {
+      "label": "Atlanta Falcons",
+      "url": "https://www.profootballnetwork.com/nfl/teams/atlanta-falcons/"
+    },
+    {
+      "label": "Baltimore Ravens",
+      "url": "https://www.profootballnetwork.com/nfl/teams/baltimore-ravens/"
+    },
+    {
+      "label": "Buffalo Bills",
+      "url": "https://www.profootballnetwork.com/nfl/teams/buffalo-bills/"
+    },
+    {
+      "label": "Carolina Panthers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/carolina-panthers/"
+    },
+    {
+      "label": "Chicago Bears",
+      "url": "https://www.profootballnetwork.com/nfl/teams/chicago-bears/"
+    },
+    {
+      "label": "Cincinnati Bengals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cincinnati-bengals/"
+    },
+    {
+      "label": "Cleveland Browns",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cleveland-browns/"
+    },
+    {
+      "label": "Dallas Cowboys",
+      "url": "https://www.profootballnetwork.com/nfl/teams/dallas-cowboys/"
+    },
+    {
+      "label": "Denver Broncos",
+      "url": "https://www.profootballnetwork.com/nfl/teams/denver-broncos/"
+    },
+    {
+      "label": "Detroit Lions",
+      "url": "https://www.profootballnetwork.com/nfl/teams/detroit-lions/"
+    },
+    {
+      "label": "Green Bay Packers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/green-bay-packers/"
+    },
+    {
+      "label": "Houston Texans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/houston-texans/"
+    },
+    {
+      "label": "Indianapolis Colts",
+      "url": "https://www.profootballnetwork.com/nfl/teams/indianapolis-colts/"
+    },
+    {
+      "label": "Jacksonville Jaguars",
+      "url": "https://www.profootballnetwork.com/nfl/teams/jacksonville-jaguars/"
+    },
+    {
+      "label": "Kansas City Chiefs",
+      "url": "https://www.profootballnetwork.com/nfl/teams/kansas-city-chiefs/"
+    },
+    {
+      "label": "Las Vegas Raiders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/las-vegas-raiders/"
+    },
+    {
+      "label": "Los Angeles Chargers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-chargers/"
+    },
+    {
+      "label": "Los Angeles Rams",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-rams/"
+    },
+    {
+      "label": "Miami Dolphins",
+      "url": "https://www.profootballnetwork.com/nfl/teams/miami-dolphins/"
+    },
+    {
+      "label": "Minnesota Vikings",
+      "url": "https://www.profootballnetwork.com/nfl/teams/minnesota-vikings/"
+    },
+    {
+      "label": "New England Patriots",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-england-patriots/"
+    },
+    {
+      "label": "New Orleans Saints",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-orleans-saints/"
+    },
+    {
+      "label": "New York Giants",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-giants/"
+    },
+    {
+      "label": "New York Jets",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-jets/"
+    },
+    {
+      "label": "Philadelphia Eagles",
+      "url": "https://www.profootballnetwork.com/nfl/teams/philadelphia-eagles/"
+    },
+    {
+      "label": "Pittsburgh Steelers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/pittsburgh-steelers/"
+    },
+    {
+      "label": "San Francisco 49ers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/san-francisco-49ers/"
+    },
+    {
+      "label": "Seattle Seahawks",
+      "url": "https://www.profootballnetwork.com/nfl/teams/seattle-seahawks/"
+    },
+    {
+      "label": "Tampa Bay Buccaneers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tampa-bay-buccaneers/"
+    },
+    {
+      "label": "Tennessee Titans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tennessee-titans/"
+    },
+    {
+      "label": "Washington Commanders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/washington-commanders/"
+    }
+  ],
+  "Schedules": [
+    {
+      "label": "NFL Schedule",
+      "url": "https://www.profootballnetwork.com/nfl/schedule/"
+    },
+    {
+      "label": "Arizona Cardinals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/arizona-cardinals/schedule/"
+    },
+    {
+      "label": "Atlanta Falcons",
+      "url": "https://www.profootballnetwork.com/nfl/teams/atlanta-falcons/schedule/"
+    },
+    {
+      "label": "Baltimore Ravens",
+      "url": "https://www.profootballnetwork.com/nfl/teams/baltimore-ravens/schedule/"
+    },
+    {
+      "label": "Buffalo Bills",
+      "url": "https://www.profootballnetwork.com/nfl/teams/buffalo-bills/schedule/"
+    },
+    {
+      "label": "Carolina Panthers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/carolina-panthers/schedule/"
+    },
+    {
+      "label": "Chicago Bears",
+      "url": "https://www.profootballnetwork.com/nfl/teams/chicago-bears/schedule/"
+    },
+    {
+      "label": "Cincinnati Bengals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cincinnati-bengals/schedule/"
+    },
+    {
+      "label": "Cleveland Browns",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cleveland-browns/schedule/"
+    },
+    {
+      "label": "Dallas Cowboys",
+      "url": "https://www.profootballnetwork.com/nfl/teams/dallas-cowboys/schedule/"
+    },
+    {
+      "label": "Denver Broncos",
+      "url": "https://www.profootballnetwork.com/nfl/teams/denver-broncos/schedule/"
+    },
+    {
+      "label": "Detroit Lions",
+      "url": "https://www.profootballnetwork.com/nfl/teams/detroit-lions/schedule/"
+    },
+    {
+      "label": "Green Bay Packers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/green-bay-packers/schedule/"
+    },
+    {
+      "label": "Houston Texans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/houston-texans/schedule/"
+    },
+    {
+      "label": "Indianapolis Colts",
+      "url": "https://www.profootballnetwork.com/nfl/teams/indianapolis-colts/schedule/"
+    },
+    {
+      "label": "Jacksonville Jaguars",
+      "url": "https://www.profootballnetwork.com/nfl/teams/jacksonville-jaguars/schedule/"
+    },
+    {
+      "label": "Kansas City Chiefs",
+      "url": "https://www.profootballnetwork.com/nfl/teams/kansas-city-chiefs/schedule/"
+    },
+    {
+      "label": "Las Vegas Raiders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/las-vegas-raiders/schedule/"
+    },
+    {
+      "label": "Los Angeles Chargers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-chargers/schedule/"
+    },
+    {
+      "label": "Los Angeles Rams",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-rams/schedule/"
+    },
+    {
+      "label": "Miami Dolphins",
+      "url": "https://www.profootballnetwork.com/nfl/teams/miami-dolphins/schedule/"
+    },
+    {
+      "label": "Minnesota Vikings",
+      "url": "https://www.profootballnetwork.com/nfl/teams/minnesota-vikings/schedule/"
+    },
+    {
+      "label": "New England Patriots",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-england-patriots/schedule/"
+    },
+    {
+      "label": "New Orleans Saints",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-orleans-saints/schedule/"
+    },
+    {
+      "label": "New York Giants",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-giants/schedule/"
+    },
+    {
+      "label": "New York Jets",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-jets/schedule/"
+    },
+    {
+      "label": "Philadelphia Eagles",
+      "url": "https://www.profootballnetwork.com/nfl/teams/philadelphia-eagles/schedule/"
+    },
+    {
+      "label": "Pittsburgh Steelers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/pittsburgh-steelers/schedule/"
+    },
+    {
+      "label": "San Francisco 49ers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/san-francisco-49ers/schedule/"
+    },
+    {
+      "label": "Seattle Seahawks",
+      "url": "https://www.profootballnetwork.com/nfl/teams/seattle-seahawks/schedule/"
+    },
+    {
+      "label": "Tampa Bay Buccaneers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tampa-bay-buccaneers/schedule/"
+    },
+    {
+      "label": "Tennessee Titans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tennessee-titans/schedule/"
+    },
+    {
+      "label": "Washington Commanders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/washington-commanders/schedule/"
+    }
+  ],
+  "Stats": [
+    {
+      "label": "Arizona Cardinals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/arizona-cardinals/stats/"
+    },
+    {
+      "label": "Atlanta Falcons",
+      "url": "https://www.profootballnetwork.com/nfl/teams/atlanta-falcons/stats/"
+    },
+    {
+      "label": "Baltimore Ravens",
+      "url": "https://www.profootballnetwork.com/nfl/teams/baltimore-ravens/stats/"
+    },
+    {
+      "label": "Buffalo Bills",
+      "url": "https://www.profootballnetwork.com/nfl/teams/buffalo-bills/stats/"
+    },
+    {
+      "label": "Carolina Panthers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/carolina-panthers/stats/"
+    },
+    {
+      "label": "Chicago Bears",
+      "url": "https://www.profootballnetwork.com/nfl/teams/chicago-bears/stats/"
+    },
+    {
+      "label": "Cincinnati Bengals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cincinnati-bengals/stats/"
+    },
+    {
+      "label": "Cleveland Browns",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cleveland-browns/stats/"
+    },
+    {
+      "label": "Dallas Cowboys",
+      "url": "https://www.profootballnetwork.com/nfl/teams/dallas-cowboys/stats/"
+    },
+    {
+      "label": "Denver Broncos",
+      "url": "https://www.profootballnetwork.com/nfl/teams/denver-broncos/stats/"
+    },
+    {
+      "label": "Detroit Lions",
+      "url": "https://www.profootballnetwork.com/nfl/teams/detroit-lions/stats/"
+    },
+    {
+      "label": "Green Bay Packers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/green-bay-packers/stats/"
+    },
+    {
+      "label": "Houston Texans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/houston-texans/stats/"
+    },
+    {
+      "label": "Indianapolis Colts",
+      "url": "https://www.profootballnetwork.com/nfl/teams/indianapolis-colts/stats/"
+    },
+    {
+      "label": "Jacksonville Jaguars",
+      "url": "https://www.profootballnetwork.com/nfl/teams/jacksonville-jaguars/stats/"
+    },
+    {
+      "label": "Kansas City Chiefs",
+      "url": "https://www.profootballnetwork.com/nfl/teams/kansas-city-chiefs/stats/"
+    },
+    {
+      "label": "Las Vegas Raiders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/las-vegas-raiders/stats/"
+    },
+    {
+      "label": "Los Angeles Chargers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-chargers/stats/"
+    },
+    {
+      "label": "Los Angeles Rams",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-rams/stats/"
+    },
+    {
+      "label": "Miami Dolphins",
+      "url": "https://www.profootballnetwork.com/nfl/teams/miami-dolphins/stats/"
+    },
+    {
+      "label": "Minnesota Vikings",
+      "url": "https://www.profootballnetwork.com/nfl/teams/minnesota-vikings/stats/"
+    },
+    {
+      "label": "New England Patriots",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-england-patriots/stats/"
+    },
+    {
+      "label": "New Orleans Saints",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-orleans-saints/stats/"
+    },
+    {
+      "label": "New York Giants",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-giants/stats/"
+    },
+    {
+      "label": "New York Jets",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-jets/stats/"
+    },
+    {
+      "label": "Philadelphia Eagles",
+      "url": "https://www.profootballnetwork.com/nfl/teams/philadelphia-eagles/stats/"
+    },
+    {
+      "label": "Pittsburgh Steelers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/pittsburgh-steelers/stats/"
+    },
+    {
+      "label": "San Francisco 49ers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/san-francisco-49ers/stats/"
+    },
+    {
+      "label": "Seattle Seahawks",
+      "url": "https://www.profootballnetwork.com/nfl/teams/seattle-seahawks/stats/"
+    },
+    {
+      "label": "Tampa Bay Buccaneers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tampa-bay-buccaneers/stats/"
+    },
+    {
+      "label": "Tennessee Titans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tennessee-titans/stats/"
+    },
+    {
+      "label": "Washington Commanders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/washington-commanders/stats/"
+    }
+  ],
+  "Rosters": [
+    {
+      "label": "Arizona Cardinals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/arizona-cardinals/roster/"
+    },
+    {
+      "label": "Atlanta Falcons",
+      "url": "https://www.profootballnetwork.com/nfl/teams/atlanta-falcons/roster/"
+    },
+    {
+      "label": "Baltimore Ravens",
+      "url": "https://www.profootballnetwork.com/nfl/teams/baltimore-ravens/roster/"
+    },
+    {
+      "label": "Buffalo Bills",
+      "url": "https://www.profootballnetwork.com/nfl/teams/buffalo-bills/roster/"
+    },
+    {
+      "label": "Carolina Panthers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/carolina-panthers/roster/"
+    },
+    {
+      "label": "Chicago Bears",
+      "url": "https://www.profootballnetwork.com/nfl/teams/chicago-bears/roster/"
+    },
+    {
+      "label": "Cincinnati Bengals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cincinnati-bengals/roster/"
+    },
+    {
+      "label": "Cleveland Browns",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cleveland-browns/roster/"
+    },
+    {
+      "label": "Dallas Cowboys",
+      "url": "https://www.profootballnetwork.com/nfl/teams/dallas-cowboys/roster/"
+    },
+    {
+      "label": "Denver Broncos",
+      "url": "https://www.profootballnetwork.com/nfl/teams/denver-broncos/roster/"
+    },
+    {
+      "label": "Detroit Lions",
+      "url": "https://www.profootballnetwork.com/nfl/teams/detroit-lions/roster/"
+    },
+    {
+      "label": "Green Bay Packers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/green-bay-packers/roster/"
+    },
+    {
+      "label": "Houston Texans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/houston-texans/roster/"
+    },
+    {
+      "label": "Indianapolis Colts",
+      "url": "https://www.profootballnetwork.com/nfl/teams/indianapolis-colts/roster/"
+    },
+    {
+      "label": "Jacksonville Jaguars",
+      "url": "https://www.profootballnetwork.com/nfl/teams/jacksonville-jaguars/roster/"
+    },
+    {
+      "label": "Kansas City Chiefs",
+      "url": "https://www.profootballnetwork.com/nfl/teams/kansas-city-chiefs/roster/"
+    },
+    {
+      "label": "Las Vegas Raiders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/las-vegas-raiders/roster/"
+    },
+    {
+      "label": "Los Angeles Chargers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-chargers/roster/"
+    },
+    {
+      "label": "Los Angeles Rams",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-rams/roster/"
+    },
+    {
+      "label": "Miami Dolphins",
+      "url": "https://www.profootballnetwork.com/nfl/teams/miami-dolphins/roster/"
+    },
+    {
+      "label": "Minnesota Vikings",
+      "url": "https://www.profootballnetwork.com/nfl/teams/minnesota-vikings/roster/"
+    },
+    {
+      "label": "New England Patriots",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-england-patriots/roster/"
+    },
+    {
+      "label": "New Orleans Saints",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-orleans-saints/roster/"
+    },
+    {
+      "label": "New York Giants",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-giants/roster/"
+    },
+    {
+      "label": "New York Jets",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-jets/roster/"
+    },
+    {
+      "label": "Philadelphia Eagles",
+      "url": "https://www.profootballnetwork.com/nfl/teams/philadelphia-eagles/roster/"
+    },
+    {
+      "label": "Pittsburgh Steelers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/pittsburgh-steelers/roster/"
+    },
+    {
+      "label": "San Francisco 49ers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/san-francisco-49ers/roster/"
+    },
+    {
+      "label": "Seattle Seahawks",
+      "url": "https://www.profootballnetwork.com/nfl/teams/seattle-seahawks/roster/"
+    },
+    {
+      "label": "Tampa Bay Buccaneers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tampa-bay-buccaneers/roster/"
+    },
+    {
+      "label": "Tennessee Titans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tennessee-titans/roster/"
+    },
+    {
+      "label": "Washington Commanders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/washington-commanders/roster/"
+    }
+  ],
+  "Depth Charts": [
+    {
+      "label": "All",
+      "url": "https://www.profootballnetwork.com/nfl/depth-chart/"
+    },
+    {
+      "label": "Arizona Cardinals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/arizona-cardinals/depth-chart/"
+    },
+    {
+      "label": "Atlanta Falcons",
+      "url": "https://www.profootballnetwork.com/nfl/teams/atlanta-falcons/depth-chart/"
+    },
+    {
+      "label": "Baltimore Ravens",
+      "url": "https://www.profootballnetwork.com/nfl/teams/baltimore-ravens/depth-chart/"
+    },
+    {
+      "label": "Buffalo Bills",
+      "url": "https://www.profootballnetwork.com/nfl/teams/buffalo-bills/depth-chart/"
+    },
+    {
+      "label": "Carolina Panthers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/carolina-panthers/depth-chart/"
+    },
+    {
+      "label": "Chicago Bears",
+      "url": "https://www.profootballnetwork.com/nfl/teams/chicago-bears/depth-chart/"
+    },
+    {
+      "label": "Cincinnati Bengals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cincinnati-bengals/depth-chart/"
+    },
+    {
+      "label": "Cleveland Browns",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cleveland-browns/depth-chart/"
+    },
+    {
+      "label": "Dallas Cowboys",
+      "url": "https://www.profootballnetwork.com/nfl/teams/dallas-cowboys/depth-chart/"
+    },
+    {
+      "label": "Denver Broncos",
+      "url": "https://www.profootballnetwork.com/nfl/teams/denver-broncos/depth-chart/"
+    },
+    {
+      "label": "Detroit Lions",
+      "url": "https://www.profootballnetwork.com/nfl/teams/detroit-lions/depth-chart/"
+    },
+    {
+      "label": "Green Bay Packers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/green-bay-packers/depth-chart/"
+    },
+    {
+      "label": "Houston Texans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/houston-texans/depth-chart/"
+    },
+    {
+      "label": "Indianapolis Colts",
+      "url": "https://www.profootballnetwork.com/nfl/teams/indianapolis-colts/depth-chart/"
+    },
+    {
+      "label": "Jacksonville Jaguars",
+      "url": "https://www.profootballnetwork.com/nfl/teams/jacksonville-jaguars/depth-chart/"
+    },
+    {
+      "label": "Kansas City Chiefs",
+      "url": "https://www.profootballnetwork.com/nfl/teams/kansas-city-chiefs/depth-chart/"
+    },
+    {
+      "label": "Las Vegas Raiders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/las-vegas-raiders/depth-chart/"
+    },
+    {
+      "label": "Los Angeles Chargers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-chargers/depth-chart/"
+    },
+    {
+      "label": "Los Angeles Rams",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-rams/depth-chart/"
+    },
+    {
+      "label": "Miami Dolphins",
+      "url": "https://www.profootballnetwork.com/nfl/teams/miami-dolphins/depth-chart/"
+    },
+    {
+      "label": "Minnesota Vikings",
+      "url": "https://www.profootballnetwork.com/nfl/teams/minnesota-vikings/depth-chart/"
+    },
+    {
+      "label": "New England Patriots",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-england-patriots/depth-chart/"
+    },
+    {
+      "label": "New Orleans Saints",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-orleans-saints/depth-chart/"
+    },
+    {
+      "label": "New York Giants",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-giants/depth-chart/"
+    },
+    {
+      "label": "New York Jets",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-jets/depth-chart/"
+    },
+    {
+      "label": "Philadelphia Eagles",
+      "url": "https://www.profootballnetwork.com/nfl/teams/philadelphia-eagles/depth-chart/"
+    },
+    {
+      "label": "Pittsburgh Steelers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/pittsburgh-steelers/depth-chart/"
+    },
+    {
+      "label": "San Francisco 49ers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/san-francisco-49ers/depth-chart/"
+    },
+    {
+      "label": "Seattle Seahawks",
+      "url": "https://www.profootballnetwork.com/nfl/teams/seattle-seahawks/depth-chart/"
+    },
+    {
+      "label": "Tampa Bay Buccaneers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tampa-bay-buccaneers/depth-chart/"
+    },
+    {
+      "label": "Tennessee Titans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tennessee-titans/depth-chart/"
+    },
+    {
+      "label": "Washington Commanders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/washington-commanders/depth-chart/"
+    }
+  ],
+  "Transactions": [
+    {
+      "label": "All",
+      "url": "https://www.profootballnetwork.com/nfl-transactions/"
+    },
+    {
+      "label": "Arizona Cardinals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/arizona-cardinals/transactions/"
+    },
+    {
+      "label": "Atlanta Falcons",
+      "url": "https://www.profootballnetwork.com/nfl/teams/atlanta-falcons/transactions/"
+    },
+    {
+      "label": "Baltimore Ravens",
+      "url": "https://www.profootballnetwork.com/nfl/teams/baltimore-ravens/transactions/"
+    },
+    {
+      "label": "Buffalo Bills",
+      "url": "https://www.profootballnetwork.com/nfl/teams/buffalo-bills/transactions/"
+    },
+    {
+      "label": "Carolina Panthers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/carolina-panthers/transactions/"
+    },
+    {
+      "label": "Chicago Bears",
+      "url": "https://www.profootballnetwork.com/nfl/teams/chicago-bears/transactions/"
+    },
+    {
+      "label": "Cincinnati Bengals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cincinnati-bengals/transactions/"
+    },
+    {
+      "label": "Cleveland Browns",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cleveland-browns/transactions/"
+    },
+    {
+      "label": "Dallas Cowboys",
+      "url": "https://www.profootballnetwork.com/nfl/teams/dallas-cowboys/transactions/"
+    },
+    {
+      "label": "Denver Broncos",
+      "url": "https://www.profootballnetwork.com/nfl/teams/denver-broncos/transactions/"
+    },
+    {
+      "label": "Detroit Lions",
+      "url": "https://www.profootballnetwork.com/nfl/teams/detroit-lions/transactions/"
+    },
+    {
+      "label": "Green Bay Packers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/green-bay-packers/transactions/"
+    },
+    {
+      "label": "Houston Texans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/houston-texans/transactions/"
+    },
+    {
+      "label": "Indianapolis Colts",
+      "url": "https://www.profootballnetwork.com/nfl/teams/indianapolis-colts/transactions/"
+    },
+    {
+      "label": "Jacksonville Jaguars",
+      "url": "https://www.profootballnetwork.com/nfl/teams/jacksonville-jaguars/transactions/"
+    },
+    {
+      "label": "Kansas City Chiefs",
+      "url": "https://www.profootballnetwork.com/nfl/teams/kansas-city-chiefs/transactions/"
+    },
+    {
+      "label": "Las Vegas Raiders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/las-vegas-raiders/transactions/"
+    },
+    {
+      "label": "Los Angeles Chargers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-chargers/transactions/"
+    },
+    {
+      "label": "Los Angeles Rams",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-rams/transactions/"
+    },
+    {
+      "label": "Miami Dolphins",
+      "url": "https://www.profootballnetwork.com/nfl/teams/miami-dolphins/transactions/"
+    },
+    {
+      "label": "Minnesota Vikings",
+      "url": "https://www.profootballnetwork.com/nfl/teams/minnesota-vikings/transactions/"
+    },
+    {
+      "label": "New England Patriots",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-england-patriots/transactions/"
+    },
+    {
+      "label": "New Orleans Saints",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-orleans-saints/transactions/"
+    },
+    {
+      "label": "New York Giants",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-giants/transactions/"
+    },
+    {
+      "label": "New York Jets",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-jets/transactions/"
+    },
+    {
+      "label": "Philadelphia Eagles",
+      "url": "https://www.profootballnetwork.com/nfl/teams/philadelphia-eagles/transactions/"
+    },
+    {
+      "label": "Pittsburgh Steelers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/pittsburgh-steelers/transactions/"
+    },
+    {
+      "label": "San Francisco 49ers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/san-francisco-49ers/transactions/"
+    },
+    {
+      "label": "Seattle Seahawks",
+      "url": "https://www.profootballnetwork.com/nfl/teams/seattle-seahawks/transactions/"
+    },
+    {
+      "label": "Tampa Bay Buccaneers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tampa-bay-buccaneers/transactions/"
+    },
+    {
+      "label": "Tennessee Titans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tennessee-titans/transactions/"
+    },
+    {
+      "label": "Washington Commanders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/washington-commanders/transactions/"
+    }
+  ],
+  "Injury Reports": [
+    {
+      "label": "All",
+      "url": "https://www.profootballnetwork.com/nfl-injury-report/"
+    },
+    {
+      "label": "Arizona Cardinals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/arizona-cardinals/injury-report/"
+    },
+    {
+      "label": "Atlanta Falcons",
+      "url": "https://www.profootballnetwork.com/nfl/teams/atlanta-falcons/injury-report/"
+    },
+    {
+      "label": "Baltimore Ravens",
+      "url": "https://www.profootballnetwork.com/nfl/teams/baltimore-ravens/injury-report/"
+    },
+    {
+      "label": "Buffalo Bills",
+      "url": "https://www.profootballnetwork.com/nfl/teams/buffalo-bills/injury-report/"
+    },
+    {
+      "label": "Carolina Panthers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/carolina-panthers/injury-report/"
+    },
+    {
+      "label": "Chicago Bears",
+      "url": "https://www.profootballnetwork.com/nfl/teams/chicago-bears/injury-report/"
+    },
+    {
+      "label": "Cincinnati Bengals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cincinnati-bengals/injury-report/"
+    },
+    {
+      "label": "Cleveland Browns",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cleveland-browns/injury-report/"
+    },
+    {
+      "label": "Dallas Cowboys",
+      "url": "https://www.profootballnetwork.com/nfl/teams/dallas-cowboys/injury-report/"
+    },
+    {
+      "label": "Denver Broncos",
+      "url": "https://www.profootballnetwork.com/nfl/teams/denver-broncos/injury-report/"
+    },
+    {
+      "label": "Detroit Lions",
+      "url": "https://www.profootballnetwork.com/nfl/teams/detroit-lions/injury-report/"
+    },
+    {
+      "label": "Green Bay Packers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/green-bay-packers/injury-report/"
+    },
+    {
+      "label": "Houston Texans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/houston-texans/injury-report/"
+    },
+    {
+      "label": "Indianapolis Colts",
+      "url": "https://www.profootballnetwork.com/nfl/teams/indianapolis-colts/injury-report/"
+    },
+    {
+      "label": "Jacksonville Jaguars",
+      "url": "https://www.profootballnetwork.com/nfl/teams/jacksonville-jaguars/injury-report/"
+    },
+    {
+      "label": "Kansas City Chiefs",
+      "url": "https://www.profootballnetwork.com/nfl/teams/kansas-city-chiefs/injury-report/"
+    },
+    {
+      "label": "Las Vegas Raiders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/las-vegas-raiders/injury-report/"
+    },
+    {
+      "label": "Los Angeles Chargers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-chargers/injury-report/"
+    },
+    {
+      "label": "Los Angeles Rams",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-rams/injury-report/"
+    },
+    {
+      "label": "Miami Dolphins",
+      "url": "https://www.profootballnetwork.com/nfl/teams/miami-dolphins/injury-report/"
+    },
+    {
+      "label": "Minnesota Vikings",
+      "url": "https://www.profootballnetwork.com/nfl/teams/minnesota-vikings/injury-report/"
+    },
+    {
+      "label": "New England Patriots",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-england-patriots/injury-report/"
+    },
+    {
+      "label": "New Orleans Saints",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-orleans-saints/injury-report/"
+    },
+    {
+      "label": "New York Giants",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-giants/injury-report/"
+    },
+    {
+      "label": "New York Jets",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-jets/injury-report/"
+    },
+    {
+      "label": "Philadelphia Eagles",
+      "url": "https://www.profootballnetwork.com/nfl/teams/philadelphia-eagles/injury-report/"
+    },
+    {
+      "label": "Pittsburgh Steelers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/pittsburgh-steelers/injury-report/"
+    },
+    {
+      "label": "San Francisco 49ers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/san-francisco-49ers/injury-report/"
+    },
+    {
+      "label": "Seattle Seahawks",
+      "url": "https://www.profootballnetwork.com/nfl/teams/seattle-seahawks/injury-report/"
+    },
+    {
+      "label": "Tampa Bay Buccaneers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tampa-bay-buccaneers/injury-report/"
+    },
+    {
+      "label": "Tennessee Titans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tennessee-titans/injury-report/"
+    },
+    {
+      "label": "Washington Commanders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/washington-commanders/injury-report/"
+    }
+  ],
+  "Players": [
+    {
+      "label": "Mock Draft Simulator",
+      "url": "https://www.profootballnetwork.com/mockdraft/"
+    },
+    {
+      "label": "Playoff Predictor",
+      "url": "https://www.profootballnetwork.com/nfl-playoff-predictor/"
+    },
+    {
+      "label": "Trade Analyzer",
+      "url": "https://www.profootballnetwork.com/fantasy-football-trade-analyzer/"
+    },
+    {
+      "label": "Redraft Trade Value Charts",
+      "url": "https://www.profootballnetwork.com/fantasy-football-trade-value-charts/"
+    },
+    {
+      "label": "Dynasty Trade Value Charts",
+      "url": "https://www.profootballnetwork.com/dynasty-fantasy-football-trade-value-charts/"
+    },
+    {
+      "label": "PPR Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-ppr-rankings/"
+    },
+    {
+      "label": "Half-PPR Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-half-ppr-rankings/"
+    },
+    {
+      "label": "Non-PPR Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-non-ppr-rankings/"
+    },
+    {
+      "label": "QB Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-qb-rankings/"
+    },
+    {
+      "label": "WR Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-wr-rankings/"
+    },
+    {
+      "label": "RB Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-rb-rankings/"
+    },
+    {
+      "label": "TE Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-te-rankings/"
+    },
+    {
+      "label": "Defense Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-defense-rankings/"
+    },
+    {
+      "label": "Kicker Rankings",
+      "url": "https://www.profootballnetwork.com/fantasy-football-kicker-rankings/"
+    },
+    {
+      "label": "Who Should I Start",
+      "url": "https://www.profootballnetwork.com/who-should-i-start-fantasy-optimizer/"
+    },
+    {
+      "label": "DFS Lineup Optimizer",
+      "url": "https://www.profootballnetwork.com/nfl-dfs-optimizer-lineup-generator/"
+    },
+    {
+      "label": "Fantasy Football News Tracker",
+      "url": "https://www.profootballnetwork.com/nfl-player-news-injuries-transactions-fantasy/"
+    },
+    {
+      "label": "Team Name Generator",
+      "url": "https://www.profootballnetwork.com/fantasy-football-team-name-generator/"
+    },
+    {
+      "label": "NFL Wordle",
+      "url": "https://www.profootballnetwork.com/nfl-word-fumble-player-name-game/"
+    },
+    {
+      "label": "Who Should I Draft",
+      "url": "https://www.profootballnetwork.com/who-should-i-draft-fantasy-football/"
+    },
+    {
+      "label": "Draft Order Generator",
+      "url": "https://www.profootballnetwork.com/fantasy-football-draft-order-generator-randomizer/"
+    },
+    {
+      "label": "Odds Calculator",
+      "url": "https://www.profootballnetwork.com/nfl-betting/betting-odds-calculator/"
+    },
+    {
+      "label": "Parlay Calculator",
+      "url": "https://www.profootballnetwork.com/nfl-betting/parlays-calculator/"
+    }
+  ],
+  "Trade Value Charts": [
+    {
+      "label": "PSFN Home",
+      "url": "https://www.profootballnetwork.com/"
+    },
+    {
+      "label": "Redraft Trade Value Charts",
+      "url": "https://www.profootballnetwork.com/fantasy-football-trade-value-charts/"
+    },
+    {
+      "label": "Dynasty Trade Value Charts",
+      "url": "https://www.profootballnetwork.com/dynasty-fantasy-football-trade-value-charts/"
+    },
+    {
+      "label": "PPR Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-ppr-fantasy-football-rankings/"
+    },
+    {
+      "label": "Half-PPR Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-half-ppr-fantasy-football-rankings/"
+    },
+    {
+      "label": "Non-PPR Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-non-ppr-fantasy-football-rankings/"
+    },
+    {
+      "label": "QB Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-fantasy-football-qb-rankings/"
+    },
+    {
+      "label": "WR Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-fantasy-football-wr-rankings/"
+    },
+    {
+      "label": "RB Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-fantasy-football-rb-rankings/"
+    },
+    {
+      "label": "TE Rankings",
+      "url": "https://www.profootballnetwork.com/dynasty-fantasy-football-te-rankings/"
+    },
+    {
+      "label": "Mock Draft Simulator",
+      "url": "https://www.profootballnetwork.com/mockdraft/"
+    },
+    {
+      "label": "Playoff Predictor",
+      "url": "https://www.profootballnetwork.com/nfl-playoff-predictor/"
+    },
+    {
+      "label": "Start/Sit Optimizer",
+      "url": "https://www.profootballnetwork.com/who-should-i-start-fantasy-optimizer/"
+    },
+    {
+      "label": "Injury Reports",
+      "url": "https://www.profootballnetwork.com/nfl-injury-report/"
+    },
+    {
+      "label": "Trade Analyzer",
+      "url": "https://www.profootballnetwork.com/fantasy-football-trade-analyzer/"
+    }
+  ],
+  "Trending": [
+    {
+      "label": "NFL Mock Draft Simulator",
+      "url": "https://www.profootballnetwork.com/mockdraft"
+    },
+    {
+      "label": "NBA Mock Draft Simulator",
+      "url": "https://www.profootballnetwork.com/nba-mock-draft-simulator"
+    },
+    {
+      "label": "Fantasy Mock Draft Simulator",
+      "url": "https://www.profootballnetwork.com/fantasy-football-mock-draft-simulator/"
+    },
+    {
+      "label": "NFL Playoff Predictor",
+      "url": "https://www.profootballnetwork.com/nfl-playoff-predictor/"
+    },
+    {
+      "label": "CFB Playoff Predictor",
+      "url": "https://www.profootballnetwork.com/college-football-playoff-predictor"
+    },
+    {
+      "label": "NFL Player Guessing Game",
+      "url": "https://www.profootballnetwork.com/nfl-player-guessing-game/"
+    },
+    {
+      "label": "Trade Analyzer",
+      "url": "https://www.profootballnetwork.com/fantasy-football-trade-analyzer/"
+    },
+    {
+      "label": "NFL Word Search Game",
+      "url": "https://www.profootballnetwork.com/nfl-wordsearch"
+    },
+    {
+      "label": "WWE Player Guessing Game",
+      "url": "https://www.profootballnetwork.com/wwe-player-guessing-game"
+    },
+    {
+      "label": "NBA Player Guessing Game",
+      "url": "https://www.profootballnetwork.com/nba-player-guessing-game"
+    },
+    {
+      "label": "Draft Prospect Guessing Game",
+      "url": "https://www.profootballnetwork.com/nfl-draft-prospect-guessing-game/"
+    },
+    {
+      "label": "Team Name Generator",
+      "url": "https://www.profootballnetwork.com/fantasy-football-team-name-generator/"
+    },
+    {
+      "label": "Offseason Manager",
+      "url": "https://www.profootballnetwork.com/nfl-offseason-salary-cap-free-agency-manager"
+    },
+    {
+      "label": "Who Should I Draft",
+      "url": "https://www.profootballnetwork.com/who-should-i-draft-fantasy-football/"
+    },
+    {
+      "label": "Big Board Builder",
+      "url": "https://www.profootballnetwork.com/nfl-draft-big-board-builder"
+    },
+    {
+      "label": "NFL Wordle",
+      "url": "https://www.profootballnetwork.com/nfl-word-fumble-player-name-game/"
+    },
+    {
+      "label": "NFL Draft Rankings",
+      "url": "https://www.profootballnetwork.com/nfl-draft-prospect-rankings"
+    },
+    {
+      "label": "NFL Draft Order & Results",
+      "url": "https://www.profootballnetwork.com/current-nfl-draft-order"
+    },
+    {
+      "label": "Salary Cap Tracker",
+      "url": "https://www.profootballnetwork.com/nfl-salary-cap-space-by-team"
+    },
+    {
+      "label": "Who Should I Start",
+      "url": "https://www.profootballnetwork.com/who-should-i-start-fantasy-optimizer/"
+    },
+    {
+      "label": "DFS Lineup Optimizer",
+      "url": "https://www.profootballnetwork.com/nfl-dfs-optimizer-lineup-generator/"
+    },
+    {
+      "label": "Fantasy Football News Tracker",
+      "url": "https://www.profootballnetwork.com/nfl-player-news-injuries-transactions-fantasy/"
+    },
+    {
+      "label": "Fantasy Waiver Wire Tool",
+      "url": "https://www.profootballnetwork.com/fantasy-football-waiver-wire/"
+    },
+    {
+      "label": "Draft Order Generator",
+      "url": "https://www.profootballnetwork.com/fantasy-football-draft-order-generator-randomizer/"
+    },
+    {
+      "label": "Odds Calculator",
+      "url": "https://www.profootballnetwork.com/nfl-betting/betting-odds-calculator/"
+    },
+    {
+      "label": "Parlay Calculator",
+      "url": "https://www.profootballnetwork.com/nfl-betting/parlays-calculator/"
+    },
+    {
+      "label": "All Tools",
+      "url": "https://www.profootballnetwork.com/free-interactive-tools/"
+    }
+  ],
+  "Draft Picks": [
+    {
+      "label": "Arizona Cardinals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/arizona-cardinals/draft-picks"
+    },
+    {
+      "label": "Atlanta Falcons",
+      "url": "https://www.profootballnetwork.com/nfl/teams/atlanta-falcons/draft-picks"
+    },
+    {
+      "label": "Baltimore Ravens",
+      "url": "https://www.profootballnetwork.com/nfl/teams/baltimore-ravens/draft-picks"
+    },
+    {
+      "label": "Buffalo Bills",
+      "url": "https://www.profootballnetwork.com/nfl/teams/buffalo-bills/draft-picks"
+    },
+    {
+      "label": "Carolina Panthers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/carolina-panthers/draft-picks"
+    },
+    {
+      "label": "Chicago Bears",
+      "url": "https://www.profootballnetwork.com/nfl/teams/chicago-bears/draft-picks"
+    },
+    {
+      "label": "Cincinnati Bengals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cincinnati-bengals/draft-picks"
+    },
+    {
+      "label": "Cleveland Browns",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cleveland-browns/draft-picks"
+    },
+    {
+      "label": "Dallas Cowboys",
+      "url": "https://www.profootballnetwork.com/nfl/teams/dallas-cowboys/draft-picks"
+    },
+    {
+      "label": "Denver Broncos",
+      "url": "https://www.profootballnetwork.com/nfl/teams/denver-broncos/draft-picks"
+    },
+    {
+      "label": "Detroit Lions",
+      "url": "https://www.profootballnetwork.com/nfl/teams/detroit-lions/draft-picks"
+    },
+    {
+      "label": "Green Bay Packers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/green-bay-packers/draft-picks"
+    },
+    {
+      "label": "Houston Texans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/houston-texans/draft-picks"
+    },
+    {
+      "label": "Indianapolis Colts",
+      "url": "https://www.profootballnetwork.com/nfl/teams/indianapolis-colts/draft-picks"
+    },
+    {
+      "label": "Jacksonville Jaguars",
+      "url": "https://www.profootballnetwork.com/nfl/teams/jacksonville-jaguars/draft-picks"
+    },
+    {
+      "label": "Kansas City Chiefs",
+      "url": "https://www.profootballnetwork.com/nfl/teams/kansas-city-chiefs/draft-picks"
+    },
+    {
+      "label": "Las Vegas Raiders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/las-vegas-raiders/draft-picks"
+    },
+    {
+      "label": "Los Angeles Chargers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-chargers/draft-picks"
+    },
+    {
+      "label": "Los Angeles Rams",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-rams/draft-picks"
+    },
+    {
+      "label": "Miami Dolphins",
+      "url": "https://www.profootballnetwork.com/nfl/teams/miami-dolphins/draft-picks"
+    },
+    {
+      "label": "Minnesota Vikings",
+      "url": "https://www.profootballnetwork.com/nfl/teams/minnesota-vikings/draft-picks"
+    },
+    {
+      "label": "New England Patriots",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-england-patriots/draft-picks"
+    },
+    {
+      "label": "New Orleans Saints",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-orleans-saints/draft-picks"
+    },
+    {
+      "label": "New York Giants",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-giants/draft-picks"
+    },
+    {
+      "label": "New York Jets",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-jets/draft-picks"
+    },
+    {
+      "label": "Philadelphia Eagles",
+      "url": "https://www.profootballnetwork.com/nfl/teams/philadelphia-eagles/draft-picks"
+    },
+    {
+      "label": "Pittsburgh Steelers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/pittsburgh-steelers/draft-picks"
+    },
+    {
+      "label": "San Francisco 49ers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/san-francisco-49ers/draft-picks"
+    },
+    {
+      "label": "Seattle Seahawks",
+      "url": "https://www.profootballnetwork.com/nfl/teams/seattle-seahawks/draft-picks"
+    },
+    {
+      "label": "Tampa Bay Buccaneers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tampa-bay-buccaneers/draft-picks"
+    },
+    {
+      "label": "Tennessee Titans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tennessee-titans/draft-picks"
+    },
+    {
+      "label": "Washington Commanders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/washington-commanders/draft-picks"
+    }
+  ],
+  "Salary Cap": [
+    {
+      "label": "Arizona Cardinals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/arizona-cardinals/salary-cap"
+    },
+    {
+      "label": "Atlanta Falcons",
+      "url": "https://www.profootballnetwork.com/nfl/teams/atlanta-falcons/salary-cap"
+    },
+    {
+      "label": "Baltimore Ravens",
+      "url": "https://www.profootballnetwork.com/nfl/teams/baltimore-ravens/salary-cap"
+    },
+    {
+      "label": "Buffalo Bills",
+      "url": "https://www.profootballnetwork.com/nfl/teams/buffalo-bills/salary-cap"
+    },
+    {
+      "label": "Carolina Panthers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/carolina-panthers/salary-cap"
+    },
+    {
+      "label": "Chicago Bears",
+      "url": "https://www.profootballnetwork.com/nfl/teams/chicago-bears/salary-cap"
+    },
+    {
+      "label": "Cincinnati Bengals",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cincinnati-bengals/salary-cap"
+    },
+    {
+      "label": "Cleveland Browns",
+      "url": "https://www.profootballnetwork.com/nfl/teams/cleveland-browns/salary-cap"
+    },
+    {
+      "label": "Dallas Cowboys",
+      "url": "https://www.profootballnetwork.com/nfl/teams/dallas-cowboys/salary-cap"
+    },
+    {
+      "label": "Denver Broncos",
+      "url": "https://www.profootballnetwork.com/nfl/teams/denver-broncos/salary-cap"
+    },
+    {
+      "label": "Detroit Lions",
+      "url": "https://www.profootballnetwork.com/nfl/teams/detroit-lions/salary-cap"
+    },
+    {
+      "label": "Green Bay Packers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/green-bay-packers/salary-cap"
+    },
+    {
+      "label": "Houston Texans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/houston-texans/salary-cap"
+    },
+    {
+      "label": "Indianapolis Colts",
+      "url": "https://www.profootballnetwork.com/nfl/teams/indianapolis-colts/salary-cap"
+    },
+    {
+      "label": "Jacksonville Jaguars",
+      "url": "https://www.profootballnetwork.com/nfl/teams/jacksonville-jaguars/salary-cap"
+    },
+    {
+      "label": "Kansas City Chiefs",
+      "url": "https://www.profootballnetwork.com/nfl/teams/kansas-city-chiefs/salary-cap"
+    },
+    {
+      "label": "Las Vegas Raiders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/las-vegas-raiders/salary-cap"
+    },
+    {
+      "label": "Los Angeles Chargers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-chargers/salary-cap"
+    },
+    {
+      "label": "Los Angeles Rams",
+      "url": "https://www.profootballnetwork.com/nfl/teams/los-angeles-rams/salary-cap"
+    },
+    {
+      "label": "Miami Dolphins",
+      "url": "https://www.profootballnetwork.com/nfl/teams/miami-dolphins/salary-cap"
+    },
+    {
+      "label": "Minnesota Vikings",
+      "url": "https://www.profootballnetwork.com/nfl/teams/minnesota-vikings/salary-cap"
+    },
+    {
+      "label": "New England Patriots",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-england-patriots/salary-cap"
+    },
+    {
+      "label": "New Orleans Saints",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-orleans-saints/salary-cap"
+    },
+    {
+      "label": "New York Giants",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-giants/salary-cap"
+    },
+    {
+      "label": "New York Jets",
+      "url": "https://www.profootballnetwork.com/nfl/teams/new-york-jets/salary-cap"
+    },
+    {
+      "label": "Philadelphia Eagles",
+      "url": "https://www.profootballnetwork.com/nfl/teams/philadelphia-eagles/salary-cap"
+    },
+    {
+      "label": "Pittsburgh Steelers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/pittsburgh-steelers/salary-cap"
+    },
+    {
+      "label": "San Francisco 49ers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/san-francisco-49ers/salary-cap"
+    },
+    {
+      "label": "Seattle Seahawks",
+      "url": "https://www.profootballnetwork.com/nfl/teams/seattle-seahawks/salary-cap"
+    },
+    {
+      "label": "Tampa Bay Buccaneers",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tampa-bay-buccaneers/salary-cap"
+    },
+    {
+      "label": "Tennessee Titans",
+      "url": "https://www.profootballnetwork.com/nfl/teams/tennessee-titans/salary-cap"
+    },
+    {
+      "label": "Washington Commanders",
+      "url": "https://www.profootballnetwork.com/nfl/teams/washington-commanders/salary-cap"
+    }
+  ]
+}

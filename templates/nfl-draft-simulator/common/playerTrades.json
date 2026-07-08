@@ -1,0 +1,2954 @@
+[
+  {
+    "Team": "ARI",
+    "Player": "Trey McBride",
+    "Position": "TE",
+    "Value": 450
+  },
+  {
+    "Team": "ARI",
+    "Player": "Walter Nolen",
+    "Position": "DT",
+    "Value": 200
+  },
+  {
+    "Team": "ARI",
+    "Player": "Josh Sweat",
+    "Position": "EDGE",
+    "Value": 125
+  },
+  {
+    "Team": "ARI",
+    "Player": "Budda Baker",
+    "Position": "S",
+    "Value": 80
+  },
+  {
+    "Team": "ARI",
+    "Player": "Marvin Harrison Jr.",
+    "Position": "WR",
+    "Value": 80
+  },
+  {
+    "Team": "ARI",
+    "Player": "Denzel Burke",
+    "Position": "CB",
+    "Value": 50
+  },
+  {
+    "Team": "ARI",
+    "Player": "Garrett Williams",
+    "Position": "CB",
+    "Value": 50
+  },
+  {
+    "Team": "ARI",
+    "Player": "Baron Browning",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "ARI",
+    "Player": "Dalvin Tomlinson",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "ARI",
+    "Player": "Jacoby Brissett",
+    "Position": "QB",
+    "Value": 35
+  },
+  {
+    "Team": "ARI",
+    "Player": "Michael Wilson",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "ARI",
+    "Player": "Paris Johnson Jr.",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "ARI",
+    "Player": "Sean Murphy-Bunting",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "ARI",
+    "Player": "James Conner",
+    "Position": "RB",
+    "Value": 5
+  },
+  {
+    "Team": "ATL",
+    "Player": "Bijan Robinson",
+    "Position": "RB",
+    "Value": 400
+  },
+  {
+    "Team": "ATL",
+    "Player": "Chris Lindstrom",
+    "Position": "OG",
+    "Value": 250
+  },
+  {
+    "Team": "ATL",
+    "Player": "Drake London",
+    "Position": "WR",
+    "Value": 250
+  },
+  {
+    "Team": "ATL",
+    "Player": "James Pearce Jr.",
+    "Position": "EDGE",
+    "Value": 250
+  },
+  {
+    "Team": "ATL",
+    "Player": "Kyle Pitts",
+    "Position": "TE",
+    "Value": 250
+  },
+  {
+    "Team": "ATL",
+    "Player": "Michael Penix Jr.",
+    "Position": "QB",
+    "Value": 250
+  },
+  {
+    "Team": "ATL",
+    "Player": "Jalon Walker",
+    "Position": "EDGE",
+    "Value": 200
+  },
+  {
+    "Team": "ATL",
+    "Player": "A.J. Terrell",
+    "Position": "CB",
+    "Value": 180
+  },
+  {
+    "Team": "ATL",
+    "Player": "Jessie Bates",
+    "Position": "S",
+    "Value": 150
+  },
+  {
+    "Team": "ATL",
+    "Player": "Matthew Bergeron",
+    "Position": "OG",
+    "Value": 50
+  },
+  {
+    "Team": "ATL",
+    "Player": "Xavier Watts",
+    "Position": "S",
+    "Value": 50
+  },
+  {
+    "Team": "ATL",
+    "Player": "Divine Deablo",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "ATL",
+    "Player": "Jake Matthews",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "ATL",
+    "Player": "Jessie Bates",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "ATL",
+    "Player": "Kaleb McGary",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "ATL",
+    "Player": "Ryan Neuzil",
+    "Position": "OC",
+    "Value": 35
+  },
+  {
+    "Team": "ATL",
+    "Player": "Xavier Watts",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "BAL",
+    "Player": "Lamar Jackson",
+    "Position": "QB",
+    "Value": 1400
+  },
+  {
+    "Team": "BAL",
+    "Player": "Kyle Hamilton",
+    "Position": "S",
+    "Value": 250
+  },
+  {
+    "Team": "BAL",
+    "Player": "Roger Rosengarten",
+    "Position": "OT",
+    "Value": 200
+  },
+  {
+    "Team": "BAL",
+    "Player": "Roquan Smith",
+    "Position": "LB",
+    "Value": 200
+  },
+  {
+    "Team": "BAL",
+    "Player": "Zay Flowers",
+    "Position": "WR",
+    "Value": 150
+  },
+  {
+    "Team": "BAL",
+    "Player": "Derrick Henry",
+    "Position": "RB",
+    "Value": 100
+  },
+  {
+    "Team": "BAL",
+    "Player": "Marlon Humphrey",
+    "Position": "CB",
+    "Value": 100
+  },
+  {
+    "Team": "BAL",
+    "Player": "Mark Andrews",
+    "Position": "TE",
+    "Value": 75
+  },
+  {
+    "Team": "BAL",
+    "Player": "Nnamdi Madubuike",
+    "Position": "DT",
+    "Value": 75
+  },
+  {
+    "Team": "BAL",
+    "Player": "Nate Wiggins",
+    "Position": "CB",
+    "Value": 50
+  },
+  {
+    "Team": "BAL",
+    "Player": "Travis Jones",
+    "Position": "DT",
+    "Value": 50
+  },
+  {
+    "Team": "BAL",
+    "Player": "Malaki Starks",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "BAL",
+    "Player": "Rashod Bateman",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "BAL",
+    "Player": "Roquan Smith",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "BAL",
+    "Player": "Trenton Simpson",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "BAL",
+    "Player": "Ronnie Stanley",
+    "Position": "OT",
+    "Value": 25
+  },
+  {
+    "Team": "BUF",
+    "Player": "Josh Allen",
+    "Position": "QB",
+    "Value": 1400
+  },
+  {
+    "Team": "BUF",
+    "Player": "James Cook III",
+    "Position": "RB",
+    "Value": 250
+  },
+  {
+    "Team": "BUF",
+    "Player": "Christian Benford",
+    "Position": "CB",
+    "Value": 200
+  },
+  {
+    "Team": "BUF",
+    "Player": "Dalton Kincaid",
+    "Position": "TE",
+    "Value": 150
+  },
+  {
+    "Team": "BUF",
+    "Player": "Khalil Shakir",
+    "Position": "WR",
+    "Value": 150
+  },
+  {
+    "Team": "BUF",
+    "Player": "Terrel Bernard",
+    "Position": "LB",
+    "Value": 150
+  },
+  {
+    "Team": "BUF",
+    "Player": "DJ Moore",
+    "Position": "WR",
+    "Value": 75
+  },
+  {
+    "Team": "BUF",
+    "Player": "Ed Oliver",
+    "Position": "DT",
+    "Value": 75
+  },
+  {
+    "Team": "BUF",
+    "Player": "Gregory Rousseau",
+    "Position": "EDGE",
+    "Value": 75
+  },
+  {
+    "Team": "BUF",
+    "Player": "Khalil Shakir",
+    "Position": "WR",
+    "Value": 75
+  },
+  {
+    "Team": "BUF",
+    "Player": "Cole Bishop",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "BUF",
+    "Player": "Dawson Knox",
+    "Position": "TE",
+    "Value": 35
+  },
+  {
+    "Team": "BUF",
+    "Player": "Dion Dawkins",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "BUF",
+    "Player": "Ray Davis",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "BUF",
+    "Player": "Keon Coleman",
+    "Position": "WR",
+    "Value": 16
+  },
+  {
+    "Team": "CAR",
+    "Player": "Bryce Young",
+    "Position": "QB",
+    "Value": 1200
+  },
+  {
+    "Team": "CAR",
+    "Player": "Tetairoa McMillan",
+    "Position": "WR",
+    "Value": 450
+  },
+  {
+    "Team": "CAR",
+    "Player": "Taylor Moton",
+    "Position": "OT",
+    "Value": 250
+  },
+  {
+    "Team": "CAR",
+    "Player": "Jaycee Horn",
+    "Position": "CB",
+    "Value": 125
+  },
+  {
+    "Team": "CAR",
+    "Player": "Tre'von Moehrig",
+    "Position": "S",
+    "Value": 100
+  },
+  {
+    "Team": "CAR",
+    "Player": "Damien Lewis",
+    "Position": "OG",
+    "Value": 75
+  },
+  {
+    "Team": "CAR",
+    "Player": "Jalen Coker",
+    "Position": "WR",
+    "Value": 75
+  },
+  {
+    "Team": "CAR",
+    "Player": "Ikem Ekwonu",
+    "Position": "OT",
+    "Value": 50
+  },
+  {
+    "Team": "CAR",
+    "Player": "Mike Jackson",
+    "Position": "CB",
+    "Value": 50
+  },
+  {
+    "Team": "CAR",
+    "Player": "Tershawn Wharton",
+    "Position": "DT",
+    "Value": 50
+  },
+  {
+    "Team": "CAR",
+    "Player": "A'Shawn Robinson",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "CAR",
+    "Player": "Derrick Brown",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "CAR",
+    "Player": "Nick Scott",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "CAR",
+    "Player": "Robert Hunt",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "CAR",
+    "Player": "Chuba Hubbard",
+    "Position": "RB",
+    "Value": 16
+  },
+  {
+    "Team": "CHI",
+    "Player": "Caleb Williams",
+    "Position": "QB",
+    "Value": 1250
+  },
+  {
+    "Team": "CHI",
+    "Player": "Colston Loveland",
+    "Position": "TE",
+    "Value": 250
+  },
+  {
+    "Team": "CHI",
+    "Player": "Ozzy Trapilo",
+    "Position": "OT",
+    "Value": 200
+  },
+  {
+    "Team": "CHI",
+    "Player": "Luther Burden III",
+    "Position": "WR",
+    "Value": 175
+  },
+  {
+    "Team": "CHI",
+    "Player": "Rome Odunze",
+    "Position": "WR",
+    "Value": 175
+  },
+  {
+    "Team": "CHI",
+    "Player": "Gervon Dexter Sr.",
+    "Position": "DT",
+    "Value": 150
+  },
+  {
+    "Team": "CHI",
+    "Player": "Montez Sweat",
+    "Position": "EDGE",
+    "Value": 100
+  },
+  {
+    "Team": "CHI",
+    "Player": "Darnell Wright",
+    "Position": "OT",
+    "Value": 80
+  },
+  {
+    "Team": "CHI",
+    "Player": "Cole Kmet",
+    "Position": "TE",
+    "Value": 75
+  },
+  {
+    "Team": "CHI",
+    "Player": "T.J. Edwards",
+    "Position": "LB",
+    "Value": 75
+  },
+  {
+    "Team": "CHI",
+    "Player": "Joe Thuney",
+    "Position": "OG",
+    "Value": 50
+  },
+  {
+    "Team": "CHI",
+    "Player": "Grady Jarrett",
+    "Position": "DT",
+    "Value": 40
+  },
+  {
+    "Team": "CHI",
+    "Player": "Austin Booker",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "CHI",
+    "Player": "Jaylon Johnson",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "CHI",
+    "Player": "Kyle Monangai",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "CHI",
+    "Player": "Kyler Gordon",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "CHI",
+    "Player": "Tyson Bagent",
+    "Position": "QB",
+    "Value": 35
+  },
+  {
+    "Team": "CHI",
+    "Player": "D'Andre Swift",
+    "Position": "RB",
+    "Value": 25
+  },
+  {
+    "Team": "CIN",
+    "Player": "Joe Burrow",
+    "Position": "QB",
+    "Value": 1250
+  },
+  {
+    "Team": "CIN",
+    "Player": "Ja'Marr Chase",
+    "Position": "WR",
+    "Value": 450
+  },
+  {
+    "Team": "CIN",
+    "Player": "Tee Higgins",
+    "Position": "WR",
+    "Value": 175
+  },
+  {
+    "Team": "CIN",
+    "Player": "Amarius Mims",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "CIN",
+    "Player": "B.J. Hill",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "CIN",
+    "Player": "Chase Brown",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "CIN",
+    "Player": "Dalton Risner",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "CIN",
+    "Player": "Dax Hill",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "CIN",
+    "Player": "DJ Turner II",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "CIN",
+    "Player": "Evan McPherson",
+    "Position": "K",
+    "Value": 35
+  },
+  {
+    "Team": "CIN",
+    "Player": "Jordan Battle",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "CIN",
+    "Player": "Orlando Brown Jr.",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "CIN",
+    "Player": "Ted Karras",
+    "Position": "OC",
+    "Value": 35
+  },
+  {
+    "Team": "CLE",
+    "Player": "Myles Garrett",
+    "Position": "EDGE",
+    "Value": 525
+  },
+  {
+    "Team": "CLE",
+    "Player": "Carson Schwesinger",
+    "Position": "LB",
+    "Value": 175
+  },
+  {
+    "Team": "CLE",
+    "Player": "Maliek Collins",
+    "Position": "DT",
+    "Value": 175
+  },
+  {
+    "Team": "CLE",
+    "Player": "Quinshon Judkins",
+    "Position": "RB",
+    "Value": 150
+  },
+  {
+    "Team": "CLE",
+    "Player": "Harold Fanin Jr.",
+    "Position": "TE",
+    "Value": 125
+  },
+  {
+    "Team": "CLE",
+    "Player": "Denzel Ward",
+    "Position": "CB",
+    "Value": 100
+  },
+  {
+    "Team": "CLE",
+    "Player": "Tyson Campbell",
+    "Position": "CB",
+    "Value": 100
+  },
+  {
+    "Team": "CLE",
+    "Player": "Shedeur Sanders",
+    "Position": "QB",
+    "Value": 80
+  },
+  {
+    "Team": "CLE",
+    "Player": "Grant Delpit",
+    "Position": "S",
+    "Value": 50
+  },
+  {
+    "Team": "CLE",
+    "Player": "Mason Graham",
+    "Position": "DT",
+    "Value": 40
+  },
+  {
+    "Team": "CLE",
+    "Player": "Alex Wright",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "CLE",
+    "Player": "Cedric Tillman",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "CLE",
+    "Player": "Jerry Jeudy",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "DAL",
+    "Player": "Dak Prescott",
+    "Position": "QB",
+    "Value": 1250
+  },
+  {
+    "Team": "DAL",
+    "Player": "CeeDee Lamb",
+    "Position": "WR",
+    "Value": 450
+  },
+  {
+    "Team": "DAL",
+    "Player": "Quinnen Williams",
+    "Position": "DT",
+    "Value": 400
+  },
+  {
+    "Team": "DAL",
+    "Player": "George Pickens",
+    "Position": "WR",
+    "Value": 250
+  },
+  {
+    "Team": "DAL",
+    "Player": "Tyler Smith",
+    "Position": "OG",
+    "Value": 100
+  },
+  {
+    "Team": "DAL",
+    "Player": "Jake Ferguson",
+    "Position": "TE",
+    "Value": 75
+  },
+  {
+    "Team": "DAL",
+    "Player": "Cooper Beebe",
+    "Position": "OC",
+    "Value": 70
+  },
+  {
+    "Team": "DAL",
+    "Player": "Javonte Williams",
+    "Position": "RB",
+    "Value": 50
+  },
+  {
+    "Team": "DAL",
+    "Player": "DaRon Bland",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "DAL",
+    "Player": "DeMarvion Overshown",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "DAL",
+    "Player": "Donovan Ezeiruaku",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "DAL",
+    "Player": "Kenny Clark",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "DAL",
+    "Player": "Malik Hooker",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "DAL",
+    "Player": "Shemar James",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "DAL",
+    "Player": "Tyler Booker",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "DAL",
+    "Player": "Tyler Guyton",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "DAL",
+    "Player": "Joe Milton III",
+    "Position": "QB",
+    "Value": 2
+  },
+  {
+    "Team": "DEN",
+    "Player": "Bo Nix",
+    "Position": "QB",
+    "Value": 1200
+  },
+  {
+    "Team": "DEN",
+    "Player": "Patrick Surtain II",
+    "Position": "CB",
+    "Value": 525
+  },
+  {
+    "Team": "DEN",
+    "Player": "Garett Bolles",
+    "Position": "OT",
+    "Value": 150
+  },
+  {
+    "Team": "DEN",
+    "Player": "Nik Bonitto",
+    "Position": "EDGE",
+    "Value": 150
+  },
+  {
+    "Team": "DEN",
+    "Player": "Luke Wattenberg",
+    "Position": "OC",
+    "Value": 100
+  },
+  {
+    "Team": "DEN",
+    "Player": "Quinn Meinerz",
+    "Position": "OG",
+    "Value": 100
+  },
+  {
+    "Team": "DEN",
+    "Player": "Talanoa Hufanga",
+    "Position": "S",
+    "Value": 100
+  },
+  {
+    "Team": "DEN",
+    "Player": "Zach Allen",
+    "Position": "DT",
+    "Value": 100
+  },
+  {
+    "Team": "DEN",
+    "Player": "Courtland Sutton",
+    "Position": "WR",
+    "Value": 80
+  },
+  {
+    "Team": "DEN",
+    "Player": "DJ Jones",
+    "Position": "DT",
+    "Value": 50
+  },
+  {
+    "Team": "DEN",
+    "Player": "Ben Powers",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "DEN",
+    "Player": "Brandon Jones",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "DEN",
+    "Player": "Dre Greenlaw",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "DEN",
+    "Player": "Jonathon Cooper",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "DEN",
+    "Player": "Malcolm Roach",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "DEN",
+    "Player": "Mike McGlinchey",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "DEN",
+    "Player": "Riley Moss",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "DEN",
+    "Player": "Troy Franklin",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "DEN",
+    "Player": "Jarrett Stidham",
+    "Position": "QB",
+    "Value": 24
+  },
+  {
+    "Team": "DEN",
+    "Player": "Evan Engram",
+    "Position": "TE",
+    "Value": 16
+  },
+  {
+    "Team": "DET",
+    "Player": "Jared Goff",
+    "Position": "QB",
+    "Value": 1050
+  },
+  {
+    "Team": "DET",
+    "Player": "Jahmyr Gibbs",
+    "Position": "RB",
+    "Value": 525
+  },
+  {
+    "Team": "DET",
+    "Player": "Penei Sewell",
+    "Position": "OT",
+    "Value": 525
+  },
+  {
+    "Team": "DET",
+    "Player": "Aidan Hutchinson",
+    "Position": "EDGE",
+    "Value": 450
+  },
+  {
+    "Team": "DET",
+    "Player": "Amon-Ra St. Brown",
+    "Position": "WR",
+    "Value": 450
+  },
+  {
+    "Team": "DET",
+    "Player": "Jameson Williams",
+    "Position": "WR",
+    "Value": 180
+  },
+  {
+    "Team": "DET",
+    "Player": "Brian Branch",
+    "Position": "S",
+    "Value": 100
+  },
+  {
+    "Team": "DET",
+    "Player": "Jack Campbell",
+    "Position": "LB",
+    "Value": 100
+  },
+  {
+    "Team": "DET",
+    "Player": "Sam LaPorta",
+    "Position": "TE",
+    "Value": 100
+  },
+  {
+    "Team": "DET",
+    "Player": "Alim McNeill",
+    "Position": "DT",
+    "Value": 80
+  },
+  {
+    "Team": "DET",
+    "Player": "D.J. Reed",
+    "Position": "CB",
+    "Value": 50
+  },
+  {
+    "Team": "DET",
+    "Player": "Tate Ratledge",
+    "Position": "OG",
+    "Value": 50
+  },
+  {
+    "Team": "DET",
+    "Player": "Alex Anzalone",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "DET",
+    "Player": "Derrick Barnes",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "DET",
+    "Player": "Terrion Arnold",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "GB",
+    "Player": "Jordan Love",
+    "Position": "QB",
+    "Value": 1200
+  },
+  {
+    "Team": "GB",
+    "Player": "Micah Parsons",
+    "Position": "LB",
+    "Value": 450
+  },
+  {
+    "Team": "GB",
+    "Player": "Xavier McKinney",
+    "Position": "S",
+    "Value": 200
+  },
+  {
+    "Team": "GB",
+    "Player": "Matthew Golden",
+    "Position": "WR",
+    "Value": 150
+  },
+  {
+    "Team": "GB",
+    "Player": "Tucker Kraft",
+    "Position": "TE",
+    "Value": 150
+  },
+  {
+    "Team": "GB",
+    "Player": "Josh Jacobs",
+    "Position": "RB",
+    "Value": 100
+  },
+  {
+    "Team": "GB",
+    "Player": "Christian Watson",
+    "Position": "WR",
+    "Value": 80
+  },
+  {
+    "Team": "GB",
+    "Player": "Jayden Reed",
+    "Position": "WR",
+    "Value": 75
+  },
+  {
+    "Team": "GB",
+    "Player": "Zach Tom",
+    "Position": "OT",
+    "Value": 75
+  },
+  {
+    "Team": "GB",
+    "Player": "Aaron Banks",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "GB",
+    "Player": "Devonte Wyatt",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "GB",
+    "Player": "Edgerrin Cooper",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "GB",
+    "Player": "Elgton Jenkins",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "GB",
+    "Player": "Keisean Nixon",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "GB",
+    "Player": "Lukas Van Ness",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "GB",
+    "Player": "Quay Walker",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "HOU",
+    "Player": "C.J. Stroud",
+    "Position": "QB",
+    "Value": 1000
+  },
+  {
+    "Team": "HOU",
+    "Player": "Will Anderson",
+    "Position": "EDGE",
+    "Value": 525
+  },
+  {
+    "Team": "HOU",
+    "Player": "Danielle Hunter",
+    "Position": "EDGE",
+    "Value": 450
+  },
+  {
+    "Team": "HOU",
+    "Player": "Nico Collins",
+    "Position": "WR",
+    "Value": 450
+  },
+  {
+    "Team": "HOU",
+    "Player": "Derek Stingley",
+    "Position": "CB",
+    "Value": 375
+  },
+  {
+    "Team": "HOU",
+    "Player": "Calen Bullock",
+    "Position": "S",
+    "Value": 80
+  },
+  {
+    "Team": "HOU",
+    "Player": "Azeez Al-Shahir",
+    "Position": "LB",
+    "Value": 75
+  },
+  {
+    "Team": "HOU",
+    "Player": "Kamari Lassiter",
+    "Position": "S",
+    "Value": 75
+  },
+  {
+    "Team": "HOU",
+    "Player": "David Montgomery",
+    "Position": "RB",
+    "Value": 50
+  },
+  {
+    "Team": "HOU",
+    "Player": "Jalen Pitre",
+    "Position": "S",
+    "Value": 50
+  },
+  {
+    "Team": "HOU",
+    "Player": "Dalton Schultz",
+    "Position": "TE",
+    "Value": 35
+  },
+  {
+    "Team": "HOU",
+    "Player": "Henry To'oTo'o",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "HOU",
+    "Player": "Jake Andrews",
+    "Position": "OC",
+    "Value": 35
+  },
+  {
+    "Team": "HOU",
+    "Player": "Tommy Togiai",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "IND",
+    "Player": "Daniel Jones",
+    "Position": "QB",
+    "Value": 450
+  },
+  {
+    "Team": "IND",
+    "Player": "DeForest Buckner",
+    "Position": "DT",
+    "Value": 225
+  },
+  {
+    "Team": "IND",
+    "Player": "Tyler Warren",
+    "Position": "TE",
+    "Value": 200
+  },
+  {
+    "Team": "IND",
+    "Player": "Jonathan Taylor",
+    "Position": "RB",
+    "Value": 150
+  },
+  {
+    "Team": "IND",
+    "Player": "Quenton Nelson",
+    "Position": "OG",
+    "Value": 125
+  },
+  {
+    "Team": "IND",
+    "Player": "Cam Bynum",
+    "Position": "S",
+    "Value": 100
+  },
+  {
+    "Team": "IND",
+    "Player": "Michael Pittman Jr.",
+    "Position": "WR",
+    "Value": 100
+  },
+  {
+    "Team": "IND",
+    "Player": "Bernhard Raimann",
+    "Position": "OT",
+    "Value": 75
+  },
+  {
+    "Team": "IND",
+    "Player": "Jaylon Jones",
+    "Position": "CB",
+    "Value": 75
+  },
+  {
+    "Team": "IND",
+    "Player": "Josh Downs",
+    "Position": "WR",
+    "Value": 75
+  },
+  {
+    "Team": "IND",
+    "Player": "Laiatu Latu",
+    "Position": "EDGE",
+    "Value": 75
+  },
+  {
+    "Team": "IND",
+    "Player": "Tanor Bortolini",
+    "Position": "OC",
+    "Value": 75
+  },
+  {
+    "Team": "IND",
+    "Player": "Anthony Richardson",
+    "Position": "QB",
+    "Value": 35
+  },
+  {
+    "Team": "IND",
+    "Player": "Charvarius Ward",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "IND",
+    "Player": "Grover Stewart",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "IND",
+    "Player": "Kenny Moore II",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "IND",
+    "Player": "Laiatu Latu",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "IND",
+    "Player": "Zaire Franklin",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "IND",
+    "Player": "Riley Leonard",
+    "Position": "QB",
+    "Value": 24
+  },
+  {
+    "Team": "JAX",
+    "Player": "Trevor Lawrence",
+    "Position": "QB",
+    "Value": 1200
+  },
+  {
+    "Team": "JAX",
+    "Player": "Josh Hines-Allen",
+    "Position": "EDGE",
+    "Value": 175
+  },
+  {
+    "Team": "JAX",
+    "Player": "Brian Thomas Jr.",
+    "Position": "WR",
+    "Value": 150
+  },
+  {
+    "Team": "JAX",
+    "Player": "Jakobi Meyers",
+    "Position": "WR",
+    "Value": 150
+  },
+  {
+    "Team": "JAX",
+    "Player": "Parker Washington",
+    "Position": "WR",
+    "Value": 80
+  },
+  {
+    "Team": "JAX",
+    "Player": "Jarrian Jones",
+    "Position": "CB",
+    "Value": 75
+  },
+  {
+    "Team": "JAX",
+    "Player": "Travon Walker",
+    "Position": "EDGE",
+    "Value": 75
+  },
+  {
+    "Team": "JAX",
+    "Player": "Arik Armstead",
+    "Position": "EDGE",
+    "Value": 50
+  },
+  {
+    "Team": "JAX",
+    "Player": "Brenton Strange",
+    "Position": "TE",
+    "Value": 50
+  },
+  {
+    "Team": "JAX",
+    "Player": "Davon Hamilton",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "JAX",
+    "Player": "Ezra Cleveland",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "JAX",
+    "Player": "Foyesade Oluokun",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "JAX",
+    "Player": "Jourdan Lewis",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "JAX",
+    "Player": "Patrick Mekari",
+    "Position": "OC",
+    "Value": 35
+  },
+  {
+    "Team": "JAX",
+    "Player": "Robert Hainsey",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "JAX",
+    "Player": "Walker Little",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "KC",
+    "Player": "Patrick Mahomes",
+    "Position": "QB",
+    "Value": 1400
+  },
+  {
+    "Team": "KC",
+    "Player": "Creed Humphrey",
+    "Position": "OC",
+    "Value": 250
+  },
+  {
+    "Team": "KC",
+    "Player": "Rashee Rice",
+    "Position": "WR",
+    "Value": 200
+  },
+  {
+    "Team": "KC",
+    "Player": "Chris Jones",
+    "Position": "DT",
+    "Value": 100
+  },
+  {
+    "Team": "KC",
+    "Player": "Xavier Worthy",
+    "Position": "WR",
+    "Value": 80
+  },
+  {
+    "Team": "KC",
+    "Player": "George Karlaftis",
+    "Position": "EDGE",
+    "Value": 75
+  },
+  {
+    "Team": "KC",
+    "Player": "Trey Smith",
+    "Position": "OG",
+    "Value": 75
+  },
+  {
+    "Team": "KC",
+    "Player": "Drue Tranquill",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "KC",
+    "Player": "Harrison Butker",
+    "Position": "K",
+    "Value": 35
+  },
+  {
+    "Team": "KC",
+    "Player": "Nick Bolton",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "KC",
+    "Player": "Matt Araiza",
+    "Position": "P",
+    "Value": 20
+  },
+  {
+    "Team": "KC",
+    "Player": "Nick Bolton",
+    "Position": "LB",
+    "Value": 20
+  },
+  {
+    "Team": "KC",
+    "Player": "Hollywood Brown",
+    "Position": "WR",
+    "Value": 15
+  },
+  {
+    "Team": "KC",
+    "Player": "Kareem Hunt",
+    "Position": "RB",
+    "Value": 5
+  },
+  {
+    "Team": "LAC",
+    "Player": "Justin Herbert",
+    "Position": "QB",
+    "Value": 1250
+  },
+  {
+    "Team": "LAC",
+    "Player": "Joe Alt",
+    "Position": "OT",
+    "Value": 250
+  },
+  {
+    "Team": "LAC",
+    "Player": "Derwin James",
+    "Position": "S",
+    "Value": 200
+  },
+  {
+    "Team": "LAC",
+    "Player": "Ladd McConkey",
+    "Position": "WR",
+    "Value": 180
+  },
+  {
+    "Team": "LAC",
+    "Player": "Omarion Hampton",
+    "Position": "RB",
+    "Value": 150
+  },
+  {
+    "Team": "LAC",
+    "Player": "Tuli Tuipulotu",
+    "Position": "LB",
+    "Value": 100
+  },
+  {
+    "Team": "LAC",
+    "Player": "Tyler Biadasz",
+    "Position": "OC",
+    "Value": 100
+  },
+  {
+    "Team": "LAC",
+    "Player": "Oronde Gadsden II",
+    "Position": "TE",
+    "Value": 50
+  },
+  {
+    "Team": "LAC",
+    "Player": "Quentin Johnston",
+    "Position": "WR",
+    "Value": 50
+  },
+  {
+    "Team": "LAC",
+    "Player": "Cameron Dicker",
+    "Position": "K",
+    "Value": 35
+  },
+  {
+    "Team": "LAC",
+    "Player": "Daiyan Henley",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "LAC",
+    "Player": "Donte Jackson",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "LAC",
+    "Player": "Najee Harris",
+    "Position": "RB",
+    "Value": 5
+  },
+  {
+    "Team": "LAR",
+    "Player": "Matthew Stafford",
+    "Position": "QB",
+    "Value": 1200
+  },
+  {
+    "Team": "LAR",
+    "Player": "Puka Nacua",
+    "Position": "WR",
+    "Value": 525
+  },
+  {
+    "Team": "LAR",
+    "Player": "Jared Verse",
+    "Position": "EDGE",
+    "Value": 200
+  },
+  {
+    "Team": "LAR",
+    "Player": "Byron Young",
+    "Position": "EDGE",
+    "Value": 100
+  },
+  {
+    "Team": "LAR",
+    "Player": "Kevin Dotson",
+    "Position": "OG",
+    "Value": 100
+  },
+  {
+    "Team": "LAR",
+    "Player": "Kyren Williams",
+    "Position": "RB",
+    "Value": 100
+  },
+  {
+    "Team": "LAR",
+    "Player": "Quentin Lake",
+    "Position": "S",
+    "Value": 100
+  },
+  {
+    "Team": "LAR",
+    "Player": "Davante Adams",
+    "Position": "WR",
+    "Value": 75
+  },
+  {
+    "Team": "LAR",
+    "Player": "Kobie Turner",
+    "Position": "DT",
+    "Value": 75
+  },
+  {
+    "Team": "LAR",
+    "Player": "Warren McClendon Jr.",
+    "Position": "OT",
+    "Value": 75
+  },
+  {
+    "Team": "LAR",
+    "Player": "Alaric Jackson",
+    "Position": "OT",
+    "Value": 50
+  },
+  {
+    "Team": "LAR",
+    "Player": "Blake Corum",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "LAR",
+    "Player": "Braden Fiske",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "LAR",
+    "Player": "Emmanuel Forbes",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "LAR",
+    "Player": "Nate Landman",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "LAR",
+    "Player": "Tyler Higbee",
+    "Position": "TE",
+    "Value": 25
+  },
+  {
+    "Team": "LAR",
+    "Player": "Braden Fisk",
+    "Position": "EDGE",
+    "Value": 15
+  },
+  {
+    "Team": "LAR",
+    "Player": "Terrance Ferguson",
+    "Position": "TE",
+    "Value": 15
+  },
+  {
+    "Team": "LV",
+    "Player": "Brock Bowers",
+    "Position": "TE",
+    "Value": 450
+  },
+  {
+    "Team": "LV",
+    "Player": "Maxx Crosby",
+    "Position": "EDGE",
+    "Value": 400
+  },
+  {
+    "Team": "LV",
+    "Player": "Ashton Jeanty",
+    "Position": "RB",
+    "Value": 350
+  },
+  {
+    "Team": "LV",
+    "Player": "Aidan O'Connell",
+    "Position": "QB",
+    "Value": 35
+  },
+  {
+    "Team": "LV",
+    "Player": "Charles Grant",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "LV",
+    "Player": "Darien Porter",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "LV",
+    "Player": "DJ Glaze",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "LV",
+    "Player": "Isaiah Pola-Mao",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "LV",
+    "Player": "Jack Bech",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "LV",
+    "Player": "Jackson Powers-Johnson",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "LV",
+    "Player": "Jonah Laulu",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "LV",
+    "Player": "Kyu Blu Kelly",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "LV",
+    "Player": "Tonka Hemingway",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "LV",
+    "Player": "Tre Tucker",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "LV",
+    "Player": "Jeremy Chinn",
+    "Position": "S",
+    "Value": 25
+  },
+  {
+    "Team": "LV",
+    "Player": "Tyree Wilson",
+    "Position": "S",
+    "Value": 25
+  },
+  {
+    "Team": "MIA",
+    "Player": "De'Von Achane",
+    "Position": "RB",
+    "Value": 250
+  },
+  {
+    "Team": "MIA",
+    "Player": "Zach Sieler",
+    "Position": "DT",
+    "Value": 100
+  },
+  {
+    "Team": "MIA",
+    "Player": "Aaron Brewer",
+    "Position": "OC",
+    "Value": 80
+  },
+  {
+    "Team": "MIA",
+    "Player": "Jordyn Brooks",
+    "Position": "LB",
+    "Value": 75
+  },
+  {
+    "Team": "MIA",
+    "Player": "Austin Jackson",
+    "Position": "OT",
+    "Value": 50
+  },
+  {
+    "Team": "MIA",
+    "Player": "Jaylen Wright",
+    "Position": "RB",
+    "Value": 50
+  },
+  {
+    "Team": "MIA",
+    "Player": "Patrick Paul",
+    "Position": "OT",
+    "Value": 50
+  },
+  {
+    "Team": "MIA",
+    "Player": "Tyrel Dodson",
+    "Position": "LB",
+    "Value": 50
+  },
+  {
+    "Team": "MIA",
+    "Player": "Cam Smith",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "MIA",
+    "Player": "Chop Robinson",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "MIA",
+    "Player": "Jonah Savaiinaea",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "MIA",
+    "Player": "Quinn Ewers",
+    "Position": "QB",
+    "Value": 24
+  },
+  {
+    "Team": "MIN",
+    "Player": "Justin Jeffferson",
+    "Position": "WR",
+    "Value": 525
+  },
+  {
+    "Team": "MIN",
+    "Player": "T.J. Hockenson",
+    "Position": "TE",
+    "Value": 200
+  },
+  {
+    "Team": "MIN",
+    "Player": "Byron Murphy",
+    "Position": "CB",
+    "Value": 150
+  },
+  {
+    "Team": "MIN",
+    "Player": "J.J. McCarthy",
+    "Position": "QB",
+    "Value": 150
+  },
+  {
+    "Team": "MIN",
+    "Player": "Jonathan Greenard",
+    "Position": "LB",
+    "Value": 65
+  },
+  {
+    "Team": "MIN",
+    "Player": "Andrew Van Ginkel",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "MIN",
+    "Player": "Blake Cashman",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "MIN",
+    "Player": "Brian O'Neill",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "MIN",
+    "Player": "Christian Darrisaw",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "MIN",
+    "Player": "Dallas Turner",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "MIN",
+    "Player": "Jalen Redmond",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "MIN",
+    "Player": "Jordan Addison",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "MIN",
+    "Player": "Josh Metellus",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "MIN",
+    "Player": "Will Fries",
+    "Position": "OC",
+    "Value": 35
+  },
+  {
+    "Team": "NE",
+    "Player": "Drake Maye",
+    "Position": "QB",
+    "Value": 1250
+  },
+  {
+    "Team": "NE",
+    "Player": "Christian Gonzalez",
+    "Position": "CB",
+    "Value": 450
+  },
+  {
+    "Team": "NE",
+    "Player": "Milton Williams",
+    "Position": "DT",
+    "Value": 250
+  },
+  {
+    "Team": "NE",
+    "Player": "Will Campbell",
+    "Position": "OT",
+    "Value": 250
+  },
+  {
+    "Team": "NE",
+    "Player": "TreVeyon Henderson",
+    "Position": "RB",
+    "Value": 150
+  },
+  {
+    "Team": "NE",
+    "Player": "Carlton Davis",
+    "Position": "CB",
+    "Value": 50
+  },
+  {
+    "Team": "NE",
+    "Player": "Robert Spillane",
+    "Position": "LB",
+    "Value": 50
+  },
+  {
+    "Team": "NE",
+    "Player": "Christian Barmore",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "NE",
+    "Player": "Hunter Henry",
+    "Position": "TE",
+    "Value": 35
+  },
+  {
+    "Team": "NE",
+    "Player": "Mack Hollins",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "NE",
+    "Player": "Morgan Moses",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "NE",
+    "Player": "Rhamondre Stevenson",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "NE",
+    "Player": "DeMario Douglas",
+    "Position": "WR",
+    "Value": 5
+  },
+  {
+    "Team": "NE",
+    "Player": "Kayshon Boutte",
+    "Position": "WR",
+    "Value": 5
+  },
+  {
+    "Team": "NO",
+    "Player": "Tyler Shough",
+    "Position": "QB",
+    "Value": 450
+  },
+  {
+    "Team": "NO",
+    "Player": "Chris Olave",
+    "Position": "WR",
+    "Value": 250
+  },
+  {
+    "Team": "NO",
+    "Player": "Erik McCoy",
+    "Position": "OC",
+    "Value": 70
+  },
+  {
+    "Team": "NO",
+    "Player": "Alontae Taylor",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "NO",
+    "Player": "Alvin Kamara",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "NO",
+    "Player": "Bryan Bresee",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "NO",
+    "Player": "Carl Granderson",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "NO",
+    "Player": "Chase Young",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "NO",
+    "Player": "Justin Reid",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "NO",
+    "Player": "Kelvin Banks Jr.",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "NO",
+    "Player": "Kool-Aid McKinstry",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "NO",
+    "Player": "Pete Werner",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "NO",
+    "Player": "Quincy Riley",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "NO",
+    "Player": "Derek Carr",
+    "Position": "QB",
+    "Value": 25
+  },
+  {
+    "Team": "NO",
+    "Player": "Juwan Johnson",
+    "Position": "TE",
+    "Value": 25
+  },
+  {
+    "Team": "NYG",
+    "Player": "Jaxson Dart",
+    "Position": "QB",
+    "Value": 300
+  },
+  {
+    "Team": "NYG",
+    "Player": "Malik Nabers",
+    "Position": "WR",
+    "Value": 150
+  },
+  {
+    "Team": "NYG",
+    "Player": "Abdul Carter",
+    "Position": "EDGE",
+    "Value": 80
+  },
+  {
+    "Team": "NYG",
+    "Player": "Tremaine Edmunds",
+    "Position": "LB",
+    "Value": 50
+  },
+  {
+    "Team": "NYG",
+    "Player": "Andrew Thomas",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "NYG",
+    "Player": "Brian Burns",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "NYG",
+    "Player": "Cam Skattebo",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "NYG",
+    "Player": "Darius Slayton",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "NYG",
+    "Player": "Deonte Banks",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "NYG",
+    "Player": "Evan Neal",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "NYG",
+    "Player": "Greg Van Roten",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "NYG",
+    "Player": "Jalin Hyatt",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "NYG",
+    "Player": "Kayvon Thibodeaux",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "NYG",
+    "Player": "Rakeem Nunez-Roches",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "NYG",
+    "Player": "Theo Johnson",
+    "Position": "TE",
+    "Value": 35
+  },
+  {
+    "Team": "NYG",
+    "Player": "Tyrone Tracy",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "NYG",
+    "Player": "Wan'Dale Robinson",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Garrett Wilson",
+    "Position": "WR",
+    "Value": 200
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Breece Hall",
+    "Position": "RB",
+    "Value": 100
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Justin Fields",
+    "Position": "QB",
+    "Value": 75
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Armand Membou",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Azareye'h Thomas",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Brandon Stephens",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Jamien Sherwood",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Joe Tippmann",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Jowon Briggs",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Kiko Mauigoa",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Malachi Moore",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Mason Taylor",
+    "Position": "TE",
+    "Value": 35
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Olu Fashanu",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "NYJ",
+    "Player": "T'Vondre Sweat",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Will McDonald IV",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "NYJ",
+    "Player": "Minkah Fitzpatrick",
+    "Position": "S",
+    "Value": 10
+  },
+  {
+    "Team": "PHI",
+    "Player": "Jalen Hurts",
+    "Position": "QB",
+    "Value": 1250
+  },
+  {
+    "Team": "PHI",
+    "Player": "DeVonta Smith",
+    "Position": "WR",
+    "Value": 525
+  },
+  {
+    "Team": "PHI",
+    "Player": "Jordan Mailata",
+    "Position": "OT",
+    "Value": 525
+  },
+  {
+    "Team": "PHI",
+    "Player": "Saquon Barkley",
+    "Position": "RB",
+    "Value": 450
+  },
+  {
+    "Team": "PHI",
+    "Player": "AJ Brown",
+    "Position": "WR",
+    "Value": 250
+  },
+  {
+    "Team": "PHI",
+    "Player": "Jalen Carter",
+    "Position": "DT",
+    "Value": 250
+  },
+  {
+    "Team": "PHI",
+    "Player": "Cooper DeJean",
+    "Position": "CB",
+    "Value": 200
+  },
+  {
+    "Team": "PHI",
+    "Player": "Quinyon Mitchell",
+    "Position": "CB",
+    "Value": 200
+  },
+  {
+    "Team": "PHI",
+    "Player": "Zack Baun",
+    "Position": "LB",
+    "Value": 200
+  },
+  {
+    "Team": "PHI",
+    "Player": "Jordan Davis",
+    "Position": "DT",
+    "Value": 75
+  },
+  {
+    "Team": "PHI",
+    "Player": "Tyler Steen",
+    "Position": "OG",
+    "Value": 50
+  },
+  {
+    "Team": "PHI",
+    "Player": "Jake Elliott",
+    "Position": "K",
+    "Value": 35
+  },
+  {
+    "Team": "PHI",
+    "Player": "Jordan Davis",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "PHI",
+    "Player": "Lane Johnson",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "PHI",
+    "Player": "Reed Blankenship",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "PHI",
+    "Player": "Tank Bigsby",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "PHI",
+    "Player": "Andy Dalton",
+    "Position": "QB",
+    "Value": 5
+  },
+  {
+    "Team": "PIT",
+    "Player": "Joey Porter Jr.",
+    "Position": "CB",
+    "Value": 450
+  },
+  {
+    "Team": "PIT",
+    "Player": "T.J. Watt",
+    "Position": "EDGE",
+    "Value": 250
+  },
+  {
+    "Team": "PIT",
+    "Player": "Will Howard",
+    "Position": "QB",
+    "Value": 150
+  },
+  {
+    "Team": "PIT",
+    "Player": "Alex Highsmith",
+    "Position": "LB",
+    "Value": 80
+  },
+  {
+    "Team": "PIT",
+    "Player": "DK Metcalf",
+    "Position": "WR",
+    "Value": 75
+  },
+  {
+    "Team": "PIT",
+    "Player": "Zach Frazier",
+    "Position": "OC",
+    "Value": 70
+  },
+  {
+    "Team": "PIT",
+    "Player": "Calvin Austin",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "PIT",
+    "Player": "Cameron Heyward",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "PIT",
+    "Player": "Darnell Washington",
+    "Position": "TE",
+    "Value": 35
+  },
+  {
+    "Team": "PIT",
+    "Player": "Dylan Cook",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "PIT",
+    "Player": "Jalen Ramsey",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "PIT",
+    "Player": "Jaylen Warren",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "PIT",
+    "Player": "Jonnu Smith",
+    "Position": "TE",
+    "Value": 35
+  },
+  {
+    "Team": "PIT",
+    "Player": "Kaleb Johnson",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "PIT",
+    "Player": "Mason McCormick",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "PIT",
+    "Player": "Nick Herbig",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "PIT",
+    "Player": "Pat Freiermuth",
+    "Position": "TE",
+    "Value": 35
+  },
+  {
+    "Team": "PIT",
+    "Player": "Patrick Queen",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "SEA",
+    "Player": "Sam Darnold",
+    "Position": "QB",
+    "Value": 1100
+  },
+  {
+    "Team": "SEA",
+    "Player": "Jaxon Smith-Njigba",
+    "Position": "WR",
+    "Value": 525
+  },
+  {
+    "Team": "SEA",
+    "Player": "Nick Emmanwori",
+    "Position": "S",
+    "Value": 175
+  },
+  {
+    "Team": "SEA",
+    "Player": "Abraham Lucas",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "SEA",
+    "Player": "AJ Barner",
+    "Position": "TE",
+    "Value": 35
+  },
+  {
+    "Team": "SEA",
+    "Player": "Cooper Kupp",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "SEA",
+    "Player": "DeMarcus Lawrence",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "SEA",
+    "Player": "Devon Witherspoon",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "SEA",
+    "Player": "Ernest Jones",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "SEA",
+    "Player": "Grey Zabel",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "SEA",
+    "Player": "Leonard Williams",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "SEA",
+    "Player": "Tory Horton",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "SEA",
+    "Player": "Zach Charbonnet",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "SF",
+    "Player": "Brock Purdy",
+    "Position": "QB",
+    "Value": 1200
+  },
+  {
+    "Team": "SF",
+    "Player": "Christian McCaffrey",
+    "Position": "RB",
+    "Value": 250
+  },
+  {
+    "Team": "SF",
+    "Player": "Colton McKivitz",
+    "Position": "OT",
+    "Value": 80
+  },
+  {
+    "Team": "SF",
+    "Player": "George Kittle",
+    "Position": "TE",
+    "Value": 80
+  },
+  {
+    "Team": "SF",
+    "Player": "Nick Bosa",
+    "Position": "EDGE",
+    "Value": 80
+  },
+  {
+    "Team": "SF",
+    "Player": "Trent Williams",
+    "Position": "OT",
+    "Value": 80
+  },
+  {
+    "Team": "SF",
+    "Player": "Mac Jones",
+    "Position": "QB",
+    "Value": 75
+  },
+  {
+    "Team": "SF",
+    "Player": "Osa Odighizuwa",
+    "Position": "DT",
+    "Value": 75
+  },
+  {
+    "Team": "SF",
+    "Player": "Jake Brendel",
+    "Position": "OC",
+    "Value": 70
+  },
+  {
+    "Team": "SF",
+    "Player": "Dominick Puni",
+    "Position": "OG",
+    "Value": 50
+  },
+  {
+    "Team": "SF",
+    "Player": "Brandon Aiyuk",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "SF",
+    "Player": "Deommodore Lenoir",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "SF",
+    "Player": "Fred Warner",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "SF",
+    "Player": "Jake Tonges",
+    "Position": "TE",
+    "Value": 35
+  },
+  {
+    "Team": "SF",
+    "Player": "Kyle Juszczyk",
+    "Position": "FB",
+    "Value": 35
+  },
+  {
+    "Team": "SF",
+    "Player": "Renardo Green",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "SF",
+    "Player": "Ricky Pearsall",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "SF",
+    "Player": "Keion White",
+    "Position": "EDGE",
+    "Value": 25
+  },
+  {
+    "Team": "TB",
+    "Player": "Baker Mayfield",
+    "Position": "QB",
+    "Value": 1000
+  },
+  {
+    "Team": "TB",
+    "Player": "Tristan Wirfs",
+    "Position": "OT",
+    "Value": 450
+  },
+  {
+    "Team": "TB",
+    "Player": "Antoine Winfield",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "TB",
+    "Player": "Bucky Irving",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "TB",
+    "Player": "Calijah Kancey",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "TB",
+    "Player": "Chris Godwin Jr.",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "TB",
+    "Player": "Emeka Egbuka",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "TB",
+    "Player": "Jacob Parrish",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "TB",
+    "Player": "Jalen McMillan",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "TB",
+    "Player": "Luke Goedeke",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "TB",
+    "Player": "Tykee Smith",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "TB",
+    "Player": "Vita Vea",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "TB",
+    "Player": "YaYa Diaby",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "TB",
+    "Player": "Zyon McCollum",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "TEN",
+    "Player": "Cam Ward",
+    "Position": "QB",
+    "Value": 450
+  },
+  {
+    "Team": "TEN",
+    "Player": "Jeffery Simmons",
+    "Position": "DT",
+    "Value": 450
+  },
+  {
+    "Team": "TEN",
+    "Player": "Oluwafemi Oladejo",
+    "Position": "LB",
+    "Value": 65
+  },
+  {
+    "Team": "TEN",
+    "Player": "Amani Hooker",
+    "Position": "S",
+    "Value": 35
+  },
+  {
+    "Team": "TEN",
+    "Player": "Cedric Gray",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "TEN",
+    "Player": "Chimere Dike",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "TEN",
+    "Player": "Cody Barton",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "TEN",
+    "Player": "Elic Ayomanor",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "TEN",
+    "Player": "Jaylen Harrell",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "TEN",
+    "Player": "JC Latham",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "TEN",
+    "Player": "Jermaine Johnson",
+    "Position": "EDGE",
+    "Value": 35
+  },
+  {
+    "Team": "TEN",
+    "Player": "L'Jarius Sneed",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "TEN",
+    "Player": "Marcus Harris",
+    "Position": "CB",
+    "Value": 35
+  },
+  {
+    "Team": "TEN",
+    "Player": "Peter Skoronski",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "TEN",
+    "Player": "Tony Pollard",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "WAS",
+    "Player": "Jayden Daniels",
+    "Position": "QB",
+    "Value": 1100
+  },
+  {
+    "Team": "WAS",
+    "Player": "Terry McLaurin",
+    "Position": "WR",
+    "Value": 150
+  },
+  {
+    "Team": "WAS",
+    "Player": "Ben Sinnott",
+    "Position": "OG",
+    "Value": 35
+  },
+  {
+    "Team": "WAS",
+    "Player": "Daron Payne",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "WAS",
+    "Player": "Frankie Luvu",
+    "Position": "LB",
+    "Value": 35
+  },
+  {
+    "Team": "WAS",
+    "Player": "Jacory Croskey-Merritt",
+    "Position": "RB",
+    "Value": 35
+  },
+  {
+    "Team": "WAS",
+    "Player": "Javon Kinlaw",
+    "Position": "DT",
+    "Value": 35
+  },
+  {
+    "Team": "WAS",
+    "Player": "Laremy Tunsil",
+    "Position": "OT",
+    "Value": 35
+  },
+  {
+    "Team": "WAS",
+    "Player": "Luke McCaffrey",
+    "Position": "WR",
+    "Value": 35
+  },
+  {
+    "Team": "WAS",
+    "Player": "Sam Cosmi",
+    "Position": "OG",
+    "Value": 35
+  }
+]

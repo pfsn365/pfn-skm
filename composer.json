@@ -1,0 +1,14 @@
+{
+    "require": {
+        "slim/slim": "2.*",
+        "slim/views": "0.1.*",
+        "smarty/smarty": "v3.1.48",
+        "sankalp_sans/slim-goes-slimmer": "*",
+        "ampproject/amp-toolbox": "^0.5.2",
+        "google/apiclient": "^2.2",
+        "guzzlehttp/guzzle": "^7.4.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.*"
+    }
+}
