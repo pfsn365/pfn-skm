@@ -53,6 +53,14 @@ if(!empty($_SERVER["HTTP_PFNORIGINHEADER"])) {// this header is used for PFN dom
 // --- PFN_URL (used by get_brand_login_url)  (from config.php:97-97) ---
 	define('PFN_URL', 'https://www.profootballnetwork.com');
 
+// --- PFN header-menu cron constants  (from config.php:4223-4225) ---
+// Used by cronjobs/pfn/pfn-menu-cron.php to fetch the PFN WordPress top menu.
+// NOTE: PFN_WP_AUTH_KEY is a secret (WordPress basic-auth). Consider moving it
+// to dev-config.php / an environment variable rather than committing it.
+	define("PFN_WP_AUTH_KEY", "Basic QWJkdWw6UzZObCBHaFhpIGE1ZG4gUUFBUyBYYXQyIEFwemk=");
+	define("PFN_SITE_URL", "https://www.profootballnetwork.com/");
+	define("PFN_MAIN_MENU_ID", "wp-json/wp/v2/menu-items?menus=54");
+
 // --- VISIBL_SCRIPT_URL__PFN  (from config.php:123-123) ---
 	define('VISIBL_SCRIPT_URL__PFN', 'https://assets.govisibl.io/scripts/dist/v1/sk.min.js?s=1&t=6008c3a6-0ddf-47a3-9146-2c4a38a74751');
 

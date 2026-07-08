@@ -808,3 +808,75 @@ function sanitize_article_contents($content, $removeLineBreaks = true)
     return $content_transformed;
 }
 
+
+// ===== PFN header-menu cron helpers =====
+// Used by cronjobs/pfn/pfn-menu-cron.php (+ templates/third-party/proxy/pfn/common/functions.php)
+// to refresh data/pfn/main-menu-data.json. Verbatim from the parent functions.php.
+
+// from functions.php:14783
+function cron_log_message($str)
+{
+  date_default_timezone_set('Asia/Kolkata');
+  $str = PHP_EOL . $str;
+  $str .= ' at ' . date("h:i:sa") . ' on ' . date("d M Y") . PHP_EOL . '-------------------------------------';
+  error_log($str);
+}
+
+// from functions.php:14791
+function cron_info_log_message($str)
+{
+  date_default_timezone_set('Asia/Kolkata');
+  $str = PHP_EOL . $str;
+  $str .= ' at ' . date("h:i:sa") . ' on ' . date("d M Y") . PHP_EOL . '-------------------------------------';
+	print($str);
+}
+
+// from functions.php:15918
+function fetch_data_with_curl_multi($urls, $auth_key)
+{
+  $mh = curl_multi_init();
+  $ch = [];
+  $responses = [];
+
+  foreach ($urls as $key => $url) {
+    $ch[$key] = curl_init($url);
+    $headers = ['Authorization: ' . $auth_key];
+
+    curl_setopt($ch[$key], CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch[$key], CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch[$key], CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch[$key], CURLOPT_USERAGENT, 'SK-Internal-NON-Blocking');
+    curl_setopt($ch[$key], CURLOPT_HTTPHEADER, $headers);
+
+    curl_multi_add_handle($mh, $ch[$key]);
+  }
+
+  $active = null;
+  do {
+    $mrc = curl_multi_exec($mh, $active);
+  } while ($mrc == CURLM_CALL_MULTI_PERFORM);
+
+  while ($active && $mrc == CURLM_OK) {
+    if (curl_multi_select($mh) != -1) {
+      do {
+        $mrc = curl_multi_exec($mh, $active);
+      } while ($mrc == CURLM_CALL_MULTI_PERFORM);
+    }
+  }
+
+  foreach ($ch as $key => $channel) {
+    if (curl_errno($channel)) {
+      cron_log_message("cURL error on URL $urls[$key]: " . curl_error($channel));
+      $responses[$key] = null;
+    } else {
+      $response = curl_multi_getcontent($channel);
+      $responses[$key] = json_decode($response, true);
+    }
+    curl_multi_remove_handle($mh, $channel);
+    curl_close($channel);
+  }
+
+  curl_multi_close($mh);
+
+  return $responses;
+}

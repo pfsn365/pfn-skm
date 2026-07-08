@@ -1,36 +1,109 @@
 [
     {
-        "itemTitle": "Mock Draft Simulator",
-        "itemUrl": "https:\/\/www.profootballnetwork.com\/mockdraft",
-        "subItems": []
-    },
-    {
-        "itemTitle": "Playoff Predictor",
-        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-playoff-predictor",
-        "subItems": []
-    },
-    {
-        "itemTitle": "Tools",
-        "itemUrl": "https:\/\/www.profootballnetwork.com\/free-interactive-tools\/",
+        "itemTitle": "CFB",
+        "itemUrl": "https:\/\/www.profootballnetwork.com\/cfb\/",
         "subItems": [
+            {
+                "itemTitle": "CFB Transfer Portal Tracker",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/cfb-hq\/transfer-portal-tracker",
+                "subItems": []
+            },
+            {
+                "itemTitle": "CFB Playoff Predictor",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/college-football-playoff-predictor",
+                "subItems": []
+            },
+            {
+                "itemTitle": "CFB Playoff Meter",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/cfb-fpm\/",
+                "subItems": []
+            },
+            {
+                "itemTitle": "CFB Offense Impact",
+                "itemUrl": "https:\/\/profootballnetwork.com\/cfb-offense-rankings-impact\/",
+                "subItems": [
+                    {
+                        "itemTitle": "CFB QB Impact",
+                        "itemUrl": "https:\/\/profootballnetwork.com\/cfb-qb-rankings-impact\/",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "CFB RB Impact",
+                        "itemUrl": "https:\/\/profootballnetwork.com\/cfb-rb-rankings-impact\/",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "CFB WR Impact",
+                        "itemUrl": "https:\/\/profootballnetwork.com\/cfb-wr-rankings-impact\/",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "CFB TE Impact",
+                        "itemUrl": "https:\/\/profootballnetwork.com\/cfb-te-rankings-impact\/",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "CFB Team OL Impact",
+                        "itemUrl": "https:\/\/profootballnetwork.com\/cfb-team-ol-rankings-impact\/",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "CFB Player OL Impact",
+                        "itemUrl": "https:\/\/profootballnetwork.com\/cfb-player-ol-rankings-impact\/",
+                        "subItems": []
+                    }
+                ]
+            },
+            {
+                "itemTitle": "CFB Defense Impact",
+                "itemUrl": "https:\/\/profootballnetwork.com\/cfb-defense-rankings-impact\/",
+                "subItems": [
+                    {
+                        "itemTitle": "CFB DT Impact",
+                        "itemUrl": "https:\/\/profootballnetwork.com\/cfb-dt-rankings-impact\/",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "CFB EDGE Impact",
+                        "itemUrl": "https:\/\/profootballnetwork.com\/cfb-edge-rankings-impact\/",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "CFB LB Impact",
+                        "itemUrl": "https:\/\/profootballnetwork.com\/cfb-lb-rankings-impact\/",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "CFB CB Impact",
+                        "itemUrl": "https:\/\/profootballnetwork.com\/cfb-cb-rankings-impact\/",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "CFB Safety Impact",
+                        "itemUrl": "https:\/\/profootballnetwork.com\/cfb-safety-rankings-impact\/",
+                        "subItems": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "itemTitle": "Fantasy",
+        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy\/football",
+        "subItems": [
+            {
+                "itemTitle": "Fantasy Trade Analyzer",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-trade-analyzer",
+                "subItems": []
+            },
             {
                 "itemTitle": "DFS Lineup Optimizer",
                 "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-dfs-optimizer-lineup-generator\/",
                 "subItems": []
             },
             {
-                "itemTitle": "Fantasy News Tracker",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-player-news-injuries-transactions-fantasy\/",
-                "subItems": []
-            },
-            {
                 "itemTitle": "Fantasy Start\/Sit Optimizer",
                 "itemUrl": "https:\/\/www.profootballnetwork.com\/who-should-i-start-fantasy-optimizer",
-                "subItems": []
-            },
-            {
-                "itemTitle": "Fantasy Trade Analyzer",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-trade-analyzer",
                 "subItems": []
             },
             {
@@ -44,13 +117,54 @@
                 "subItems": []
             },
             {
-                "itemTitle": "NFL Mock Draft Simulator",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/mockdraft\/",
-                "subItems": []
+                "itemTitle": "Fantasy Rankings",
+                "itemUrl": "",
+                "subItems": [
+                    {
+                        "itemTitle": "2025 Fantasy PPR Rankings",
+                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy\/football\/overall-rankings",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "2025 Fantasy WR Rankings",
+                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy\/football\/wr-rankings-ppr",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "2025 Fantasy RB Rankings",
+                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy\/football\/rb-rankings-ppr",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "2025 Fantasy TE Rankings",
+                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy\/football\/te-rankings-ppr",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "2025 Fantasy QB Rankings",
+                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy\/football\/qb-rankings-ppr",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "2025 Fantasy Kicker Rankings",
+                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy\/football\/kicker-rankings",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "2025 Fantasy Defense Rankings",
+                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy\/football\/defense-rankings",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "Fantasy Dynasty Rankings",
+                        "itemUrl": "https:\/\/www.profootballnetwork.com\/dynasty-fantasy-football-rankings\/",
+                        "subItems": []
+                    }
+                ]
             },
             {
-                "itemTitle": "NFL Playoff Predictor",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-playoff-predictor\/",
+                "itemTitle": "Fantasy Football MDS",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-mock-draft-simulator\/",
                 "subItems": []
             },
             {
@@ -62,225 +176,44 @@
                 "itemTitle": "NFL Betting Parlay Calculator",
                 "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-betting\/parlays-calculator\/",
                 "subItems": []
-            },
+            }
+        ]
+    },
+    {
+        "itemTitle": "MLB",
+        "itemUrl": "https:\/\/www.profootballnetwork.com\/?page_id=795991&preview_id=795991",
+        "subItems": [
             {
-                "itemTitle": "Word Fumble: The NFL Wordle",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-word-fumble-player-name-game\/",
+                "itemTitle": "MLB Playoff Predictor",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/mlb-playoff-predictor\/",
                 "subItems": []
             }
         ]
     },
     {
-        "itemTitle": "Injuries",
-        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-injury-report",
+        "itemTitle": "NASCAR",
+        "itemUrl": "https:\/\/www.profootballnetwork.com\/nascar-predictor",
         "subItems": [
             {
-                "itemTitle": "AFC East",
-                "itemUrl": "#",
-                "subItems": [
-                    {
-                        "itemTitle": "Buffalo Bills Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/buffalo-bills\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Miami Dolphins Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/miami-dolphins\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "New England Patriots Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/new-england-patriots\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "New York Jets Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/new-york-jets\/injury-report",
-                        "subItems": []
-                    }
-                ]
+                "itemTitle": "NASCAR Season Predictor",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nascar-predictor",
+                "subItems": []
+            }
+        ]
+    },
+    {
+        "itemTitle": "NBA",
+        "itemUrl": "https:\/\/www.profootballnetwork.com\/nba\/",
+        "subItems": [
+            {
+                "itemTitle": "NBA Mock Draft Simulator",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nba-mock-draft-simulator",
+                "subItems": []
             },
             {
-                "itemTitle": "AFC North",
-                "itemUrl": "#",
-                "subItems": [
-                    {
-                        "itemTitle": "Baltimore Ravens Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/baltimore-ravens\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Cincinnati Bengals Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/cincinnati-bengals\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Cleveland Browns Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/cleveland-browns\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Pittsburgh Steelers Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/pittsburgh-steelers\/injury-report",
-                        "subItems": []
-                    }
-                ]
-            },
-            {
-                "itemTitle": "AFC South",
-                "itemUrl": "#",
-                "subItems": [
-                    {
-                        "itemTitle": "Houston Texans Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/houston-texans\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Indianapolis Colts Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/indianapolis-colts\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Jacksonville Jaguars Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/jacksonville-jaguars\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Tennessee Titans Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/tennessee-titans\/injury-report",
-                        "subItems": []
-                    }
-                ]
-            },
-            {
-                "itemTitle": "AFC West",
-                "itemUrl": "#",
-                "subItems": [
-                    {
-                        "itemTitle": "Denver Broncos Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/denver-broncos\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Kansas City Chiefs Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/kansas-city-chiefs\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Las Vegas Raiders Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/las-vegas-raiders\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Los Angeles Chargers Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/los-angeles-chargers\/injury-report",
-                        "subItems": []
-                    }
-                ]
-            },
-            {
-                "itemTitle": "NFC East",
-                "itemUrl": "#",
-                "subItems": [
-                    {
-                        "itemTitle": "Dallas Cowboys Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/dallas-cowboys\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "New York Giants Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/new-york-giants\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Philadelphia Eagles Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/philadelphia-eagles\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Washington Commanders Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/washington-commanders\/injury-report",
-                        "subItems": []
-                    }
-                ]
-            },
-            {
-                "itemTitle": "NFC North",
-                "itemUrl": "#",
-                "subItems": [
-                    {
-                        "itemTitle": "Chicago Bears Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/chicago-bears\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Detroit Lions Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/detroit-lions\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Green Bay Packers Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/green-bay-packers\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Minnesota Vikings Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/minnesota-vikings\/injury-report",
-                        "subItems": []
-                    }
-                ]
-            },
-            {
-                "itemTitle": "NFC South",
-                "itemUrl": "#",
-                "subItems": [
-                    {
-                        "itemTitle": "Atlanta Falcons Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/atlanta-falcons\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Carolina Panthers Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/carolina-panthers\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "New Orleans Saints Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/new-orleans-saints\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Tampa Bay Buccaneers Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/tampa-bay-buccaneers\/injury-report",
-                        "subItems": []
-                    }
-                ]
-            },
-            {
-                "itemTitle": "NFC West",
-                "itemUrl": "#",
-                "subItems": [
-                    {
-                        "itemTitle": "Arizona Cardinals Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/arizona-cardinals\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Los Angeles Rams Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/los-angeles-rams\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "San Francisco 49ers Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/san-francisco-49ers\/injury-report",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Seattle Seahawks Injury Report",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/teams\/seattle-seahawks\/injury-report",
-                        "subItems": []
-                    }
-                ]
+                "itemTitle": "NBA Playoff Predictor",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nba-playoff-predictor\/",
+                "subItems": []
             }
         ]
     },
@@ -289,38 +222,28 @@
         "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/",
         "subItems": [
             {
-                "itemTitle": "NFL News and Analysis",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/",
+                "itemTitle": "NFL Mock Draft Simulator",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/mockdraft",
                 "subItems": []
             },
             {
-                "itemTitle": "NFL Depth Charts",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/depth-chart\/",
+                "itemTitle": "NFL Playoff Predictor",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-playoff-predictor",
                 "subItems": []
             },
             {
-                "itemTitle": "NFL History",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-history\/",
+                "itemTitle": "Ultimate GM Simulator",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-ultimate-gm-simulator\/",
                 "subItems": []
             },
             {
-                "itemTitle": "NFL Printable Schedule",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/printable-nfl-schedule\/",
+                "itemTitle": "NFL Draft Big Board Builder",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-draft-hq\/custom-big-board\/",
                 "subItems": []
             },
             {
-                "itemTitle": "NFL Schedule",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/schedule\/",
-                "subItems": []
-            },
-            {
-                "itemTitle": "NFL Standings",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/standings\/",
-                "subItems": []
-            },
-            {
-                "itemTitle": "NFL Wallpapers",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-wallpapers\/",
+                "itemTitle": "NFL Offseason Manager",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-offseason-salary-cap-free-agency-manager",
                 "subItems": []
             },
             {
@@ -536,207 +459,80 @@
                         ]
                     }
                 ]
-            }
-        ]
-    },
-    {
-        "itemTitle": "Fantasy",
-        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football\/",
-        "subItems": [
+            },
             {
-                "itemTitle": "Fantasy News and Analysis",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football\/",
+                "itemTitle": "NFL News and Analysis",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/",
                 "subItems": []
             },
             {
-                "itemTitle": "Fantasy Rankings",
-                "itemUrl": "",
+                "itemTitle": "Football Playoff Meter (FPM)",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-fpm\/",
+                "subItems": []
+            },
+            {
+                "itemTitle": "NFL Impact Rankings",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-qb-rankings-impact\/",
                 "subItems": [
                     {
-                        "itemTitle": "Fantasy Weekly Rankings",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/redraft-fantasy-football-rankings\/",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Fantasy Dynasty Rankings",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/dynasty-fantasy-football-rankings\/",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Fantasy PPR Rankings",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-ppr-rankings\/",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Fantasy Half-PPR Rankings",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-half-ppr-rankings\/",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Fantasy Non-PPR Rankings",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-nonppr-rankings\/",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Fantasy WR Rankings",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-wr-rankings\/",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Fantasy RB Rankings",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-rb-rankings\/",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Fantasy TE Rankings",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-te-rankings\/",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Fantasy FLEX Rankings",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-flex-rankings\/",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Fantasy QB Rankings",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-qb-rankings\/",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Fantasy Kicker Rankings",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-kicker-rankings\/",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Fantasy Defense Rankings",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-defense-rankings\/",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Fantasy Superflex Rankings",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-superflex-rankings\/",
-                        "subItems": []
-                    }
-                ]
-            },
-            {
-                "itemTitle": "Redraft Trade Value Chart",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/fantasy-football-trade-value-charts",
-                "subItems": []
-            },
-            {
-                "itemTitle": "Trade Value Chart",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/dynasty-fantasy-football-trade-value-charts",
-                "subItems": []
-            }
-        ]
-    },
-    {
-        "itemTitle": "More",
-        "itemUrl": "",
-        "subItems": [
-            {
-                "itemTitle": "Betting",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-betting\/",
-                "subItems": []
-            },
-            {
-                "itemTitle": "Draft",
-                "itemUrl": "",
-                "subItems": [
-                    {
-                        "itemTitle": "Prospect News and Analysis",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-draft\/",
-                        "subItems": []
-                    },
-                    {
-                        "itemTitle": "Prospect Scouting Reports",
-                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-draft-scouting-profiles\/",
+                        "itemTitle": "Offense Impact Rankings",
+                        "itemUrl": "https:\/\/profootballnetwork.com\/nfl-offense-rankings-impact\/",
                         "subItems": [
                             {
-                                "itemTitle": "Quarterbacks",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/tag\/qb-scouting-reports\/",
+                                "itemTitle": "QB Impact Rankings",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-qb-rankings-impact\/",
                                 "subItems": []
                             },
                             {
-                                "itemTitle": "Running Backs",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/tag\/rb-scouting-reports\/",
+                                "itemTitle": "RB Impact Rankings",
+                                "itemUrl": "https:\/\/profootballnetwork.com\/nfl-rb-rankings-impact\/",
                                 "subItems": []
                             },
                             {
-                                "itemTitle": "Wide Receivers",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/tag\/wr-scouting-reports\/",
+                                "itemTitle": "WR Impact Rankings",
+                                "itemUrl": "https:\/\/profootballnetwork.com\/nfl-wr-rankings-impact\/",
                                 "subItems": []
                             },
                             {
-                                "itemTitle": "Tight Ends",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/tag\/te-scouting-reports\/",
+                                "itemTitle": "TE Impact Rankings",
+                                "itemUrl": "https:\/\/profootballnetwork.com\/nfl-te-rankings-impact\/",
                                 "subItems": []
                             },
                             {
-                                "itemTitle": "Offensive Tackles",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/tag\/ot-scouting-reports\/",
-                                "subItems": []
-                            },
-                            {
-                                "itemTitle": "Interior Offensive Line",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/tag\/iol-scouting-reports\/",
-                                "subItems": []
-                            },
-                            {
-                                "itemTitle": "EDGE Defenders",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/tag\/edge-scouting-reports\/",
-                                "subItems": []
-                            },
-                            {
-                                "itemTitle": "Defensive Tackles",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/tag\/dt-scouting-reports\/",
-                                "subItems": []
-                            },
-                            {
-                                "itemTitle": "Linebackers",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/tag\/lb-scouting-reports\/",
-                                "subItems": []
-                            },
-                            {
-                                "itemTitle": "Cornerbacks",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/tag\/cb-scouting-reports\/",
-                                "subItems": []
-                            },
-                            {
-                                "itemTitle": "Safeties",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/tag\/saf-scouting-reports\/",
-                                "subItems": []
+                                "itemTitle": "Team OL Impact Rankings",
+                                "itemUrl": "https:\/\/profootballnetwork.com\/nfl-team-ol-rankings-impact\/",
+                                "subItems": [
+                                    {
+                                        "itemTitle": "Player OL Impact Rankings",
+                                        "itemUrl": "https:\/\/profootballnetwork.com\/nfl-player-ol-rankings-impact\/",
+                                        "subItems": []
+                                    }
+                                ]
                             }
                         ]
                     },
                     {
-                        "itemTitle": "Draft Resources\/Recap",
-                        "itemUrl": "",
+                        "itemTitle": "Defense Impact Rankings",
+                        "itemUrl": "https:\/\/profootballnetwork.com\/nfl-defense-rankings-impact\/",
                         "subItems": [
                             {
-                                "itemTitle": "NFL Draft Pick Tracker",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/2024-nfl-draft-results-order\/",
+                                "itemTitle": "DT Impact Rankings",
+                                "itemUrl": "https:\/\/profootballnetwork.com\/nfl-dt-rankings-impact\/",
                                 "subItems": []
                             },
                             {
-                                "itemTitle": "UDFA Tracker",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-udfa-tracker-2024\/",
+                                "itemTitle": "LB Impact Rankings",
+                                "itemUrl": "https:\/\/profootballnetwork.com\/nfl-lb-rankings-impact\/",
                                 "subItems": []
                             },
                             {
-                                "itemTitle": "NFL Draft Grades",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/overall-nfl-draft-grades-2024\/",
+                                "itemTitle": "CB Impact Rankings",
+                                "itemUrl": "https:\/\/profootballnetwork.com\/nfl-cb-rankings-impact\/",
                                 "subItems": []
                             },
                             {
-                                "itemTitle": "NFL Draft Trade Tracker",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/2024-nfl-draft-trade-tracker\/",
-                                "subItems": []
-                            },
-                            {
-                                "itemTitle": "NFL Draft Picks by Team",
-                                "itemUrl": "https:\/\/www.profootballnetwork.com\/2024-nfl-draft-picks-by-team\/",
+                                "itemTitle": "Safety Impact Rankings",
+                                "itemUrl": "https:\/\/profootballnetwork.com\/nfl-saf-rankings-impact\/",
                                 "subItems": []
                             }
                         ]
@@ -744,23 +540,331 @@
                 ]
             },
             {
-                "itemTitle": "Madden 25",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/ea-sports-madden\/",
+                "itemTitle": "NFL News Tracker",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-player-news-injuries-transactions-fantasy\/",
                 "subItems": []
             },
             {
-                "itemTitle": "Lifestyle Stories",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/pfn-life\/",
+                "itemTitle": "NFL Salary Cap Tracker by Team",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/salary-cap-tracker",
                 "subItems": []
             },
             {
-                "itemTitle": "NFL Newsletter",
-                "itemUrl": "https:\/\/www.profootballnetwork.com\/football-newsletters\/",
+                "itemTitle": "NFL Transactions",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-transactions",
                 "subItems": []
             },
             {
-                "itemTitle": "PFN Merchandise",
-                "itemUrl": "https:\/\/pfnmerch.com",
+                "itemTitle": "NFL Depth Charts",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl\/depth-chart\/",
+                "subItems": []
+            },
+            {
+                "itemTitle": "NFL Draft",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-draft-hq\/",
+                "subItems": [
+                    {
+                        "itemTitle": "NFL Mock Draft Simulator",
+                        "itemUrl": "https:\/\/www.profootballnetwork.com\/mock-draft-simulator\/",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "PFSN NFL Draft Rankings",
+                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-draft-hq\/pfsn-big-board\/",
+                        "subItems": []
+                    },
+                    {
+                        "itemTitle": "2026 NFL Draft Order",
+                        "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-draft-hq\/draft-order\/",
+                        "subItems": []
+                    }
+                ]
+            },
+            {
+                "itemTitle": "NFL Injuries",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/injuries",
+                "subItems": [
+                    {
+                        "itemTitle": "AFC East",
+                        "itemUrl": "#",
+                        "subItems": [
+                            {
+                                "itemTitle": "Buffalo Bills Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/buffalo-bills\/injury-report\/",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Miami Dolphins Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/miami-dolphins\/injury-report\/",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "New England Patriots Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/new-england-patriots\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "New York Jets Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/new-york-jets\/injury-report",
+                                "subItems": []
+                            }
+                        ]
+                    },
+                    {
+                        "itemTitle": "AFC North",
+                        "itemUrl": "#",
+                        "subItems": [
+                            {
+                                "itemTitle": "Baltimore Ravens Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/baltimore-ravens\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Cincinnati Bengals Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/cincinnati-bengals\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Cleveland Browns Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/cleveland-browns\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Pittsburgh Steelers Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/pittsburgh-steelers\/injury-report",
+                                "subItems": []
+                            }
+                        ]
+                    },
+                    {
+                        "itemTitle": "AFC South",
+                        "itemUrl": "#",
+                        "subItems": [
+                            {
+                                "itemTitle": "Houston Texans Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/houston-texans\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Indianapolis Colts Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/indianapolis-colts\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Jacksonville Jaguars Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/jacksonville-jaguars\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Tennessee Titans Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/tennessee-titans\/injury-report",
+                                "subItems": []
+                            }
+                        ]
+                    },
+                    {
+                        "itemTitle": "AFC West",
+                        "itemUrl": "#",
+                        "subItems": [
+                            {
+                                "itemTitle": "Denver Broncos Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/denver-broncos\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Kansas City Chiefs Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/kansas-city-chiefs\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Las Vegas Raiders Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/las-vegas-raiders\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Los Angeles Chargers Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/los-angeles-chargers\/injury-report",
+                                "subItems": []
+                            }
+                        ]
+                    },
+                    {
+                        "itemTitle": "NFC East",
+                        "itemUrl": "#",
+                        "subItems": [
+                            {
+                                "itemTitle": "Dallas Cowboys Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/dallas-cowboys\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "New York Giants Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/new-york-giants\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Philadelphia Eagles Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/philadelphia-eagles\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Washington Commanders Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/washington-commanders\/injury-report",
+                                "subItems": []
+                            }
+                        ]
+                    },
+                    {
+                        "itemTitle": "NFC North",
+                        "itemUrl": "#",
+                        "subItems": [
+                            {
+                                "itemTitle": "Chicago Bears Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/chicago-bears\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Detroit Lions Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/detroit-lions\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Green Bay Packers Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/green-bay-packers\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Minnesota Vikings Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/minnesota-vikings\/injury-report",
+                                "subItems": []
+                            }
+                        ]
+                    },
+                    {
+                        "itemTitle": "NFC South",
+                        "itemUrl": "#",
+                        "subItems": [
+                            {
+                                "itemTitle": "Atlanta Falcons Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/atlanta-falcons\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Carolina Panthers Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/carolina-panthers\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "New Orleans Saints Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/new-orleans-saints\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Tampa Bay Buccaneers Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/tampa-bay-buccaneers\/injury-report",
+                                "subItems": []
+                            }
+                        ]
+                    },
+                    {
+                        "itemTitle": "NFC West",
+                        "itemUrl": "#",
+                        "subItems": [
+                            {
+                                "itemTitle": "Arizona Cardinals Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/arizona-cardinals\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Los Angeles Rams Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/los-angeles-rams\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "San Francisco 49ers Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/san-francisco-49ers\/injury-report",
+                                "subItems": []
+                            },
+                            {
+                                "itemTitle": "Seattle Seahawks Injury Report",
+                                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/teams\/seattle-seahawks\/injury-report",
+                                "subItems": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "itemTitle": "NFL Schedule",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/schedule",
+                "subItems": []
+            },
+            {
+                "itemTitle": "NFL Standings",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-hq\/standings",
+                "subItems": []
+            }
+        ]
+    },
+    {
+        "itemTitle": "Soccer",
+        "itemUrl": "https:\/\/www.profootballnetwork.com\/soccer\/",
+        "subItems": [
+            {
+                "itemTitle": "Soccer Homepage",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/soccer\/",
+                "subItems": []
+            },
+            {
+                "itemTitle": "World Cup Simulator",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/fifa-world-cup-simulator\/",
+                "subItems": []
+            }
+        ]
+    },
+    {
+        "itemTitle": "Tennis",
+        "itemUrl": "https:\/\/www.profootballnetwork.com\/tennis\/",
+        "subItems": [
+            {
+                "itemTitle": "Tennis Simulator",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/tennis-simulator",
+                "subItems": []
+            }
+        ]
+    },
+    {
+        "itemTitle": "Games",
+        "itemUrl": "#",
+        "subItems": [
+            {
+                "itemTitle": "NBA Player Guessing Game",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nba-player-guessing-game",
+                "subItems": []
+            },
+            {
+                "itemTitle": "NFL Connections",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/games\/nfl-connections\/",
+                "subItems": []
+            },
+            {
+                "itemTitle": "NFL Player Guessing Game",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-player-guessing-game\/",
+                "subItems": []
+            },
+            {
+                "itemTitle": "NFL Draft Prospect Guessing Game",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-draft-prospect-guessing-game\/",
+                "subItems": []
+            },
+            {
+                "itemTitle": "NFL Word Search",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-wordsearch",
+                "subItems": []
+            },
+            {
+                "itemTitle": "NFL Wordle",
+                "itemUrl": "https:\/\/www.profootballnetwork.com\/nfl-word-fumble-player-name-game\/",
                 "subItems": []
             }
         ]

@@ -407,3 +407,18 @@ $app->get("/sk-proxy/:brand/ultimate-simulator", function ($brand) use ($app) {
 
   $app->render('third-party/proxy/index.tpl', $template_data);
 });
+
+// ===== catch-all: invalid /sk-proxy/pfn/... paths -> styled 404 =====
+// (verbatim from parent sk-proxy.php:4663; must stay AFTER the 4 tool routes
+//  above so Slim matches those first and this only catches unknown tool paths)
+$app->get('/sk-proxy/:brand/.*', function ($brand) use ($app) {
+  $templateData = array(
+    "layout_fragment" => "third-party/proxy/404.tpl",
+    "is_desktop" => $app->is_desktop,
+    "brand" => $brand,
+  );
+
+  preparePFNMenuData($templateData, "Trending", "");
+
+  $app->render("third-party/proxy/index.tpl", $templateData);
+})->conditions(array('brand' => 'pfn'));

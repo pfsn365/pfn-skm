@@ -92,12 +92,12 @@ $app->get('/health-check', function () use ($app) {
 // restrictAccess() redirects unauthorized requests here.
 $app->get('/error/404', function () use ($app) {
     $app->response->setStatus(404);
-    echo "404 - Not Found. Append ?debug__proxy_tools=true to a tool URL to view it.";
+    echo "404 - Not Found.";
 });
 
 $app->notFound(function () use ($app) {
     $app->response->setStatus(404);
-    echo "404 - Not Found. Append ?debug__proxy_tools=true to a tool URL to view it.";
+    echo "404 - Not Found.";
 });
 
 $app->error(function (\Exception $e) use ($app) {
