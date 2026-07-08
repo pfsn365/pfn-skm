@@ -6,3 +6,6 @@ composer.phar
 *.log
 .DS_Store
 /js/production/
+
+# per-environment overrides (copy from dev-config.php.sample)
+/dev-config.php

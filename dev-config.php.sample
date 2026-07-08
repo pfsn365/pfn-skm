@@ -1,0 +1,25 @@
+<?php
+/**
+ * Dev / staging overrides — mirrors the parent repo's dev-config.php mechanism.
+ *
+ * Copy this file to `dev-config.php` on a dev or staging box:
+ *     cp dev-config.php.sample dev-config.php
+ *
+ * When `dev-config.php` exists, config.php loads it INSTEAD of the production
+ * CDN bundle constants, so the app serves the JS bundles you build locally
+ * (npm run build -> js/production/pfn-proxy/*-bundle.js) from this same host,
+ * rather than the frozen production bundles on staticd.profootballnetwork.com.
+ *
+ * `dev-config.php` is gitignored — it never ships to production. This sample IS
+ * committed so every box knows the shape.
+ *
+ * Any constant defined here wins over the production default, because config.php
+ * only defines the production values in the `else` branch. Add other per-env
+ * overrides here as needed.
+ */
+
+// Serve the locally-built bundles from this host (relative to the current domain).
+// Build them first with: npm install && npm run build
+define('MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION', '/js/production/pfn-proxy/mockdraft-simulator-bundle.js');
+define('ULTIMATE_SIMULATOR_SCRIPT_LOCATION',  '/js/production/pfn-proxy/ultimate-simulator-bundle.js');
+define('PLAYOFF_PREDICTOR_SCRIPT_LOCATION',   '/js/production/pfn-proxy/playoff-predictor-bundle.js');

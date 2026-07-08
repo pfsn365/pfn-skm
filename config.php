@@ -2602,16 +2602,24 @@ define("CHARTBEAT_CONFIGS", [
 
 // ============================================================
 // SOURCE: js-side-menu-config.php  (needs BUNDLE_STATIC_URL first)
+// JS bundle locations. Like the parent repo, a gitignored dev-config.php
+// (copied from dev-config.php.sample) can override these on a dev/staging box
+// to serve locally-built bundles instead of the production CDN. When it is
+// absent (production), the CDN paths below are used.
 // ============================================================
 
-// --- MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION  (from js-side-menu-config.php:34-34) ---
-define('MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/mockdraft-simulator-bundle-ab8a1ae4f0.js');
+if (file_exists(__DIR__ . '/dev-config.php')) {
+    include_once __DIR__ . '/dev-config.php';
+} else {
+    // --- MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION  (from js-side-menu-config.php:34-34) ---
+    define('MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/mockdraft-simulator-bundle-ab8a1ae4f0.js');
 
-// --- ULTIMATE_SIMULATOR_SCRIPT_LOCATION  (from js-side-menu-config.php:35-35) ---
-define('ULTIMATE_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/ultimate-simulator-bundle-7d18fcab43.js');
+    // --- ULTIMATE_SIMULATOR_SCRIPT_LOCATION  (from js-side-menu-config.php:35-35) ---
+    define('ULTIMATE_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/ultimate-simulator-bundle-7d18fcab43.js');
 
-// --- PLAYOFF_PREDICTOR_SCRIPT_LOCATION  (from js-side-menu-config.php:37-37) ---
-define('PLAYOFF_PREDICTOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/playoff-predictor-bundle-cdfa2d2c0c.js');
+    // --- PLAYOFF_PREDICTOR_SCRIPT_LOCATION  (from js-side-menu-config.php:37-37) ---
+    define('PLAYOFF_PREDICTOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/playoff-predictor-bundle-cdfa2d2c0c.js');
+}
 
 // ============================================================
 // SOURCE: routes/sk-proxy.php  (defined at file scope, top of routes)
