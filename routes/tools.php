@@ -62,6 +62,16 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
   $template_data['feedback_popup_logo'] = "logo/pfn-black-big.png";
   $template_data['feedback_source_tab'] = $brand;
 
+  // Set before addPageMetadata() so the schemas survive even if the taxonomy
+  // call fails; on success it reassigns the identical list, so this is a no-op.
+  // Every tool page except mockdraft-simulator-widget carries these four.
+  $template_data["schemas"] = array(
+    "third-party/proxy/pfn/common/schemas/webpage.tpl",
+    "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
+    "third-party/proxy/pfn/common/schemas/siteNavigationElement.tpl",
+    "third-party/proxy/pfn/common/schemas/website.tpl",
+  );
+
   addPageMetadata($template_data, getPFNToolSubpageSlug("Playoff Predictor"));
 
   preparePFNMenuData($template_data, "Tools", "NFL Playoff Predictor");
@@ -402,6 +412,17 @@ $app->get("/sk-proxy/:brand/ultimate-simulator", function ($brand) use ($app) {
 
   preparePFNMenuData($template_data, "Tools", "NFL Ultimate GM Simulator");
   preparePFNSecondaryNav($template_data, "Football", "NFL Ultimate GM Simulator");
+
+  // Set before addPageMetadata() so the schemas survive even if the taxonomy
+  // call fails; on success it reassigns the identical list, so this is a no-op.
+  // Every tool page except mockdraft-simulator-widget carries these four.
+  $template_data["schemas"] = array(
+    "third-party/proxy/pfn/common/schemas/webpage.tpl",
+    "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
+    "third-party/proxy/pfn/common/schemas/siteNavigationElement.tpl",
+    "third-party/proxy/pfn/common/schemas/website.tpl",
+  );
+
   addPageMetadata($template_data, getPFNToolSubpageSlug("NFL Ultimate GM Simulator"));
 
   $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
@@ -441,7 +462,31 @@ $app->get('/sk-proxy/:brand/fifa-world-cup-simulator', function ($brand) use ($a
 
   preparePFNMenuData($template_data, "Tools", "FIFA World Cup Simulator");
   preparePFNSecondaryNav($template_data, "Tools", "FIFA World Cup Simulator");
-  addPageMetadata($template_data, getPFNToolSubpageSlug("FIFA World Cup Simulator"));
+
+  // Page metadata is set inline rather than via addPageMetadata(), so this page
+  // renders without a blocking call to the (VPC-internal) taxonomy API. Values
+  // mirror the CMS entry ad168211-5952-4e25-bad3-b46e8a1b93b3 as of 2026-07-20.
+  //
+  // `header_text` is load-bearing: third-party/proxy/pfn/index.tpl gates BOTH
+  // the <h1> header-wrapper and the desktop-tools-top-adv-container (the Raptive
+  // 90px header ad) on isset($header_text). Removing it hides the page header
+  // and the header ad. Edit these strings here when the CMS entry changes.
+  //
+  // page_text_content / faq are intentionally absent: the CMS entry has neither,
+  // so there is no FAQ schema fragment to append either.
+  $template_data["header_text"] = "FIFA World Cup 2026 Simulator";
+  $template_data["seo_title"] = "FIFA World Cup 2026 Simulator | Predict Tournament Results";
+  $template_data["meta_description"] = "Interactive FIFA World Cup 2026 tournament simulator with 48 teams. Predict every match, track group standings, and simulate the knockout bracket.";
+  $template_data["seo_robots_tag"] = "index, follow, max-image-preview:large";
+  $template_data["allow_site_scaling"] = true;
+  $template_data["setHtmlLangAttribute"] = true;
+
+  $template_data["schemas"] = array(
+    "third-party/proxy/pfn/common/schemas/webpage.tpl",
+    "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
+    "third-party/proxy/pfn/common/schemas/siteNavigationElement.tpl",
+    "third-party/proxy/pfn/common/schemas/website.tpl",
+  );
 
   $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
   $template_data['fragments'] = array("third-party/proxy/$brand/common/gtag-script.tpl", "pages/static/tools/nfl/fifa-world-cup-simulator/index.tpl");

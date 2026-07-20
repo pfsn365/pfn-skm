@@ -71,6 +71,22 @@ by the `redirect-url-and-response-filter.php` middleware (LANG, GA4_ID,
 IS_DESKTOP, FRAMEWORK_URL, API_ENDPOINT_DOMAIN) are defined directly at the tail
 of `config.php`.
 
+`API_ENDPOINT_DOMAIN` is **not defined in this repo**. `addPageMetadata()`
+(`helpers.php:396`) references it, so the taxonomy call fails and the helper
+returns early — it supplies no `seo_title`, `meta_description`, `page_text_content`
+or `header_text`. That last one matters: `third-party/proxy/pfn/index.tpl` gates
+both the `<h1>` header-wrapper **and** the `desktop-tools-top-adv-container`
+(Raptive 90px header ad) on `isset($header_text)`, so any route that neither
+hardcodes `header_text` nor uses the `show_sidebar_nav` layout branch renders
+without a page header. Routes therefore set their metadata inline.
+
+The FIFA route is the one **deliberate deviation** from the parent: it sets
+`header_text` / `seo_title` / `meta_description` / `seo_robots_tag` / `schemas`
+inline instead of calling `addPageMetadata()`, so it renders with no dependency
+on the internal API. Those strings mirror CMS entry
+`ad168211-5952-4e25-bad3-b46e8a1b93b3` and must be edited by hand when it
+changes. Playoff Predictor and Ultimate GM still call `addPageMetadata()`.
+
 ### Templates — `templates/` (217 `.tpl` + data)
 
 Full transitive `{include}` closure of the render path (main render template,
