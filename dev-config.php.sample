@@ -23,3 +23,4 @@
 define('MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION', '/js/production/pfn-proxy/mockdraft-simulator-bundle.js');
 define('ULTIMATE_SIMULATOR_SCRIPT_LOCATION',  '/js/production/pfn-proxy/ultimate-simulator-bundle.js');
 define('PLAYOFF_PREDICTOR_SCRIPT_LOCATION',   '/js/production/pfn-proxy/playoff-predictor-bundle.js');
+define('FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION', '/js/production/pfn-proxy/fifa-world-cup-simulator-bundle.js');

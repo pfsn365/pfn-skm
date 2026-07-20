@@ -1,6 +1,6 @@
 <?php
 /**
- * The 4 extracted PFN tool routes, copied verbatim from the parent
+ * The 5 extracted PFN tool routes, copied verbatim from the parent
  * routes/sk-proxy.php. Helper functions and constants they depend on live in
  * ../helpers.php and ../config.php (the *_SCRIPT_LOCATION bundle constants,
  * originally in js-side-menu-config.php, are consolidated into config.php).
@@ -9,6 +9,7 @@
  *   /sk-proxy/:brand/mockdraft-simulator         (parent sk-proxy.php:2137)
  *   /sk-proxy/:brand/mockdraft-simulator-widget  (parent sk-proxy.php:2300)
  *   /sk-proxy/:brand/ultimate-simulator          (parent sk-proxy.php:4352)
+ *   /sk-proxy/:brand/fifa-world-cup-simulator    (parent sk-proxy.php:4409)
  *
  * Reach a tool with ?debug__proxy_tools=true (restrictAccess guard).
  */
@@ -406,6 +407,46 @@ $app->get("/sk-proxy/:brand/ultimate-simulator", function ($brand) use ($app) {
   $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
   $template_data['fragments'] = array("third-party/proxy/$brand/common/gtag-script.tpl", "pages/static/tools/nfl/ultimate-gm-simulator/index.tpl");
   $template_data['head_fragments'] = array("third-party/proxy/$brand/common/ad-script.tpl", "pages/static/common/analytics/track-returning-users.tpl", "third-party/proxy/$brand/common/clarity-script.tpl", "third-party/proxy/$brand/tools/ultimate-simulator/meta.tpl");
+
+  $app->render('third-party/proxy/index.tpl', $template_data);
+});
+
+// ===== fifa-world-cup-simulator (sk-proxy.php:4409-4444) =====
+
+$app->get('/sk-proxy/:brand/fifa-world-cup-simulator', function ($brand) use ($app) {
+  restrictAccess($app);
+
+  $template_data = array(
+    'meta_keywords' => '',
+    'brand' => $brand,
+    'canonical_url' => 'https://www.profootballnetwork.com/fifa-world-cup-simulator/',
+    'slug' => 'nba-mock-draft-simulator',
+    'tool' => 'pfn-tools',
+    'bodyClasses' => 'raptive-pfn-disable-footer-close',
+    'raptive_header_90_class' => 'raptive-pfn-header-90',
+    'include_right_sidebar' => false,
+    'adv_in_content' => false,
+    'add_header_navigation' => true,
+    'send_page_view_event' => true,
+    'content_width' => 'full-width',
+    'updated_timestamp' => "---",
+    'is_desktop' => $app->is_desktop,
+    'js_bundle_location' => FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION,
+    'show_right_sticky_ad_container' => true,
+    'show_desktop_tools_top_adv_container' => true,
+    'data_source_path' => generateDataIntegrationAssetsPath('tools/soccer-simulator/'),
+    'chartbeat_authors' => CHARTBEAT_CONFIGS['team-player-pages']['authors'],
+    'chartbeat_sections' => CHARTBEAT_CONFIGS['team-player-pages']['sections'],
+  );
+
+  preparePFNMenuData($template_data, "Tools", "FIFA World Cup Simulator");
+  preparePFNSecondaryNav($template_data, "Tools", "FIFA World Cup Simulator");
+  addPageMetadata($template_data, getPFNToolSubpageSlug("FIFA World Cup Simulator"));
+
+  $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
+  $template_data['fragments'] = array("third-party/proxy/$brand/common/gtag-script.tpl", "pages/static/tools/nfl/fifa-world-cup-simulator/index.tpl");
+  $template_data['head_fragments'] = array("third-party/proxy/$brand/common/ad-script.tpl", "pages/static/common/analytics/track-returning-users.tpl", "third-party/proxy/$brand/common/taboola-script/head-script.tpl", "third-party/proxy/$brand/common/clarity-script.tpl", "third-party/proxy/$brand/tools/fifa-world-cup-simulator/meta.tpl");
+  $template_data['body_fragments'] = array("third-party/proxy/$brand/common/taboola-script/body-script.tpl");
 
   $app->render('third-party/proxy/index.tpl', $template_data);
 });

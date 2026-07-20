@@ -1,6 +1,6 @@
 # PFN Tools — Extraction Map
 
-This repo is a standalone extraction of **4 PFN tools** from the `skm` codebase,
+This repo is a standalone extraction of **5 PFN tools** from the `skm` codebase,
 containing only the files needed to render them and nothing else.
 
 | Tool | Route | JS bundle | Canonical |
@@ -9,6 +9,7 @@ containing only the files needed to render them and nothing else.
 | Mock Draft Simulator (iframe widget) | `/sk-proxy/:brand/mockdraft-simulator-widget` | `mockdraft-simulator-bundle` | — |
 | NFL Playoff Predictor | `/sk-proxy/:brand/playoff-predictor` | `playoff-predictor-bundle` | profootballnetwork.com/nfl-playoff-predictor |
 | NFL Ultimate GM Simulator | `/sk-proxy/:brand/ultimate-simulator` | `ultimate-simulator-bundle` | profootballnetwork.com/nfl-ultimate-gm-simulator |
+| FIFA World Cup Simulator | `/sk-proxy/:brand/fifa-world-cup-simulator` | `fifa-world-cup-simulator-bundle` | profootballnetwork.com/fifa-world-cup-simulator |
 
 All handlers were copied **verbatim** from the parent `routes/sk-proxy.php`. The
 only intended brand is `pfn`.
@@ -19,7 +20,7 @@ only intended brand is `pfn`.
 
 ```
 index.php  (Slim 2 + Smarty 3 bootstrap)
-  └─ routes/tools.php            4 handlers (verbatim from sk-proxy.php)
+  └─ routes/tools.php            5 handlers (verbatim from sk-proxy.php)
        ├─ helpers.php            all helper functions the handlers call
        ├─ config.php             all constants they + the templates reference
        └─ $app->render(...)
@@ -37,12 +38,12 @@ but the tools render like production without a local build.
 
 ## File inventory
 
-### PHP (authored slim files — only what these 4 routes use)
+### PHP (authored slim files — only what these 5 routes use)
 
 | File | Contents | Extracted from |
 |------|----------|----------------|
 | `index.php` | Minimal Slim 2 + Smarty bootstrap (mirrors parent index.php: same template roots, the `include_once` Smarty plugin, PFN origin forced) | parent `index.php` |
-| `routes/tools.php` | The 4 route handlers, verbatim | `routes/sk-proxy.php` :1450, :2137, :2300, :4352 |
+| `routes/tools.php` | The 5 route handlers, verbatim | `routes/sk-proxy.php` :1450, :2137, :2300, :4352, :4409 |
 | `helpers.php` | 24 helper functions (transitive closure) | see table below |
 | `config.php` | Every constant referenced by handlers/helpers/templates, PFN-production values | `config.php`, `js-side-menu-config.php`, `redirect-url-and-response-filter.php` |
 
@@ -61,8 +62,8 @@ they must exist at render time.
 
 **Key constants in `config.php`** — `BUNDLE_STATIC_URL`, `STATIC_URL`,
 `MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION`, `ULTIMATE_SIMULATOR_SCRIPT_LOCATION`,
-`PLAYOFF_PREDICTOR_SCRIPT_LOCATION`, `PFN_NFL_LOGO_CACHE_BUSTER`,
-`CHARTBEAT_CONFIGS`, `AD_UNITS` (+ `createBidsArray`), `GA4_ID`, `LANG`,
+`PLAYOFF_PREDICTOR_SCRIPT_LOCATION`, `FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION`,
+`PFN_NFL_LOGO_CACHE_BUSTER`, `CHARTBEAT_CONFIGS`, `AD_UNITS` (+ `createBidsArray`), `GA4_ID`, `LANG`,
 `IS_DESKTOP/IS_MOBILE`, `FRAMEWORK_URL`, `API_ENDPOINT_DOMAIN`, GOTHAM/COOKIE_*
 constants, etc. Values resolve to the **PFN production** branch (the app forces
 `HTTP_PFNORIGINHEADER` in `index.php`). The request-time constants normally set
@@ -70,17 +71,17 @@ by the `redirect-url-and-response-filter.php` middleware (LANG, GA4_ID,
 IS_DESKTOP, FRAMEWORK_URL, API_ENDPOINT_DOMAIN) are defined directly at the tail
 of `config.php`.
 
-### Templates — `templates/` (212 `.tpl` + data)
+### Templates — `templates/` (217 `.tpl` + data)
 
 Full transitive `{include}` closure of the render path (main render template,
-PFN layout/header/footer/nav, ads, schemas, and the three tool template trees).
+PFN layout/header/footer/nav, ads, schemas, and the four tool template trees).
 Notable trees:
 
 - `templates/third-party/proxy/` — proxy render template, PFN chrome, per-tool
   styles/meta, schemas
 - `templates/nfl-draft-simulator/` — mock draft simulator UI (home, widget,
   common: players/teams/picks/multi-user/final-result/dashboard) + **data files**
-- `templates/pages/static/tools/nfl/{playoff-predictor,ultimate-gm-simulator}/` — those two tools' markup
+- `templates/pages/static/tools/nfl/{playoff-predictor,ultimate-gm-simulator,fifa-world-cup-simulator}/` — those three tools' markup
 - `templates/common/widgets/`, `templates/ads/`, `templates/pages/common/` — shared chrome pulled in transitively
 
 Three templates are referenced **dynamically via PHP** (not static `{include}`),
@@ -105,6 +106,7 @@ found during verification and copied:
 | `js/fragments/mockdraft-simulator.js` | mockdraft + widget bundle source (self-contained, no imports) |
 | `js/fragments/ultimate-simulator.js` | ultimate-sim bundle source |
 | `js/fragments/playoff-predictor.js` | playoff-predictor bundle source |
+| `js/fragments/fifa-world-cup-simulator.js` | fifa-world-cup-simulator bundle source |
 | `scripts/build-bundles.js` | Minifies each source into `js/production/pfn-proxy/*-bundle.js` (matches the parent's `MergeIntoSingleFilePlugin` + minify transform — no module wrapper, globals preserved) |
 | `package.json` | `npm run build` → the above (dep: `terser`) |
 
@@ -128,7 +130,7 @@ the `SlimGoesSlimmer` middleware). Run `composer install`.
   - `statics.sportskeeda.com/assets/sheets/tools/mockdraft-simulator/mockdraftSimulatorData.json` (live MDS data; local JSONs are the fallback)
   - `statics.sportskeeda.com/assets/sheets/nav-data/navData.json` (secondary nav)
   - `API_ENDPOINT_DOMAIN/v1/taxonomy/<slug>` (page SEO metadata)
-  - `generateDataIntegrationAssetsPath(...)` asset paths (playoff/ultimate data)
+  - `generateDataIntegrationAssetsPath(...)` asset paths (playoff/ultimate/fifa data)
 - The `redirect-url-and-response-filter.php` middleware (main-site redirect
   logic) — its request-time constants are reproduced directly in `config.php`.
 

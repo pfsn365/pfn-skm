@@ -1,6 +1,6 @@
 name: Handle Bundle Workflow
 
-# When a PR is labelled "Bundle"/"bundle", build the 3 tool JS bundles
+# When a PR is labelled "Bundle"/"bundle", build the 4 tool JS bundles
 # (content-hashed), upload them to S3, commit the regenerated
 # js-side-menu-config.php back to the PR, and comment the S3 URLs.
 #

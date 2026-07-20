@@ -1,11 +1,12 @@
 # pfn-skm
 
-Standalone extraction of 4 PFN tools from the `skm` codebase:
+Standalone extraction of 5 PFN tools from the `skm` codebase:
 
 - **NFL Mock Draft Simulator** — `/sk-proxy/pfn/mockdraft-simulator`
 - **Mock Draft Simulator widget** — `/sk-proxy/pfn/mockdraft-simulator-widget`
 - **NFL Playoff Predictor** — `/sk-proxy/pfn/playoff-predictor`
 - **NFL Ultimate GM Simulator** — `/sk-proxy/pfn/ultimate-simulator`
+- **FIFA World Cup Simulator** — `/sk-proxy/pfn/fifa-world-cup-simulator`
 
 Slim 2 + Smarty 3 app. It renders identically to the parent site; the compiled
 JS bundles and all images/fonts load from the same CDN at runtime. See
@@ -53,11 +54,11 @@ new files (or deploy them to the CDN under the same paths).
 
 ```
 index.php            Slim + Smarty bootstrap
-routes/tools.php     the 4 route handlers (verbatim)
+routes/tools.php     the 5 route handlers (verbatim)
 helpers.php          helper functions the handlers/templates use
 config.php           constants (PFN production values)
 templates/           full transitive Smarty template closure + data files
 data/pfn/            PFN menu data
-js/fragments/        the 3 bundle sources
+js/fragments/        the 4 bundle sources
 scripts/build-bundles.js   minifies sources into js/production/pfn-proxy/
 ```
