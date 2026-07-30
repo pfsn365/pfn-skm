@@ -85,7 +85,14 @@
     "wide_left_consensus": "",
   };
 
+  // year the simulator is currently running, i.e. the board rendered with the page
+  const currentDraftYear = "2027";
+
   const redraftDataList = {
+    // the current year's players come with the page, so they are never fetched
+    [currentDraftYear]: {
+      playersData: originalMDSData.playersList,
+    },
     "2020": {
       roundends: [10, 32, 64, 106, 146, 179, 214, 255],
     },

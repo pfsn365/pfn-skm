@@ -7,13 +7,15 @@
         allRoundContainers.forEach(container => addClass(container, "hidden"));
       }
 
+      const playersData = getDashboardPlayersList();
+
       Object.keys(data).forEach(round => {
         if (!data[round]) return;
         let roundContainerSelector = ".most-drafted-players-container .round-data." + round;
         const roundContainer = parentContainer.querySelector(roundContainerSelector);
         if (roundContainer) {
           removeClass(roundContainer, "hidden");
-          const playerData = playersListAll.find(player => player.name === data[round]);
+          const playerData = playersData.find(player => player.name === data[round]);
           if (playerData) {
             const playerNameHolder = roundContainer.querySelector(".player-name");
             if (playerNameHolder) {
