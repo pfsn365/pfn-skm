@@ -22,7 +22,7 @@
 // --- PROFOOTBALLNETWORK + BUNDLE_STATIC_URL (PFN header branch)  (from config.php:7-13) ---
 if(!empty($_SERVER["HTTP_PFNORIGINHEADER"])) {// this header is used for PFN domain
 	define('PROFOOTBALLNETWORK', true);
-	define('BUNDLE_STATIC_URL', '//staticd.profootballnetwork.com');
+	define('BUNDLE_STATIC_URL', '//static.profootballnetwork.com');
 } else {
 	define('PROFOOTBALLNETWORK', false);
 	define('BUNDLE_STATIC_URL', '//staticg.sportskeeda.com');
