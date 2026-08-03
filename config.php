@@ -28,8 +28,8 @@ if(!empty($_SERVER["HTTP_PFNORIGINHEADER"])) {// this header is used for PFN dom
 	define('BUNDLE_STATIC_URL', '//staticg.sportskeeda.com');
 }
 
-	define('GOTHAM_URL', 'http://gotham.profootballnetwork.com');
-	define('GOTHAM_CF_URL', 'https://gotham.profootballnetwork.com');
+	define('GOTHAM_URL', 'http://gotham-bigscoots.profootballnetwork.com');
+	define('GOTHAM_CF_URL', 'https://gotham-bigscoots.profootballnetwork.com');
 	
 // --- ENVIRONMENT + SCHEME  (from config.php:73-74) ---
 	define('ENVIRONMENT', "production");
