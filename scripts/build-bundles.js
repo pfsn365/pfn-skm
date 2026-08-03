@@ -1,5 +1,5 @@
 /**
- * Builds the 3 PFN tool JS bundles the way the parent skm repo does
+ * Builds the 4 PFN tool JS bundles the way the parent skm repo does
  * (webpack.build.js -> MergeIntoSingleFilePlugin + minify transform): each
  * bundle is a single source fragment written to one file. No babel, no webpack
  * module wrapper — top-level declarations stay global, which the tools rely on
@@ -35,6 +35,7 @@ const BUNDLES = [
   { out: "mockdraft-simulator-bundle", src: "mockdraft-simulator.js", constant: "MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION" },
   { out: "ultimate-simulator-bundle", src: "ultimate-simulator.js", constant: "ULTIMATE_SIMULATOR_SCRIPT_LOCATION" },
   { out: "playoff-predictor-bundle", src: "playoff-predictor.js", constant: "PLAYOFF_PREDICTOR_SCRIPT_LOCATION" },
+  { out: "fifa-world-cup-simulator-bundle", src: "fifa-world-cup-simulator.js", constant: "FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION" },
 ];
 
 const WATCH = process.argv.includes("--watch");

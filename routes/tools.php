@@ -1,6 +1,6 @@
 <?php
 /**
- * The 4 extracted PFN tool routes, copied verbatim from the parent
+ * The 5 extracted PFN tool routes, copied verbatim from the parent
  * routes/sk-proxy.php. Helper functions and constants they depend on live in
  * ../helpers.php and ../config.php (the *_SCRIPT_LOCATION bundle constants,
  * originally in js-side-menu-config.php, are consolidated into config.php).
@@ -9,6 +9,7 @@
  *   /sk-proxy/:brand/mockdraft-simulator         (parent sk-proxy.php:2137)
  *   /sk-proxy/:brand/mockdraft-simulator-widget  (parent sk-proxy.php:2300)
  *   /sk-proxy/:brand/ultimate-simulator          (parent sk-proxy.php:4352)
+ *   /sk-proxy/:brand/fifa-world-cup-simulator    (parent sk-proxy.php:4409)
  *
  * Reach a tool with ?debug__proxy_tools=true (restrictAccess guard).
  */
@@ -60,6 +61,16 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
   $template_data["brand_logo"] = "pfn-logo.png";
   $template_data['feedback_popup_logo'] = "logo/pfn-black-big.png";
   $template_data['feedback_source_tab'] = $brand;
+
+  // Set before addPageMetadata() so the schemas survive even if the taxonomy
+  // call fails; on success it reassigns the identical list, so this is a no-op.
+  // Every tool page except mockdraft-simulator-widget carries these four.
+  $template_data["schemas"] = array(
+    "third-party/proxy/pfn/common/schemas/webpage.tpl",
+    "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
+    "third-party/proxy/pfn/common/schemas/siteNavigationElement.tpl",
+    "third-party/proxy/pfn/common/schemas/website.tpl",
+  );
 
   addPageMetadata($template_data, getPFNToolSubpageSlug("Playoff Predictor"));
 
@@ -401,11 +412,86 @@ $app->get("/sk-proxy/:brand/ultimate-simulator", function ($brand) use ($app) {
 
   preparePFNMenuData($template_data, "Tools", "NFL Ultimate GM Simulator");
   preparePFNSecondaryNav($template_data, "Football", "NFL Ultimate GM Simulator");
+
+  // Set before addPageMetadata() so the schemas survive even if the taxonomy
+  // call fails; on success it reassigns the identical list, so this is a no-op.
+  // Every tool page except mockdraft-simulator-widget carries these four.
+  $template_data["schemas"] = array(
+    "third-party/proxy/pfn/common/schemas/webpage.tpl",
+    "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
+    "third-party/proxy/pfn/common/schemas/siteNavigationElement.tpl",
+    "third-party/proxy/pfn/common/schemas/website.tpl",
+  );
+
   addPageMetadata($template_data, getPFNToolSubpageSlug("NFL Ultimate GM Simulator"));
 
   $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
   $template_data['fragments'] = array("third-party/proxy/$brand/common/gtag-script.tpl", "pages/static/tools/nfl/ultimate-gm-simulator/index.tpl");
   $template_data['head_fragments'] = array("third-party/proxy/$brand/common/ad-script.tpl", "pages/static/common/analytics/track-returning-users.tpl", "third-party/proxy/$brand/common/clarity-script.tpl", "third-party/proxy/$brand/tools/ultimate-simulator/meta.tpl");
+
+  $app->render('third-party/proxy/index.tpl', $template_data);
+});
+
+// ===== fifa-world-cup-simulator (sk-proxy.php:4409-4444) =====
+
+$app->get('/sk-proxy/:brand/fifa-world-cup-simulator', function ($brand) use ($app) {
+  restrictAccess($app);
+
+  $template_data = array(
+    'meta_keywords' => '',
+    'brand' => $brand,
+    'canonical_url' => 'https://www.profootballnetwork.com/fifa-world-cup-simulator/',
+    'slug' => 'nba-mock-draft-simulator',
+    'tool' => 'pfn-tools',
+    'bodyClasses' => 'raptive-pfn-disable-footer-close',
+    'raptive_header_90_class' => 'raptive-pfn-header-90',
+    'include_right_sidebar' => false,
+    'adv_in_content' => false,
+    'add_header_navigation' => true,
+    'send_page_view_event' => true,
+    'content_width' => 'full-width',
+    'updated_timestamp' => "---",
+    'is_desktop' => $app->is_desktop,
+    'js_bundle_location' => FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION,
+    'show_right_sticky_ad_container' => true,
+    'show_desktop_tools_top_adv_container' => true,
+    'data_source_path' => generateDataIntegrationAssetsPath('tools/soccer-simulator/'),
+    'chartbeat_authors' => CHARTBEAT_CONFIGS['team-player-pages']['authors'],
+    'chartbeat_sections' => CHARTBEAT_CONFIGS['team-player-pages']['sections'],
+  );
+
+  preparePFNMenuData($template_data, "Tools", "FIFA World Cup Simulator");
+  preparePFNSecondaryNav($template_data, "Tools", "FIFA World Cup Simulator");
+
+  // Page metadata is set inline rather than via addPageMetadata(), so this page
+  // renders without a blocking call to the (VPC-internal) taxonomy API. Values
+  // mirror the CMS entry ad168211-5952-4e25-bad3-b46e8a1b93b3 as of 2026-07-20.
+  //
+  // `header_text` is load-bearing: third-party/proxy/pfn/index.tpl gates BOTH
+  // the <h1> header-wrapper and the desktop-tools-top-adv-container (the Raptive
+  // 90px header ad) on isset($header_text). Removing it hides the page header
+  // and the header ad. Edit these strings here when the CMS entry changes.
+  //
+  // page_text_content / faq are intentionally absent: the CMS entry has neither,
+  // so there is no FAQ schema fragment to append either.
+  $template_data["header_text"] = "FIFA World Cup 2026 Simulator";
+  $template_data["seo_title"] = "FIFA World Cup 2026 Simulator | Predict Tournament Results";
+  $template_data["meta_description"] = "Interactive FIFA World Cup 2026 tournament simulator with 48 teams. Predict every match, track group standings, and simulate the knockout bracket.";
+  $template_data["seo_robots_tag"] = "index, follow, max-image-preview:large";
+  $template_data["allow_site_scaling"] = true;
+  $template_data["setHtmlLangAttribute"] = true;
+
+  $template_data["schemas"] = array(
+    "third-party/proxy/pfn/common/schemas/webpage.tpl",
+    "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
+    "third-party/proxy/pfn/common/schemas/siteNavigationElement.tpl",
+    "third-party/proxy/pfn/common/schemas/website.tpl",
+  );
+
+  $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
+  $template_data['fragments'] = array("third-party/proxy/$brand/common/gtag-script.tpl", "pages/static/tools/nfl/fifa-world-cup-simulator/index.tpl");
+  $template_data['head_fragments'] = array("third-party/proxy/$brand/common/ad-script.tpl", "pages/static/common/analytics/track-returning-users.tpl", "third-party/proxy/$brand/common/taboola-script/head-script.tpl", "third-party/proxy/$brand/common/clarity-script.tpl", "third-party/proxy/$brand/tools/fifa-world-cup-simulator/meta.tpl");
+  $template_data['body_fragments'] = array("third-party/proxy/$brand/common/taboola-script/body-script.tpl");
 
   $app->render('third-party/proxy/index.tpl', $template_data);
 });

@@ -249,6 +249,59 @@
     }
   }
 
+  // Sheet rows arrive as arrays, with the column names in the first row
+  function prepareDashboardPlayersData(result) {
+    let data = result;
+    if (result && result.collections) {
+      const playersCollection = result.collections.find(collection => (collection.sheetName || "").indexOf(
+        "_players") !== -1);
+      data = playersCollection ? playersCollection.data : [];
+    }
+
+    if (!Array.isArray(data) || data.length < 2) {
+      return [];
+    }
+
+    return prepareMDSPlayersList(data);
+  }
+
+  // players of each year are kept in redraftDataList, the current year is already there
+  async function fetchPlayersDataForYear(year) {
+    if (!redraftDataList[year]) {
+      redraftDataList[year] = {};
+    }
+
+    if (redraftDataList[year].playersData) {
+      return;
+    }
+
+    let playersDataUrl = STATIC_URL + "/assets/sheets/tools/mockdraft-simulator/redraft-players/" + year +
+      "PlayersData.json";
+    playersDataUrl = playersDataUrl.replace("staticd.pr", "staticj.pr");
+
+    // cache the outcome either way so switching years does not refetch
+    try {
+      const response = await fetch(playersDataUrl);
+      const result = await response.json();
+      redraftDataList[year].playersData = prepareDashboardPlayersData(result);
+    } catch (error) {
+      console.error("Error while fetching players data for " + year + ":", error);
+      redraftDataList[year].playersData = [];
+    }
+  }
+
+  // players of the year selected in the dashboard, widgets resolve names against these
+  // instead of playersListAll, which holds whichever board the simulator has loaded
+  function getDashboardPlayersList() {
+    const yearSelector = $(".dashboard-container .dashboard-data-year");
+    const yearData = yearSelector ? redraftDataList[yearSelector.value] : null;
+    if (yearData && yearData.playersData && yearData.playersData.length) {
+      return yearData.playersData;
+    }
+
+    return playersListAll;
+  }
+
   async function fetchDashboardData(parentSelector) {
     let selectedYear;
     const yearSelector = $(".dashboard-container .dashboard-data-year");
@@ -263,11 +316,15 @@
     }
 
     try {
+      // fetched alongside the user data, needed only before the widgets render
+      const playersDataRequest = selectedYear ? fetchPlayersDataForYear(selectedYear) : Promise.resolve();
+
       let userData = await fetch(userDataUrl, {
         method: 'GET',
         credentials: 'include',
       });
       userData = await userData.json();
+
       if (userData.status === "Success") {
         storeDashboardData(userData.data);
         let statsData = await fetch(statsDataUrl, {
@@ -277,6 +334,7 @@
         statsData = await statsData.json();
         if (statsData.status === "Success") {
           storeStatsData(statsData.data);
+          await playersDataRequest;
           updateDashboardSection("", parentSelector);
           hideDashboardLoadingOverlay(parentSelector);
         }
