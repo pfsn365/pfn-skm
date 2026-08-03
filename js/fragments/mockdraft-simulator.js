@@ -11832,3 +11832,7 @@ function restoreOriginalMDSData() {
   // Re-render players list
   renderMDSPlayersList(playersList);
 }
+
+function abc() {
+  return true;
+}
