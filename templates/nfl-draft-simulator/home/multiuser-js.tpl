@@ -15,7 +15,7 @@
         try {
             await loadSocketIO();
 
-            socket = io("https://wscr.profootballnetwork.com");
+            socket = io("https://wscr-bigscoots.profootballnetwork.com");
             console.log("Socket connected");
             initSocketEvents();
 
