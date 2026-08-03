@@ -1,0 +1,9 @@
+.git
+.github
+.claude
+vendor
+node_modules
+templates/_compiled
+templates/_cache
+dev-config.php
+*.md
