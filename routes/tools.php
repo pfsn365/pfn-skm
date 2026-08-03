@@ -72,7 +72,7 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
     "third-party/proxy/pfn/common/schemas/website.tpl",
   );
 
-  addPageMetadata($template_data, getPFNToolSubpageSlug("Playoff Predictor"));
+  // addPageMetadata($template_data, getPFNToolSubpageSlug("Playoff Predictor"));
 
   preparePFNMenuData($template_data, "Tools", "NFL Playoff Predictor");
   preparePFNSecondaryNav($template_data, "Football", "NFL Playoff Predictor");
@@ -423,7 +423,7 @@ $app->get("/sk-proxy/:brand/ultimate-simulator", function ($brand) use ($app) {
     "third-party/proxy/pfn/common/schemas/website.tpl",
   );
 
-  addPageMetadata($template_data, getPFNToolSubpageSlug("NFL Ultimate GM Simulator"));
+  // addPageMetadata($template_data, getPFNToolSubpageSlug("NFL Ultimate GM Simulator"));
 
   $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
   $template_data['fragments'] = array("third-party/proxy/$brand/common/gtag-script.tpl", "pages/static/tools/nfl/ultimate-gm-simulator/index.tpl");
