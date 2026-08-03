@@ -48,14 +48,14 @@ jobs:
         run: |
           S3_URLS=""
           for FILE in js/production/pfn-proxy/*-bundle-*.js; do
-            KEY="s3://static.sportskeeda.com/$FILE"
+            KEY="s3://static.profootballnetwork.com/$FILE"
             if aws s3 ls "$KEY" > /dev/null 2>&1; then
               echo "$FILE already on S3 — skipping."
             else
               aws s3 cp "$FILE" "$KEY"
               echo "Uploaded $FILE"
             fi
-            S3_URLS="$S3_URLS"$'\n'"https://static.sportskeeda.com/$FILE"
+            S3_URLS="$S3_URLS"$'\n'"https://static.profootballnetwork.com/$FILE"
           done
           # stash URLs for the PR comment
           echo "urls<<EOF" >> "$GITHUB_OUTPUT"
