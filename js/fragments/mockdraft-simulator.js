@@ -7223,6 +7223,20 @@ function getCurrentPick() {
   }
 }
 
+// Sheet columns like doNotDraft / penaltyPOS can arrive as an array, a comma
+// separated string, or be missing entirely, so normalize before spreading.
+function toPositionList(value) {
+  if (Array.isArray(value)) {
+    return value;
+  }
+
+  if (typeof value === "string") {
+    return value.split(",").map(function (pos) { return pos.trim(); }).filter(Boolean);
+  }
+
+  return [];
+}
+
 function updateTeamNeeds(currentPickNumber) {
   var simPicks = picksList.slice(0, roundends[rounds]);
   var teamNeedsContainer = $(".team-needs-picks-container");
@@ -7281,7 +7295,13 @@ function updateTeamNeeds(currentPickNumber) {
             teamsList[i].teamNeed5
           ].filter(function (need) { return need; });
           teamNeeds = needsArray.join(", ");
-          teamStrengths = [...new Set([...teamNeedsList[i].doNotDraft, ...teamNeedsList[i].penaltyPOS])];
+          var teamNeedsEntry = teamNeedsList.find(function (entry) {
+            return entry.shortName === team.shortName;
+          }) || {};
+          teamStrengths = [...new Set([
+            ...toPositionList(teamNeedsEntry.doNotDraft),
+            ...toPositionList(teamNeedsEntry.penaltyPOS)
+          ])];
           teamStrengths = teamStrengths.join(", ");
           break;
         }
