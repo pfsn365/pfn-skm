@@ -5,6 +5,7 @@
  * ../helpers.php and ../config.php (the *_SCRIPT_LOCATION bundle constants,
  * originally in js-side-menu-config.php, are consolidated into config.php).
  *
+ *   /sk-proxy/:brand/login                       (parent sk-proxy.php:71)
  *   /sk-proxy/:brand/playoff-predictor          (parent sk-proxy.php:1450)
  *   /sk-proxy/:brand/mockdraft-simulator         (parent sk-proxy.php:2137)
  *   /sk-proxy/:brand/mockdraft-simulator-widget  (parent sk-proxy.php:2300)
@@ -16,6 +17,37 @@
 
 define('PFN_NFL_WEEK_NUMBER', "18");
 define('PFN_NFL_LOGO_CACHE_BUSTER', "00008");
+
+// ===== login (sk-proxy.php:71-85) =====
+// Target of get_brand_login_url() — the mockdraft-simulator dashboard sends
+// unauthenticated users here with ?after-login=<the page they came from>. Sign-in
+// is Firebase (email/password, register, password reset, Google popup); on
+// success firebaseManager.tpl POSTs the Firebase ID token to
+// GOTHAM_URL_PFN_FRONTEND/pfn/auth, which sets the session cookies the tools read
+// via getCurrentUserID(), and the page redirects to `after-login`.
+
+$app->get('/sk-proxy/:brand/login', function ($brand) use ($app) {
+  restrictAccess($app);
+
+  $template_data = array(
+    'brand' => $brand,
+    'send_page_view_event' => true,
+    'is_desktop' => $app->is_desktop,
+    'login_page' => true,
+    // Deviation from the parent, which also passes
+    // "google_login_url" => get_google_login_url(). That builds a Google OAuth
+    // redirect back to FRAMEWORK_URL_HOST/login/google-auth-digest — the
+    // Sportskeeda login framework, which PFN does not use. PFN auth is Firebase
+    // -> POST GOTHAM_URL_PFN_FRONTEND/pfn/auth (pfn-gotham app/pfn/router.go),
+    // and the login template never reads the value. Omitted, so this repo needs
+    // no GOOGLE_CLIENT_ID secret.
+  );
+
+  $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
+  $template_data['fragments'] = array("third-party/proxy/$brand/common/login/index.tpl", "third-party/proxy/$brand/common/gtag-script.tpl");
+
+  $app->render('third-party/proxy/index.tpl', $template_data);
+});
 // ===== playoff-predictor (sk-proxy.php:1450-1510) =====
 
 $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {

@@ -20,23 +20,45 @@
 // ============================================================
 
 // --- PROFOOTBALLNETWORK + BUNDLE_STATIC_URL (PFN header branch)  (from config.php:7-13) ---
-if(!empty($_SERVER["HTTP_PFNORIGINHEADER"])) {// this header is used for PFN domain
-	define('PROFOOTBALLNETWORK', true);
-	define('BUNDLE_STATIC_URL', '//static.profootballnetwork.com');
-} else {
-	define('PROFOOTBALLNETWORK', false);
-	define('BUNDLE_STATIC_URL', '//staticg.sportskeeda.com');
-}
+// if(!empty($_SERVER["HTTP_PFNORIGINHEADER"])) {// this header is used for PFN domain
+define('PROFOOTBALLNETWORK', true);
+define('BUNDLE_STATIC_URL', '//static.profootballnetwork.com');
+// } else {
+// 	define('PROFOOTBALLNETWORK', false);
+// 	define('BUNDLE_STATIC_URL', '//staticg.sportskeeda.com');
+// }
 
 	define('GOTHAM_URL', 'http://gotham-bigscoots.profootballnetwork.com');
 	define('GOTHAM_CF_URL', 'https://gotham-bigscoots.profootballnetwork.com');
-	
+
+// --- GOTHAM_URL_PFN_FRONTEND  (from config.php:39-39) ---
+// Browser-facing Gotham host. Used by the login page (POST /pfn/auth to exchange
+// the Firebase ID token for a session), the MDS dashboard/logout calls and the
+// feedback/playoff-predictor submissions. Parent value is
+// 'https://gotham.profootballnetwork.com'; this repo points at the BigScoots
+// endpoint to match GOTHAM_URL/GOTHAM_CF_URL above.
+	define('GOTHAM_URL_PFN_FRONTEND', 'https://gotham-bigscoots.profootballnetwork.com');
+
 // --- ENVIRONMENT + SCHEME  (from config.php:73-74) ---
 	define('ENVIRONMENT', "production");
 	define('SCHEME', "https");
 
 // --- PFN_URL (used by get_brand_login_url)  (from config.php:97-97) ---
 	define('PFN_URL', 'https://www.profootballnetwork.com');
+
+// --- MOBILE_LOGIN_FIREBASE_PFN  (from config.php:101-109) ---
+// Firebase web-app config for the PFN login page (templates/third-party/proxy/
+// pfn/common/login/firebaseManager.tpl). These are public client-side keys, the
+// same ones the parent app ships to the browser.
+	define("MOBILE_LOGIN_FIREBASE_PFN", [
+		"apiKey" => "AIzaSyDxsSRpmQUt41Q_JmPEcbAPgQzUrUNXV6Q",
+		"authDomain" => "profootballnetwork-8e365.firebaseapp.com",
+		"projectId" => "profootballnetwork-8e365",
+		"storageBucket" => "profootballnetwork-8e365.appspot.com",
+		"messagingSenderId" => "317914786543",
+		"appId" => "1:317914786543:web:e93f8a514cbbc1e761491a",
+		"measurementId" => "G-HZWEW0N3E8"
+	]);
 
 // --- PFN header-menu cron constants  (from config.php:4223-4225) ---
 // Used by cronjobs/pfn/pfn-menu-cron.php to fetch the PFN WordPress top menu.

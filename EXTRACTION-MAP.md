@@ -11,8 +11,15 @@ containing only the files needed to render them and nothing else.
 | NFL Ultimate GM Simulator | `/sk-proxy/:brand/ultimate-simulator` | `ultimate-simulator-bundle` | profootballnetwork.com/nfl-ultimate-gm-simulator |
 | FIFA World Cup Simulator | `/sk-proxy/:brand/fifa-world-cup-simulator` | `fifa-world-cup-simulator-bundle` | profootballnetwork.com/fifa-world-cup-simulator |
 
-All handlers were copied **verbatim** from the parent `routes/sk-proxy.php`. The
-only intended brand is `pfn`.
+Plus the **login page** the Mock Draft Simulator sends unauthenticated users to:
+
+| Page | Route | Canonical |
+|------|-------|-----------|
+| PFN login / register | `/sk-proxy/:brand/login` | profootballnetwork.com/login |
+
+All handlers were copied **verbatim** from the parent `routes/sk-proxy.php` (the
+login handler with one documented deviation, see below). The only intended brand
+is `pfn`.
 
 ---
 
@@ -43,7 +50,7 @@ but the tools render like production without a local build.
 | File | Contents | Extracted from |
 |------|----------|----------------|
 | `index.php` | Minimal Slim 2 + Smarty bootstrap (mirrors parent index.php: same template roots, the `include_once` Smarty plugin, PFN origin forced) | parent `index.php` |
-| `routes/tools.php` | The 5 route handlers, verbatim | `routes/sk-proxy.php` :1450, :2137, :2300, :4352, :4409 |
+| `routes/tools.php` | The 5 tool handlers + the login handler, verbatim | `routes/sk-proxy.php` :71, :1450, :2137, :2300, :4352, :4409 |
 | `helpers.php` | 24 helper functions (transitive closure) | see table below |
 | `config.php` | Every constant referenced by handlers/helpers/templates, PFN-production values | `config.php`, `js-side-menu-config.php`, `redirect-url-and-response-filter.php` |
 
@@ -80,7 +87,51 @@ both the `<h1>` header-wrapper **and** the `desktop-tools-top-adv-container`
 hardcodes `header_text` nor uses the `show_sidebar_nav` layout branch renders
 without a page header. Routes therefore set their metadata inline.
 
-The FIFA route is the one **deliberate deviation** from the parent: it sets
+## Login
+
+`/sk-proxy/pfn/login` is the target of `get_brand_login_url()` (`helpers.php`),
+which the mock draft simulator passes to its templates as `login_url`; the
+dashboard's Login button navigates there with `?after-login=<page you came from>`.
+
+Sign-in is entirely client side, in
+`templates/third-party/proxy/pfn/common/login/`:
+
+| File | Role |
+|------|------|
+| `index.tpl` | The three boxes (sign in / register / forgot password) + the Google button, and the `after-login` redirect |
+| `firebaseManager.tpl` | `PFNLoginManagerInstance` — loads Firebase 8.10 from gstatic, does email/password + Google popup auth, then POSTs the Firebase ID token to `GOTHAM_URL_PFN_FRONTEND/pfn/auth` |
+| `styles.tpl` | PFN blue overrides |
+
+Gotham's `/pfn/auth` response sets the session cookies; the tools then read
+`fw_ID` through `getCurrentUserID()` in `templates/third-party/proxy/js.tpl`.
+The base CSS comes from `templates/{desktop,mobile}/fragments/login-css.tpl`
+(copied from the parent), and the JS helpers it calls (`$`, `addClass`,
+`loadScriptAsync`, `pureJSAjaxPost`, `getCurrentUserID`) already exist in
+`third-party/proxy/js.tpl`; `trackGAEvent` comes from the `gtag-script.tpl`
+fragment the route includes.
+
+Two constants were added to `config.php` for it: `MOBILE_LOGIN_FIREBASE_PFN`
+(public Firebase web config, verbatim from the parent) and
+`GOTHAM_URL_PFN_FRONTEND`. The latter was **missing from this repo entirely**
+even though the MDS dashboard/logout, the feedback CTA and the playoff-predictor
+submission templates all reference it — it rendered as an empty string, so those
+calls hit relative URLs. It is defined here as
+`https://gotham-bigscoots.profootballnetwork.com` to match the BigScoots
+`GOTHAM_URL`/`GOTHAM_CF_URL` above it; the parent uses
+`https://gotham.profootballnetwork.com`.
+
+The **one deviation** in the login handler: the parent also passes
+`"google_login_url" => get_google_login_url()`, which builds a Google OAuth
+redirect back to `FRAMEWORK_URL_HOST/login/google-auth-digest` — the Sportskeeda
+login framework. **PFN does not use that flow.** Its Google button goes through
+the Firebase popup and ends at the same `POST /pfn/auth` as the email/password
+path; `pfn-gotham/app/pfn/router.go` exposes only `/auth`, `/logout` and the MDS
+dashboard routes, no OAuth callback. The template never reads
+`google_login_url`, so the key, the `get_google_login_url()` /
+`get_google_digest_url()` helpers, `FRAMEWORK_URL_HOST` and the `GOOGLE_CLIENT_ID`
+secret are all omitted here — this repo needs no secrets file.
+
+The FIFA route is the other **deliberate deviation** from the parent: it sets
 `header_text` / `seo_title` / `meta_description` / `seo_robots_tag` / `schemas`
 inline instead of calling `addPageMetadata()`, so it renders with no dependency
 on the internal API. Those strings mirror CMS entry
@@ -94,7 +145,8 @@ PFN layout/header/footer/nav, ads, schemas, and the four tool template trees).
 Notable trees:
 
 - `templates/third-party/proxy/` — proxy render template, PFN chrome, per-tool
-  styles/meta, schemas
+  styles/meta, schemas, `pfn/common/login/` (login page + Firebase manager)
+- `templates/{desktop,mobile}/fragments/login-css.tpl` — login page base CSS
 - `templates/nfl-draft-simulator/` — mock draft simulator UI (home, widget,
   common: players/teams/picks/multi-user/final-result/dashboard) + **data files**
 - `templates/pages/static/tools/nfl/{playoff-predictor,ultimate-gm-simulator,fifa-world-cup-simulator}/` — those three tools' markup
