@@ -94,17 +94,53 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
   $template_data['feedback_popup_logo'] = "logo/pfn-black-big.png";
   $template_data['feedback_source_tab'] = $brand;
 
-  // Set before addPageMetadata() so the schemas survive even if the taxonomy
-  // call fails; on success it reassigns the identical list, so this is a no-op.
-  // Every tool page except mockdraft-simulator-widget carries these four.
+  // Page metadata is set inline rather than via addPageMetadata(), so this page
+  // renders without a blocking call to the (VPC-internal) taxonomy API. Values
+  // mirror the CMS entry c6e9b54f-008a-42b8-b5b1-0e70d8efd572 as of 2026-08-05
+  // (GET API_ENDPOINT_DOMAIN/v1/taxonomy/<slug>). `page_text_content` is that
+  // entry's `data_subpage_info` after sanitize_article_contents(), with no FAQs to
+  // append (the CMS entry has none, so `faq` is empty and the faq-schema.tpl
+  // fragment in head_fragments below emits an empty FAQPage, exactly as before).
+  //
+  // `header_text` is load-bearing: third-party/proxy/pfn/index.tpl gates BOTH
+  // the <h1> header-wrapper and the desktop-tools-top-adv-container (the Raptive
+  // 90px header ad) on isset($header_text). Removing it hides the page header
+  // and the header ad. Edit these strings here when the CMS entry changes.
+  $template_data["header_text"] = "Free NFL Playoff Predictor & Season Simulator (2026)";
+  $template_data["seo_title"] = "Free NFL Playoff Predictor & Season Simulator (2026)";
+  $template_data["meta_description"] = "PFSN's NFL Playoff Predictor allows you to predict each game of the 2026 NFL season to see how it impacts the playoff picture and matchups.";
+  $template_data["seo_robots_tag"] = "index, follow, max-image-preview:large";
+  $template_data["allow_site_scaling"] = true;
+  $template_data["setHtmlLangAttribute"] = true;
+  $template_data["page_text_content"] = <<<'PAGE_TEXT'
+<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-0">What Is PFSN&rsquo;s NFL Playoff Predictor?</h2>
+<p>PFSN&rsquo;s NFL Playoff Predictor is a one-of-a-kind tool that gives you the ability to simulate the entire NFL season right up until the Super Bowl. Not only do you get to see how each game impacts the NFL playoff picture, but you also get to see what next year&rsquo;s <a href="https://www.profootballnetwork.com/nfl-draft-order/" target="_blank" rel="noopener nofollow">draft order</a> will look like based on the outcomes of the games.</p>
+<p>PFSN&rsquo;s Playoff Machine is updated within minutes of the conclusion of each NFL game to allow you to test out an unlimited number of playoff scenarios in real time to see how your favorite team is impacted in the NFL playoff picture.</p>
+<p>PFSN&rsquo;s NFL Playoff Predictor allows you to play out various weekly scenarios to see how the playoff picture changes with each scenario. The combination of actual game results from the NFL season, along with user-selected game picks and AI-simulated results, provides you with a unique NFL playoff bracket.</p>
+<p>Now that the NFL season is here, play out every game and determine who will be heading to Super Bowl LXI in Inglewood.</p>
+<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-1">How Does PFSN&rsquo;s NFL Playoff Machine Work?</h2>
+<p>The PFSN NFL Playoff Picture Predictor is updated in near-real time at the conclusion of every NFL game. From there, you can choose to pick every remaining game yourself or select only the games that interest you. Once you make your picks, you can choose to simulate that week only or the rest of the season. PFSN&rsquo;s Playoff Predictor includes a proprietary, state-of-the-art algorithm that will simulate and predict the outcomes of the games you have not already selected.</p>
+<p>From there, you can see the projected playoff picture and can manipulate any of the game results to see how it changes the NFL playoff bracket. Once your NFL playoff bracket predictor is finished, you can select the winners of each playoff matchup from Wild Card Weekend through the Super Bowl.</p>
+<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-2">How Many Teams Make the NFL Playoffs?</h2>
+<p>A total of 14 teams make it into the playoffs. The 14-team field consists of seven teams from the AFC and seven teams from the NFC. There are four division winners and three Wild Card teams from each conference. The three Wild Card teams are those with the best regular-season records among the teams that did not win their respective division.</p>
+<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-3">How Do the NFL Playoffs Work?</h2>
+<p>The NFL regular season is an 18-week schedule consisting of 17 games for each of the 32 NFL teams. At the conclusion of Week 18, the playoff field is set.</p>
+<p>The four division winners in each conference are seeded one through four in their respective playoff brackets based on their winning percentage. Three additional teams from each conference, known as Wild Card teams, also advance to the playoffs and are seeded five through seven. In the first round, the No. 1 seed from each conference gets a bye week and automatically advances to the second round. The six other teams in each conference face off: 2 vs. 7, 3 vs. 6, and 4 vs. 5.</p>
+<p>The winners advance to the second round. The lowest remaining seed in each conference must face the No. 1 seed. The other two remaining teams in each conference face off as well. Two teams from each conference that win their games advance to the Conference Championship round.</p>
+<p>The winners of the AFC Championship Game and NFC Championship Game face off two weeks later in the Super Bowl.</p>
+<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-4">When Do the NFL Playoffs Start?</h2>
+<p>The 2026-27 NFL Playoffs begin with Wild Card Weekend from Saturday, January 16, through Monday, January 18. Two games are slated for Saturday, with three additional games on Sunday. The round wraps up with a Monday Night Football game on January 18. Super Bowl 61 will be played on Sunday, February 14, at SoFi Stadium in Inglewood.</p>
+<p><br></p>
+PAGE_TEXT;
+
+  $template_data["faq"] = array();
+
   $template_data["schemas"] = array(
     "third-party/proxy/pfn/common/schemas/webpage.tpl",
     "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
     "third-party/proxy/pfn/common/schemas/siteNavigationElement.tpl",
     "third-party/proxy/pfn/common/schemas/website.tpl",
   );
-
-  // addPageMetadata($template_data, getPFNToolSubpageSlug("Playoff Predictor"));
 
   preparePFNMenuData($template_data, "Tools", "NFL Playoff Predictor");
   preparePFNSecondaryNav($template_data, "Football", "NFL Playoff Predictor");
@@ -407,6 +443,8 @@ $app->get("/sk-proxy/:brand/ultimate-simulator", function ($brand) use ($app) {
     'brand' => $brand,
     'canonical_url' => 'https://www.profootballnetwork.com/nfl-ultimate-gm-simulator/',
     'slug' => 'ultimate-gm-simulator',
+    // Both of these are placeholders kept from the parent; the inline metadata
+    // block below overwrites them (as addPageMetadata() did in the parent).
     'header_text' => 'Ultimate Simulator',
     'bodyClasses' => 'raptive-pfn-disable-footer-close',
     'page_text_content' => "",
@@ -445,9 +483,161 @@ $app->get("/sk-proxy/:brand/ultimate-simulator", function ($brand) use ($app) {
   preparePFNMenuData($template_data, "Tools", "NFL Ultimate GM Simulator");
   preparePFNSecondaryNav($template_data, "Football", "NFL Ultimate GM Simulator");
 
-  // Set before addPageMetadata() so the schemas survive even if the taxonomy
-  // call fails; on success it reassigns the identical list, so this is a no-op.
-  // Every tool page except mockdraft-simulator-widget carries these four.
+  // Page metadata is set inline rather than via addPageMetadata(), so this page
+  // renders without a blocking call to the (VPC-internal) taxonomy API. Values
+  // mirror the CMS entry b2c4d786-00f8-4dfc-9bef-fb27a1c3b6e1 as of 2026-08-05
+  // (GET API_ENDPOINT_DOMAIN/v1/taxonomy/<slug>). `page_text_content` is that
+  // entry's `data_subpage_info` after sanitize_article_contents(), with the 6 CMS
+  // FAQs appended by appendFaqsToPageContent() under the "FAQ" heading. The same
+  // FAQs feed templates/common/faq/faq-schema.tpl, added to head_fragments below.
+  //
+  // `header_text` is load-bearing: third-party/proxy/pfn/index.tpl gates BOTH
+  // the <h1> header-wrapper and the desktop-tools-top-adv-container (the Raptive
+  // 90px header ad) on isset($header_text). Removing it hides the page header
+  // and the header ad. Edit these strings here when the CMS entry changes.
+  $template_data["header_text"] = "NFL Ultimate GM Simulator";
+  $template_data["seo_title"] = "NFL Ultimate GM Simulator";
+  $template_data["meta_description"] = "Put your knowledge of the NFL to the test with our Ultimate GM Simulator and guide your favorite team to victory.";
+  $template_data["seo_robots_tag"] = "index, follow, max-image-preview:large";
+  $template_data["allow_site_scaling"] = true;
+  $template_data["setHtmlLangAttribute"] = true;
+  $template_data["page_text_content"] = <<<'PAGE_TEXT'
+<p>Do you think you can manage your favorite team&rsquo;s roster better than the real-life general managers? Well, the PFSN Ultimate GM Simulator is here to help you prove it. Whether it&rsquo;s making those tough cuts, re-signing your own pending free agents, hitting the free agent market, or running your team's draft, you can build your ideal roster, see how next season plays out, and share it with the world.</p>
+<h2 id="b2c4d786-00f8-4dfc-9bef-fb27a1c3b6e1-0">How To Play PFSN&rsquo;s NFL Ultimate GM Simulator</h2>
+<p>There are multiple elements to the PFSN Offseason Manager. Firstly, you can either simulate the remaining games or pick how you see them playing out, which will set the draft order for the 2026 NFL Mock Draft Simulator.<br><br>In the initial phase of the offseason, you decide which of the players who are under contract you want to keep, who you want to cut, and whose contracts to restructure to save cap space. When it comes to cutting players, you must navigate the cap implications of each move and decide which decisions are right and which are wrong.</p>
+<p>In the second stage of the offseason, you decide which of your pending free agents to re-sign, transition tag, or franchise tag. You can only franchise tag or transition tag one player in total, but you can re-sign as many players as you deem necessary and have cap space to do so. Each player has a programmed minimum value of the contract in terms of money, years, and guarantees that they will accept.</p>
+<p>The third stage of the NFL offseason allows you to sign any free agents that you believe will improve your roster. The process here is largely the same as re-signing your own free agents, where each player has minimum values in terms of money, years, and guarantees that you must meet before they will sign with you.</p>
+<p>Once you have handled that phase of the offseason, it is on to the MDS to fill the remaining holes on your roster. Navigate your way through a seven-round mock draft to complete your roster ahead of the 2026-27 NFL season.</p>
+<p>After that, you can simulate the 2026-27 NFL season with our proprietary PFSN Impact analytics comparing all the rosters following the offseason and playing out what could happen next season. </p>
+<p><br></p>
+<p><br></p>
+
+<h2 id="faq-heading">FAQ</h2>
+<h3>How Does the NFL Salary Cap Work?</h3>
+<p><p>The&nbsp;<a href="https://www.profootballnetwork.com/how-does-nfl-salary-cap-work/" target="_blank" rel="noopener">NFL salary cap</a>&nbsp;is complex to master, but the principle of how it works is relatively simple. It is what is referred to as a hard cap, meaning that when the new league year starts, each team must be below that cap and remain below it at all times.</p>
+<p>Salary cap numbers are a combination of salaries and bonuses. Only the top 51 players count toward the cap during the offseason, but when the season starts, all 53 players on the active roster count toward it. Additionally, any player placed on the injured reserve or the practice squad counts against a team salary cap.</p></p>
+<h3>What Are the Different Free Agent Designations?</h3>
+<p><p>Unrestricted Free Agent (UFA): Players with four or more accrued seasons are listed as unrestricted free agents. They can sign with any other team in the league with no draft compensation owed to the previous team. A player with fewer than four accrued seasons can become a UFA if their old team does not extend them a qualifying offer.</p>
+<p>Restricted Free Agent (RFA): Players with three accrued seasons who have been given a qualifying offer from their current team. RFAs can negotiate with any team for the first month of the new league year. If they agree to a contract, they must sign an “offer sheet.” Their former team then has the “right of first refusal” on that offer sheet. They will retain that player if they choose to match the offer sheet.</p>
+<p>If the original team does not match the offer sheet, then the team that gave the offer sheet may send draft compensation to the original team. The value of this depends on the original qualifying offer given to the RFA.</p>
+<p>Exclusive Rights Free Agent (ERFA): A player with two or fewer accrued seasons and an expired contract. If the original team extends a qualifying offer to an ERFA, then that player is unable to negotiate with any other team. If an ERFA is not tendered a qualifying offer, he is free to negotiate with other teams, and his original team has no ability to match unless the ERFA gives them the opportunity.</p>
+<p>Street Free Agent: A player who has either been released by his previous team or did not play in the previous season. These players are free to negotiate with any team, and the previous team does not receive any consideration in the compensatory pick formula.</p></p>
+<h3>What Are the Different NFL Roster Designations?</h3>
+<p><p>QB: Quarterback</p>
+<p>RB: Running Back</p>
+<p>WR: Wide Receiver</p>
+<p>TE: Tight End</p>
+<p>OT: Offensive Tackle</p>
+<p>G: Guard</p>
+<p>C: Center</p>
+<p>DT: Defensive Tackle</p>
+<p>EDGE: Edge Rusher - includes outside linebackers and defensive ends</p>
+<p>LB: Linebacker</p>
+<p>CB: Cornerback</p>
+<p>S: Safety</p>
+<p>K: Kicker</p>
+<p>P: Punter</p>
+<p>LS: Long Snapper</p></p>
+<h3>How do NFL Contract Restructures Work?</h3>
+<p><p>There are multiple ways an NFL contract restructure can work. Some restructures can be performed by the team without needing permission from the player, while others require the player to sign a new contract to allow the change in terms to happen. Most of the time, a restructure does not see a player lose money, and it usually accelerates the timeframe in which the player receives their money.</p>
+<p>In a basic contract restructure, teams can take any base salary, roster bonus, or workout bonus and pay it to the player as a lump sum. That money is treated as a “signing bonus,” which allows it to be counted for up to five years in terms of the salary cap (prorated). For example, if a team restructures a contract to pay a $10 million lump sum in 2025, that would be prorated across the cap at $2 million a year from 2025 to 2029.</p>
+<p>In order for that to be the case, a player must have at least five more years remaining on their deal. If a player has just two years remaining, including 2025, then it would count for $5 million against the cap in 2025 and $5 million in 2026. If a team wants to prorate it over anything longer than the remaining length of the contract, they can add void years to the end of the contract, but this requires the player to sign a new contract.</p>
+<p>A void year is essentially a “dummy” year that is used for cap purposes. If a contract voids in 2026, that player becomes a free agent, and all the remaining cap ramifications will then count in the 2026 season. So in the example above, if the cap number were $2 million a year across 2025 to 2029 and the contract voids in 2026, the team would have an $8 million cap hit in the 2026 season, even though the player no longer is on their roster.</p>
+<p>When restructuring a contract, the only constraint for a team is that they must leave at least the minimum base salary for that player based on the number of accrued seasons. All other cash for that season can be transferred into the lump sum payment and treated as a signing bonus.</p></p>
+<h3>What Is Dead Money in NFL Contracts?</h3>
+<p><p>Dead money in an NFL contract refers to money a team has already spent or committed to spending but has yet to count against its cap. This money could be paid as a signing bonus, an option bonus, or a guaranteed salary at signing.</p>
+<p>For example, let’s imagine a contract where a player signs for two years in a deal worth $20 million with a $10 million signing bonus and $5 million in guaranteed salary. In Year 1, their salary is just $1.5 million, with the remaining $8.5 million in Year 2.</p>
+<p>That $10 million signing bonus prorates across the two years at $5 million per year. His cap numbers would be $6.5 million in Year 1 and $13.5 million in Year 2.</p>
+<p>If the team decides after Year 1 that the player is not worth $13.5 million against their cap in Year 2, they could cut him. The team would then have the following in dead money: the remaining $5 million from the prorated signing bonus and the remaining $3.5 million in guaranteed salary.</p>
+<p>The remaining $5 million in salary that was not guaranteed would “vanish” and would be both a cap and cash saving of $5 million, as it is money the team would not have to pay to that player. However, because the team has already spent the $5 million signing bonus that was due to count against the cap in Year 2 and committed to spending another $3.5 million in salary, they will have $8.5 million in dead money against their cap in Year 2.</p></p>
+<h3>What Are the Franchise Tag and the Transition Tag?</h3>
+<p><p>The franchise tag is a tool that NFL teams can use to ensure they retain a free agent. Teams do not have to use a franchise tag but can only use a maximum of one franchise or transition tag per season.</p>
+<p>Once a team applies the franchise tag, that player is under contract for another season. As soon as the player signs the franchise tag contract, the salary attributed to the tag is guaranteed and cannot be rescinded unless a long-term contract is agreed upon. However, the player does not have to sign the franchise tag, but it does not mean they can negotiate with other teams.</p>
+<p>Once a franchise tag has been applied, a team has until a deadline in the middle of July to negotiate a long-term deal. Once that deadline has passed, no further negotiations can occur until the following offseason.</p>
+<p>Teams can franchise tag a player three times, but the cost increases exponentially on each occasion. A first franchise tag is applied at the greater of either the value set within the NFL Collective Bargaining Agreement (CBA) or 120% of the player’s previous year's salary. A second tag has a value of at least 120% of the first tag. A third franchise tag would be valued at 144% of the second tag. The initial cost of the franchise tag is based on the player’s position.</p>
+<p>There are two types of franchise tags: exclusive and non-exclusive. The non-exclusive tag allows players to negotiate with other teams. If a player agrees to a contract with another team, the team applying the tag has the right of first refusal. If the original team does not match, then the new team must pay the original team compensation of two first-round picks.</p>
+<p>The exclusive franchise tag does not allow a player to negotiate. However, this comes at a higher cost, which is determined following that year’s free agency.</p>
+<p>The transition tag is also a one-year, fully guaranteed contract, but at a lower salary than the franchise tag. The value is set by the NFL CBA and varies based on the player’s position. Players who get the transition tag can negotiate with other teams. If they agree to a contract with a new team, their original team has the right of first refusal. If the original team does not match, then the player is free to leave, and no compensation is owed.</p></p>
+PAGE_TEXT;
+
+  $template_data["faq"] = array(
+    array(
+      "question" => "How Does the NFL Salary Cap Work?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>The&nbsp;<a href="https://www.profootballnetwork.com/how-does-nfl-salary-cap-work/" target="_blank" rel="noopener">NFL salary cap</a>&nbsp;is complex to master, but the principle of how it works is relatively simple. It is what is referred to as a hard cap, meaning that when the new league year starts, each team must be below that cap and remain below it at all times.</p>
+<p>Salary cap numbers are a combination of salaries and bonuses. Only the top 51 players count toward the cap during the offseason, but when the season starts, all 53 players on the active roster count toward it. Additionally, any player placed on the injured reserve or the practice squad counts against a team salary cap.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+    array(
+      "question" => "What Are the Different Free Agent Designations?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>Unrestricted Free Agent (UFA): Players with four or more accrued seasons are listed as unrestricted free agents. They can sign with any other team in the league with no draft compensation owed to the previous team. A player with fewer than four accrued seasons can become a UFA if their old team does not extend them a qualifying offer.</p>
+<p>Restricted Free Agent (RFA): Players with three accrued seasons who have been given a qualifying offer from their current team. RFAs can negotiate with any team for the first month of the new league year. If they agree to a contract, they must sign an “offer sheet.” Their former team then has the “right of first refusal” on that offer sheet. They will retain that player if they choose to match the offer sheet.</p>
+<p>If the original team does not match the offer sheet, then the team that gave the offer sheet may send draft compensation to the original team. The value of this depends on the original qualifying offer given to the RFA.</p>
+<p>Exclusive Rights Free Agent (ERFA): A player with two or fewer accrued seasons and an expired contract. If the original team extends a qualifying offer to an ERFA, then that player is unable to negotiate with any other team. If an ERFA is not tendered a qualifying offer, he is free to negotiate with other teams, and his original team has no ability to match unless the ERFA gives them the opportunity.</p>
+<p>Street Free Agent: A player who has either been released by his previous team or did not play in the previous season. These players are free to negotiate with any team, and the previous team does not receive any consideration in the compensatory pick formula.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+    array(
+      "question" => "What Are the Different NFL Roster Designations?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>QB: Quarterback</p>
+<p>RB: Running Back</p>
+<p>WR: Wide Receiver</p>
+<p>TE: Tight End</p>
+<p>OT: Offensive Tackle</p>
+<p>G: Guard</p>
+<p>C: Center</p>
+<p>DT: Defensive Tackle</p>
+<p>EDGE: Edge Rusher - includes outside linebackers and defensive ends</p>
+<p>LB: Linebacker</p>
+<p>CB: Cornerback</p>
+<p>S: Safety</p>
+<p>K: Kicker</p>
+<p>P: Punter</p>
+<p>LS: Long Snapper</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+    array(
+      "question" => "How do NFL Contract Restructures Work?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>There are multiple ways an NFL contract restructure can work. Some restructures can be performed by the team without needing permission from the player, while others require the player to sign a new contract to allow the change in terms to happen. Most of the time, a restructure does not see a player lose money, and it usually accelerates the timeframe in which the player receives their money.</p>
+<p>In a basic contract restructure, teams can take any base salary, roster bonus, or workout bonus and pay it to the player as a lump sum. That money is treated as a “signing bonus,” which allows it to be counted for up to five years in terms of the salary cap (prorated). For example, if a team restructures a contract to pay a $10 million lump sum in 2025, that would be prorated across the cap at $2 million a year from 2025 to 2029.</p>
+<p>In order for that to be the case, a player must have at least five more years remaining on their deal. If a player has just two years remaining, including 2025, then it would count for $5 million against the cap in 2025 and $5 million in 2026. If a team wants to prorate it over anything longer than the remaining length of the contract, they can add void years to the end of the contract, but this requires the player to sign a new contract.</p>
+<p>A void year is essentially a “dummy” year that is used for cap purposes. If a contract voids in 2026, that player becomes a free agent, and all the remaining cap ramifications will then count in the 2026 season. So in the example above, if the cap number were $2 million a year across 2025 to 2029 and the contract voids in 2026, the team would have an $8 million cap hit in the 2026 season, even though the player no longer is on their roster.</p>
+<p>When restructuring a contract, the only constraint for a team is that they must leave at least the minimum base salary for that player based on the number of accrued seasons. All other cash for that season can be transferred into the lump sum payment and treated as a signing bonus.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+    array(
+      "question" => "What Is Dead Money in NFL Contracts?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>Dead money in an NFL contract refers to money a team has already spent or committed to spending but has yet to count against its cap. This money could be paid as a signing bonus, an option bonus, or a guaranteed salary at signing.</p>
+<p>For example, let’s imagine a contract where a player signs for two years in a deal worth $20 million with a $10 million signing bonus and $5 million in guaranteed salary. In Year 1, their salary is just $1.5 million, with the remaining $8.5 million in Year 2.</p>
+<p>That $10 million signing bonus prorates across the two years at $5 million per year. His cap numbers would be $6.5 million in Year 1 and $13.5 million in Year 2.</p>
+<p>If the team decides after Year 1 that the player is not worth $13.5 million against their cap in Year 2, they could cut him. The team would then have the following in dead money: the remaining $5 million from the prorated signing bonus and the remaining $3.5 million in guaranteed salary.</p>
+<p>The remaining $5 million in salary that was not guaranteed would “vanish” and would be both a cap and cash saving of $5 million, as it is money the team would not have to pay to that player. However, because the team has already spent the $5 million signing bonus that was due to count against the cap in Year 2 and committed to spending another $3.5 million in salary, they will have $8.5 million in dead money against their cap in Year 2.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+    array(
+      "question" => "What Are the Franchise Tag and the Transition Tag?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>The franchise tag is a tool that NFL teams can use to ensure they retain a free agent. Teams do not have to use a franchise tag but can only use a maximum of one franchise or transition tag per season.</p>
+<p>Once a team applies the franchise tag, that player is under contract for another season. As soon as the player signs the franchise tag contract, the salary attributed to the tag is guaranteed and cannot be rescinded unless a long-term contract is agreed upon. However, the player does not have to sign the franchise tag, but it does not mean they can negotiate with other teams.</p>
+<p>Once a franchise tag has been applied, a team has until a deadline in the middle of July to negotiate a long-term deal. Once that deadline has passed, no further negotiations can occur until the following offseason.</p>
+<p>Teams can franchise tag a player three times, but the cost increases exponentially on each occasion. A first franchise tag is applied at the greater of either the value set within the NFL Collective Bargaining Agreement (CBA) or 120% of the player’s previous year's salary. A second tag has a value of at least 120% of the first tag. A third franchise tag would be valued at 144% of the second tag. The initial cost of the franchise tag is based on the player’s position.</p>
+<p>There are two types of franchise tags: exclusive and non-exclusive. The non-exclusive tag allows players to negotiate with other teams. If a player agrees to a contract with another team, the team applying the tag has the right of first refusal. If the original team does not match, then the new team must pay the original team compensation of two first-round picks.</p>
+<p>The exclusive franchise tag does not allow a player to negotiate. However, this comes at a higher cost, which is determined following that year’s free agency.</p>
+<p>The transition tag is also a one-year, fully guaranteed contract, but at a lower salary than the franchise tag. The value is set by the NFL CBA and varies based on the player’s position. Players who get the transition tag can negotiate with other teams. If they agree to a contract with a new team, their original team has the right of first refusal. If the original team does not match, then the player is free to leave, and no compensation is owed.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+  );
+
   $template_data["schemas"] = array(
     "third-party/proxy/pfn/common/schemas/webpage.tpl",
     "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
@@ -455,11 +645,9 @@ $app->get("/sk-proxy/:brand/ultimate-simulator", function ($brand) use ($app) {
     "third-party/proxy/pfn/common/schemas/website.tpl",
   );
 
-  // addPageMetadata($template_data, getPFNToolSubpageSlug("NFL Ultimate GM Simulator"));
-
   $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
   $template_data['fragments'] = array("third-party/proxy/$brand/common/gtag-script.tpl", "pages/static/tools/nfl/ultimate-gm-simulator/index.tpl");
-  $template_data['head_fragments'] = array("third-party/proxy/$brand/common/ad-script.tpl", "pages/static/common/analytics/track-returning-users.tpl", "third-party/proxy/$brand/common/clarity-script.tpl", "third-party/proxy/$brand/tools/ultimate-simulator/meta.tpl");
+  $template_data['head_fragments'] = array("third-party/proxy/$brand/common/ad-script.tpl", "pages/static/common/analytics/track-returning-users.tpl", "third-party/proxy/$brand/common/clarity-script.tpl", "third-party/proxy/$brand/tools/ultimate-simulator/meta.tpl", "templates/common/faq/faq-schema.tpl");
 
   $app->render('third-party/proxy/index.tpl', $template_data);
 });

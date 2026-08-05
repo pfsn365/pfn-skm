@@ -85,7 +85,10 @@ or `header_text`. That last one matters: `third-party/proxy/pfn/index.tpl` gates
 both the `<h1>` header-wrapper **and** the `desktop-tools-top-adv-container`
 (Raptive 90px header ad) on `isset($header_text)`, so any route that neither
 hardcodes `header_text` nor uses the `show_sidebar_nav` layout branch renders
-without a page header. Routes therefore set their metadata inline.
+without a page header. **No route in this repo calls `addPageMetadata()`** — every
+tool page sets its metadata inline instead (see below), so `helpers.php`'s copy of
+the function is retained only as the documented reference for what those inline
+values mirror.
 
 ## Login
 
@@ -131,12 +134,37 @@ dashboard routes, no OAuth callback. The template never reads
 `get_google_digest_url()` helpers, `FRAMEWORK_URL_HOST` and the `GOOGLE_CLIENT_ID`
 secret are all omitted here — this repo needs no secrets file.
 
-The FIFA route is the other **deliberate deviation** from the parent: it sets
-`header_text` / `seo_title` / `meta_description` / `seo_robots_tag` / `schemas`
-inline instead of calling `addPageMetadata()`, so it renders with no dependency
-on the internal API. Those strings mirror CMS entry
-`ad168211-5952-4e25-bad3-b46e8a1b93b3` and must be edited by hand when it
-changes. Playoff Predictor and Ultimate GM still call `addPageMetadata()`.
+## Hardcoded page metadata
+
+The other **deliberate deviation** from the parent: the three tool routes that
+called `addPageMetadata()` now set `header_text` / `seo_title` /
+`meta_description` / `seo_robots_tag` / `page_text_content` / `faq` /
+`allow_site_scaling` / `setHtmlLangAttribute` / `schemas` inline, so they render
+with no dependency on the VPC-internal taxonomy API. The values were fetched once
+from `/v1/taxonomy/<slug>` on **2026-08-05** and must be edited by hand when the
+CMS entry changes:
+
+| Route | CMS entry (`getPFNToolSubpageSlug`) | FAQs |
+|-------|-------------------------------------|------|
+| `playoff-predictor` | `c6e9b54f-008a-42b8-b5b1-0e70d8efd572` — "Playoff Predictor" | none |
+| `ultimate-simulator` | `b2c4d786-00f8-4dfc-9bef-fb27a1c3b6e1` — "NFL Ultimate GM Simulator" | 6 |
+| `fifa-world-cup-simulator` | `ad168211-5952-4e25-bad3-b46e8a1b93b3` — "FIFA World Cup Simulator" | none |
+
+`page_text_content` is the entry's `data_subpage_info` after
+`sanitize_article_contents($c, false)`, with the FAQs appended by
+`appendFaqsToPageContent()` under the entry's `faq_section_title` — i.e. exactly
+what `addPageMetadata()` would have assembled. The one difference: the helper
+strips every `\n`, while the hardcoded blocks keep the line breaks between tags
+for source readability (insignificant whitespace between block-level elements).
+
+`ultimate-simulator` also gains `templates/common/faq/faq-schema.tpl` in its
+`head_fragments` — `addPageMetadata()` appended that fragment whenever the entry
+had FAQs. `playoff-predictor` already listed it in the parent, and with an empty
+`faq` it emits an empty `FAQPage`, same as before.
+
+`mockdraft-simulator` is untouched: the parent never called `addPageMetadata()`
+for it, so its metadata was already inline. `mockdraft-simulator-widget` is
+excluded by design — it is a `NOINDEX` iframe with no SEO metadata or schemas.
 
 ### Templates — `templates/` (217 `.tpl` + data)
 
