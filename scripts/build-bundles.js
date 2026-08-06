@@ -36,6 +36,7 @@ const BUNDLES = [
   { out: "ultimate-simulator-bundle", src: "ultimate-simulator.js", constant: "ULTIMATE_SIMULATOR_SCRIPT_LOCATION" },
   { out: "playoff-predictor-bundle", src: "playoff-predictor.js", constant: "PLAYOFF_PREDICTOR_SCRIPT_LOCATION" },
   { out: "fifa-world-cup-simulator-bundle", src: "fifa-world-cup-simulator.js", constant: "FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION" },
+  { out: "free-agency-simulator-bundle", src: "free-agency-simulator.js", constant: "FREE_AGENCY_SIMULATOR_SCRIPT_LOCATION" },
 ];
 
 const WATCH = process.argv.includes("--watch");
