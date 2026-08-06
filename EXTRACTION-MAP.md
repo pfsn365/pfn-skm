@@ -1,6 +1,6 @@
 # PFN Tools — Extraction Map
 
-This repo is a standalone extraction of **5 PFN tools** from the `skm` codebase,
+This repo is a standalone extraction of **6 PFN tools** from the `skm` codebase,
 containing only the files needed to render them and nothing else.
 
 | Tool | Route | JS bundle | Canonical |
@@ -10,6 +10,7 @@ containing only the files needed to render them and nothing else.
 | NFL Playoff Predictor | `/sk-proxy/:brand/playoff-predictor` | `playoff-predictor-bundle` | profootballnetwork.com/nfl-playoff-predictor |
 | NFL Ultimate GM Simulator | `/sk-proxy/:brand/ultimate-simulator` | `ultimate-simulator-bundle` | profootballnetwork.com/nfl-ultimate-gm-simulator |
 | FIFA World Cup Simulator | `/sk-proxy/:brand/fifa-world-cup-simulator` | `fifa-world-cup-simulator-bundle` | profootballnetwork.com/fifa-world-cup-simulator |
+| NFL Offseason Manager (free agency) | `/sk-proxy/:brand/free-agency-simulator` | `free-agency-simulator-bundle` | profootballnetwork.com/nfl-offseason-salary-cap-free-agency-manager |
 
 Plus the **login page** the Mock Draft Simulator sends unauthenticated users to:
 
@@ -27,7 +28,7 @@ is `pfn`.
 
 ```
 index.php  (Slim 2 + Smarty 3 bootstrap)
-  └─ routes/tools.php            5 handlers (verbatim from sk-proxy.php)
+  └─ routes/tools.php            6 handlers (verbatim from sk-proxy.php)
        ├─ helpers.php            all helper functions the handlers call
        ├─ config.php             all constants they + the templates reference
        └─ $app->render(...)
@@ -45,12 +46,12 @@ but the tools render like production without a local build.
 
 ## File inventory
 
-### PHP (authored slim files — only what these 5 routes use)
+### PHP (authored slim files — only what these 6 routes use)
 
 | File | Contents | Extracted from |
 |------|----------|----------------|
 | `index.php` | Minimal Slim 2 + Smarty bootstrap (mirrors parent index.php: same template roots, the `include_once` Smarty plugin, PFN origin forced) | parent `index.php` |
-| `routes/tools.php` | The 5 tool handlers + the login handler, verbatim | `routes/sk-proxy.php` :71, :1450, :2137, :2300, :4352, :4409 |
+| `routes/tools.php` | The 6 tool handlers + the login handler, verbatim | `routes/sk-proxy.php` :71, :1450, :2137, :2300, :2405, :4352, :4409 |
 | `helpers.php` | 24 helper functions (transitive closure) | see table below |
 | `config.php` | Every constant referenced by handlers/helpers/templates, PFN-production values | `config.php`, `js-side-menu-config.php`, `redirect-url-and-response-filter.php` |
 
@@ -70,6 +71,7 @@ they must exist at render time.
 **Key constants in `config.php`** — `BUNDLE_STATIC_URL`, `STATIC_URL`,
 `MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION`, `ULTIMATE_SIMULATOR_SCRIPT_LOCATION`,
 `PLAYOFF_PREDICTOR_SCRIPT_LOCATION`, `FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION`,
+`FREE_AGENCY_SIMULATOR_SCRIPT_LOCATION`,
 `PFN_NFL_LOGO_CACHE_BUSTER`, `CHARTBEAT_CONFIGS`, `AD_UNITS` (+ `createBidsArray`), `GA4_ID`, `LANG`,
 `IS_DESKTOP/IS_MOBILE`, `FRAMEWORK_URL`, `API_ENDPOINT_DOMAIN`, GOTHAM/COOKIE_*
 constants, etc. Values resolve to the **PFN production** branch (the app forces
@@ -136,19 +138,20 @@ secret are all omitted here — this repo needs no secrets file.
 
 ## Hardcoded page metadata
 
-The other **deliberate deviation** from the parent: the three tool routes that
+The other **deliberate deviation** from the parent: the four tool routes that
 called `addPageMetadata()` now set `header_text` / `seo_title` /
 `meta_description` / `seo_robots_tag` / `page_text_content` / `faq` /
 `allow_site_scaling` / `setHtmlLangAttribute` / `schemas` inline, so they render
 with no dependency on the VPC-internal taxonomy API. The values were fetched once
-from `/v1/taxonomy/<slug>` on **2026-08-05** and must be edited by hand when the
+from `/v1/taxonomy/<slug>` on the date below and must be edited by hand when the
 CMS entry changes:
 
-| Route | CMS entry (`getPFNToolSubpageSlug`) | FAQs |
-|-------|-------------------------------------|------|
-| `playoff-predictor` | `c6e9b54f-008a-42b8-b5b1-0e70d8efd572` — "Playoff Predictor" | none |
-| `ultimate-simulator` | `b2c4d786-00f8-4dfc-9bef-fb27a1c3b6e1` — "NFL Ultimate GM Simulator" | 6 |
-| `fifa-world-cup-simulator` | `ad168211-5952-4e25-bad3-b46e8a1b93b3` — "FIFA World Cup Simulator" | none |
+| Route | CMS entry (`getPFNToolSubpageSlug`) | FAQs | Fetched |
+|-------|-------------------------------------|------|---------|
+| `playoff-predictor` | `c6e9b54f-008a-42b8-b5b1-0e70d8efd572` — "Playoff Predictor" | none | 2026-08-05 |
+| `ultimate-simulator` | `b2c4d786-00f8-4dfc-9bef-fb27a1c3b6e1` — "NFL Ultimate GM Simulator" | 6 | 2026-08-05 |
+| `fifa-world-cup-simulator` | `ad168211-5952-4e25-bad3-b46e8a1b93b3` — "FIFA World Cup Simulator" | none | 2026-08-05 |
+| `free-agency-simulator` | `bcbe7791-2f06-4d66-9673-4a1467412bae` — "NFL Offseason Manager" | 6 | 2026-08-06 |
 
 `page_text_content` is the entry's `data_subpage_info` after
 `sanitize_article_contents($c, false)`, with the FAQs appended by
@@ -157,10 +160,19 @@ what `addPageMetadata()` would have assembled. The one difference: the helper
 strips every `\n`, while the hardcoded blocks keep the line breaks between tags
 for source readability (insignificant whitespace between block-level elements).
 
-`ultimate-simulator` also gains `templates/common/faq/faq-schema.tpl` in its
-`head_fragments` — `addPageMetadata()` appended that fragment whenever the entry
-had FAQs. `playoff-predictor` already listed it in the parent, and with an empty
-`faq` it emits an empty `FAQPage`, same as before.
+`ultimate-simulator` and `free-agency-simulator` also gain
+`templates/common/faq/faq-schema.tpl` in their `head_fragments` —
+`addPageMetadata()` appended that fragment whenever the entry had FAQs, but in
+both parent handlers the very next line reassigns `head_fragments` wholesale and
+drops it, so the parent never actually emits the `FAQPage` JSON-LD. Adding it
+here is a deliberate fix, not a verbatim copy. `playoff-predictor` already listed
+it in the parent, and with an empty `faq` it emits an empty `FAQPage`, same as
+before.
+
+`free-agency-simulator` keeps the parent's `'slug' => 'ree-agency-simulator'`
+typo verbatim; on this page `slug` only feeds an equality check in
+`templates/ads/video-players/vidazoo.tpl`, so "fixing" it would be a behavior
+change for no gain.
 
 `mockdraft-simulator` is untouched: the parent never called `addPageMetadata()`
 for it, so its metadata was already inline. `mockdraft-simulator-widget` is
@@ -177,7 +189,9 @@ Notable trees:
 - `templates/{desktop,mobile}/fragments/login-css.tpl` — login page base CSS
 - `templates/nfl-draft-simulator/` — mock draft simulator UI (home, widget,
   common: players/teams/picks/multi-user/final-result/dashboard) + **data files**
-- `templates/pages/static/tools/nfl/{playoff-predictor,ultimate-gm-simulator,fifa-world-cup-simulator}/` — those three tools' markup
+- `templates/pages/static/tools/nfl/{playoff-predictor,ultimate-gm-simulator,fifa-world-cup-simulator,free-agency-simulator}/` — those four tools' markup
+  (free-agency-simulator = `index.tpl` + `styles.tpl` + `fetch-data.tpl` + `js.tpl`,
+  its only outside include being `templates/utils/script.tpl`)
 - `templates/common/widgets/`, `templates/ads/`, `templates/pages/common/` — shared chrome pulled in transitively
 
 Three templates are referenced **dynamically via PHP** (not static `{include}`),
@@ -203,6 +217,7 @@ found during verification and copied:
 | `js/fragments/ultimate-simulator.js` | ultimate-sim bundle source |
 | `js/fragments/playoff-predictor.js` | playoff-predictor bundle source |
 | `js/fragments/fifa-world-cup-simulator.js` | fifa-world-cup-simulator bundle source |
+| `js/fragments/free-agency-simulator.js` | free-agency-simulator (Offseason Manager) bundle source |
 | `scripts/build-bundles.js` | Minifies each source into `js/production/pfn-proxy/*-bundle.js` (matches the parent's `MergeIntoSingleFilePlugin` + minify transform — no module wrapper, globals preserved) |
 | `package.json` | `npm run build` → the above (dep: `terser`) |
 
@@ -226,7 +241,8 @@ the `SlimGoesSlimmer` middleware). Run `composer install`.
   - `statics.sportskeeda.com/assets/sheets/tools/mockdraft-simulator/mockdraftSimulatorData.json` (live MDS data; local JSONs are the fallback)
   - `statics.sportskeeda.com/assets/sheets/nav-data/navData.json` (secondary nav)
   - `API_ENDPOINT_DOMAIN/v1/taxonomy/<slug>` (page SEO metadata)
-  - `generateDataIntegrationAssetsPath(...)` asset paths (playoff/ultimate/fifa data)
+  - `generateDataIntegrationAssetsPath(...)` asset paths (playoff/ultimate/fifa data,
+    and `tools/free_agency_simulator/{final,team_level_data}.json` for the Offseason Manager)
 - The `redirect-url-and-response-filter.php` middleware (main-site redirect
   logic) — its request-time constants are reproduced directly in `config.php`.
 
