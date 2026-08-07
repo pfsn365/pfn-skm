@@ -329,7 +329,7 @@
         var simulatorLogo;
         if (brand === "pfn") {
             simulatorLogo = $('img[data-logo="pfn-mock-simulator"]');
-            ctx.drawImage(simulatorLogo, canvas.width / 2 - 50, 7, 30, 30);
+            ctx.drawImage(simulatorLogo, canvas.width / 2 - 50, 7, 35, 35);
         } else if (brand === "cfn") {
             simulatorLogo = $('img[data-logo="cfn-mock-simulator"]');
             ctx.drawImage(simulatorLogo, canvas.width / 2 - 110, 7, 100, 35);

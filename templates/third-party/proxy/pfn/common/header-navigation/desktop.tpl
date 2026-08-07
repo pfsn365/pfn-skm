@@ -1,7 +1,7 @@
 <div class="pfn-header-wrapper">
   <div class="pfn-header-container">
     <a class="header-logo-container" href="https://www.profootballnetwork.com" data-item-url="https://www.profootballnetwork.com">
-      <img rel="preload" class="header-logo" src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfsn-logo-ver-2.png?w=40&h=40" width="40"
+      <img rel="preload" class="header-logo" src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfn-logos/pfn-logo-white-2026-v1.png?w=40&h=40" width="40"
         height="40" alt="pfn-logo" />
     </a>
     <div class="header-items-container">
