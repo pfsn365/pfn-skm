@@ -8268,16 +8268,16 @@ var predictor = (function () {
 		return canvas;
 	}
 
-	function downloadImageByBlob(blob) {
+	function downloadImageByBlob(blob, section) {
 		var objectURL = window.URL.createObjectURL(blob);
 
 		var link = document.createElement("a");
 
 		link.setAttribute("href", objectURL);
 		if (brand == "pfn") {
-			link.setAttribute("download", "PFN_PLAYOFF_" + Date.now());
+			link.setAttribute("download", "PFN_" + (section || "PLAYOFF") + "_" + Date.now());
 		} else {
-			link.setAttribute("download", "SK_PLAYOFF_" + Date.now());
+			link.setAttribute("download", "SK_" + (section || "PLAYOFF") + "_" + Date.now());
 		}
 
 		document.body.appendChild(link);
@@ -8285,6 +8285,16 @@ var predictor = (function () {
 		link.click();
 		link.remove();
 	};
+
+	// Safari on iOS will not act on a data: URL href, and only acts on anchors
+	// that are attached to the document, so canvas downloads have to go through
+	// a blob URL on an appended anchor -- the same path the mock draft simulator
+	// already uses successfully on iOS.
+	function downloadCanvasImage(canvas, section) {
+		canvas.toBlob(function (blob) {
+			downloadImageByBlob(blob, section);
+		}, "image/png", 1);
+	}
 
 	function shareImageByBlob(blob, section) {
 		if (brand == "pfn") {
@@ -8325,14 +8335,7 @@ var predictor = (function () {
 
 		if (playoffContainer) {
 			var playoffCanvas = preparePlayOffCanvas();
-			var link = document.createElement('a');
-			if (brand == "pfn") {
-				link.download = "PFN_PLAYOFF_" + Date.now();
-			} else {
-				link.download = "SK_PLAYOFF_" + Date.now();
-			}
-			link.href = playoffCanvas.toDataURL()
-			link.click();
+			downloadCanvasImage(playoffCanvas, "PLAYOFF");
 		}
 
 		if (downloadBtn) {
@@ -8536,14 +8539,7 @@ var predictor = (function () {
 
 		if (tableContainer) {
 			var conferenceStandingsCanvas = prepareDraftOrderCanvas();
-			var link = document.createElement('a');
-			if (brand == "pfn") {
-				link.download = "PFN_DRAFT_ORDER_" + Date.now();
-			} else {
-				link.download = "SK_DRAFT_ORDER_" + Date.now();
-			}
-			link.href = conferenceStandingsCanvas.toDataURL()
-			link.click();
+			downloadCanvasImage(conferenceStandingsCanvas, "DRAFT_ORDER");
 		}
 
 	}
@@ -8749,26 +8745,12 @@ var predictor = (function () {
 
 		if (divisionStandings && !hasClass(divisionStandings, "hidden")) {
 			var divisionStandingsCanvas = prepareDivisionStandingsCanvas();
-			var link = document.createElement('a');
-			if (brand == "pfn") {
-				link.download = "PFN_DIVISION_STANDINGS_" + Date.now();
-			} else {
-				link.download = "SK_DIVISION_STANDINGS_" + Date.now();
-			}
-			link.href = divisionStandingsCanvas.toDataURL()
-			link.click();
+			downloadCanvasImage(divisionStandingsCanvas, "DIVISION_STANDINGS");
 		}
 
 		if (conferenceStandings && !hasClass(conferenceStandings, "hidden")) {
 			var conferenceStandingsCanvas = prepareConferenceStandingsCanvas();
-			var link = document.createElement('a');
-			if (brand == "pfn") {
-				link.download = "PFN_CONFERENCE_STANDINGS_" + Date.now();
-			} else {
-				link.download = "SK_CONFERENCE_STANDINGS_" + Date.now();
-			}
-			link.href = conferenceStandingsCanvas.toDataURL()
-			link.click();
+			downloadCanvasImage(conferenceStandingsCanvas, "CONFERENCE_STANDINGS");
 		}
 	}
 

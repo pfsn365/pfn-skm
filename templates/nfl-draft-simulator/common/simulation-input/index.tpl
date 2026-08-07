@@ -93,7 +93,7 @@
           </select>
         </div>
         {if isset($mds_widget_distinction) && $mds_widget_distinction}
-          <img class="widget-pfsn-logo" src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfsn-logo-black-ver-2.png?w=40&h=40" width="26" height="26"
+          <img class="widget-pfsn-logo" src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfn-logos/pfn-logo-blue-2026-v1.png?w=40&h=40" width="26" height="26"
             alt="PFSN Logo">
         {/if}
       </div>

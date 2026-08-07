@@ -9,7 +9,7 @@
       </div>
     {/if}
     <a class="header-logo-container" href="https://www.profootballnetwork.com" data-item-url="https://www.profootballnetwork.com">
-      <img class="header-logo" src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfsn-logo-ver-2.png?w=25&h=25" width="25"
+      <img class="header-logo" src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfn-logos/pfn-logo-white-2026-v1.png?w=25&h=25" width="25"
         height="25" alt="pfn-logo" />
     </a>
   </div>

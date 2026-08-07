@@ -25,7 +25,7 @@
           src="{$smarty.const.STATIC_URL}/skm/assets/playoff-predictor/icons/scroll-right-btn.png" height="12"
           width="12" alt="scroll button icon" loading="lazy">
       </div>
-      <img class="table-pfn-logo" src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfsn_logo_white_transparent.png" width="25"
+      <img class="table-pfn-logo" src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfn-logos/pfn-logo-white-2026-v1.png" width="25"
         height="25" alt="pfn logo" crossorigin="anonymous">
     </div>
     <div class="custom-settings-banner">

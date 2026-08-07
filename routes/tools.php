@@ -92,7 +92,7 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
   $template_data["predict_cta_text"] = "Predict Playoff Games";
   $template_data["standings_header_text"] = "Predicted NFL Standings 2026-27";
   $template_data["brand_logo"] = "pfn-logo.png";
-  $template_data['feedback_popup_logo'] = "logo/pfn-black-big.png";
+  $template_data['feedback_popup_logo'] = "skm/assets/pfn/pfn-logos/pfn-logo-blue-2026-v1.png";
   $template_data['feedback_source_tab'] = $brand;
 
   // Page metadata is set inline rather than via addPageMetadata(), so this page
@@ -279,7 +279,7 @@ $app->get('/sk-proxy/:brand/mockdraft-simulator', function ($brand) use ($app) {
     'content_width' => 'full-width',
     'canonical_url' => 'https://www.profootballnetwork.com/mockdraft',
     'download_image_bottom_url' => 'www.profootballnetwork.com/mockdraft',
-    'result_header_logo' => 'skm/assets/pfn/pfsn-logo-white-ver-2.png',
+    'result_header_logo' => 'skm/assets/pfn/pfn-logos/pfn-logo-white-2026-v1.png',
     'feeds_source_path' => generateDataIntegrationAssetsPath("tools/rss_feed/rss_feeds.json"),
     'is_desktop' => $app->is_desktop,
     'chartbeat_authors' => CHARTBEAT_CONFIGS['team-player-pages']['authors'],
@@ -306,7 +306,7 @@ $app->get('/sk-proxy/:brand/mockdraft-simulator', function ($brand) use ($app) {
   $template_data['fragments'] = array("third-party/proxy/$brand/common/gtag-script.tpl", "third-party/proxy/$brand/tools/mockdraft-simulator/pre-styles.tpl", "templates/nfl-draft-simulator/home/$brand/index.tpl", "third-party/proxy/$brand/tools/mockdraft-simulator/styles.tpl");
   $template_data['head_fragments'] = array("third-party/proxy/$brand/common/ad-script.tpl", "pages/static/common/analytics/track-returning-users.tpl", "third-party/proxy/$brand/common/taboola-script/head-script.tpl", "third-party/proxy/$brand/common/clarity-script.tpl", "third-party/proxy/$brand/tools/mockdraft-simulator/meta.tpl");
   $template_data['body_fragments'] = array("third-party/proxy/$brand/common/taboola-script/body-script.tpl");
-  $template_data['feedback_popup_logo'] = "logo/pfn-black-big.png";
+  $template_data['feedback_popup_logo'] = "skm/assets/pfn/pfn-logos/pfn-logo-blue-2026-v1.png";
   $template_data['feedback_source_tab'] = $brand;
 
   $template_data["schemas"] = array(
@@ -412,7 +412,7 @@ $app->get('/sk-proxy/:brand/mockdraft-simulator-widget', function ($brand) use (
     'skip_shift' => "true",
     'js_bundle_location' => MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION,
     'download_image_bottom_url' => 'www.profootballnetwork.com/mockdraft',
-    'result_header_logo' => 'skm/assets/pfn/pfsn-logo-white-ver-2.png',
+    'result_header_logo' => 'skm/assets/pfn/pfn-logos/pfn-logo-white-2026-v1.png',
     'is_desktop' => false,
     'show_dashboard_btn_final_result' => false,
     'mds_widget_distinction' => true,
