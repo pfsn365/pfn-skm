@@ -1,3 +1,10 @@
+<script type="text/javascript">
+  window.addEventListener('voltaxPlayerLoaded', (event) => {
+    const vplayer = event.detail.player;
+    vplayer.setPublisherParam('utm_source=verve');
+  });
+</script>
+
 <script>
   (function() {
       // Step 1: Load AdThrive first (it will load GPT internally)
