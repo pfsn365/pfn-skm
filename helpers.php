@@ -694,28 +694,55 @@ function getFeaturedToolsQuickLinksWidgetForPFN() {
     return [
         "section" => "quick-links-widget",
         "heading" => "Featured Tools",
-        "templateFile" => "common/widgets/taxonomy/quick-links/index.tpl",
+        "templateFile" => "common/widgets/pfn-featured-tools/index.tpl",
         "templateData" => [
             "identifier" => "featured-tools-pfn",
-            "groups" => [
+            "tools" => [
                 [
-                    "heading" => "",
-                    "links" => [
-                        "Mock Draft Simulator" => "/mockdraft/",
-                        "NFL Playoff Predictor" => "/nfl-playoff-predictor/",
-                        "Fantasy Football Trade Analyzer" => "/fantasy-football-trade-analyzer/",
-                        "Start/Sit Optimizer" => "/who-should-i-start-fantasy-optimizer/",
-                        "Fantasy Football Draft Assistant" => "/who-should-i-draft-fantasy-football/",
-                        "Fantasy Football Name Generator" => "/fantasy-football-team-name-generator/",
-                        "Fantasy Football News Tracker" => "/nfl-player-news-injuries-transactions-fantasy/",
-                        "DFS Lineup Optimizer" => "/nfl-dfs-optimizer-lineup-generator/",
-                        "Word Fumble: The NFL Wordle" => "/nfl-word-fumble-player-name-game/",
-                        "NFL Betting Odds Calculator" => "/nfl-betting/betting-odds-calculator/",
-                        "NFL Betting Parlay Calculator" => "/nfl-betting/parlays-calculator/",
-                        "NFL Waiver Wire" => "/fantasy-football-waiver-wire/",
-                        "Player Guessing Game" => "/nfl-player-guessing-game/",
-                        "Offseason Manager" => "/nfl-offseason-salary-cap-free-agency-manage/"
-                    ],
+                    "label" => "Fantasy Football Draft Simulator",
+                    "href" => "https://www.profootballnetwork.com/fantasy-hq/mock-draft",
+                    "featured" => true,
+                ],
+                [
+                    "label" => "College Fantasy Draft Simulator",
+                    "href" => "https://www.profootballnetwork.com/fantasy-hq/college-fantasy-football-rankings-half-ppr",
+                    "featured" => true,
+                ],
+                [
+                    "label" => "NFL Playoff Predictor",
+                    "href" => "https://www.profootballnetwork.com/nfl-playoff-predictor",
+                ],
+                [
+                    "label" => "CFB Playoff Predictor",
+                    "href" => "https://www.profootballnetwork.com/cfb-hq/playoff-predictor",
+                ],
+                [
+                    "label" => "NFL Redraft Simulator",
+                    "href" => "https://www.profootballnetwork.com/nfl-hq/redraft-simulator",
+                ],
+                [
+                    "label" => "NFL Trade Machine",
+                    "href" => "https://www.profootballnetwork.com/nfl-hq/trade-machine",
+                ],
+                [
+                    "label" => "CFB Player Rankings Builder",
+                    "href" => "https://www.profootballnetwork.com/cfb-hq/player-rankings-builder",
+                ],
+                [
+                    "label" => "NFL Player Guessing Game",
+                    "href" => "https://www.profootballnetwork.com/nfl-hq/games/guessing-game",
+                ],
+                [
+                    "label" => "NFL Connections Game",
+                    "href" => "https://www.profootballnetwork.com/nfl-hq/games/connections",
+                ],
+                [
+                    "label" => "NFL Word Fumble",
+                    "href" => "https://www.profootballnetwork.com/nfl-hq/games/word-fumble",
+                ],
+                [
+                    "label" => "NFL Word Search",
+                    "href" => "https://www.profootballnetwork.com/nfl-hq/games/word-search",
                 ],
             ],
         ],

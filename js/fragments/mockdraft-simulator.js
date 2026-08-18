@@ -5655,10 +5655,6 @@ function showRSSFeeds(feedsData) {
     const headerContainer = document.createElement("div");
     addClass(headerContainer, "header-container");
 
-    const headerBar = document.createElement("div");
-    addClass(headerBar, "header-bar");
-    headerContainer.appendChild(headerBar);
-
     const headerText = document.createElement("div");
     addClass(headerText, "header-text");
     headerText.innerHTML = "Latest NFL Draft Analysis";

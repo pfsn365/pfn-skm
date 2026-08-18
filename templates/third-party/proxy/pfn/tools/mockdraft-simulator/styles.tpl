@@ -181,13 +181,12 @@
 
       .nfl-feeds-container {
         border: unset;
-        padding: 16px;
-        /* margin-bottom: 100px; */
+        padding: 10px;
       }
 
       .nfl-feeds-container .header-container .header-text {
-        font-size: 14px;
-        line-height: 19px;
+        font-size: 16px;
+        line-height: 24px;
       }
 
       .nfl-feeds-container .header-container .header-bar {
@@ -202,11 +201,6 @@
 
       .nfl-feeds-container .feeds-holder .single-feed {
         width: 100%;
-      }
-
-      .nfl-feeds-container .feeds-holder .single-feed img {
-        width: 84px;
-        height: 73px;
       }
 
       .single-feed .feed-data-container .feed-title {
@@ -936,8 +930,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid #DFE1E6;
-    padding: 23px;
     gap: 16px;
   }
 
@@ -947,19 +939,22 @@
     align-items: center;
     gap: 8px;
     width: 100%;
+    background: #0957c3;
+    padding: 10px 20px;
+    border-radius: 12px;
   }
 
   .nfl-feeds-container .header-container .header-bar {
     width: 4px;
-    background: #172B4D;
+    background: #fff;
     height: 21px;
   }
 
   .nfl-feeds-container .header-container .header-text {
     font-size: 16px;
-    line-height: 21px;
-    font-weight: 700;
-    color: #172B4D;
+    line-height: 24px;
+    font-weight: 500;
+    color: #fff;
   }
 
   .nfl-feeds-container .feeds-holder {
@@ -974,14 +969,14 @@
     display: flex;
     gap: 16px;
     text-decoration: none;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
   }
 
   .nfl-feeds-container .feeds-holder .single-feed img {
     border-radius: 12px;
-    width: 100px;
-    height: 80px;
+    width: 120px;
+    height: 68px;
   }
 
   .single-feed .feed-data-container {
@@ -1018,11 +1013,11 @@
     margin-top: 5px;
     width: 100%;
     padding: 8px 0;
-    background: #172B4D;
+    background: #0957c3;
     color: #fff;
     font-size: 16px;
     line-height: 18px;
-    font-weight: 600;
+    font-weight: 500;
     border: unset;
     border-radius: 2px;
   }
@@ -1100,6 +1095,16 @@
     transform: translate(-50%);
   }
 
+  .final-result-container .quick-links-widget .panel-header {
+    background: #0957c3;
+    color: #fff;
+    border-radius: 12px;
+  }
+
+  .final-result-container .panel-header>.panel-heading {
+    font-weight: 500;
+  }
+
   @media(max-width: 1280px) {
     .pfn-player-info-popup {
       width: 80vw;
@@ -1162,6 +1167,22 @@
       max-width: var(--tab-width);
       height: 70vh;
       top: 25px;
+    }
+
+    .final-result-container .quick-links-widget .panel-header {
+      margin: 10px 10px 0 10px;
+      padding: 8px;
+      width: unset;
+    }
+
+    .nfl-feeds-container .feeds-holder .single-feed img {
+      width: 112px;
+      height: 63px;
+    }
+
+    .nfl-feeds-container,
+    .nfl-feeds-container .header-container {
+      padding: 8px;
     }
   }
 </style>
