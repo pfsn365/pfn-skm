@@ -57,10 +57,15 @@
       width: 100%;
       background-color: #ededed;
       position: fixed;
+      min-height: 52px;
       height: 9vh;
       top: unset;
       bottom: 0px;
       z-index: 10000;
+    }
+
+    #ad-banner-container .adthrive-draft-simulator-header {
+      min-height: 52px;
     }
 
     .landing-page-container .draft-option-btns-container {
