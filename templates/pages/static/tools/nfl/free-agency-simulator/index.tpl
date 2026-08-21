@@ -394,7 +394,7 @@
 
 <div id="offseason-banner-container"></div>
 
-<img class="pfn-logo hidden" src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfsn-logo-white-ver-2.png?h=30" width="30"
+<img class="pfn-logo hidden" src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfn-logos/pfn-logo-white-2026-v1.png?h=30" width="30"
   height="30" alt="pfn-logo" crossorigin="anonymous" />
 
 <div id="rosterManagementModal" class="modal-overlay" style="display: none;">

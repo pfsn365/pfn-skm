@@ -65,7 +65,7 @@
 				<span class="team-name"></span>
 			</div>
 			<img class="pfn-logo"
-				src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfsn-logo-white-ver-2.png" width="40"
+				src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfn-logos/pfn-logo-white-2026-v1.png" width="40"
 				height="40" alt="pfn-logo" />
 		</div>
 
