@@ -4,7 +4,7 @@
 // The bundle.yml GitHub Action rebuilds these, uploads the hashed files to S3,
 // and commits this file back to the PR.
 define('MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/mockdraft-simulator-bundle-ff6cbaf648.js');
-define('ULTIMATE_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/ultimate-simulator-bundle-3e358b7e90.js');
+define('ULTIMATE_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/ultimate-simulator-bundle-b57053363f.js');
 define('PLAYOFF_PREDICTOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/playoff-predictor-bundle-b4e548024c.js');
 define('FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/fifa-world-cup-simulator-bundle-0f2651c70e.js');
 define('FREE_AGENCY_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/free-agency-simulator-bundle-e17a92aabc.js');

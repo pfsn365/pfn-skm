@@ -292,7 +292,7 @@
   <div class="loading-overlay-text">Loading...</div>
 </div>
 
-<img class="pfn-white-logo-full-download" src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfsn-logo-white-ver-2.png"
-alt="pfsn-logo" width="145" height="36" loading="lazy" crossorigin="anonymous">
+<img class="pfn-white-logo-full-download" src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfn-logos/pfn-logo-white-2026-v1.png"
+alt="pfn-logo" width="145" height="36" loading="lazy" crossorigin="anonymous">
 
 {include file="./js.tpl"}

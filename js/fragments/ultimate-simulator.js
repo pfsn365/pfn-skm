@@ -7821,6 +7821,30 @@ function getUnpredictedMyGamesCount() {
   return unpredictedMatchesCount;
 }
 
+// The download canvas picks up team logos with a `.<shortName>` lookup, and the only elements
+// carrying that class are the select-screen tiles. Move them into a hidden store so they survive
+// the team selection DOM being destroyed — they are already loaded and CORS enabled, so reusing
+// these nodes keeps the canvas untainted.
+function preserveTeamLogosForCanvas(sectionTeamSelect) {
+  const teamLogos = sectionTeamSelect.querySelectorAll(".teams-grid .team-tile img");
+  if (!teamLogos.length) {
+    return;
+  }
+
+  let logoStore = $(".ultimate-sim-team-logos-store");
+  if (!logoStore) {
+    logoStore = document.createElement("div");
+    addClass(logoStore, "ultimate-sim-team-logos-store");
+    document.body.appendChild(logoStore);
+  }
+
+  teamLogos.forEach(logo => {
+    // Off-screen lazy images never load, and the canvas needs every team, not just the ones scrolled past
+    logo.removeAttribute("loading");
+    logoStore.appendChild(logo);
+  });
+}
+
 async function initializePlayoffPredictorTool(setEventListeners) {
   const continueBtn = document.getElementById('continueBtn');
   if (continueBtn && setEventListeners) {
@@ -7866,6 +7890,8 @@ async function initializePlayoffPredictorTool(setEventListeners) {
 
   const sectionTeamSelect = $("#screen-select");
   if (sectionTeamSelect) {
+    // Keep the team logos alive — download canvas looks them up by team short name
+    preserveTeamLogosForCanvas(sectionTeamSelect);
     // Destroy team selection DOM — not revisited after team is chosen
     sectionTeamSelect.innerHTML = "";
     addClass(sectionTeamSelect, "hidden");

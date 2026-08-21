@@ -745,7 +745,7 @@ $app->get('/sk-proxy/:brand/free-agency-simulator', function ($brand) use ($app)
     'js_bundle_location' => FREE_AGENCY_SIMULATOR_SCRIPT_LOCATION,
     'content_width' => 'full-width',
     'canonical_url' => "https://www.profootballnetwork.com/nfl-offseason-salary-cap-free-agency-manager",
-    'result_header_logo' => '/skm/assets/third-party/pfsn-logo-white.png',
+    'result_header_logo' => 'skm/assets/pfn/pfn-logos/pfn-logo-white-2026-v1.png',
     'is_desktop' => $app->is_desktop,
     'chartbeat_authors' => CHARTBEAT_CONFIGS['team-player-pages']['authors'],
     'chartbeat_sections' => CHARTBEAT_CONFIGS['team-player-pages']['sections'],

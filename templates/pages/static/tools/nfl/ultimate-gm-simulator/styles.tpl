@@ -4,6 +4,17 @@
     border-radius: 12px;
   }
 
+  /* Holds the team logos the download canvas draws from, once the select screen is destroyed */
+  .ultimate-sim-team-logos-store {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
   .ultimate-simulator-container #ad-banner-container {
     background-color: #ededed;
     height: 105px;
