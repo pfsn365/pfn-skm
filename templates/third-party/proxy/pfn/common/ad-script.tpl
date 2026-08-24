@@ -1,7 +1,10 @@
 <script type="text/javascript">
   window.addEventListener('voltaxPlayerLoaded', (event) => {
-    const vplayer = event.detail.player;
-    vplayer.setPublisherParam('utm_source=verve');
+    const player = event.detail.player;
+    const utm = new URLSearchParams(window.location.search).get('utm_source');
+    if (utm) {
+      player.setPublisherParam(`utm_source=${utm}`);
+    }
   });
 </script>
 
