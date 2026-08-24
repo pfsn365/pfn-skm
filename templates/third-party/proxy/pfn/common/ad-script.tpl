@@ -3,7 +3,7 @@
     const player = event.detail.player;
     const utm = new URLSearchParams(window.location.search).get('utm_source');
     if (utm) {
-      player.setPublisherParam(`utm_source=${utm}`);
+      player.setPublisherParam(`utm_source=${ utm }`);
     }
   });
 </script>
