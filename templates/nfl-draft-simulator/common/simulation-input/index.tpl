@@ -99,6 +99,17 @@
       </div>
     {/if}
 
+    {if $brand === "pfn" && (!isset($mds_widget_distinction) || !$mds_widget_distinction)}
+      <div class="custom-draft-order-container">
+        <div class="custom-draft-order-container-holder">
+          <span class="list-selection-text">Customize Draft Order:</span>
+          <button class="customize-draft-order-btn" onclick="showCustomDraftOrderPopUp(event)">
+            <span class="customize-draft-order-btn-text">Customize</span>
+          </button>
+        </div>
+      </div>
+    {/if}
+
     <div class="year-list-selection-container hidden">
       <div class="year-list-selection-container-holder">
         <span class="list-selection-text">Select Year:</span>

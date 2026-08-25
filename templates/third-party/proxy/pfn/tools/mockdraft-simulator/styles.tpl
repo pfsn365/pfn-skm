@@ -1056,7 +1056,10 @@
 
   .draft-rankings-provider-container {
     display: flex;
-    justify-content: flex-start;
+    /* with the custom order note hidden the single child still sits left */
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
     font-size: 14px;
     font-weight: 500;
     font-style: italic;
@@ -1156,7 +1159,10 @@
     }
 
     .draft-rankings-provider-container {
+      flex-direction: column;
       justify-content: center;
+      align-items: center;
+      gap: 2px;
       padding: 0 22px;
       font-size: 12px;
       margin-top: unset;

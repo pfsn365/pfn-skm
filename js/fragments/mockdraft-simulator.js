@@ -1236,6 +1236,7 @@ document.addEventListener("click", hideOffers);
 document.addEventListener("click", hideTradeDetails);
 document.addEventListener("click", closePlayerInfoPopup);
 document.addEventListener("click", closeTeamPicksInfoPopup);
+document.addEventListener("click", closeCustomDraftOrderPopUp);
 
 (function () {
   var searchPlayerInput = document.getElementById("player-input");
@@ -1792,6 +1793,509 @@ function assignPicks() {
   }
 };
 
+// ---- Custom Draft Order Popup ----
+
+// Slot bound data (pick number / value / on the clock flag) always stays with the
+// position in the draft, only the team owning the slot moves when the user reorders.
+var defaultDraftOrderPicks = null;
+var customDraftOrderSlots = null;
+var customDraftOrderApplied = false;
+var draggedDraftOrderRow = null;
+var draftOrderDragScrollInterval = null;
+
+function getNonFuturePicksCount() {
+  for (var i = 0; i < picksList.length; i++) {
+    if (picksList[i].futurePick) return i;
+  }
+  return picksList.length;
+}
+
+function captureDefaultDraftOrder() {
+  if (defaultDraftOrderPicks) return;
+
+  var count = getNonFuturePicksCount();
+  defaultDraftOrderPicks = picksList.slice(0, count);
+  customDraftOrderSlots = defaultDraftOrderPicks.map(function (pick) {
+    return { number: pick.number, value: pick.value, onTheClock: pick.onTheClock };
+  });
+}
+
+// [start, end) index ranges of every round inside the non future picks.
+// roundends[0] is the "top 10" marker, the real round boundaries start at index 1.
+function getCustomDraftOrderRoundBounds() {
+  var total = defaultDraftOrderPicks ? defaultDraftOrderPicks.length : 0;
+  var bounds = [];
+  var start = 0;
+
+  for (var r = 1; r < roundends.length; r++) {
+    var end = Math.min(roundends[r], total);
+    if (end <= start) continue;
+    bounds.push([start, end]);
+    start = end;
+    if (start >= total) break;
+  }
+
+  if (start < total) bounds.push([start, total]);
+
+  return bounds;
+}
+
+// Compensatory picks are flagged with COMP in the compPicks column, they are
+// awarded to a specific team and never move when the draft order is reordered.
+function isCompensatoryPick(pick) {
+  return String(pick.compPicks || "").toUpperCase().indexOf("COMP") !== -1;
+}
+
+// nativeTeam is the sheet column holding the team a slot originally belongs to.
+// Guarded as a string because assignPicks() turns team columns into objects
+// once the draft starts.
+function getDraftOrderNativeTeam(pick) {
+  return typeof pick.nativeTeam === "string" ? pick.nativeTeam : "";
+}
+
+// A slot belongs to the team that originally owned it, even after it was traded.
+function getDraftOrderPickTeamKey(pick) {
+  return getDraftOrderNativeTeam(pick) || pick.shortName;
+}
+
+// Rounds 2-7 cycle with round 1: their non compensatory picks are laid back out
+// following the round 1 order of original teams. Returns the round unchanged if
+// the data does not line up so a bad sheet can never scramble the draft.
+function applyBaseOrderToRound(roundPicks, baseOrder) {
+  var reorderedRound = new Array(roundPicks.length);
+  var picksByTeam = {};
+  var freeSlots = [];
+
+  for (var i = 0; i < roundPicks.length; i++) {
+    if (isCompensatoryPick(roundPicks[i])) {
+      reorderedRound[i] = roundPicks[i];
+      continue;
+    }
+
+    freeSlots.push(i);
+    var teamKey = getDraftOrderPickTeamKey(roundPicks[i]);
+    if (!picksByTeam[teamKey]) picksByTeam[teamKey] = [];
+    picksByTeam[teamKey].push(roundPicks[i]);
+  }
+
+  if (freeSlots.length !== baseOrder.length) return roundPicks.slice();
+
+  for (var j = 0; j < freeSlots.length; j++) {
+    var teamPicks = picksByTeam[baseOrder[j]];
+    if (!teamPicks || !teamPicks.length) return roundPicks.slice();
+    reorderedRound[freeSlots[j]] = teamPicks.shift();
+  }
+
+  return reorderedRound;
+}
+
+function buildCustomDraftOrderPicks(roundOnePicks) {
+  var bounds = getCustomDraftOrderRoundBounds();
+  if (!bounds.length || bounds[0][1] !== roundOnePicks.length) return null;
+
+  var baseOrder = roundOnePicks.map(getDraftOrderPickTeamKey);
+  var orderedPicks = roundOnePicks.slice();
+
+  for (var b = 1; b < bounds.length; b++) {
+    var roundPicks = picksList.slice(bounds[b][0], bounds[b][1]);
+    Array.prototype.push.apply(orderedPicks, applyBaseOrderToRound(roundPicks, baseOrder));
+  }
+
+  return orderedPicks;
+}
+
+// picksList gets swapped out on redraft / provider changes, the captured default
+// order points at the old objects then and has to be dropped.
+function resetCustomDraftOrderState() {
+  defaultDraftOrderPicks = null;
+  customDraftOrderSlots = null;
+  customDraftOrderApplied = false;
+  updateCustomDraftOrderBtnText();
+}
+
+function updateCustomDraftOrderBtnText() {
+  var btn = $(".customize-draft-order-btn");
+  if (!btn) return;
+
+  var btnText = btn.querySelector(".customize-draft-order-btn-text");
+  if (btnText) {
+    btnText.innerHTML = customDraftOrderApplied ? "Customized" : "Customize";
+  }
+
+  if (customDraftOrderApplied) {
+    addClass(btn, "customized");
+  } else {
+    removeClass(btn, "customized");
+  }
+}
+
+function getDraftOrderTeamDetails(shortName) {
+  for (var i = 0; i < teamsList.length; i++) {
+    if (teamsList[i].shortName === shortName) return teamsList[i];
+  }
+  return null;
+}
+
+function getDraftOrderTeamLogoHtml(shortName, extraClass) {
+  var team = getDraftOrderTeamDetails(shortName);
+  if (!team || !team.teamLogo) return "";
+
+  return '<img class="custom-draft-order-team-logo' + (extraClass ? " " + extraClass : "") +
+    '" draggable="false" src="' + STATIC_URL + teamLogoPath + team.teamLogo + "?w=80&tag=" +
+    imageRefreshTag + '" width="28" height="19" alt="' + shortName + '">';
+}
+
+function showCustomDraftOrderPopUp() {
+  var customDraftOrderEl = document.getElementById("custom-draft-order");
+  if (!customDraftOrderEl) return;
+
+  captureDefaultDraftOrder();
+  if (!defaultDraftOrderPicks || !defaultDraftOrderPicks.length) return;
+
+  var existingPopup = $(".custom-draft-order-popup");
+  if (existingPopup) {
+    existingPopup.remove();
+  }
+
+  var customDraftOrderPopup = customDraftOrderEl.content.cloneNode(true).querySelector(
+    ".custom-draft-order-popup");
+  if (!customDraftOrderPopup) return;
+
+  var closeBtn = customDraftOrderPopup.querySelector(".close-custom-draft-order-btn");
+  if (closeBtn) {
+    closeBtn.onclick = removeCustomDraftOrderPopUp;
+  }
+
+  var resetBtn = customDraftOrderPopup.querySelector(".custom-draft-order-reset-btn");
+  if (resetBtn) {
+    resetBtn.onclick = resetCustomDraftOrderToDefault;
+  }
+
+  var applyBtn = customDraftOrderPopup.querySelector(".custom-draft-order-apply-btn");
+  if (applyBtn) {
+    applyBtn.onclick = applyCustomDraftOrder;
+  }
+
+  var bounds = getCustomDraftOrderRoundBounds();
+  if (!bounds.length) return;
+
+  var listEl = customDraftOrderPopup.querySelector(".custom-draft-order-list");
+  renderCustomDraftOrderList(listEl, picksList.slice(0, bounds[0][1]));
+
+  // HTML5 drag events never fire on touch, so the handle drives a parallel touch
+  // drag. touchmove has to be non passive to stop the list scrolling under the
+  // finger, which rules out an ontouchmove property assignment.
+  listEl.addEventListener("touchstart", startCustomDraftOrderTouchDrag, { passive: true });
+  listEl.addEventListener("touchmove", moveCustomDraftOrderTouchDrag, { passive: false });
+  listEl.addEventListener("touchend", endCustomDraftOrderDrag);
+  listEl.addEventListener("touchcancel", endCustomDraftOrderDrag);
+
+  var overlay = $(".overlay");
+  if (overlay) {
+    removeClass(overlay, "hidden");
+  } else {
+    overlay = document.createElement("div");
+    addClass(overlay, "overlay");
+    document.body.appendChild(overlay);
+  }
+
+  addClass(customDraftOrderPopup, "popup");
+  document.body.appendChild(customDraftOrderPopup);
+}
+
+function renderCustomDraftOrderList(listEl, picks) {
+  if (!listEl) return;
+
+  var rowsHtml = "";
+  var rowIndex = 0;
+  for (var i = 0; i < picks.length; i++) {
+    var pick = picks[i];
+    var orderIndex = defaultDraftOrderPicks.indexOf(pick);
+    if (orderIndex === -1) continue;
+
+    var nativeTeam = getDraftOrderNativeTeam(pick);
+    var isTradedPick = nativeTeam && nativeTeam !== pick.shortName;
+    var teamNameHtml = isTradedPick
+      ? getDraftOrderTeamLogoHtml(nativeTeam, "original") +
+        '<span class="custom-draft-order-original-team">' + nativeTeam + '</span>' +
+        '<img class="custom-draft-order-trade-icon" draggable="false" src="' + STATIC_URL +
+          '/skm/assets/nfl-mockup/trade-details-icon-blue-new.png" width="16" height="16" alt="traded pick">' +
+        '<span class="custom-draft-order-current-team">' + pick.shortName + '</span>' +
+        getDraftOrderTeamLogoHtml(pick.shortName)
+      : getDraftOrderTeamLogoHtml(pick.shortName) +
+        '<span class="custom-draft-order-current-team">' + pick.shortName + '</span>';
+    var slot = customDraftOrderSlots[rowIndex];
+    var pickNumber = slot ? slot.number : (rowIndex + 1);
+    rowIndex += 1;
+
+    rowsHtml += '<div class="custom-draft-order-row" draggable="true" data-orderindex="' + orderIndex + '">' +
+      '<span class="custom-draft-order-handle" aria-hidden="true"></span>' +
+      '<span class="custom-draft-order-number">' + pickNumber + '</span>' +
+      '<span class="custom-draft-order-team-name">' + teamNameHtml + '</span>' +
+      '<div class="custom-draft-order-arrows">' +
+      '<button class="custom-draft-order-up" aria-label="move pick up">&#9650;</button>' +
+      '<button class="custom-draft-order-down" aria-label="move pick down">&#9660;</button>' +
+      '</div>' +
+      '</div>';
+  }
+
+  listEl.innerHTML = rowsHtml;
+  listEl.onclick = moveCustomDraftOrderPick;
+  listEl.ondragstart = startCustomDraftOrderDrag;
+  listEl.ondragover = dragCustomDraftOrderRow;
+  listEl.ondrop = endCustomDraftOrderDrag;
+  listEl.ondragend = endCustomDraftOrderDrag;
+}
+
+// Drag and drop lets a pick travel several places at once, the arrows stay as
+// the single step fallback (and the only option on touch devices).
+function getDraftOrderRowAfterDrag(listEl, y) {
+  var rows = listEl.querySelectorAll(".custom-draft-order-row:not(.dragging)");
+  var closestRow = null;
+  var closestOffset = Number.NEGATIVE_INFINITY;
+
+  for (var i = 0; i < rows.length; i++) {
+    var box = rows[i].getBoundingClientRect();
+    var offset = y - box.top - box.height / 2;
+    if (offset < 0 && offset > closestOffset) {
+      closestOffset = offset;
+      closestRow = rows[i];
+    }
+  }
+
+  return closestRow;
+}
+
+function stopDraftOrderDragScroll() {
+  if (draftOrderDragScrollInterval) {
+    clearInterval(draftOrderDragScrollInterval);
+    draftOrderDragScrollInterval = null;
+  }
+}
+
+function autoScrollDraftOrderList(y) {
+  var scrollContainer = $(".custom-draft-order-popup .custom-draft-order-list-container");
+  if (!scrollContainer) return;
+
+  stopDraftOrderDragScroll();
+
+  var box = scrollContainer.getBoundingClientRect();
+  var scrollZone = 40;
+  var scrollStep = 8;
+
+  if (y < box.top + scrollZone) {
+    draftOrderDragScrollInterval = setInterval(function () {
+      scrollContainer.scrollTop -= scrollStep;
+    }, 16);
+  } else if (y > box.bottom - scrollZone) {
+    draftOrderDragScrollInterval = setInterval(function () {
+      scrollContainer.scrollTop += scrollStep;
+    }, 16);
+  }
+}
+
+function startCustomDraftOrderDrag(event) {
+  var row = event.target.closest(".custom-draft-order-row");
+  if (!row) return;
+
+  draggedDraftOrderRow = row;
+  addClass(row, "dragging");
+
+  if (event.dataTransfer) {
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("text/plain", "");
+  }
+}
+
+function dragCustomDraftOrderRow(event) {
+  if (!draggedDraftOrderRow) return;
+  event.preventDefault();
+
+  repositionDraggedDraftOrderRow(event.clientY);
+}
+
+function startCustomDraftOrderTouchDrag(event) {
+  if (!event.target.closest(".custom-draft-order-handle")) return;
+
+  var row = event.target.closest(".custom-draft-order-row");
+  if (!row) return;
+
+  draggedDraftOrderRow = row;
+  addClass(row, "dragging");
+}
+
+function moveCustomDraftOrderTouchDrag(event) {
+  if (!draggedDraftOrderRow) return;
+
+  var touch = event.touches && event.touches[0];
+  if (!touch) return;
+
+  event.preventDefault();
+  repositionDraggedDraftOrderRow(touch.clientY);
+}
+
+function repositionDraggedDraftOrderRow(y) {
+  var listEl = $(".custom-draft-order-popup .custom-draft-order-list");
+  if (!listEl) return;
+
+  var rowAfterDrag = getDraftOrderRowAfterDrag(listEl, y);
+  if (rowAfterDrag) {
+    listEl.insertBefore(draggedDraftOrderRow, rowAfterDrag);
+  } else {
+    listEl.appendChild(draggedDraftOrderRow);
+  }
+
+  autoScrollDraftOrderList(y);
+}
+
+// Also runs on touchend for taps that never became a drag, so it must not
+// preventDefault unless a drag was actually in progress or the arrow buttons
+// would lose their synthesized click.
+function endCustomDraftOrderDrag(event) {
+  stopDraftOrderDragScroll();
+  if (!draggedDraftOrderRow) return;
+
+  if (event) event.preventDefault();
+
+  removeClass(draggedDraftOrderRow, "dragging");
+  draggedDraftOrderRow = null;
+
+  var listEl = $(".custom-draft-order-popup .custom-draft-order-list");
+  if (listEl) {
+    updateCustomDraftOrderNumbers(listEl);
+  }
+}
+
+function moveCustomDraftOrderPick(event) {
+  var upBtn = event.target.closest(".custom-draft-order-up");
+  var downBtn = event.target.closest(".custom-draft-order-down");
+  if (!upBtn && !downBtn) return;
+
+  var row = event.target.closest(".custom-draft-order-row");
+  var listEl = $(".custom-draft-order-popup .custom-draft-order-list");
+  if (!row || !listEl) return;
+
+  if (upBtn) {
+    var previousRow = row.previousElementSibling;
+    if (!previousRow) return;
+    listEl.insertBefore(row, previousRow);
+  } else {
+    var nextRow = row.nextElementSibling;
+    if (!nextRow) return;
+    listEl.insertBefore(nextRow, row);
+  }
+
+  updateCustomDraftOrderNumbers(listEl);
+  row.scrollIntoView({ block: "nearest" });
+}
+
+function updateCustomDraftOrderNumbers(listEl) {
+  var rows = listEl.querySelectorAll(".custom-draft-order-row");
+  for (var i = 0; i < rows.length; i++) {
+    var slot = customDraftOrderSlots[i];
+    var pickNumber = slot ? slot.number : (i + 1);
+    rows[i].querySelector(".custom-draft-order-number").innerHTML = pickNumber;
+  }
+}
+
+function setCustomDraftOrder(orderedPicks) {
+  for (var i = 0; i < orderedPicks.length; i++) {
+    orderedPicks[i].number = customDraftOrderSlots[i].number;
+    orderedPicks[i].value = customDraftOrderSlots[i].value;
+    orderedPicks[i].onTheClock = customDraftOrderSlots[i].onTheClock;
+  }
+
+  picksList.splice.apply(picksList, [0, orderedPicks.length].concat(orderedPicks));
+}
+
+function applyCustomDraftOrder() {
+  var listEl = $(".custom-draft-order-popup .custom-draft-order-list");
+  if (!listEl || !defaultDraftOrderPicks || !customDraftOrderSlots) return;
+
+  var bounds = getCustomDraftOrderRoundBounds();
+  var rows = listEl.querySelectorAll(".custom-draft-order-row");
+  if (!bounds.length || rows.length !== bounds[0][1]) return;
+
+  var roundOnePicks = [];
+  var isCustomized = false;
+  for (var i = 0; i < rows.length; i++) {
+    var orderIndex = parseInt(rows[i].dataset.orderindex, 10);
+    var pick = defaultDraftOrderPicks[orderIndex];
+    if (!pick) return;
+    if (orderIndex !== i) isCustomized = true;
+    roundOnePicks.push(pick);
+  }
+
+  var orderedPicks = buildCustomDraftOrderPicks(roundOnePicks);
+  if (!orderedPicks || orderedPicks.length !== defaultDraftOrderPicks.length) return;
+
+  setCustomDraftOrder(orderedPicks);
+
+  customDraftOrderApplied = isCustomized;
+  updateCustomDraftOrderBtnText();
+  trackGAEventForPage("custom_draft_order", { "customized": isCustomized });
+  removeCustomDraftOrderPopUp();
+}
+
+function resetCustomDraftOrderToDefault() {
+  if (!defaultDraftOrderPicks || !customDraftOrderSlots) return;
+
+  setCustomDraftOrder(defaultDraftOrderPicks.slice());
+
+  customDraftOrderApplied = false;
+  updateCustomDraftOrderBtnText();
+
+  var bounds = getCustomDraftOrderRoundBounds();
+  var listEl = $(".custom-draft-order-popup .custom-draft-order-list");
+  if (listEl && bounds.length) {
+    renderCustomDraftOrderList(listEl, defaultDraftOrderPicks.slice(0, bounds[0][1]));
+  }
+}
+
+// Flags on the result screen that the draft did not run in the default order.
+function showCustomDraftOrderNote() {
+  var note = $(".custom-draft-order-note");
+  if (!note) return;
+
+  if (!customDraftOrderApplied) {
+    addClass(note, "hidden");
+    return;
+  }
+
+  removeClass(note, "hidden");
+
+  // the note shares its row with the rankings note, which stays hidden when the
+  // big board dropdown is switched off
+  var container = note.closest(".draft-rankings-provider-container");
+  if (container) removeClass(container, "hidden");
+}
+
+function removeCustomDraftOrderPopUp() {
+  stopDraftOrderDragScroll();
+  draggedDraftOrderRow = null;
+
+  var customDraftOrderPopup = $(".custom-draft-order-popup");
+  if (customDraftOrderPopup) {
+    customDraftOrderPopup.remove();
+  }
+
+  if (!checkForAlreadyOpenPopup()) {
+    var overlay = $(".overlay");
+    if (overlay) {
+      addClass(overlay, "hidden");
+    }
+  }
+}
+
+function closeCustomDraftOrderPopUp(event) {
+  var customDraftOrderPopup = $(".custom-draft-order-popup");
+  if (!customDraftOrderPopup) return;
+  if (event.target.closest(".custom-draft-order-popup") || event.target.closest(
+    ".customize-draft-order-btn")) return;
+
+  removeCustomDraftOrderPopUp();
+}
+
 function reassignWidgetData() {
   for (var pick of picksList) {
     for (var team of teamsList) {
@@ -2062,6 +2566,8 @@ async function startDraftHelper() {
       }
     }
   }
+
+  showCustomDraftOrderNote();
 
   if (!IS_DESKTOP) {
     const footerNav = $(".pfn-content-wrapper .pfn-footer");
@@ -11606,6 +12112,7 @@ async function loadWidgetData() {
     window.handleWidgetMessage = null;
   }
   if (widgetData.selectedPicksList) {
+    resetCustomDraftOrderState();
     picksList = widgetData.selectedPicksList;
     // Older widget builds set pick.tradeProposals to {} (an object) before serialization.
     // Normalize to an array so consumers like createDraftSnapshot() can safely call .slice().
@@ -11662,6 +12169,7 @@ async function selectMDSYear(year) {
 
     isRedraft = true;
     pickstart = 0;
+    resetCustomDraftOrderState();
 
     // Cache the raw JSON response to avoid circular reference issues
     // (picks reference teams which reference picks back via draftPicks)
@@ -11831,6 +12339,7 @@ function relinkPicksToTeams(picks, teams) {
 }
 
 function restoreOriginalMDSData() {
+  resetCustomDraftOrderState();
   picksList = JSON.parse(JSON.stringify(originalMDSData.picksList));
   teamsList = JSON.parse(JSON.stringify(originalMDSData.teamsList));
   teamNeedsList = JSON.parse(JSON.stringify(originalMDSData.teamsList));

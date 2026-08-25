@@ -557,10 +557,36 @@
 
         yPos += 20;
 
-        if (noteText) {
+        var customOrderNote = (typeof customDraftOrderApplied !== "undefined" && customDraftOrderApplied)
+            ? "Custom Draft Order"
+            : "";
+
+        if (noteText || customOrderNote) {
+            // extra breathing room above both notes
+            yPos += 7;
             ctx.fillStyle = "#000";
             ctx.font = "italic 400 16px Poppins,Calibri,Roboto,Open Sans,Helvetica,sans-serif";
-            ctx.fillText(noteText, 10, yPos);
+
+            if (noteText) {
+                ctx.fillText(noteText, 10, yPos);
+            }
+
+            if (customOrderNote) {
+                // sits on the right at the same height as the rankings note, and
+                // drops to its own line on the narrow team image if they collide
+                var logicalWidth = canvas.width / dpr;
+                var noteWidth = noteText ? ctx.measureText(noteText).width : 0;
+                var customOrderWidth = ctx.measureText(customOrderNote).width;
+                var customOrderXPos = logicalWidth - 10 - customOrderWidth;
+
+                if (noteText && customOrderXPos < noteWidth + 20) {
+                    yPos += 20;
+                    ctx.fillText(customOrderNote, 10, yPos);
+                } else {
+                    ctx.fillText(customOrderNote, customOrderXPos, yPos);
+                }
+            }
+
             yPos += 20;
         }
 

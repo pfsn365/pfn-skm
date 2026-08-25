@@ -371,6 +371,28 @@
 	</div>
 </template>
 
+{if $brand === "pfn" && (!isset($mds_widget_distinction) || !$mds_widget_distinction)}
+<template id="custom-draft-order">
+	<div class="custom-draft-order-popup">
+		<div class="custom-draft-order-header">
+			<span class="custom-draft-order-header-text">Customize Draft Order</span>
+			<button class="close-custom-draft-order-btn">
+				<img src="{$smarty.const.STATIC_URL}/skm/assets/nfl-mockup/close-icon.svg" width="16" height="16"
+					alt="close-icon">
+			</button>
+		</div>
+		<span class="custom-draft-order-info-text">Drag a pick by its handle or use the arrows to reorder Round 1. The remaining rounds follow the same order.</span>
+		<div class="custom-draft-order-list-container">
+			<div class="custom-draft-order-list"></div>
+		</div>
+		<div class="custom-draft-order-footer">
+			<button class="custom-draft-order-reset-btn">Reset to Default</button>
+			<button class="custom-draft-order-apply-btn">Apply</button>
+		</div>
+	</div>
+</template>
+{/if}
+
 <template id="trade-proposal-response">
 	<div class="trade-proposal-response-popup">
 		<div class="trade-proposal-response-header">

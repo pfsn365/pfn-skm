@@ -82,6 +82,9 @@
     {if $show_playerslist_selection_dropdown}
       <div class="draft-rankings-provider-container hidden">
         <span class="draft-rankings-provider-text"></span>
+        {if $brand === "pfn"}
+          <span class="custom-draft-order-note hidden">Custom Draft Order</span>
+        {/if}
       </div>
     {/if}
 

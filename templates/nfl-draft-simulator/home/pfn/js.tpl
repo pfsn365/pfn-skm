@@ -134,6 +134,11 @@
         addClass(yearSelectionContainer, "hidden");
       }
 
+      const customDraftOrderContainer = $(".draft-options-view-container .custom-draft-order-container");
+      if (customDraftOrderContainer) {
+        removeClass(customDraftOrderContainer, "hidden");
+      }
+
       // Restore original data when switching back from redraft
       if (isRedraft) {
         restoreOriginalMDSData();
@@ -154,6 +159,11 @@
       const playersListSelectionContainer = $(".draft-options-view-container .players-list-selection-container");
       if (playersListSelectionContainer) {
         addClass(playersListSelectionContainer, "hidden");
+      }
+
+      const customDraftOrderContainer = $(".draft-options-view-container .custom-draft-order-container");
+      if (customDraftOrderContainer) {
+        addClass(customDraftOrderContainer, "hidden");
       }
 
       if (!redraftDataList[2026].rawData) {
