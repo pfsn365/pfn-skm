@@ -33,8 +33,34 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
+      - name: Snapshot the committed bundle names
+        run: cp js-side-menu-config.php "$RUNNER_TEMP/config.before.php"
+
       - name: Build the bundles (hashed) + regenerate js-side-menu-config.php
         run: npm run build
+
+      - name: Find changed bundle files
+        id: find_bundle
+        run: |
+          # js/production/ is gitignored here (unlike skm, which commits every
+          # hashed bundle), so `git diff` can't tell us what changed. The
+          # committed js-side-menu-config.php is the equivalent snapshot: it
+          # records the filenames currently live in production. Bundle names are
+          # content-hashed, so a name that appears in the regenerated config but
+          # not in the committed one means that tool's source actually changed.
+          names() { grep -oE '[a-z0-9-]+-bundle-[0-9a-f]+\.js' "$1" | sort -u; }
+          names "$RUNNER_TEMP/config.before.php" > "$RUNNER_TEMP/before.txt" || true
+          names js-side-menu-config.php > "$RUNNER_TEMP/after.txt" || true
+
+          comm -13 "$RUNNER_TEMP/before.txt" "$RUNNER_TEMP/after.txt" \
+            | sed 's|^|js/production/pfn-proxy/|' > "$RUNNER_TEMP/changed.txt"
+
+          if [ ! -s "$RUNNER_TEMP/changed.txt" ]; then
+            echo "No bundle files changed."
+          else
+            echo "Changed bundle files:"
+            cat "$RUNNER_TEMP/changed.txt"
+          fi
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -43,11 +69,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION_SK }}
 
-      - name: Upload bundles to S3
+      - name: Upload changed bundles to S3
         id: upload
         run: |
           S3_URLS=""
-          for FILE in js/production/pfn-proxy/*-bundle-*.js; do
+          UPLOADED=0
+          while IFS= read -r FILE; do
+            [ -n "$FILE" ] || continue
             KEY="s3://static.profootballnetwork.com/$FILE"
             if aws s3 ls "$KEY" > /dev/null 2>&1; then
               echo "$FILE already on S3 — skipping."
@@ -55,9 +83,11 @@ jobs:
               aws s3 cp "$FILE" "$KEY"
               echo "Uploaded $FILE"
             fi
+            UPLOADED=$((UPLOADED + 1))
             S3_URLS="$S3_URLS"$'\n'"https://static.profootballnetwork.com/$FILE"
-          done
-          # stash URLs for the PR comment
+          done < "$RUNNER_TEMP/changed.txt"
+          # stash the changed bundles' URLs for the PR comment
+          echo "count=$UPLOADED" >> "$GITHUB_OUTPUT"
           echo "urls<<EOF" >> "$GITHUB_OUTPUT"
           echo "$S3_URLS" >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
@@ -75,8 +105,18 @@ jobs:
           fi
 
       - name: Comment bundle URLs on the PR
+        if: github.event_name == 'pull_request'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          UPLOAD_COUNT: ${{ steps.upload.outputs.count }}
+          UPLOAD_URLS: ${{ steps.upload.outputs.urls }}
         run: |
-          gh pr comment "${{ github.event.pull_request.number }}" --body "## Bundle files uploaded to S3:
-          ${{ steps.upload.outputs.urls }}"
+          if [ "${UPLOAD_COUNT:-0}" -eq 0 ]; then
+            BODY="## No new bundles
+
+          No tool source changed in this PR — every bundle hash is already live."
+          else
+            BODY="## Bundle files uploaded to S3:
+          $UPLOAD_URLS"
+          fi
+          gh pr comment "${{ github.event.pull_request.number }}" --body "$BODY"

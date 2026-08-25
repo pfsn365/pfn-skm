@@ -121,6 +121,7 @@
                     pick["teamLogo"] = team.teamLogo;
                 }
             });
+            resetCustomDraftOrderState();
             picksList = data.picksList;
             teamsList = data.teamsList;
             teamNeedsList = JSON.parse(JSON.stringify(data.teamsList));

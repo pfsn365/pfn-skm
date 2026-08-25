@@ -505,6 +505,36 @@
         transform: translate(-50%, -50%);
       }
 
+      .custom-draft-order-popup {
+        width: calc(100% - 24px);
+        max-width: var(--tab-width);
+        height: 75vh;
+        margin: unset;
+        transform: translate(-50%, -50%);
+      }
+
+      .custom-draft-order-header .custom-draft-order-header-text {
+        font-size: 14px;
+      }
+
+      .custom-draft-order-popup .custom-draft-order-team-name {
+        font-size: 13px;
+      }
+
+      .custom-draft-order-popup .custom-draft-order-list-container {
+        padding: 0 8px;
+      }
+
+      .custom-draft-order-popup .custom-draft-order-handle {
+        width: 18px;
+        height: 17px;
+        background-size: 100% 6px;
+      }
+
+      .custom-draft-order-popup .custom-draft-order-row {
+        padding: 9px 6px;
+      }
+
       .mypicks-container {
         overflow-y: scroll;
       }
@@ -2459,6 +2489,198 @@
     height: 16px;
   }
 
+  .custom-draft-order-popup {
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    width: 450px;
+    height: 520px;
+    background: #fff;
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    margin-top: -260px;
+    margin-left: -225px;
+    z-index: 2001;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 12px 12px 0 0;
+    {if !$brand}
+      background: #080A3C;
+    {else}
+      background: #2D2D2D;
+    {/if}
+  }
+
+  .custom-draft-order-header .custom-draft-order-header-text {
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .custom-draft-order-popup .close-custom-draft-order-btn {
+    border: unset;
+    display: flex;
+  }
+
+  .custom-draft-order-popup .close-custom-draft-order-btn img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-info-text {
+    padding: 12px 20px 8px 20px;
+    color: #777;
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-list-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 12px;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-bottom: 1px solid #E2E2E2;
+    background: #FFF;
+    cursor: grab;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-row.dragging {
+    opacity: 0.5;
+    background: #F4F4F4;
+    cursor: grabbing;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-handle {
+    flex: none;
+    width: 14px;
+    height: 12px;
+    cursor: grab;
+    background-image: linear-gradient(#B0B0B0 2px, transparent 2px);
+    background-size: 100% 5px;
+    background-repeat: repeat-y;
+    /* the browser must not claim the gesture for scrolling, the drag needs it */
+    touch-action: none;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-row.dragging .custom-draft-order-handle {
+    cursor: grabbing;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-number {
+    color: #2D2D2D;
+    font-size: 14px;
+    font-weight: 600;
+    width: 28px;
+    margin-right: 10px;
+    text-align: right;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-team-logo {
+    flex: none;
+    width: 28px;
+    height: 19px;
+    object-fit: contain;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-team-name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    color: #2D2D2D;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* the team that gave the pick up is dimmed, the team picking stays solid */
+  .custom-draft-order-popup .custom-draft-order-team-logo.original {
+    opacity: 0.45;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-original-team {
+    color: #999;
+    font-weight: 400;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-trade-icon {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-arrows {
+    display: flex;
+    gap: 4px;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-arrows button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #E2E2E2;
+    border-radius: 4px;
+    background: #F4F4F4;
+    color: #2D2D2D;
+    font-size: 10px;
+    line-height: 10px;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-arrows button {
+    cursor: pointer;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-arrows button:hover {
+    background: #E2E2E2;
+  }
+
+  .custom-draft-order-popup .custom-draft-order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border-top: 1px solid #E2E2E2;
+  }
+
+  .custom-draft-order-footer .custom-draft-order-reset-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid #E2E2E2;
+    background: #FFF;
+    color: #2D2D2D;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .custom-draft-order-footer .custom-draft-order-apply-btn {
+    padding: 8px 28px;
+    border-radius: 8px;
+    border: unset;
+    {if !$brand}
+      background: #D32F2F;
+    {else}
+      background: #0957C3;
+    {/if}
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
   .team-picks-info-popup .team-logo-container,
   .team-picks-info-popup .pick-trade-info-btn,
   .team-picks-info-popup .traded-player-name-position-container {
@@ -2491,6 +2713,7 @@
   .teams-result-holder .user-teams-holder::-webkit-scrollbar,
   .mypicks-container::-webkit-scrollbar,
   .team-picks-info-popup .team-picks-list-container::-webkit-scrollbar,
+  .custom-draft-order-popup .custom-draft-order-list-container::-webkit-scrollbar,
   .picks-confirmation-container::-webkit-scrollbar,
   .offer-list::-webkit-scrollbar,
   .multi-user-room .room-content::-webkit-scrollbar,
@@ -2511,6 +2734,7 @@
   .teams-result-holder .user-teams-holder::-webkit-scrollbar-thumb,
   .mypicks-container::-webkit-scrollbar-thumb,
   .team-picks-info-popup .team-picks-list-container::-webkit-scrollbar-thumb,
+  .custom-draft-order-popup .custom-draft-order-list-container::-webkit-scrollbar-thumb,
   .picks-confirmation-container::-webkit-scrollbar-thumb,
   .offer-list::-webkit-scrollbar-thumb,
   .multi-user-room .room-content::-webkit-scrollbar-thumb,

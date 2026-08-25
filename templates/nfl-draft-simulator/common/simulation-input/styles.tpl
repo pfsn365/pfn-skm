@@ -155,6 +155,42 @@
     flex-wrap: wrap;
   }
 
+  .inputs-container .custom-draft-order-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .inputs-container .custom-draft-order-container .custom-draft-order-container-holder {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .custom-draft-order-container .list-selection-text {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .custom-draft-order-container .customize-draft-order-btn {
+    padding: 3px 12px;
+    border-radius: 6px;
+    border: 1px solid #767676;
+    background: #FFF;
+    color: #2D2D2D;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    white-space: nowrap;
+  }
+
+  .custom-draft-order-container .customize-draft-order-btn.customized {
+    border-color: #37C77A;
+    background: #E9F7F2;
+    color: #37C77A;
+  }
+
   .start-draft-btn {
     padding: 10px 0;
     display: flex;
