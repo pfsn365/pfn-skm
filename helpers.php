@@ -629,16 +629,16 @@ function do_curl($url, &$status_code, $time_out = 2) {
 
 // from functions.php:146
 function get_brand_login_url($app, $brand) {
-    // $pfnRequestUri = $app->request->headers->get('PFNOriginHeader');
+    $pfnRequestUri = $app->request->headers->get('PFNOriginHeader');
 
-    // $rootUrl = $app->request->getUrl();
-    // $resourceUri = $app->request->getResourceUri();
-    // if (!$pfnRequestUri) {
-    //     return $rootUrl . "/sk-proxy/$brand/login?debug__proxy_tools=true&after-login=" . $rootUrl . $resourceUri . "?debug__proxy_tools=true";
-    // }
+    $rootUrl = $app->request->getUrl();
+    $resourceUri = $app->request->getResourceUri();
+    if (!$pfnRequestUri) {
+        return $rootUrl . "/sk-proxy/$brand/login?debug__proxy_tools=true&after-login=" . $rootUrl . $resourceUri . "?debug__proxy_tools=true";
+    }
 
-    // return PFN_URL . "/login?after-login=" . PFN_URL . "/mockdraft";
-    return "https://pfn-skm.profootballnetwork.com/sk-proxy/pfn/login?after-login=https://pfn-skm.profootballnetwork.com/sk-proxy/pfn/mockdraft-simulator";
+    return PFN_URL . "/login?after-login=" . PFN_URL . "/mockdraft";
+    // return "https://pfn-skm.profootballnetwork.com/sk-proxy/pfn/login?after-login=https://pfn-skm.profootballnetwork.com/sk-proxy/pfn/mockdraft-simulator";
 }
 
 // from functions.php:221
