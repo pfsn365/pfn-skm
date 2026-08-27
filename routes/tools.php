@@ -359,34 +359,40 @@ $app->get('/sk-proxy/:brand/mockdraft-simulator', function ($brand) use ($app) {
   $nfcTeams = collectConferenceTeams($nfcTeamsList, $pickSequence);
 
   $pageTitle = "2027 NFL Mock Draft Simulator With Free Trades and Grades";
-  $pageDescription = "PFSN’s free NFL Mock Draft Simulator with user-sim, sim-user, and sim-to-sim trades allows you to look ahead to the 2027 NFL Draft and be the GM of your favorite NFL team(s).";
+  $pageDescription = "PFN’s free NFL Mock Draft Simulator with user-sim, sim-user, and sim-to-sim trades allows you to look ahead to the 2027 NFL Draft and be the GM of your favorite NFL team(s).";
   $pageTextContent = "
-    <h2>What Is PFSN's NFL Mock Draft Simulator?</h2>
-    <p>PFSN's NFL Mock Draft Simulator is a free tool that puts you in the general manager's chair for the NFL Draft. You make the picks for the team (s) you control, while a proprietary simulation drafts for the rest of the league, including trades. It is built to let you chase every what-if: reach for your quarterback, trade down to stockpile capital, or sit back and watch how the board falls.</p>
-    <h2>How Does PFSN's NFL Mock Draft Simulator Work?</h2>
+    <h2>What Is PFN's NFL Mock Draft Simulator?</h2>
+    <p>PFN's NFL Mock Draft Simulator is a free tool that puts you in the general manager's chair for the NFL Draft. You make the picks for the team (s) you control, while a proprietary simulation drafts for the rest of the league, including trades. It is built to let you chase every what-if: reach for your quarterback, trade down to stockpile capital, or sit back and watch how the board falls.</p>
+    <h2>How Does PFN's NFL Mock Draft Simulator Work?</h2>
     <p>Once your draft begins, you go pick-for-pick against the rest of the league. When you are on the clock, your team's biggest needs appear in priority order above the player list, so you can draft for need, take the best player available, or balance the two. The board is filterable by position, and every prospect carries a scouting report and draft profile to inform your pick. The simulation drafts for every team you are not controlling, weighing each prospect's value against that team's roster needs, so the board shifts based on who is still available.</p>
     <h2>How Does the NFL Draft Work?</h2>
     <p>The NFL Draft is held every April over three days and consists of seven rounds. Before trades and compensatory picks, each of the 32 teams receives one selection per round, which, together with compensatory picks, pushes the field past 250 total selections.</p>
     <p>The order is set by the reverse order of finish from the previous season. The 18 teams that miss the playoffs are slotted first, from worst record to best, with strength of schedule as the primary tiebreaker between teams that finish even. The 14 playoff teams fill out the rest of each round by how far they advanced, with the Super Bowl runner-up picking next to last and the Super Bowl champion picking last.</p>
     <p>Compensatory picks are awarded at the end of Rounds 3 through 7 to teams that lost more or better free agents than they signed the previous offseason. A total of 32 compensatory selections are typically awarded under this method, with each team eligible to receive up to 4 selections (there have been 2 occasions when 33 compensatory selections were awarded). Additionally, up to 32 JC-2A resolution compensatory selections can be awarded per season to teams (one per team) that have developed minority candidates for head coach and general manager positions.</p>
-    <h2>Can I draft for any NFL team?</h2>
-    <p>Yes. All 32 franchises are available. You can run one team, several at once, all 32, or none at all, and let the simulation draft the entire board. Pick order follows the real NFL draft order for the year you select. For the current cycle, the order is based on Super Bowl odds from the summer through the first four weeks of the regular season. From that point on, it is set by the current standings, with each team's 17-game strength of schedule serving as the tiebreaker when needed.</p>
-    <h2>How many rounds can I run, and how fast?</h2>
+    <h2>Can I Draft for Any NFL Team?</h2>
+    <p>Yes. All 32 teams are available. You can control one team, several teams, all 32, or none and let the simulator handle the entire draft.</p>
+    <p>By default, the simulator uses the real NFL draft order for the year you select, but you can also create a custom order. For the current draft cycle, the default order is based on Super Bowl odds from the summer through the first four weeks of the regular season. After Week 4, it follows the current standings, with each team's 17-game strength of schedule used as the tiebreaker when necessary.</p>
+    <h2>Can I Customize the Draft Order?</h2>
+    <p>Yes. The PFN Mock Draft Simulator lets you build your own draft order for free with no sign-up required, instead of using the default. Move any team to any pick, rearrange the top of the board, or start with the projected order and change only the picks you want.</p>
+    <p>Your custom order carries through all seven rounds. If you move a team to No. 1 overall, for example, its new position remains in place for the rest of the draft. Trades still work normally once the draft begins.</p>
+    <p>You can use a custom order to test scenarios that the current standings don't allow. Put your team at No. 1 and see how the board changes. Move a contender back 10 spots and see which players are still available. Or set the order to match a projection you want to draft against.</p>
+    <p>The typical NFL draft order rules still apply, and you will not be able to circumvent the standing rules that the league currently has. Before trades shake things up, the NFL’s playoff rules also determine where teams can pick late in the first round. No more than three teams from each conference can pick from Nos. 19-24; two from each conference can pick from Nos. 25-28, and one from each conference fills each of the final two groups, Nos. 29-30 and 31-32.</p>
+    <h2>How Many Rounds Can I Run, and How Fast?</h2>
     <p>Anywhere from one round to all seven, the same as the real NFL Draft, with the simulation speed set to slow, normal, or fast. The fast setting quickens the overall simulation but gives you less time to pause between picks. The slow setting gives you more flexibility to pause and pursue trades, while normal strikes a balance.</p>
-    <h2>What draft years can I simulate?</h2>
+    <h2>What Draft Years Can I Simulate?</h2>
     <p>You can run a mock for the upcoming draft or redraft past NFL Draft classes, dating back to the 2020 NFL Draft cycle.</p>
-    <h2>Can I make trades?</h2>
+    <h2>Can I Make Trades?</h2>
     <p>Yes, and every trade is free. Deals move in every direction: you to the simulation, the simulation to you, and simulation-to-simulation. Pause the draft to make an offer (including a short window before the No. 1 overall pick), choose the team and the picks to include, set protections on any future selections, then review and submit. You can also counter offers that come your way.</p>
-    <h2>Can I draft with friends?</h2>
+    <h2>Can I Draft With Friends?</h2>
     <p>Yes. In multi-user mode, you can create a room and draft live against others, with everyone selecting from the same board and the same simulation through the final pick. You can create or join a public lobby to draft with other active MDS users, or set up a private lobby with a password to share with your friends.</p>
-    <h2>Is PFSN's NFL Mock Draft Simulator free?</h2>
-    <p>Yes. It is completely free to use on Pro Football & Sports Network, with no sign-up required.</p>
+    <h2>Is PFN's NFL Mock Draft Simulator Free?</h2>
+    <p>Yes. It is completely free to use on Pro Football Network, with no sign-up required.</p>
   ";
 
   $template_data = array(
     'seo_title' => $pageTitle,
     'meta_description' => $pageDescription,
-    'meta_keywords' => 'PFN Mock Draft Simulator, PFSN Mock Draft Simulator, NFL Mock Draft Simulator, 2027 NFL Mock Draft, NFL Draft Simulator with Trades, NFL Draft Predictions, NFL Draft Analysis Tools, Interactive NFL Mock Draft, NFL Mock Draft Simulator with Grades',
+    'meta_keywords' => 'PFN Mock Draft Simulator, NFL Mock Draft Simulator, 2027 NFL Mock Draft, NFL Draft Simulator with Trades, NFL Draft Predictions, NFL Draft Analysis Tools, Interactive NFL Mock Draft, NFL Mock Draft Simulator with Grades',
     'seo_robots_tag' => 'FOLLOW, INDEX, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1, MAX-IMAGE-PREVIEW:LARGE',
     'og_title' => $pageTitle,
     'og_description' => $pageDescription,
@@ -523,34 +529,40 @@ $app->get('/sk-proxy/:brand/mockdraft-simulator1', function ($brand) use ($app) 
   $nfcTeams = collectConferenceTeams($nfcTeamsList, $pickSequence);
 
   $pageTitle = "2027 NFL Mock Draft Simulator With Free Trades and Grades";
-  $pageDescription = "PFSN’s free NFL Mock Draft Simulator with user-sim, sim-user, and sim-to-sim trades allows you to look ahead to the 2027 NFL Draft and be the GM of your favorite NFL team(s).";
+  $pageDescription = "PFN’s free NFL Mock Draft Simulator with user-sim, sim-user, and sim-to-sim trades allows you to look ahead to the 2027 NFL Draft and be the GM of your favorite NFL team(s).";
   $pageTextContent = "
-    <h2>What Is PFSN's NFL Mock Draft Simulator?</h2>
-    <p>PFSN's NFL Mock Draft Simulator is a free tool that puts you in the general manager's chair for the NFL Draft. You make the picks for the team (s) you control, while a proprietary simulation drafts for the rest of the league, including trades. It is built to let you chase every what-if: reach for your quarterback, trade down to stockpile capital, or sit back and watch how the board falls.</p>
-    <h2>How Does PFSN's NFL Mock Draft Simulator Work?</h2>
+    <h2>What Is PFN's NFL Mock Draft Simulator?</h2>
+    <p>PFN's NFL Mock Draft Simulator is a free tool that puts you in the general manager's chair for the NFL Draft. You make the picks for the team (s) you control, while a proprietary simulation drafts for the rest of the league, including trades. It is built to let you chase every what-if: reach for your quarterback, trade down to stockpile capital, or sit back and watch how the board falls.</p>
+    <h2>How Does PFN's NFL Mock Draft Simulator Work?</h2>
     <p>Once your draft begins, you go pick-for-pick against the rest of the league. When you are on the clock, your team's biggest needs appear in priority order above the player list, so you can draft for need, take the best player available, or balance the two. The board is filterable by position, and every prospect carries a scouting report and draft profile to inform your pick. The simulation drafts for every team you are not controlling, weighing each prospect's value against that team's roster needs, so the board shifts based on who is still available.</p>
     <h2>How Does the NFL Draft Work?</h2>
     <p>The NFL Draft is held every April over three days and consists of seven rounds. Before trades and compensatory picks, each of the 32 teams receives one selection per round, which, together with compensatory picks, pushes the field past 250 total selections.</p>
     <p>The order is set by the reverse order of finish from the previous season. The 18 teams that miss the playoffs are slotted first, from worst record to best, with strength of schedule as the primary tiebreaker between teams that finish even. The 14 playoff teams fill out the rest of each round by how far they advanced, with the Super Bowl runner-up picking next to last and the Super Bowl champion picking last.</p>
     <p>Compensatory picks are awarded at the end of Rounds 3 through 7 to teams that lost more or better free agents than they signed the previous offseason. A total of 32 compensatory selections are typically awarded under this method, with each team eligible to receive up to 4 selections (there have been 2 occasions when 33 compensatory selections were awarded). Additionally, up to 32 JC-2A resolution compensatory selections can be awarded per season to teams (one per team) that have developed minority candidates for head coach and general manager positions.</p>
-    <h2>Can I draft for any NFL team?</h2>
-    <p>Yes. All 32 franchises are available. You can run one team, several at once, all 32, or none at all, and let the simulation draft the entire board. Pick order follows the real NFL draft order for the year you select. For the current cycle, the order is based on Super Bowl odds from the summer through the first four weeks of the regular season. From that point on, it is set by the current standings, with each team's 17-game strength of schedule serving as the tiebreaker when needed.</p>
-    <h2>How many rounds can I run, and how fast?</h2>
+    <h2>Can I Draft for Any NFL Team?</h2>
+    <p>Yes. All 32 teams are available. You can control one team, several teams, all 32, or none and let the simulator handle the entire draft.</p>
+    <p>By default, the simulator uses the real NFL draft order for the year you select, but you can also create a custom order. For the current draft cycle, the default order is based on Super Bowl odds from the summer through the first four weeks of the regular season. After Week 4, it follows the current standings, with each team's 17-game strength of schedule used as the tiebreaker when necessary.</p>
+    <h2>Can I Customize the Draft Order?</h2>
+    <p>Yes. The PFN Mock Draft Simulator lets you build your own draft order for free with no sign-up required, instead of using the default. Move any team to any pick, rearrange the top of the board, or start with the projected order and change only the picks you want.</p>
+    <p>Your custom order carries through all seven rounds. If you move a team to No. 1 overall, for example, its new position remains in place for the rest of the draft. Trades still work normally once the draft begins.</p>
+    <p>You can use a custom order to test scenarios that the current standings don't allow. Put your team at No. 1 and see how the board changes. Move a contender back 10 spots and see which players are still available. Or set the order to match a projection you want to draft against.</p>
+    <p>The typical NFL draft order rules still apply, and you will not be able to circumvent the standing rules that the league currently has. Before trades shake things up, the NFL’s playoff rules also determine where teams can pick late in the first round. No more than three teams from each conference can pick from Nos. 19-24; two from each conference can pick from Nos. 25-28, and one from each conference fills each of the final two groups, Nos. 29-30 and 31-32.</p>
+    <h2>How Many Rounds Can I Run, and How Fast?</h2>
     <p>Anywhere from one round to all seven, the same as the real NFL Draft, with the simulation speed set to slow, normal, or fast. The fast setting quickens the overall simulation but gives you less time to pause between picks. The slow setting gives you more flexibility to pause and pursue trades, while normal strikes a balance.</p>
-    <h2>What draft years can I simulate?</h2>
+    <h2>What Draft Years Can I Simulate?</h2>
     <p>You can run a mock for the upcoming draft or redraft past NFL Draft classes, dating back to the 2020 NFL Draft cycle.</p>
-    <h2>Can I make trades?</h2>
+    <h2>Can I Make Trades?</h2>
     <p>Yes, and every trade is free. Deals move in every direction: you to the simulation, the simulation to you, and simulation-to-simulation. Pause the draft to make an offer (including a short window before the No. 1 overall pick), choose the team and the picks to include, set protections on any future selections, then review and submit. You can also counter offers that come your way.</p>
-    <h2>Can I draft with friends?</h2>
+    <h2>Can I Draft With Friends?</h2>
     <p>Yes. In multi-user mode, you can create a room and draft live against others, with everyone selecting from the same board and the same simulation through the final pick. You can create or join a public lobby to draft with other active MDS users, or set up a private lobby with a password to share with your friends.</p>
-    <h2>Is PFSN's NFL Mock Draft Simulator free?</h2>
-    <p>Yes. It is completely free to use on Pro Football & Sports Network, with no sign-up required.</p>
+    <h2>Is PFN's NFL Mock Draft Simulator Free?</h2>
+    <p>Yes. It is completely free to use on Pro Football Network, with no sign-up required.</p>
   ";
 
   $template_data = array(
     'seo_title' => $pageTitle,
     'meta_description' => $pageDescription,
-    'meta_keywords' => 'PFN Mock Draft Simulator, PFSN Mock Draft Simulator, NFL Mock Draft Simulator, 2027 NFL Mock Draft, NFL Draft Simulator with Trades, NFL Draft Predictions, NFL Draft Analysis Tools, Interactive NFL Mock Draft, NFL Mock Draft Simulator with Grades',
+    'meta_keywords' => 'PFN Mock Draft Simulator, NFL Mock Draft Simulator, 2027 NFL Mock Draft, NFL Draft Simulator with Trades, NFL Draft Predictions, NFL Draft Analysis Tools, Interactive NFL Mock Draft, NFL Mock Draft Simulator with Grades',
     'seo_robots_tag' => 'FOLLOW, INDEX, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1, MAX-IMAGE-PREVIEW:LARGE',
     'og_title' => $pageTitle,
     'og_description' => $pageDescription,
