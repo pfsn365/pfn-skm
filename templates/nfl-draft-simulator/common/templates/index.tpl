@@ -381,7 +381,12 @@
 					alt="close-icon">
 			</button>
 		</div>
-		<span class="custom-draft-order-info-text">Drag a pick by its handle or use the arrows to reorder Round 1. The remaining rounds follow the same order.</span>
+		<span class="custom-draft-order-info-text">Drag a pick by its handle or use the arrows to reorder Round 1. The remaining rounds follow the same order. Picks 19 to 32 follow the playoff bracket, so each of those groups has to keep its AFC/NFC balance.</span>
+		<div class="custom-draft-order-error hidden">
+			<span class="custom-draft-order-error-text">Ineligible Draft Order</span>
+			<button class="custom-draft-order-error-info-btn" type="button" aria-label="Show draft order issues">i</button>
+			<div class="custom-draft-order-error-tooltip"></div>
+		</div>
 		<div class="custom-draft-order-list-container">
 			<div class="custom-draft-order-list"></div>
 		</div>

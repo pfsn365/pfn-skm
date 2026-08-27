@@ -1802,6 +1802,25 @@ var customDraftOrderSlots = null;
 var customDraftOrderApplied = false;
 var draggedDraftOrderRow = null;
 var draftOrderDragScrollInterval = null;
+var customDraftOrderRestrictionsEnabled = false;
+
+var draftOrderConferences = {
+  BAL: "AFC", BUF: "AFC", CIN: "AFC", CLE: "AFC", DEN: "AFC", HOU: "AFC", IND: "AFC", JAX: "AFC",
+  KC: "AFC", LV: "AFC", LAC: "AFC", MIA: "AFC", NE: "AFC", NYJ: "AFC", PIT: "AFC", TEN: "AFC",
+  ARI: "NFC", ATL: "NFC", CAR: "NFC", CHI: "NFC", DAL: "NFC", DET: "NFC", GB: "NFC", LAR: "NFC",
+  MIN: "NFC", NO: "NFC", NYG: "NFC", PHI: "NFC", SF: "NFC", SEA: "NFC", TB: "NFC", WAS: "NFC",
+};
+
+// The tail of round 1 mirrors the playoff bracket, so each of these slot groups can
+// only ever hold a fixed number of teams per conference. Counted on the team that
+// originally owned the slot, never the team that acquired it in a trade.
+// Kept in slot order so the issue list reads down the draft board.
+var customDraftOrderRules = [
+  { numbers: [19, 20, 21, 22, 23, 24], max: 3, label: "19 to 24" },
+  { numbers: [25, 26, 27, 28], max: 2, label: "25 to 28" },
+  { numbers: [29, 30], max: 1, label: "29 and 30" },
+  { numbers: [31, 32], max: 1, label: "31 and 32" },
+];
 
 function getNonFuturePicksCount() {
   for (var i = 0; i < picksList.length; i++) {
@@ -1818,6 +1837,13 @@ function captureDefaultDraftOrder() {
   customDraftOrderSlots = defaultDraftOrderPicks.map(function (pick) {
     return { number: pick.number, value: pick.value, onTheClock: pick.onTheClock };
   });
+
+  // The rules only describe a draft order seeded off the playoff bracket. Enforcing
+  // them on an order that already breaks them (a redraft year without the original
+  // team column, a reshuffled sheet) would freeze every move, so they are switched
+  // off unless the default order honours them.
+  customDraftOrderRestrictionsEnabled = true;
+  customDraftOrderRestrictionsEnabled = !getCustomDraftOrderViolations(defaultDraftOrderPicks).length;
 }
 
 // [start, end) index ranges of every round inside the non future picks.
@@ -1856,6 +1882,128 @@ function getDraftOrderNativeTeam(pick) {
 // A slot belongs to the team that originally owned it, even after it was traded.
 function getDraftOrderPickTeamKey(pick) {
   return getDraftOrderNativeTeam(pick) || pick.shortName;
+}
+
+function getDraftOrderConference(pick) {
+  return pick ? draftOrderConferences[getDraftOrderPickTeamKey(pick)] : undefined;
+}
+
+// picks is the list in slot order, so picks[i] sits in customDraftOrderSlots[i].
+// Each conference also keeps the slots it holds, the issue list names them.
+function getCustomDraftOrderRuleCounts(rule, picks) {
+  var counts = { afc: [], nfc: [] };
+
+  for (var i = 0; i < picks.length; i++) {
+    var slot = customDraftOrderSlots[i];
+    if (!slot || rule.numbers.indexOf(slot.number) === -1) continue;
+
+    var conference = getDraftOrderConference(picks[i]);
+    if (conference !== "AFC" && conference !== "NFC") continue;
+
+    var entry = getDraftOrderPickTeamKey(picks[i]) + " (" + slot.number + ")";
+    if (conference === "AFC") {
+      counts.afc.push(entry);
+    } else {
+      counts.nfc.push(entry);
+    }
+  }
+
+  return counts;
+}
+
+// Every rule the order breaks, in slot order. A group only ever holds 2x its max, so
+// at most one of the two conferences can be over.
+function getCustomDraftOrderViolations(picks) {
+  if (!customDraftOrderRestrictionsEnabled || !customDraftOrderSlots) return [];
+
+  var violations = [];
+
+  for (var r = 0; r < customDraftOrderRules.length; r++) {
+    var rule = customDraftOrderRules[r];
+    var counts = getCustomDraftOrderRuleCounts(rule, picks);
+    var overloaded = counts.afc.length > rule.max ? "AFC" : (counts.nfc.length > rule.max ? "NFC" : "");
+    if (!overloaded) continue;
+
+    violations.push({
+      rule: rule,
+      conference: overloaded,
+      teams: overloaded === "AFC" ? counts.afc : counts.nfc,
+    });
+  }
+
+  return violations;
+}
+
+function getCustomDraftOrderPicksFromList(listEl) {
+  var rows = listEl.querySelectorAll(".custom-draft-order-row");
+  var picks = [];
+
+  for (var i = 0; i < rows.length; i++) {
+    picks.push(defaultDraftOrderPicks[parseInt(rows[i].dataset.orderindex, 10)]);
+  }
+
+  return picks;
+}
+
+// The list only ever carries a single "Ineligible Draft Order" flag, the info button
+// unfolds every group that is out of balance.
+function renderCustomDraftOrderIssues(violations) {
+  var errorEl = $(".custom-draft-order-popup .custom-draft-order-error");
+  if (!errorEl) return;
+
+  // a tooltip left open on touch would sit over the picks, so any move folds it away
+  removeClass(errorEl, "tooltip-open");
+
+  if (!violations.length) {
+    addClass(errorEl, "hidden");
+    return;
+  }
+
+  var issuesHtml = "";
+  for (var i = 0; i < violations.length; i++) {
+    var violation = violations[i];
+    issuesHtml += '<span class="custom-draft-order-issue">' +
+      '<span class="custom-draft-order-issue-title">Picks ' + violation.rule.label + ": " +
+        violation.teams.length + " " + violation.conference + " teams, max " + violation.rule.max +
+        '</span>' +
+      '<span class="custom-draft-order-issue-detail">' + violation.teams.join(", ") + '</span>' +
+      '</span>';
+  }
+
+  var tooltipEl = errorEl.querySelector(".custom-draft-order-error-tooltip");
+  // dragover fires on every frame the row hovers the same slot, so the issue list is
+  // only rebuilt when it actually changes.
+  if (tooltipEl && tooltipEl.innerHTML !== issuesHtml) tooltipEl.innerHTML = issuesHtml;
+  removeClass(errorEl, "hidden");
+}
+
+function updateCustomDraftOrderApplyBtn(violations) {
+  var applyBtn = $(".custom-draft-order-popup .custom-draft-order-apply-btn");
+  if (!applyBtn) return;
+
+  applyBtn.disabled = violations.length > 0;
+}
+
+// Called after every move and whenever the list is rebuilt. The move itself always
+// stands, only Apply is held back while the order is ineligible.
+function refreshCustomDraftOrderIssues(listEl) {
+  var violations = getCustomDraftOrderViolations(getCustomDraftOrderPicksFromList(listEl));
+
+  renderCustomDraftOrderIssues(violations);
+  updateCustomDraftOrderApplyBtn(violations);
+}
+
+function toggleCustomDraftOrderIssues(event) {
+  event.preventDefault();
+
+  var errorEl = event.target.closest(".custom-draft-order-error");
+  if (!errorEl) return;
+
+  if (hasClass(errorEl, "tooltip-open")) {
+    removeClass(errorEl, "tooltip-open");
+  } else {
+    addClass(errorEl, "tooltip-open");
+  }
 }
 
 // Rounds 2-7 cycle with round 1: their non compensatory picks are laid back out
@@ -1910,6 +2058,7 @@ function resetCustomDraftOrderState() {
   defaultDraftOrderPicks = null;
   customDraftOrderSlots = null;
   customDraftOrderApplied = false;
+  customDraftOrderRestrictionsEnabled = false;
   updateCustomDraftOrderBtnText();
 }
 
@@ -1976,6 +2125,12 @@ function showCustomDraftOrderPopUp() {
     applyBtn.onclick = applyCustomDraftOrder;
   }
 
+  // the issue list opens on hover, the click keeps it reachable on touch
+  var errorInfoBtn = customDraftOrderPopup.querySelector(".custom-draft-order-error-info-btn");
+  if (errorInfoBtn) {
+    errorInfoBtn.onclick = toggleCustomDraftOrderIssues;
+  }
+
   var bounds = getCustomDraftOrderRoundBounds();
   if (!bounds.length) return;
 
@@ -2001,6 +2156,9 @@ function showCustomDraftOrderPopUp() {
 
   addClass(customDraftOrderPopup, "popup");
   document.body.appendChild(customDraftOrderPopup);
+
+  // an order applied before the rules could be evaluated still blocks Apply on reopen
+  refreshCustomDraftOrderIssues(listEl);
 }
 
 function renderCustomDraftOrderList(listEl, picks) {
@@ -2139,10 +2297,12 @@ function repositionDraggedDraftOrderRow(y) {
   if (!listEl) return;
 
   var rowAfterDrag = getDraftOrderRowAfterDrag(listEl, y);
-  if (rowAfterDrag) {
+
+  // The warning tracks the row as it is dragged, so the user sees a slot flagged
+  // before letting go of it.
+  if (rowAfterDrag !== draggedDraftOrderRow.nextElementSibling) {
     listEl.insertBefore(draggedDraftOrderRow, rowAfterDrag);
-  } else {
-    listEl.appendChild(draggedDraftOrderRow);
+    refreshCustomDraftOrderIssues(listEl);
   }
 
   autoScrollDraftOrderList(y);
@@ -2185,6 +2345,7 @@ function moveCustomDraftOrderPick(event) {
     listEl.insertBefore(nextRow, row);
   }
 
+  refreshCustomDraftOrderIssues(listEl);
   updateCustomDraftOrderNumbers(listEl);
   row.scrollIntoView({ block: "nearest" });
 }
@@ -2226,6 +2387,9 @@ function applyCustomDraftOrder() {
     roundOnePicks.push(pick);
   }
 
+  // the Apply button is disabled while the order is ineligible, this is the backstop
+  if (getCustomDraftOrderViolations(roundOnePicks).length) return;
+
   var orderedPicks = buildCustomDraftOrderPicks(roundOnePicks);
   if (!orderedPicks || orderedPicks.length !== defaultDraftOrderPicks.length) return;
 
@@ -2249,6 +2413,7 @@ function resetCustomDraftOrderToDefault() {
   var listEl = $(".custom-draft-order-popup .custom-draft-order-list");
   if (listEl && bounds.length) {
     renderCustomDraftOrderList(listEl, defaultDraftOrderPicks.slice(0, bounds[0][1]));
+    refreshCustomDraftOrderIssues(listEl);
   }
 }
 
