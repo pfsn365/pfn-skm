@@ -535,6 +535,29 @@
         padding: 9px 6px;
       }
 
+      .custom-draft-order-popup .custom-draft-order-error {
+        padding: 0 12px 8px 12px;
+      }
+
+      .custom-draft-order-error .custom-draft-order-error-text {
+        font-size: 13px;
+      }
+
+      .custom-draft-order-error .custom-draft-order-error-tooltip {
+        left: 12px;
+        right: 12px;
+        max-height: 45vh;
+        overflow-y: auto;
+      }
+
+      .custom-draft-order-issue .custom-draft-order-issue-title {
+        font-size: 12px;
+      }
+
+      .custom-draft-order-issue .custom-draft-order-issue-detail {
+        font-size: 11px;
+      }
+
       .mypicks-container {
         overflow-y: scroll;
       }
@@ -2520,7 +2543,7 @@
   .custom-draft-order-header .custom-draft-order-header-text {
     color: #FFF;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .custom-draft-order-popup .close-custom-draft-order-btn {
@@ -2537,6 +2560,77 @@
     padding: 12px 20px 8px 20px;
     color: #777;
     font-size: 13px;
+    font-weight: 400;
+  }
+
+  /* anchors the issue list, which unfolds downwards over the picks */
+  .custom-draft-order-popup .custom-draft-order-error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    padding: 0 20px 8px 20px;
+  }
+
+  .custom-draft-order-error .custom-draft-order-error-text {
+    color: #D32F2F;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .custom-draft-order-error .custom-draft-order-error-info-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #D32F2F;
+    border-radius: 50%;
+    background: #FFF;
+    color: #D32F2F;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .custom-draft-order-error .custom-draft-order-error-tooltip {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    right: 20px;
+    z-index: 1;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: rgba(45, 45, 45, 0.97);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .custom-draft-order-error-info-btn:hover + .custom-draft-order-error-tooltip,
+  .custom-draft-order-error-info-btn:focus + .custom-draft-order-error-tooltip,
+  .custom-draft-order-error.tooltip-open .custom-draft-order-error-tooltip {
+    display: flex;
+  }
+
+  .custom-draft-order-error-tooltip .custom-draft-order-issue {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .custom-draft-order-issue .custom-draft-order-issue-title {
+    color: #FF8A80;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .custom-draft-order-issue .custom-draft-order-issue-detail {
+    color: #FFF;
+    font-size: 12px;
     font-weight: 400;
   }
 
@@ -2581,7 +2675,7 @@
   .custom-draft-order-popup .custom-draft-order-number {
     color: #2D2D2D;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     width: 28px;
     margin-right: 10px;
     text-align: right;
@@ -2679,6 +2773,12 @@
     color: #FFF;
     font-size: 14px;
     font-weight: 500;
+  }
+
+  /* held back while the list carries an ineligible draft order */
+  .custom-draft-order-footer .custom-draft-order-apply-btn:disabled {
+    background: #B8B8B8;
+    cursor: not-allowed;
   }
 
   .team-picks-info-popup .team-logo-container,
