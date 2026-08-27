@@ -45,12 +45,32 @@
   }
 
   .header-container {
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-container .header-border-text-container {
+    /* width: 100%; */
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
     margin-bottom: 4px;
+  }
+
+  .header-container .pfn-shield-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 150px;
+    /* margin-left: 150px; */
+  }
+
+  .header-container .third-party-logo {
+    width: 50px;
+    height: 50px;
+    margin-left: 150px;
+    /* margin-right: 150px; */
   }
 
   .updated-timestamp-container {

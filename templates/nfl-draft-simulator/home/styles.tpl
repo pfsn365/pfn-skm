@@ -731,6 +731,8 @@
       justify-content: center;
       border: 1px solid #E9E9E9;
       margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
     }
 
   {if $skip_shift == "true"}

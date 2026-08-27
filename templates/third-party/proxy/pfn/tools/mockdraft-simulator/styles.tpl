@@ -704,6 +704,10 @@
   }
 
   {if $is_desktop}
+    .pfn-content-wrapper {
+      margin-top: 110px;
+    }
+
     .pfn-content-container {
       margin-top: 0px;
     }

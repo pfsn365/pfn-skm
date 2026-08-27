@@ -54,6 +54,8 @@ $app->get('/sk-proxy/:brand/login', function ($brand) use ($app) {
 $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
   restrictAccess($app);
 
+  $ads_free = true;
+
   $template_data = array(
     'meta_keywords' => 'nfl playoff predictor, playoff predictor',
     'brand' => $brand,
@@ -78,10 +80,12 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
     'feeds_source_path' => generateDataIntegrationAssetsPath("tools/playoff_predictor_rss_feed/rss_feeds.json"),
     'chartbeat_authors' => CHARTBEAT_CONFIGS['team-player-pages']['authors'],
     'chartbeat_sections' => CHARTBEAT_CONFIGS['team-player-pages']['sections'],
-    'show_desktop_tools_top_adv_container' => true,
+    'show_desktop_tools_top_adv_container' => false,
     'team_logo_path' => "/skm/assets/pfn/nfl-teams-logo/",
     'show_sidebar_nav' => true,
     'download_image_url' => 'https://pfsn.app/nflpredictor',
+    'disable_ads' => $ads_free,
+    'disable_ga_events' => $ads_free,
   );
 
   $template_data['js_bundle_location'] = PLAYOFF_PREDICTOR_SCRIPT_LOCATION;
@@ -148,8 +152,140 @@ PAGE_TEXT;
 
   $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
   $template_data['fragments'] = array("third-party/proxy/pfn/common/gtag-script.tpl", "pages/static/tools/nfl/playoff-predictor/index.tpl", "third-party/proxy/pfn/tools/playoff-predictor/styles.tpl");
-  $template_data['head_fragments'] = array("third-party/proxy/pfn/common/ad-script.tpl", "pages/static/common/analytics/track-returning-users.tpl", "third-party/proxy/pfn/common/taboola-script/head-script.tpl", "third-party/proxy/pfn/tools/playoff-predictor/meta.tpl", "third-party/proxy/pfn/common/clarity-script.tpl", "templates/common/faq/faq-schema.tpl");
-  $template_data['body_fragments'] = array("third-party/proxy/pfn/common/taboola-script/body-script.tpl");
+  if ($ads_free) {
+    $template_data['head_fragments'] = array(
+      "pages/static/common/analytics/track-returning-users.tpl",
+      "third-party/proxy/pfn/tools/playoff-predictor/meta.tpl",
+      "templates/common/faq/faq-schema.tpl"
+    );
+  } else {
+    $template_data['head_fragments'] = array("third-party/proxy/pfn/common/ad-script.tpl", "pages/static/common/analytics/track-returning-users.tpl", "third-party/proxy/pfn/common/taboola-script/head-script.tpl", "third-party/proxy/pfn/tools/playoff-predictor/meta.tpl", "third-party/proxy/pfn/common/clarity-script.tpl", "templates/common/faq/faq-schema.tpl");
+    $template_data['body_fragments'] = array("third-party/proxy/pfn/common/taboola-script/body-script.tpl");
+  }
+
+  // Above Page Content Widgets
+  if ($brand == "pfn") {
+    $template_data["abovePageContentWidgets"][] = getFeaturedToolsQuickLinksWidgetForPFN();
+  }
+
+  $app->render('third-party/proxy/index.tpl', $template_data);
+});
+
+// ===== playoff-predictor1: ads-free staging variant with the third-party logo =====
+
+$app->get('/sk-proxy/:brand/playoff-predictor1', function ($brand) use ($app) {
+  restrictAccess($app);
+
+  $ads_free = true;
+
+  $template_data = array(
+    'meta_keywords' => 'nfl playoff predictor, playoff predictor',
+    'brand' => $brand,
+    'tool' => 'playoff-predictor',
+    'adv_in_content' => false,
+    'canonical_url' => 'https://www.profootballnetwork.com/nfl-playoff-predictor',
+    'slug' => 'nfl-playoff-predictor',
+    'bodyClasses' => 'no-outstream-player raptive-pfn-disable-footer-close',
+    'add_header_navigation' => true,
+    'include_right_sidebar' => false,
+    'content_width' => 'full-width',
+    'updated_timestamp' => "---",
+    'logo_cache_buster' => "?ver=" . PFN_NFL_LOGO_CACHE_BUSTER,
+    'nfl_teams' => [
+      'ARI','ATL','BAL','BUF','CAR','CHI','CIN','CLE','DAL','DEN','DET','GB',
+      'HOU','IND','JAX','KC','LV','LAC','LAR','MIA','MIN','NE','NO','NYG','NYJ',
+      'PHI','PIT','SF','SEA','TB','TEN','WAS'
+    ],
+    'send_page_view_event' => true,
+    'is_desktop' => $app->is_desktop,
+    'data_source_path' => generateDataIntegrationAssetsPath('tools/playoff_predictor/'),
+    'feeds_source_path' => generateDataIntegrationAssetsPath("tools/playoff_predictor_rss_feed/rss_feeds.json"),
+    'chartbeat_authors' => CHARTBEAT_CONFIGS['team-player-pages']['authors'],
+    'chartbeat_sections' => CHARTBEAT_CONFIGS['team-player-pages']['sections'],
+    'show_desktop_tools_top_adv_container' => false,
+    'team_logo_path' => "/skm/assets/pfn/nfl-teams-logo/",
+    'show_sidebar_nav' => true,
+    'download_image_url' => 'https://pfsn.app/nflpredictor',
+    'disable_ads' => $ads_free,
+    'disable_ga_events' => $ads_free,
+    'show_third_party_logo' => true,
+    'third_party_logo_path' => "/skm/assets/pfn/third-party/hail-mary-logo.png",
+  );
+
+  $template_data['js_bundle_location'] = PLAYOFF_PREDICTOR_SCRIPT_LOCATION;
+
+  $template_data["simulator_header_text"] = "Predict Remaining NFL Games";
+  $template_data["playoff_section_text"] = "Playoffs";
+  $template_data["standings_section_text"] = "Full Standings & Draft Order";
+  $template_data["predict_cta_text"] = "Predict Playoff Games";
+  $template_data["standings_header_text"] = "Predicted NFL Standings 2026-27";
+  $template_data["brand_logo"] = "pfn-logo.png";
+  $template_data['feedback_popup_logo'] = "logo/pfn-black-big.png";
+  $template_data['feedback_source_tab'] = $brand;
+
+  // Page metadata is set inline rather than via addPageMetadata(), so this page
+  // renders without a blocking call to the (VPC-internal) taxonomy API. Values
+  // mirror the CMS entry c6e9b54f-008a-42b8-b5b1-0e70d8efd572 as of 2026-08-05
+  // (GET API_ENDPOINT_DOMAIN/v1/taxonomy/<slug>). `page_text_content` is that
+  // entry's `data_subpage_info` after sanitize_article_contents(), with no FAQs to
+  // append (the CMS entry has none, so `faq` is empty and the faq-schema.tpl
+  // fragment in head_fragments below emits an empty FAQPage, exactly as before).
+  //
+  // `header_text` is load-bearing: third-party/proxy/pfn/index.tpl gates BOTH
+  // the <h1> header-wrapper and the desktop-tools-top-adv-container (the Raptive
+  // 90px header ad) on isset($header_text). Removing it hides the page header
+  // and the header ad. Edit these strings here when the CMS entry changes.
+  $template_data["header_text"] = "Free NFL Playoff Predictor & Season Simulator (2026)";
+  $template_data["seo_title"] = "Free NFL Playoff Predictor & Season Simulator (2026)";
+  $template_data["meta_description"] = "PFSN's NFL Playoff Predictor allows you to predict each game of the 2026 NFL season to see how it impacts the playoff picture and matchups.";
+  $template_data["seo_robots_tag"] = "index, follow, max-image-preview:large";
+  $template_data["allow_site_scaling"] = true;
+  $template_data["setHtmlLangAttribute"] = true;
+  $template_data["page_text_content"] = <<<'PAGE_TEXT'
+<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-0">What Is PFSN&rsquo;s NFL Playoff Predictor?</h2>
+<p>PFSN&rsquo;s NFL Playoff Predictor is a one-of-a-kind tool that gives you the ability to simulate the entire NFL season right up until the Super Bowl. Not only do you get to see how each game impacts the NFL playoff picture, but you also get to see what next year&rsquo;s <a href="https://www.profootballnetwork.com/nfl-draft-order/" target="_blank" rel="noopener nofollow">draft order</a> will look like based on the outcomes of the games.</p>
+<p>PFSN&rsquo;s Playoff Machine is updated within minutes of the conclusion of each NFL game to allow you to test out an unlimited number of playoff scenarios in real time to see how your favorite team is impacted in the NFL playoff picture.</p>
+<p>PFSN&rsquo;s NFL Playoff Predictor allows you to play out various weekly scenarios to see how the playoff picture changes with each scenario. The combination of actual game results from the NFL season, along with user-selected game picks and AI-simulated results, provides you with a unique NFL playoff bracket.</p>
+<p>Now that the NFL season is here, play out every game and determine who will be heading to Super Bowl LXI in Inglewood.</p>
+<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-1">How Does PFSN&rsquo;s NFL Playoff Machine Work?</h2>
+<p>The PFSN NFL Playoff Picture Predictor is updated in near-real time at the conclusion of every NFL game. From there, you can choose to pick every remaining game yourself or select only the games that interest you. Once you make your picks, you can choose to simulate that week only or the rest of the season. PFSN&rsquo;s Playoff Predictor includes a proprietary, state-of-the-art algorithm that will simulate and predict the outcomes of the games you have not already selected.</p>
+<p>From there, you can see the projected playoff picture and can manipulate any of the game results to see how it changes the NFL playoff bracket. Once your NFL playoff bracket predictor is finished, you can select the winners of each playoff matchup from Wild Card Weekend through the Super Bowl.</p>
+<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-2">How Many Teams Make the NFL Playoffs?</h2>
+<p>A total of 14 teams make it into the playoffs. The 14-team field consists of seven teams from the AFC and seven teams from the NFC. There are four division winners and three Wild Card teams from each conference. The three Wild Card teams are those with the best regular-season records among the teams that did not win their respective division.</p>
+<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-3">How Do the NFL Playoffs Work?</h2>
+<p>The NFL regular season is an 18-week schedule consisting of 17 games for each of the 32 NFL teams. At the conclusion of Week 18, the playoff field is set.</p>
+<p>The four division winners in each conference are seeded one through four in their respective playoff brackets based on their winning percentage. Three additional teams from each conference, known as Wild Card teams, also advance to the playoffs and are seeded five through seven. In the first round, the No. 1 seed from each conference gets a bye week and automatically advances to the second round. The six other teams in each conference face off: 2 vs. 7, 3 vs. 6, and 4 vs. 5.</p>
+<p>The winners advance to the second round. The lowest remaining seed in each conference must face the No. 1 seed. The other two remaining teams in each conference face off as well. Two teams from each conference that win their games advance to the Conference Championship round.</p>
+<p>The winners of the AFC Championship Game and NFC Championship Game face off two weeks later in the Super Bowl.</p>
+<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-4">When Do the NFL Playoffs Start?</h2>
+<p>The 2026-27 NFL Playoffs begin with Wild Card Weekend from Saturday, January 16, through Monday, January 18. Two games are slated for Saturday, with three additional games on Sunday. The round wraps up with a Monday Night Football game on January 18. Super Bowl 61 will be played on Sunday, February 14, at SoFi Stadium in Inglewood.</p>
+<p><br></p>
+PAGE_TEXT;
+
+  $template_data["faq"] = array();
+
+  $template_data["schemas"] = array(
+    "third-party/proxy/pfn/common/schemas/webpage.tpl",
+    "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
+    "third-party/proxy/pfn/common/schemas/siteNavigationElement.tpl",
+    "third-party/proxy/pfn/common/schemas/website.tpl",
+  );
+
+  preparePFNMenuData($template_data, "Tools", "NFL Playoff Predictor");
+  preparePFNSecondaryNav($template_data, "Football", "NFL Playoff Predictor");
+
+  $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
+  $template_data['fragments'] = array("third-party/proxy/pfn/common/gtag-script.tpl", "pages/static/tools/nfl/playoff-predictor/index.tpl", "third-party/proxy/pfn/tools/playoff-predictor/styles.tpl");
+  if ($ads_free) {
+    $template_data['head_fragments'] = array(
+      "pages/static/common/analytics/track-returning-users.tpl",
+      "third-party/proxy/pfn/tools/playoff-predictor/meta.tpl",
+      "templates/common/faq/faq-schema.tpl"
+    );
+  } else {
+    $template_data['head_fragments'] = array("third-party/proxy/pfn/common/ad-script.tpl", "pages/static/common/analytics/track-returning-users.tpl", "third-party/proxy/pfn/common/taboola-script/head-script.tpl", "third-party/proxy/pfn/tools/playoff-predictor/meta.tpl", "third-party/proxy/pfn/common/clarity-script.tpl", "templates/common/faq/faq-schema.tpl");
+    $template_data['body_fragments'] = array("third-party/proxy/pfn/common/taboola-script/body-script.tpl");
+  }
 
   // Above Page Content Widgets
   if ($brand == "pfn") {
@@ -257,7 +393,7 @@ $app->get('/sk-proxy/:brand/mockdraft-simulator', function ($brand) use ($app) {
     'page_text_content' => $pageTextContent,
     'bodyClasses' => 'no-outstream-player raptive-pfn-disable-footer-close',
     'raptive_header_90_class' => 'raptive-pfn-header-90',
-    'show_desktop_tools_top_adv_container' => true,
+    // 'show_desktop_tools_top_adv_container' => true,
     'brand' => $brand,
     'slug' => 'mockdraft',
     'header_text' => 'NFL Mock Draft Simulator',
@@ -304,9 +440,175 @@ $app->get('/sk-proxy/:brand/mockdraft-simulator', function ($brand) use ($app) {
 
   $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
   $template_data['fragments'] = array("third-party/proxy/$brand/common/gtag-script.tpl", "third-party/proxy/$brand/tools/mockdraft-simulator/pre-styles.tpl", "templates/nfl-draft-simulator/home/$brand/index.tpl", "third-party/proxy/$brand/tools/mockdraft-simulator/styles.tpl");
-  $template_data['head_fragments'] = array("third-party/proxy/$brand/common/ad-script.tpl", "pages/static/common/analytics/track-returning-users.tpl", "third-party/proxy/$brand/common/taboola-script/head-script.tpl", "third-party/proxy/$brand/common/clarity-script.tpl", "third-party/proxy/$brand/tools/mockdraft-simulator/meta.tpl");
-  $template_data['body_fragments'] = array("third-party/proxy/$brand/common/taboola-script/body-script.tpl");
-  $template_data['feedback_popup_logo'] = "skm/assets/pfn/pfn-logos/pfn-logo-blue-2026-v1.png";
+  $template_data['head_fragments'] = array("pages/static/common/analytics/track-returning-users.tpl", "third-party/proxy/$brand/tools/mockdraft-simulator/meta.tpl");
+  $template_data['feedback_popup_logo'] = "logo/pfn-black-big.png";
+  $template_data['feedback_source_tab'] = $brand;
+
+  $template_data["schemas"] = array(
+    "third-party/proxy/pfn/common/schemas/webpage.tpl",
+    "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
+    "third-party/proxy/pfn/common/schemas/siteNavigationElement.tpl",
+    "third-party/proxy/pfn/common/schemas/website.tpl",
+  );
+
+  // Bottom Widgets
+  if ($brand == "pfn") {
+    $template_data["bottomWidgets"][] = getFeaturedToolsQuickLinksWidgetForPFN();
+  }
+  
+  $app->render('third-party/proxy/index.tpl', $template_data);
+});
+
+// ===== mockdraft-simulator1: ads-free staging variant with the PFN + third-party logos =====
+
+$app->get('/sk-proxy/:brand/mockdraft-simulator1', function ($brand) use ($app) {
+  restrictAccess($app);
+
+  $mdsDataUrl = "https://statics.sportskeeda.com/assets/sheets/tools/mockdraft-simulator/mockdraftSimulatorData.json";
+
+  $filesData = do_curl($mdsDataUrl, $statuscode);
+  $filesData = json_decode($filesData, true);
+  $isFilesDataInvalid = checkMDSDataisValid($filesData);
+
+  if (!isset($filesData["collections"]) || $isFilesDataInvalid) {
+    $players = file_get_contents("templates/nfl-draft-simulator/common/players.json");
+    $players = json_decode($players, TRUE);
+    $picks = file_get_contents("templates/nfl-draft-simulator/common/picks.json");
+    $picks = json_decode($picks, TRUE);
+    $teams = file_get_contents("templates/nfl-draft-simulator/common/teams.json");
+    $teams = json_decode($teams, TRUE);
+    $playerTrades = file_get_contents("templates/nfl-draft-simulator/common/playerTrades.json");
+    $playerTrades = json_decode($playerTrades, TRUE);
+    $updatedTimestamp = file_get_contents("templates/nfl-draft-simulator/common/updatedTimestamp.txt");
+    $simulationConstantsData = file_get_contents("templates/nfl-draft-simulator/common/simulationConstants.js");
+    $simulationConstants = [];
+    preg_match_all('/const\s+(\w+)\s*=\s*(.*?);/', $simulationConstantsData, $matches, PREG_SET_ORDER);
+
+    foreach ($matches as $m) {
+        $key = $m[1];
+        $value = trim($m[2]);
+
+        if (strpos($value, '[') === 0) {
+          $simulationConstants[$key] = json_decode($value, true);
+        } elseif (strpos($value, '{') === 0) {
+          // Keep as raw JS object literal; template emits it directly without json_encode.
+          $simulationConstants[$key] = $value;
+        } elseif (is_numeric($value)) {
+          $simulationConstants[$key] = $value + 0;
+        } else {
+          $simulationConstants[$key] = trim($value, '"\'');
+        }
+    }
+  } else {
+    $updatedTimestamp = new DateTime($filesData["updatedTime"], new DateTimeZone('UTC'));
+    $updatedTimestamp->setTimezone(new DateTimeZone('America/New_York'));
+    $updatedTimestamp = $updatedTimestamp->format('m/d/y, h:i:s A T');
+    $filesData = mapMDSData($filesData);
+    $picks = $filesData["picks"];
+    $players = $filesData["players"];
+    $teams = $filesData["teams"];
+    $playerTrades = $filesData["player_trades"];
+    $simulationConstants = $filesData["constants"];
+  }
+
+  $teams = setNFLTeamLogoPathForMDS($teams);
+
+  $pickSequence = getTeamPickSequenceForMDS($teams);
+  $picks = addLogoToMDSTeams($teams, $picks);
+
+  $afcTeamsList = ['BAL', 'BUF', 'CIN', 'CLE', 'DEN', 'HOU', 'IND', 'JAX', 'KC', 'LV', 'LAC', 'MIA', 'NE', 'NYJ', 'PIT', 'TEN'];
+  $nfcTeamsList = ['ARI', 'ATL', 'CAR', 'CHI', 'DAL', 'DET', 'GB', 'LAR', 'MIN', 'NO', 'NYG', 'PHI', 'SF', 'SEA', 'TB', 'WAS'];
+
+  $afcTeams = collectConferenceTeams($afcTeamsList, $pickSequence);
+  $nfcTeams = collectConferenceTeams($nfcTeamsList, $pickSequence);
+
+  $pageTitle = "2027 NFL Mock Draft Simulator With Free Trades and Grades";
+  $pageDescription = "PFSN’s free NFL Mock Draft Simulator with user-sim, sim-user, and sim-to-sim trades allows you to look ahead to the 2027 NFL Draft and be the GM of your favorite NFL team(s).";
+  $pageTextContent = "
+    <h2>What Is PFSN's NFL Mock Draft Simulator?</h2>
+    <p>PFSN's NFL Mock Draft Simulator is a free tool that puts you in the general manager's chair for the NFL Draft. You make the picks for the team (s) you control, while a proprietary simulation drafts for the rest of the league, including trades. It is built to let you chase every what-if: reach for your quarterback, trade down to stockpile capital, or sit back and watch how the board falls.</p>
+    <h2>How Does PFSN's NFL Mock Draft Simulator Work?</h2>
+    <p>Once your draft begins, you go pick-for-pick against the rest of the league. When you are on the clock, your team's biggest needs appear in priority order above the player list, so you can draft for need, take the best player available, or balance the two. The board is filterable by position, and every prospect carries a scouting report and draft profile to inform your pick. The simulation drafts for every team you are not controlling, weighing each prospect's value against that team's roster needs, so the board shifts based on who is still available.</p>
+    <h2>How Does the NFL Draft Work?</h2>
+    <p>The NFL Draft is held every April over three days and consists of seven rounds. Before trades and compensatory picks, each of the 32 teams receives one selection per round, which, together with compensatory picks, pushes the field past 250 total selections.</p>
+    <p>The order is set by the reverse order of finish from the previous season. The 18 teams that miss the playoffs are slotted first, from worst record to best, with strength of schedule as the primary tiebreaker between teams that finish even. The 14 playoff teams fill out the rest of each round by how far they advanced, with the Super Bowl runner-up picking next to last and the Super Bowl champion picking last.</p>
+    <p>Compensatory picks are awarded at the end of Rounds 3 through 7 to teams that lost more or better free agents than they signed the previous offseason. A total of 32 compensatory selections are typically awarded under this method, with each team eligible to receive up to 4 selections (there have been 2 occasions when 33 compensatory selections were awarded). Additionally, up to 32 JC-2A resolution compensatory selections can be awarded per season to teams (one per team) that have developed minority candidates for head coach and general manager positions.</p>
+    <h2>Can I draft for any NFL team?</h2>
+    <p>Yes. All 32 franchises are available. You can run one team, several at once, all 32, or none at all, and let the simulation draft the entire board. Pick order follows the real NFL draft order for the year you select. For the current cycle, the order is based on Super Bowl odds from the summer through the first four weeks of the regular season. From that point on, it is set by the current standings, with each team's 17-game strength of schedule serving as the tiebreaker when needed.</p>
+    <h2>How many rounds can I run, and how fast?</h2>
+    <p>Anywhere from one round to all seven, the same as the real NFL Draft, with the simulation speed set to slow, normal, or fast. The fast setting quickens the overall simulation but gives you less time to pause between picks. The slow setting gives you more flexibility to pause and pursue trades, while normal strikes a balance.</p>
+    <h2>What draft years can I simulate?</h2>
+    <p>You can run a mock for the upcoming draft or redraft past NFL Draft classes, dating back to the 2020 NFL Draft cycle.</p>
+    <h2>Can I make trades?</h2>
+    <p>Yes, and every trade is free. Deals move in every direction: you to the simulation, the simulation to you, and simulation-to-simulation. Pause the draft to make an offer (including a short window before the No. 1 overall pick), choose the team and the picks to include, set protections on any future selections, then review and submit. You can also counter offers that come your way.</p>
+    <h2>Can I draft with friends?</h2>
+    <p>Yes. In multi-user mode, you can create a room and draft live against others, with everyone selecting from the same board and the same simulation through the final pick. You can create or join a public lobby to draft with other active MDS users, or set up a private lobby with a password to share with your friends.</p>
+    <h2>Is PFSN's NFL Mock Draft Simulator free?</h2>
+    <p>Yes. It is completely free to use on Pro Football & Sports Network, with no sign-up required.</p>
+  ";
+
+  $template_data = array(
+    'seo_title' => $pageTitle,
+    'meta_description' => $pageDescription,
+    'meta_keywords' => 'PFN Mock Draft Simulator, PFSN Mock Draft Simulator, NFL Mock Draft Simulator, 2027 NFL Mock Draft, NFL Draft Simulator with Trades, NFL Draft Predictions, NFL Draft Analysis Tools, Interactive NFL Mock Draft, NFL Mock Draft Simulator with Grades',
+    'seo_robots_tag' => 'FOLLOW, INDEX, MAX-SNIPPET:-1, MAX-VIDEO-PREVIEW:-1, MAX-IMAGE-PREVIEW:LARGE',
+    'og_title' => $pageTitle,
+    'og_description' => $pageDescription,
+    'page_text_content' => $pageTextContent,
+    'bodyClasses' => 'no-outstream-player raptive-pfn-disable-footer-close',
+    'raptive_header_90_class' => 'raptive-pfn-header-90',
+    // 'show_desktop_tools_top_adv_container' => true,
+    'brand' => $brand,
+    'slug' => 'mockdraft',
+    'header_text' => 'NFL Mock Draft Simulator',
+    'tool' => 'mockdraft-simulator',
+    'add_header_navigation' => true,
+    'playersList' => $players,
+    'picksList' => $picks,
+    'teamsList' => $teams,
+    'playerTrades' => $playerTrades,
+    'simulationConstants' => $simulationConstants,
+    'pickSequence' => $pickSequence,
+    'afcTeams' => $afcTeams,
+    'nfcTeams' => $nfcTeams,
+    'updated_timestamp' => $updatedTimestamp,
+    'sidebar_fragment' => "",
+    'skip_shift' => "true",
+    'send_page_view_event' => true,
+    'js_bundle_location' => MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION,
+    'content_width' => 'full-width',
+    'canonical_url' => 'https://www.profootballnetwork.com/mockdraft',
+    'download_image_bottom_url' => 'www.profootballnetwork.com/mockdraft',
+    'result_header_logo' => 'skm/assets/pfn/pfsn-logo-white-ver-2.png',
+    'feeds_source_path' => generateDataIntegrationAssetsPath("tools/rss_feed/rss_feeds.json"),
+    'is_desktop' => $app->is_desktop,
+    'chartbeat_authors' => CHARTBEAT_CONFIGS['team-player-pages']['authors'],
+    'chartbeat_sections' => CHARTBEAT_CONFIGS['team-player-pages']['sections'],
+    'start_draft_btn_text' => 'Enter Solo Draft',
+    'hide_mobile_top_adv_container' => true,
+    'login_url' => get_brand_login_url($app, $brand),
+    'show_dashboard_btn_final_result' => true,
+    'setHtmlLangAttribute' => true,
+    'allow_site_scaling' => true,
+    'include_pfn_feedback' => true,
+    'show_playerslist_selection_dropdown' => true,
+    'select_teams_text' => "Select Your Team(s) - Solo Mock Draft",
+    'logo_cache_buster' => PFN_NFL_LOGO_CACHE_BUSTER,
+    'team_logo_path' => "/skm/assets/pfn/nfl-teams-logo/",
+    'show_logo_in_h2' => true,
+    'pfn_logo_path' => "/skm/assets/pfn/pfn-logos/pfn-logo-blue-2026-v1.png",
+    'third_party_logo_path' => "/skm/assets/pfn/third-party/hail-mary-black-logo.png",
+  );
+
+  preparePFNMenuData($template_data, "Tools", "NFL Mock Draft Simulator");
+  preparePFNSecondaryNav($template_data, "Football", "NFL Mock Draft Simulator");
+
+  $template_data["roomIdParam"] = $app->request->params("roomId");
+
+  $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
+  $template_data['fragments'] = array("third-party/proxy/$brand/common/gtag-script.tpl", "third-party/proxy/$brand/tools/mockdraft-simulator/pre-styles.tpl", "templates/nfl-draft-simulator/home/$brand/index.tpl", "third-party/proxy/$brand/tools/mockdraft-simulator/styles.tpl");
+  $template_data['head_fragments'] = array("pages/static/common/analytics/track-returning-users.tpl", "third-party/proxy/$brand/tools/mockdraft-simulator/meta.tpl");
+  $template_data['feedback_popup_logo'] = "logo/pfn-black-big.png";
   $template_data['feedback_source_tab'] = $brand;
 
   $template_data["schemas"] = array(
