@@ -7,7 +7,7 @@
  *
  * When `dev-config.php` exists, config.php loads it INSTEAD of the production
  * CDN bundle constants, so the app serves the JS bundles you build locally
- * (npm run build -> js/production/pfn-proxy/*-bundle.js) from this same host,
+ * (npm run dev -> js/dev/*-bundle.js) from this same host,
  * rather than the frozen production bundles on staticd.profootballnetwork.com.
  *
  * `dev-config.php` is gitignored — it never ships to production. This sample IS
@@ -19,9 +19,9 @@
  */
 
 // Serve the locally-built bundles from this host (relative to the current domain).
-// Build them first with: npm install && npm run build
-define('MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION', '/js/production/pfn-proxy/mockdraft-simulator-bundle.js');
-define('ULTIMATE_SIMULATOR_SCRIPT_LOCATION',  '/js/production/pfn-proxy/ultimate-simulator-bundle.js');
-define('PLAYOFF_PREDICTOR_SCRIPT_LOCATION',   '/js/production/pfn-proxy/playoff-predictor-bundle.js');
-define('FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION', '/js/production/pfn-proxy/fifa-world-cup-simulator-bundle.js');
-define('FREE_AGENCY_SIMULATOR_SCRIPT_LOCATION', '/js/production/pfn-proxy/free-agency-simulator-bundle.js');
+// Build them first with: npm install && npm run dev   (or npm run watch)
+define('MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION', '/js/dev/mockdraft-simulator-bundle.js');
+define('ULTIMATE_SIMULATOR_SCRIPT_LOCATION',  '/js/dev/ultimate-simulator-bundle.js');
+define('PLAYOFF_PREDICTOR_SCRIPT_LOCATION',   '/js/dev/playoff-predictor-bundle.js');
+define('FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION', '/js/dev/fifa-world-cup-simulator-bundle.js');
+define('FREE_AGENCY_SIMULATOR_SCRIPT_LOCATION', '/js/dev/free-agency-simulator-bundle.js');

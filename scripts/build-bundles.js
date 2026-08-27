@@ -7,11 +7,12 @@
  *
  * Modes:
  *   node scripts/build-bundles.js            production: minified + CONTENT-HASHED
- *                                            filenames, and regenerates
- *                                            js-side-menu-config.php with them.
+ *                                            filenames into js/production/pfn-proxy/,
+ *                                            and regenerates js-side-menu-config.php
+ *                                            with them.
  *   node scripts/build-bundles.js --dev      dev: unminified, stable (non-hashed)
- *                                            filenames — served locally via
- *                                            dev-config.php.
+ *                                            filenames into js/dev/ (like skm) —
+ *                                            served locally via dev-config.php.
  *   node scripts/build-bundles.js --watch    dev + rebuild on source change.
  *
  * Production hashing mirrors skm: a new source => a new hash => a new S3 object,
@@ -19,7 +20,8 @@
  * the app points at the freshly-uploaded bundle. terser is used (uglify-js
  * rejects a sloppy-mode `delete <localVar>` present in the sources).
  *
- * Output: js/production/pfn-proxy/<name>-bundle[-<hash>].js
+ * Output: js/production/pfn-proxy/<name>-bundle-<hash>.js  (production)
+ *         js/dev/<name>-bundle.js                          (--dev / --watch)
  */
 const fs = require("fs");
 const path = require("path");
@@ -27,7 +29,6 @@ const crypto = require("crypto");
 const { minify } = require("terser");
 
 const ROOT = path.resolve(__dirname, "..");
-const OUT_DIR = path.join(ROOT, "js/production/pfn-proxy");
 const SRC_DIR = path.join(ROOT, "js/fragments");
 const CONFIG_FILE = path.join(ROOT, "js-side-menu-config.php");
 
@@ -42,7 +43,11 @@ const BUNDLES = [
 const WATCH = process.argv.includes("--watch");
 const DEV = WATCH || process.argv.includes("--dev");
 
+// Dev builds land in js/dev/ (mirrors skm); production builds in js/production/pfn-proxy/.
+const OUT_DIR = path.join(ROOT, DEV ? "js/dev" : "js/production/pfn-proxy");
+
 function removeExisting(prefix) {
+  if (!fs.existsSync(OUT_DIR)) return;
   for (const f of fs.readdirSync(OUT_DIR)) {
     if (f === `${prefix}.js` || (f.startsWith(`${prefix}-`) && f.endsWith(".js"))) {
       fs.unlinkSync(path.join(OUT_DIR, f));
@@ -66,7 +71,9 @@ async function buildOne(b) {
   const hash = DEV ? "" : "-" + crypto.createHash("md5").update(out).digest("hex").slice(0, 10);
   const fname = `${b.out}${hash}.js`;
   fs.writeFileSync(path.join(OUT_DIR, fname), out);
-  console.log(`built ${fname}  (${(out.length / 1024).toFixed(1)} KiB${DEV ? ", dev/unminified" : ""})`);
+  console.log(
+    `built ${path.relative(ROOT, path.join(OUT_DIR, fname))}  (${(out.length / 1024).toFixed(1)} KiB${DEV ? ", dev/unminified" : ""})`
+  );
   return fname;
 }
 
