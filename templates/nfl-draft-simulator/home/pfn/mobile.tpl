@@ -66,10 +66,10 @@
   </div>
 </div>
 
-<div id="ad-banner-container">
+{* <div id="ad-banner-container">
   <div class="adthrive-draft-simulator-header">
   </div>
-</div>
+</div> *}
 
 <div class="multi-user-room-container hidden">
   <div class="multi-user-room-section">
@@ -130,7 +130,8 @@
     <span>Full Result</span>
   </button>
   {if $show_dashboard_btn_final_result == true}
-    <button class="dashboard-btn" onclick="showResultScreenDashboardMobile()">
+    {* <button class="dashboard-btn" onclick="showResultScreenDashboardMobile()"> *}
+    <button class="dashboard-btn" onclick="">
       <img src="{$smarty.const.STATIC_URL}/skm/assets/nfl-mockup/dashboard-logo-black.png" width="17" height="17"
         alt="dashboard Icon">
       <span>Dashboard</span>

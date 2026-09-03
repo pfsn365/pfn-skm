@@ -22,7 +22,7 @@ if (!trackGAEventForPage) {
   var trackGAEventForPage = function (eventName, eventParams) {
     eventParams = eventParams || {};
     trackGAEvent(eventName, Object.assign(eventParams, {
-      "tool": "mockdraft",
+      "tool": "mockdraft_simulator",
     }));
   };
 }
@@ -1358,14 +1358,14 @@ function getBiggestSteal() {
 }
 
 function sendUserDashboardData(data) {
-  fetch(dashboardDataPostUrl, {
-    method: "POST",
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data),
-  })
+  // fetch(dashboardDataPostUrl, {
+  //   method: "POST",
+  //   credentials: 'include',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify(data),
+  // })
 }
 
 function checkForAlreadyOpenPopup() {

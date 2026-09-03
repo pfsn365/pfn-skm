@@ -6,6 +6,7 @@ composer.phar
 *.log
 .DS_Store
 /js/production/
+/js/dev/
 
 # secrets (copy from secrets.php.sample)
 /secrets.php

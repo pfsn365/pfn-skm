@@ -16,6 +16,9 @@
   </div>
   <div class="playoff-section">
     <div class="playoff-section-header-container">
+      {if isset($show_third_party_logo)}
+        <img class="third-party-logo" src="{$smarty.const.STATIC_URL}{$third_party_logo_path}" alt="hail mary logo" width="35" height="35" />
+      {/if}
       <div class="playoff-section-tab-toggle">
         <button class="playoff-tab-btn participants-tab-btn selected">Playoff Picture</button>
         <button class="playoff-tab-btn bracket-tab-btn">Playoff Bracket</button>

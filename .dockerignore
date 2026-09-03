@@ -5,5 +5,7 @@ vendor
 node_modules
 templates/_compiled
 templates/_cache
-dev-config.php
+# dev-config.php is committed and must ship: config.php includes it whenever
+# ENVIRONMENT=STAGING. Excluding it makes the staging image fatal on the
+# undefined *_SCRIPT_LOCATION constants. Production ignores the file entirely.
 *.md
