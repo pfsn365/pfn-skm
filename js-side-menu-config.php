@@ -3,7 +3,7 @@
 // Production JS bundle locations (content-hashed), served from the CDN / S3.
 // The bundle.yml GitHub Action rebuilds these, uploads the hashed files to S3,
 // and commits this file back to the PR.
-define('MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/mockdraft-simulator-bundle-ba7b027942.js');
+define('MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/mockdraft-simulator-bundle-570bd09242.js');
 define('ULTIMATE_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/ultimate-simulator-bundle-b57053363f.js');
 define('PLAYOFF_PREDICTOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/playoff-predictor-bundle-b4e548024c.js');
 define('FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/fifa-world-cup-simulator-bundle-0f2651c70e.js');
