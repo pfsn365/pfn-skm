@@ -40,7 +40,12 @@ define('BUNDLE_STATIC_URL', '//static.profootballnetwork.com');
 	define('GOTHAM_URL_PFN_FRONTEND', 'https://gotham-bigscoots.profootballnetwork.com');
 
 // --- ENVIRONMENT + SCHEME  (from config.php:73-74) ---
-	define('ENVIRONMENT', "production");
+// The ENVIRONMENT environment variable is set per box to PRODUCTION or STAGING.
+// It is lower-cased here because the templates compare against "production"
+// (templates/common/third-party/debugbear/index.tpl, .../pfn/common/rollbar/js.tpl)
+// and helpers.php::generateDataIntegrationAssetsPath() upper-cases it itself.
+// When the variable is unset (e.g. CLI/cron), production stays the default.
+	define('ENVIRONMENT', strtolower(getenv('ENVIRONMENT') ?: 'production'));
 	define('SCHEME', "https");
 
 // --- PFN_URL (used by get_brand_login_url)  (from config.php:97-97) ---
@@ -98,14 +103,15 @@ define("CHARTBEAT_CONFIGS", [
 
 // ============================================================
 // SOURCE: js-side-menu-config.php  (needs BUNDLE_STATIC_URL first)
-// JS bundle locations. Like the parent repo, a gitignored dev-config.php
-// (copied from dev-config.php.sample) can override these on a dev/staging box
-// to serve locally-built bundles instead of the production CDN. When it is
-// absent (production), the CDN paths below are used.
+// JS bundle locations. dev-config.php overrides these on a staging box to serve
+// locally-built bundles instead of the production CDN. Which file is loaded is
+// decided by the ENVIRONMENT variable (see the ENVIRONMENT define above), not by
+// the presence of dev-config.php, so both files are committed and staging is an
+// explicit opt-in.
 // ============================================================
 
-if (file_exists(__DIR__ . '/dev-config.php')) {
-    // Dev/staging: serve locally-built (non-hashed) bundles from this host.
+if (ENVIRONMENT === 'staging') {
+    // Staging: serve locally-built (non-hashed) bundles from this host.
     include_once __DIR__ . '/dev-config.php';
 } else {
     // Production: content-hashed CDN bundles. js-side-menu-config.php is
