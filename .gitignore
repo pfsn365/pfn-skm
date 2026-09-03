@@ -7,8 +7,5 @@ composer.phar
 .DS_Store
 /js/production/
 
-# per-environment overrides (copy from dev-config.php.sample)
-/dev-config.php
-
 # secrets (copy from secrets.php.sample)
 /secrets.php
