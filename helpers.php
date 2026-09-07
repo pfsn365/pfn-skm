@@ -644,7 +644,7 @@ function get_brand_login_url($app, $brand) {
 // from functions.php:221
 function generateDataIntegrationAssetsPath($relativePath) {
     if (defined("ENVIRONMENT")) {
-        $bucket = "sheets_test";
+        $bucket = "sheets";
 
         if (strtoupper((ENVIRONMENT)) == "PRODUCTION") {
             $bucket = "sheets";
