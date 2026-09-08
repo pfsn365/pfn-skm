@@ -167,7 +167,7 @@ PAGE_TEXT;
 $app->get('/sk-proxy/:brand/mockdraft-simulator', function ($brand) use ($app) {
   restrictAccess($app);
 
-  $mdsDataUrl = "https://statics.sportskeeda.com/assets/sheets/tools/mockdraft-simulator/mockdraftSimulatorData.json";
+  $mdsDataUrl = "https://static.profootballnetwork.com/assets/sheets/tools/mockdraft-simulator/mockdraftSimulatorData.json";
 
   $filesData = do_curl($mdsDataUrl, $statuscode);
   $filesData = json_decode($filesData, true);
