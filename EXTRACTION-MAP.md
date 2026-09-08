@@ -81,8 +81,18 @@ they must exist at render time.
 constants, etc. Values resolve to the **PFN production** branch (the app forces
 `HTTP_PFNORIGINHEADER` in `index.php`). The request-time constants normally set
 by the `redirect-url-and-response-filter.php` middleware (LANG, GA4_ID,
-IS_DESKTOP, FRAMEWORK_URL, API_ENDPOINT_DOMAIN) are defined directly at the tail
+FRAMEWORK_URL, API_ENDPOINT_DOMAIN) are defined directly at the tail
 of `config.php`.
+
+`IS_MOBILE`/`IS_DESKTOP` are the exception: they are computed per request. The
+parent app flips `$app->is_desktop` in that middleware from the `DEVICE_TYPE`
+fastcgi param nginx derives from the incoming `CloudFront-Is-Mobile-Viewer`
+header; this repo has no such middleware and runs on Apache, so `isMobileViewer()`
+(`helpers.php`) reads that header off `$_SERVER` directly. `index.php` sets
+`$app->is_mobile`/`$app->is_desktop` from it before `require 'config.php'`, and
+the two constants follow. The Cloudflare worker fronting this origin sends the
+header as the literal string `"true"`/`"false"` (true for phone *and* tablet), so
+the check is `=== 'true'`, not `!empty()`.
 
 `API_ENDPOINT_DOMAIN` is **not defined in this repo**. `addPageMetadata()`
 (`helpers.php:396`) references it, so the taxonomy call fails and the helper

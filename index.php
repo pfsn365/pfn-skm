@@ -34,8 +34,11 @@ date_default_timezone_set("Asia/Kolkata");
 $app = new \Slim\Slim(array(
     'view' => new \Slim\Views\SmartyPlugin()
 ));
-$app->is_mobile = FALSE;
-$app->is_desktop = TRUE;
+// Mirrors what the parent app's middleware does per request — see
+// isMobileViewer() in helpers.php. Set before `require 'config.php'` below, so
+// the IS_MOBILE/IS_DESKTOP constants defined there agree with these.
+$app->is_mobile = isMobileViewer();
+$app->is_desktop = !$app->is_mobile;
 
 $app->add(new \Slim\Middleware\SlimGoesSlimmer());
 
