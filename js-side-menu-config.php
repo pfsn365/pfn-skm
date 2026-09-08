@@ -8,3 +8,5 @@ define('ULTIMATE_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production
 define('PLAYOFF_PREDICTOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/playoff-predictor-bundle-b4e548024c.js');
 define('FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/fifa-world-cup-simulator-bundle-0f2651c70e.js');
 define('FREE_AGENCY_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/free-agency-simulator-bundle-e17a92aabc.js');
+define('TENNIS_SIMULATOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/tennis-simulator-bundle-7e0feaa9a5.js');
+define('NASCAR_PREDICTOR_SCRIPT_LOCATION', BUNDLE_STATIC_URL . '/js/production/pfn-proxy/nascar-predictor-bundle-955fd67171.js');

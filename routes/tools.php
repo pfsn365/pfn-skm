@@ -1,6 +1,6 @@
 <?php
 /**
- * The 6 extracted PFN tool routes, copied verbatim from the parent
+ * The extracted PFN tool routes, copied verbatim from the parent
  * routes/sk-proxy.php. Helper functions and constants they depend on live in
  * ../helpers.php and ../config.php (the *_SCRIPT_LOCATION bundle constants,
  * originally in js-side-menu-config.php, are consolidated into config.php).
@@ -12,6 +12,9 @@
  *   /sk-proxy/:brand/ultimate-simulator          (parent sk-proxy.php:4352)
  *   /sk-proxy/:brand/fifa-world-cup-simulator    (parent sk-proxy.php:4409)
  *   /sk-proxy/:brand/free-agency-simulator       (parent sk-proxy.php:2405)
+ *   /sk-proxy/:brand/tennis-simulator            (parent sk-proxy.php:4602)
+ *   /sk-proxy/:brand/nascar-predictor            (parent sk-proxy.php:4648)
+ *   /sk-proxy/:brand/lineup-optimizer            (parent sk-proxy.php:1697)
  *
  * Reach a tool with ?debug__proxy_tools=true (restrictAccess guard).
  */
@@ -952,8 +955,389 @@ FAQ_ANSWER,
   $app->render('third-party/proxy/index.tpl', $template_data);
 });
 
+// ===== tennis-simulator (sk-proxy.php:4602-4646) =====
+
+$app->get('/sk-proxy/:brand/tennis-simulator', function ($brand) use ($app) {
+  restrictAccess($app);
+
+  $template_data = array(
+    'meta_keywords' => '',
+    'brand' => $brand,
+    'canonical_url' => 'https://www.profootballnetwork.com/tennis-simulator/',
+    'slug' => 'tennis-simulator',
+    'tool' => 'pfn-tools',
+    'bodyClasses' => 'raptive-pfn-disable-footer-close',
+    'raptive_header_90_class' => 'raptive-pfn-header-90',
+    'include_right_sidebar' => false,
+    'adv_in_content' => false,
+    'add_header_navigation' => true,
+    'send_page_view_event' => true,
+    'content_width' => 'full-width',
+    'is_desktop' => $app->is_desktop,
+    'js_bundle_location' => TENNIS_SIMULATOR_SCRIPT_LOCATION,
+    'show_right_sticky_ad_container' => true,
+    'show_desktop_tools_top_adv_container' => true,
+    'flag_base_url' => STATIC_URL . '/skm/assets/pfn/tools/fifa-world-cup-simulator/team-logos/',
+    'data_source_path' => generateDataIntegrationAssetsPath('tools/tennis-simulator/'),
+    'chartbeat_authors' => CHARTBEAT_CONFIGS['team-player-pages']['authors'],
+    'chartbeat_sections' => CHARTBEAT_CONFIGS['team-player-pages']['sections'],
+    "updated_timestamp" => true,
+    "initially_hide_updated_timestamp" => true,
+  );
+
+  preparePFNMenuData($template_data, "Tools", "Tennis Simulator");
+  preparePFNSecondaryNav($template_data, "Tools", "Australian Open Simulator");
+
+  // Page metadata is set inline rather than via addPageMetadata(), so this page
+  // renders without a blocking call to the (VPC-internal) taxonomy API. Values
+  // mirror the CMS entry 21b84d24-18bd-42bf-bab3-636541adb628 as of 2026-09-08.
+  //
+  // `header_text` is load-bearing: third-party/proxy/pfn/index.tpl gates BOTH
+  // the <h1> header-wrapper and the desktop-tools-top-adv-container (the Raptive
+  // 90px header ad) on isset($header_text). Removing it hides the page header
+  // and the header ad. Edit these strings here when the CMS entry changes.
+  //
+  // page_text_content / faq are intentionally absent: the CMS entry has an empty
+  // data_subpage_info and no FAQs, so there is no FAQ schema fragment either.
+  $template_data["header_text"] = "Tennis Predictor - US Open";
+  $template_data["seo_title"] = "Tennis Predictor - US Open 2026";
+  $template_data["meta_description"] = "Interactive US Open 2026 tennis simulator with all 128 players. Predict every match with the help of our metrics.";
+  $template_data["seo_robots_tag"] = "index, follow, max-image-preview:large";
+  $template_data["allow_site_scaling"] = true;
+  $template_data["setHtmlLangAttribute"] = true;
+
+  $template_data["schemas"] = array(
+    "third-party/proxy/pfn/common/schemas/webpage.tpl",
+    "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
+    "third-party/proxy/pfn/common/schemas/siteNavigationElement.tpl",
+    "third-party/proxy/pfn/common/schemas/website.tpl",
+  );
+
+  $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
+  $template_data['fragments'] = array("third-party/proxy/$brand/common/gtag-script.tpl", "pages/static/tools/tennis-simulator/index.tpl");
+  $template_data['head_fragments'] = array(
+    "third-party/proxy/$brand/common/ad-script.tpl", 
+    "pages/static/common/analytics/track-returning-users.tpl", 
+    "third-party/proxy/$brand/common/taboola-script/head-script.tpl", 
+    "third-party/proxy/$brand/common/clarity-script.tpl", 
+    "third-party/proxy/$brand/tools/tennis-simulator/meta.tpl"
+  );
+  $template_data['body_fragments'] = array("third-party/proxy/$brand/common/taboola-script/body-script.tpl");
+
+  $app->render('third-party/proxy/index.tpl', $template_data);
+});
+
+// ===== nascar-predictor (sk-proxy.php:4648-4692) =====
+
+$app->get('/sk-proxy/:brand/nascar-predictor', function ($brand) use ($app) {
+  restrictAccess($app);
+
+  $template_data = array(
+    'meta_keywords' => '',
+    'brand' => $brand,
+    'canonical_url' => 'https://www.profootballnetwork.com/nascar-predictor/',
+    'slug' => 'nascar-predictor',
+    'tool' => 'pfn-tools',
+    'bodyClasses' => 'raptive-pfn-disable-footer-close',
+    'raptive_header_90_class' => 'raptive-pfn-header-90',
+    'include_right_sidebar' => false,
+    'adv_in_content' => false,
+    'add_header_navigation' => true,
+    'send_page_view_event' => true,
+    'content_width' => 'full-width',
+    'is_desktop' => $app->is_desktop,
+    'js_bundle_location' => NASCAR_PREDICTOR_SCRIPT_LOCATION,
+    'show_desktop_tools_top_adv_container' => true,
+    'data_source_path' => generateDataIntegrationAssetsPath('tools/nascar-predictor/'),
+    'chartbeat_authors' => CHARTBEAT_CONFIGS['team-player-pages']['authors'],
+    'chartbeat_sections' => CHARTBEAT_CONFIGS['team-player-pages']['sections'],
+    "updated_timestamp" => true,
+    "initially_hide_updated_timestamp" => true,
+  );
+
+  preparePFNMenuData($template_data, "Tools", "NASCAR Predictor");
+  preparePFNSecondaryNav($template_data, "Tools", "NASCAR Predictor");
+
+  // Page metadata is set inline rather than via addPageMetadata(), so this page
+  // renders without a blocking call to the (VPC-internal) taxonomy API. Values
+  // mirror the CMS entry c977eba7-c752-4fbb-b717-caf17a5c013a as of 2026-09-08.
+  // `page_text_content` is that entry's `data_subpage_info` after
+  // sanitize_article_contents($c, false); the entry has no FAQs, so there is no
+  // FAQ block and no faq-schema fragment.
+  //
+  // `header_text` is load-bearing: third-party/proxy/pfn/index.tpl gates BOTH
+  // the <h1> header-wrapper and the desktop-tools-top-adv-container (the Raptive
+  // 90px header ad) on isset($header_text). Removing it hides the page header
+  // and the header ad. Edit these strings here when the CMS entry changes.
+  $template_data["header_text"] = "NASCAR Season Predictor 2026";
+  $template_data["seo_title"] = "NASCAR Season Predictor 2026";
+  $template_data["meta_description"] = "Simulate the 2026 NASCAR Cup Series season with the new Chase format. Predict all 36 races, track standings, and test championship scenarios. Free to use.";
+  $template_data["seo_robots_tag"] = "index, follow, max-image-preview:large";
+  $template_data["allow_site_scaling"] = true;
+  $template_data["setHtmlLangAttribute"] = true;
+  $template_data["page_text_content"] = <<<'PAGE_TEXT'
+<p>Predict the entire 2026 NASCAR Cup Series season race by race. Our NASCAR season simulator lets you pick winners for all 36 events&mdash;from the Daytona 500 through the championship finale at Homestead-Miami&mdash;and watch the standings update in real time. Set stage results, award fastest-lap points, and see exactly how your predictions play out when The Chase begins. Whether you&rsquo;re testing a bold prediction or mapping out your fantasy NASCAR strategy, this is the most complete Cup Series simulator available.</p>
+<h2 id="c977eba7-c752-4fbb-b717-caf17a5c013a-0">How NASCAR Cup Series Points Work in 2026</h2>
+<p>NASCAR overhauled its points system for 2026, placing more emphasis on winning races. Here&rsquo;s the breakdown:<br>Race Points: The race winner now earns 55 points&mdash;up from 40 under the old system. Second place receives 35 points, third gets 34, and points decrease from there through 40th position. Every driver who starts earns at least one point.</p>
+<p>Stage Points: Each race is divided into three segments (except for the Coca-Cola 600, which is divided into 4). The top 10 finishers in Stage 1 and Stage 2 (and stage 3 for the Coca-Cola 600) earn stage points (10 for first, 9 for second, down to 1 for tenth). A driver who wins both stages and the race can earn a maximum of 75 points in a single event. If he also has the fastest lap, he could earn 76.</p>
+<p>No More Playoff Points: Unlike the previous format, there are no &ldquo;playoff points&rdquo; that carry into the postseason. The Chase uses a clean points reset with seeding based on regular-season finish.</p>
+<h2 id="c977eba7-c752-4fbb-b717-caf17a5c013a-1">The Chase Format in 2026</h2>
+<p>NASCAR brought back The Chase for 2026, but it works differently from both the old Chase (2004-2013) and the elimination playoffs (2014-2025). Here&rsquo;s how it works:<br>Qualifying: The top 16 drivers in regular-season points after 26 races make The Chase. There&rsquo;s no more &ldquo;win and you&rsquo;re in&rdquo;&mdash;you have to earn your spot through consistent points finishes.</p>
+<p>Points Reset: Chase drivers start with reset point totals based on their regular-season finish. The regular-season champion starts with 2,100 points. Second place gets 2,075, third gets 2,065, and each position after drops by 5 points. This gives the top seed a 25-point cushion.</p>
+<p>No Eliminations: Unlike the 2014-2025 playoffs, there are no elimination rounds. All 16 Chase drivers compete across all 10 races, accumulating points the entire way.</p>
+<p>Championship: The driver with the most points after the 10th Chase race at Homestead-Miami Speedway wins the championship. No knockout rounds, no winner-take-all finale&mdash;just the best points total over the full Chase.</p>
+<h2 id="c977eba7-c752-4fbb-b717-caf17a5c013a-2">How to Use This Simulator</h2>
+<p>Click any race to set your predictions. Use the tabs to enter Stage 1, Stage 2, and final finishing positions, plus the fastest lap bonus. Hit &ldquo;Simulate&rdquo; to auto-generate random results, or pick every position yourself. The standings update automatically as you go. Use &ldquo;Reset&rdquo; to start over, or share your completed season prediction with the download and share buttons.</p>
+<p><br></p>
+PAGE_TEXT;
+
+  $template_data["schemas"] = array(
+    "third-party/proxy/pfn/common/schemas/webpage.tpl",
+    "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
+    "third-party/proxy/pfn/common/schemas/siteNavigationElement.tpl",
+    "third-party/proxy/pfn/common/schemas/website.tpl",
+  );
+
+  $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
+  $template_data['fragments'] = array("third-party/proxy/$brand/common/gtag-script.tpl", "pages/static/tools/nascar-predictor/index.tpl");
+  $template_data['head_fragments'] = array(
+    "third-party/proxy/$brand/common/ad-script.tpl",
+    "pages/static/common/analytics/track-returning-users.tpl",
+    "third-party/proxy/$brand/common/taboola-script/head-script.tpl",
+    "third-party/proxy/$brand/common/clarity-script.tpl",
+    "third-party/proxy/$brand/tools/nascar-predictor/meta.tpl"
+  );
+  $template_data['body_fragments'] = array("third-party/proxy/$brand/common/taboola-script/body-script.tpl");
+
+  $app->render('third-party/proxy/index.tpl', $template_data);
+});
+
+// ===== lineup-optimizer / "NFL DFS Optimizer" (sk-proxy.php:1697-1755) =====
+// No JS bundle constant: the whole optimizer runs from the inline script in
+// templates/pages/static/tools/nfl/lineup-optimizer/js.tpl, which fetches the
+// slates/players from https://lineup-optimizer.sportskeeda.com/ and the
+// projections from the data-integration asset path below.
+
+$app->get('/sk-proxy/:brand/lineup-optimizer', function ($brand) use ($app) {
+  restrictAccess($app);
+
+  $headerInfo = implode('', [
+    '<p>So you say you want to make some money playing DFS this NFL season? Nothing can guarantee you that, but our DFS Optimizer can certainly help! Not only does it mix your fantasy football acumen with our projections, but it also gives you the freedom to explore different roster constructions based on how you think games will play out and the site in which you play.</p>',
+  ]);
+
+  $template_data = array(
+    'meta_keywords' => 'nfl lineup optimizer, dfs lineup optimizer, lineup optimizer',
+    'seo_robots_tag' => 'index, follow',
+    'brand' => $brand,
+    'canonical_url' => 'https://www.profootballnetwork.com/nfl-dfs-optimizer-lineup-generator',
+    'slug' => 'nfl-dfs-optimizer-lineup-generator',
+    'tool' => 'pfn-tools dfs-lineup-optimizer',
+    'adv_in_content' => false,
+    'bodyClasses' => 'no-outstream-player',
+    'add_header_navigation' => true,
+    'include_right_sidebar' => false,
+    'content_width' => 'full-width',
+    'send_page_view_event' => true,
+    'include_feedback' => true,
+    'updated_timestamp' => "---",
+    'is_desktop' => $app->is_desktop,
+    'data_source_path' => generateDataIntegrationAssetsPath("tools/lineup_optimizer/dfsData.json"),
+    'chartbeat_authors' => CHARTBEAT_CONFIGS['trade-analyzer']['authors'],
+    'chartbeat_sections' => CHARTBEAT_CONFIGS['trade-analyzer']['sections'],
+    'header_info_text' => $headerInfo,
+    'show_desktop_tools_top_adv_container' => true,
+    'team_logo_path' => "/skm/assets/pfn/nfl-teams-logo/",
+    'logo_cache_buster' => "?ver=" . PFN_NFL_LOGO_CACHE_BUSTER,
+  );
+
+  preparePFNMenuData($template_data, "Tools", "DFS Lineup Optimizer");
+  preparePFNSecondaryNav($template_data, "Fantasy", "DFS Optimizer");
+
+  // Page metadata is set inline rather than via addPageMetadata(), so this page
+  // renders without a blocking call to the (VPC-internal) taxonomy API. Values
+  // mirror the CMS entry f4b7ee33-7a8a-49f7-a88d-dcc2efea7a95 as of 2026-09-08
+  // (GET API_ENDPOINT_DOMAIN/v1/taxonomy/<slug>). `page_text_content` is that
+  // entry's `data_subpage_info` after sanitize_article_contents(), with the 5 CMS
+  // FAQs appended by appendFaqsToPageContent() under the "FAQ" heading. The same
+  // FAQs feed templates/common/faq/faq-schema.tpl, added to head_fragments below.
+  //
+  // NOTE: the parent set `seo_robots_tag` twice — 'index, follow' in the array
+  // above, then addPageMetadata() overwrote it with the CMS value. The CMS value
+  // wins here too, same as the parent.
+  //
+  // `header_text` is load-bearing: third-party/proxy/pfn/index.tpl gates BOTH
+  // the <h1> header-wrapper and the desktop-tools-top-adv-container (the Raptive
+  // 90px header ad) on isset($header_text). Removing it hides the page header
+  // and the header ad. Edit these strings here when the CMS entry changes.
+  $template_data["header_text"] = "Super Bowl DFS Lineup Optimizer for DraftKings and FanDuel";
+  $template_data["seo_title"] = "Super Bowl DFS Lineup Optimizer for DraftKings and FanDuel";
+  $template_data["meta_description"] = "PFSN's NFL DFS Optimizer is here to help you take down the biggest slates on the DraftKings and FanDuel platforms.";
+  $template_data["seo_robots_tag"] = "index, follow, max-image-preview:large";
+  $template_data["allow_site_scaling"] = true;
+  $template_data["setHtmlLangAttribute"] = true;
+  $template_data["page_text_content"] = <<<'PAGE_TEXT'
+<h2 id="f4b7ee33-7a8a-49f7-a88d-dcc2efea7a95-0">Best Super Bowl DFS Picks From PFSN's NFL DFS Lineup Optimizer</h2>
+<p><strong>Kenneth Walker III, RB, Seattle Seahawks</strong></p>
+<p>Kenneth Walker III has always been capable of catching passes. But he&rsquo;s never been a pass-catching back. All season, he was regularly pulled on passing downs for Zach Charbonnet. He only saw a 7.9% target share. Unsurprisingly, there hasn&rsquo;t been a single game all season where Walker&rsquo;s receiving yardage total surpassed his rushing yards. Here&rsquo;s why it just might happen in the Super Bowl.</p>
+<p>The New England Patriots are an elite run defense. They allowed the fourth-fewest rushing yards this season. As a result, they faced a target share of over 20% to running backs. Teams attacked this defense and &ldquo;ran&rdquo; the ball with more designed passes to backs, as opposed to straight handoffs.</p>
+<p>Walker has seen an uptick in usage as a receiver lately. He has 114 receiving yards over his last three games. That ticks up to 184 over his last five. Walker now sees at least a couple of pass plays specifically designed to him each game, usually in the first quarter. </p>
+<p><strong>Drake Maye, QB, New England Patriots</strong></p>
+<p>It&rsquo;s the Super Bowl. There&rsquo;s no more protecting players or holding back plays. It&rsquo;s all or nothing. Every player and coach is going to put everything on the line and pull out every stop to try and win this game.</p>
+<p>Drake Maye is not a rushing quarterback in the mold of Lamar Jackson or Josh Allen. But he can run. And he&rsquo;s done it more than ever in the postseason.</p>
+<p>Maye&rsquo;s two highest single-game rushing totals have come in the postseason. He ran for 66 yards against the Chargers and 65 yards against the Broncos. He eclipsed 60 yards just once in the regular season.</p>
+<p>Both of these teams have very good run defenses. I discussed above why I think Walker might struggle on the ground. Likely negative game script and Seattle&rsquo;s elite run-stopping unit should limit Rhamondre Stevenson&rsquo;s volume and effectiveness. TreVeyon Henderson is not part of the offense (he played four snaps in the AFC Championship Game).</p>
+<p>I&rsquo;m expecting 40+ dropbacks for Maye. That presents a lot of opportunities for not only designed runs, but scrambles as well.</p>
+<h2 id="f4b7ee33-7a8a-49f7-a88d-dcc2efea7a95-1">Best DFS Tips and Tricks</h2>
+<p>There are only 100,000 different views on how to play DFS. Whether you&rsquo;re chasing a big prize or trying to grind out "cash games" (where nearly half the field gets paid), your personal goals dictate the game you play and thus the strategies you employ.</p>
+<p>Playing the flagship contests is fun, but understand that, even with an optimizer, your expected value per lineup isn't going to be great. The most important note for new DFS players is to target the single-entry or three-entry max tournaments.</p>
+<p>You want a fair shot at creating the best lineup, and while our optimizer will give you a good chance, the variance game makes your one lineup going against 150 others an equation that won't work in your favor.</p>
+<p>As far as lineup construction goes, here is my overarching advice:</p>
+<ol><li>Understand that every slate is different and requires a fresh approach.</li><li>Explore how to stack your daily fantasy lineups.</li><li>Be different in your lineup construction, not crazy.</li><li>Listen to what sportsbooks are telling you.</li><li>Track your progress so you can learn as you go.</li><li>Try many different "lock" options before settling on your favorite.</li></ol>
+<p><br></p>
+<p><br></p>
+<h2 id="faq-heading">FAQ</h2>
+<h3>What Is an NFL DFS Optimizer?</h3>
+<p><p dir="ltr">The idea of a DFS optimizer is actually quite simple: Take a set of projections, match up the player salaries for the game you're playing, and play around until you find the highest number of projected fantasy points that stays under your budget.</p>
+<p dir="ltr">Of course, most main slates (the 1 p.m. and 4 p.m. EST games on Sunday) involve 20+ teams and, thus, hundreds of players. Sifting through that many projections by hand is a near-impossible task, so the job of the optimizer is to do it for you! Simply select the site and slate you are playing, lock in any players you are confident in, or rule out any players you are concerned about. From there, the computer does the tedious math and spits out your personal optimized lineup.</p>
+</p>
+<h3>How Do I Use a NFL DFS Lineup Generator?</h3>
+<p><p dir="ltr">Using the PFSN NFL DFS Optimizer could not be easier.&nbsp;</p>
+<p dir="ltr">Start by selecting the site and slate you are playing or planning to play. The optimizer will then give you the player pool to sift through. At this point, you can lock in any players you want in your lineups or rule out any players you want to avoid. Once you are happy, select the number of lineups you want and hit the build button.&nbsp;</p>
+<p dir="ltr">The PFSN NFL DFS Optimizer will give you a recommended lineup or lineups, at which point you can remove any players you do not want, and the Optimizer will provide you with suggested replacements. Once you are happy, you can download the lineup(s) as a CSV, which is ready to be uploaded to your selected site.</p>
+<p><br></p>
+</p>
+<h3>Why Should You Use a DFS Optimizer for the NFL?</h3>
+<p><p>Using an NFL optimizer is a good way to improve at DFS quickly. They say it takes 10,000 hours of practice at a craft to achieve expertise. Would you rather spend those hours doing pen and paper math, or would you rather spend them honing your projection/evaluation skills while the computer sorts through the tedious lineup building?</p>
+<p>An optimizer is, naturally, only as good as the information you put into it. It’s not built to offer an opinion or give reasoning. Ours takes into account some variance because football is difficult to predict, but it's a number-crunching machine that allows you to hone your craft in other ways.</p>
+</p>
+<h3>What Is the Difference Between DraftKings and FanDuel?</h3>
+<p><p>The site in which you play needs to be included into the optimizer because the rules and price points aren't the same. If you're new to the DFS game, here are a few differences between the two powerhouse sites in the industry.</p>
+<p><strong>DraftKings</strong></p>
+<ul>
+<li>$50,000 budget</li>
+<li>Full PPR</li>
+<li>300-yard passing-yardage bonus (3 points)</li>
+<li>100-yard rushing-yardage bonus (3 points)</li>
+<li>100-yard receiving-yardage bonus (3 points)</li>
+</ul>
+<p><strong>FanDuel</strong></p>
+<ul>
+<li>$60,000 budget</li>
+<li>Half PPR</li>
+<li>No bonuses</li>
+</ul>
+<p>It should be clear from these differences that DraftKings will tend to score higher, while FanDuel will place more importance on scoring touchdowns. Those may seem like minor differences, but as you prepare to take on the world, those are nice notes to remember when planning your strategy.</p>
+</p>
+<h3>What Are the Different Slates To Choose From?</h3>
+<p><p>Each week of the NFL season is different; thus, the slates can be a bit of a moving target. There are (typically) standalone, one-game slates for every prime-time game. Those carry with them a “Captain” roster slot that will cost you 1.5x the salary he usually would, but will also return 1.5x the points he earned.</p>
+<p>The ”main slate” is for the day games on Sunday. This is where you’ll see the contests with $1,000,000 as the grand prize, which is the most analyzed slate. Most sites also offer segmented slates for Sunday’s action. You can choose to play in a contest that features only the first wave of NFL games or just the second.</p>
+<p>There are different iterations depending on the specific schedule for a given week, but those are the primary contests offered within most DFS circles.</p>
+</p>
+PAGE_TEXT;
+
+  $template_data["faq"] = array(
+    array(
+      "question" => "What Is an NFL DFS Optimizer?",
+      "answer" => <<<'FAQ_ANSWER'
+<p dir="ltr">The idea of a DFS optimizer is actually quite simple: Take a set of projections, match up the player salaries for the game you're playing, and play around until you find the highest number of projected fantasy points that stays under your budget.</p>
+<p dir="ltr">Of course, most main slates (the 1 p.m. and 4 p.m. EST games on Sunday) involve 20+ teams and, thus, hundreds of players. Sifting through that many projections by hand is a near-impossible task, so the job of the optimizer is to do it for you! Simply select the site and slate you are playing, lock in any players you are confident in, or rule out any players you are concerned about. From there, the computer does the tedious math and spits out your personal optimized lineup.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+    array(
+      "question" => "How Do I Use a NFL DFS Lineup Generator?",
+      "answer" => <<<'FAQ_ANSWER'
+<p dir="ltr">Using the PFSN NFL DFS Optimizer could not be easier.&nbsp;</p>
+<p dir="ltr">Start by selecting the site and slate you are playing or planning to play. The optimizer will then give you the player pool to sift through. At this point, you can lock in any players you want in your lineups or rule out any players you want to avoid. Once you are happy, select the number of lineups you want and hit the build button.&nbsp;</p>
+<p dir="ltr">The PFSN NFL DFS Optimizer will give you a recommended lineup or lineups, at which point you can remove any players you do not want, and the Optimizer will provide you with suggested replacements. Once you are happy, you can download the lineup(s) as a CSV, which is ready to be uploaded to your selected site.</p>
+<p><br></p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+    array(
+      "question" => "Why Should You Use a DFS Optimizer for the NFL?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>Using an NFL optimizer is a good way to improve at DFS quickly. They say it takes 10,000 hours of practice at a craft to achieve expertise. Would you rather spend those hours doing pen and paper math, or would you rather spend them honing your projection/evaluation skills while the computer sorts through the tedious lineup building?</p>
+<p>An optimizer is, naturally, only as good as the information you put into it. It’s not built to offer an opinion or give reasoning. Ours takes into account some variance because football is difficult to predict, but it's a number-crunching machine that allows you to hone your craft in other ways.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+    array(
+      "question" => "What Is the Difference Between DraftKings and FanDuel?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>The site in which you play needs to be included into the optimizer because the rules and price points aren't the same. If you're new to the DFS game, here are a few differences between the two powerhouse sites in the industry.</p>
+<p><strong>DraftKings</strong></p>
+<ul>
+<li>$50,000 budget</li>
+<li>Full PPR</li>
+<li>300-yard passing-yardage bonus (3 points)</li>
+<li>100-yard rushing-yardage bonus (3 points)</li>
+<li>100-yard receiving-yardage bonus (3 points)</li>
+</ul>
+<p><strong>FanDuel</strong></p>
+<ul>
+<li>$60,000 budget</li>
+<li>Half PPR</li>
+<li>No bonuses</li>
+</ul>
+<p>It should be clear from these differences that DraftKings will tend to score higher, while FanDuel will place more importance on scoring touchdowns. Those may seem like minor differences, but as you prepare to take on the world, those are nice notes to remember when planning your strategy.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+    array(
+      "question" => "What Are the Different Slates To Choose From?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>Each week of the NFL season is different; thus, the slates can be a bit of a moving target. There are (typically) standalone, one-game slates for every prime-time game. Those carry with them a “Captain” roster slot that will cost you 1.5x the salary he usually would, but will also return 1.5x the points he earned.</p>
+<p>The ”main slate” is for the day games on Sunday. This is where you’ll see the contests with $1,000,000 as the grand prize, which is the most analyzed slate. Most sites also offer segmented slates for Sunday’s action. You can choose to play in a contest that features only the first wave of NFL games or just the second.</p>
+<p>There are different iterations depending on the specific schedule for a given week, but those are the primary contests offered within most DFS circles.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+  );
+
+  $template_data["schemas"] = array(
+    "third-party/proxy/pfn/common/schemas/webpage.tpl",
+    "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
+    "third-party/proxy/pfn/common/schemas/siteNavigationElement.tpl",
+    "third-party/proxy/pfn/common/schemas/website.tpl",
+  );
+
+  $pageContent = $template_data["page_text_content"];
+
+  if (!$app->is_desktop) {
+    $template_data['mobile_top_text_content'] = $pageContent;
+    unset($template_data["page_text_content"]);
+  } else {
+    $template_data['page_text_content'] = $pageContent;
+  }
+
+  $template_data['layout_fragment'] = "third-party/proxy/$brand/index.tpl";
+  $template_data['fragments'] = array("third-party/proxy/$brand/common/gtag-script.tpl", "pages/static/tools/nfl/lineup-optimizer/index.tpl", "third-party/proxy/$brand/tools/lineup-optimizer/styles.tpl");
+  // templates/common/faq/faq-schema.tpl is the one addition to the parent's list:
+  // addPageMetadata() appended it whenever the CMS entry had FAQs (it does, 5),
+  // but the parent then reassigned head_fragments on the next line and dropped
+  // it. Kept here so the FAQPage JSON-LD actually renders — same call the
+  // ultimate-simulator and free-agency-simulator routes make.
+  $template_data['head_fragments'] = array(
+    "templates/third-party/proxy/$brand/common/ad-script.tpl",
+    "pages/static/common/analytics/track-returning-users.tpl",
+    "third-party/proxy/$brand/common/taboola-script/head-script.tpl",
+    "third-party/proxy/$brand/common/clarity-script.tpl",
+    "third-party/proxy/$brand/tools/lineup-optimizer/meta.tpl",
+    "templates/common/faq/faq-schema.tpl"
+  );
+  $template_data['body_fragments'] = array("third-party/proxy/$brand/common/taboola-script/body-script.tpl");
+
+  // Above Page Content Widgets
+  if ($brand == "pfn") {
+    $template_data["abovePageContentWidgets"][] = getFeaturedToolsQuickLinksWidgetForPFN();
+  }
+
+  $app->render('third-party/proxy/index.tpl', $template_data);
+});
+
 // ===== catch-all: invalid /sk-proxy/pfn/... paths -> styled 404 =====
-// (verbatim from parent sk-proxy.php:4663; must stay AFTER the 4 tool routes
+// (verbatim from parent sk-proxy.php:4663; must stay AFTER the tool routes
 //  above so Slim matches those first and this only catches unknown tool paths)
 $app->get('/sk-proxy/:brand/.*', function ($brand) use ($app) {
   $templateData = array(
