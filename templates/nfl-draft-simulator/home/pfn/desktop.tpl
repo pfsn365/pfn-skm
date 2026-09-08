@@ -44,7 +44,7 @@
 						<span>Multiplayer</span>
 						<div class="triangle-right hidden"></div>
 					</button>
-					<button class="draft-option-btn" data-type="dashboard" onclick="changeDraftOption(event)">
+					<button class="draft-option-btn" data-type="dashboard" onclick="">
 						<img class="logo-white hidden"
 							src="{$smarty.const.STATIC_URL}/skm/assets/nfl-mockup/dashboard-logo-white.png" height="20px" width="20px"
 							alt="Dashboard Icon">
