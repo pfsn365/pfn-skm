@@ -1,6 +1,6 @@
 # PFN Tools — Extraction Map
 
-This repo is a standalone extraction of **6 PFN tools** from the `skm` codebase,
+This repo is a standalone extraction of **9 PFN tools** from the `skm` codebase,
 containing only the files needed to render them and nothing else.
 
 | Tool | Route | JS bundle | Canonical |
@@ -11,6 +11,9 @@ containing only the files needed to render them and nothing else.
 | NFL Ultimate GM Simulator | `/sk-proxy/:brand/ultimate-simulator` | `ultimate-simulator-bundle` | profootballnetwork.com/nfl-ultimate-gm-simulator |
 | FIFA World Cup Simulator | `/sk-proxy/:brand/fifa-world-cup-simulator` | `fifa-world-cup-simulator-bundle` | profootballnetwork.com/fifa-world-cup-simulator |
 | NFL Offseason Manager (free agency) | `/sk-proxy/:brand/free-agency-simulator` | `free-agency-simulator-bundle` | profootballnetwork.com/nfl-offseason-salary-cap-free-agency-manager |
+| Tennis Simulator (US Open) | `/sk-proxy/:brand/tennis-simulator` | `tennis-simulator-bundle` | profootballnetwork.com/tennis-simulator |
+| NASCAR Season Predictor | `/sk-proxy/:brand/nascar-predictor` | `nascar-predictor-bundle` | profootballnetwork.com/nascar-predictor |
+| NFL DFS Lineup Optimizer | `/sk-proxy/:brand/lineup-optimizer` | — (inline `js.tpl`) | profootballnetwork.com/nfl-dfs-optimizer-lineup-generator |
 
 Plus the **login page** the Mock Draft Simulator sends unauthenticated users to:
 
@@ -28,7 +31,7 @@ is `pfn`.
 
 ```
 index.php  (Slim 2 + Smarty 3 bootstrap)
-  └─ routes/tools.php            6 handlers (verbatim from sk-proxy.php)
+  └─ routes/tools.php            9 handlers + login (verbatim from sk-proxy.php)
        ├─ helpers.php            all helper functions the handlers call
        ├─ config.php             all constants they + the templates reference
        └─ $app->render(...)
@@ -46,12 +49,12 @@ but the tools render like production without a local build.
 
 ## File inventory
 
-### PHP (authored slim files — only what these 6 routes use)
+### PHP (authored slim files — only what these routes use)
 
 | File | Contents | Extracted from |
 |------|----------|----------------|
 | `index.php` | Minimal Slim 2 + Smarty bootstrap (mirrors parent index.php: same template roots, the `include_once` Smarty plugin, PFN origin forced) | parent `index.php` |
-| `routes/tools.php` | The 6 tool handlers + the login handler, verbatim | `routes/sk-proxy.php` :71, :1450, :2137, :2300, :2405, :4352, :4409 |
+| `routes/tools.php` | The 9 tool handlers + the login handler, verbatim | `routes/sk-proxy.php` :71, :1450, :1697, :2137, :2300, :2405, :4352, :4409, :4602, :4648 |
 | `helpers.php` | 24 helper functions (transitive closure) | see table below |
 | `config.php` | Every constant referenced by handlers/helpers/templates, PFN-production values | `config.php`, `js-side-menu-config.php`, `redirect-url-and-response-filter.php` |
 
@@ -71,7 +74,8 @@ they must exist at render time.
 **Key constants in `config.php`** — `BUNDLE_STATIC_URL`, `STATIC_URL`,
 `MOCKDRAFT_SIMULATOR_SCRIPT_LOCATION`, `ULTIMATE_SIMULATOR_SCRIPT_LOCATION`,
 `PLAYOFF_PREDICTOR_SCRIPT_LOCATION`, `FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION`,
-`FREE_AGENCY_SIMULATOR_SCRIPT_LOCATION`,
+`FREE_AGENCY_SIMULATOR_SCRIPT_LOCATION`, `TENNIS_SIMULATOR_SCRIPT_LOCATION`,
+`NASCAR_PREDICTOR_SCRIPT_LOCATION`,
 `PFN_NFL_LOGO_CACHE_BUSTER`, `CHARTBEAT_CONFIGS`, `AD_UNITS` (+ `createBidsArray`), `GA4_ID`, `LANG`,
 `IS_DESKTOP/IS_MOBILE`, `FRAMEWORK_URL`, `API_ENDPOINT_DOMAIN`, GOTHAM/COOKIE_*
 constants, etc. Values resolve to the **PFN production** branch (the app forces
@@ -152,6 +156,9 @@ CMS entry changes:
 | `ultimate-simulator` | `b2c4d786-00f8-4dfc-9bef-fb27a1c3b6e1` — "NFL Ultimate GM Simulator" | 6 | 2026-08-05 |
 | `fifa-world-cup-simulator` | `ad168211-5952-4e25-bad3-b46e8a1b93b3` — "FIFA World Cup Simulator" | none | 2026-08-05 |
 | `free-agency-simulator` | `bcbe7791-2f06-4d66-9673-4a1467412bae` — "NFL Offseason Manager" | 6 | 2026-08-06 |
+| `tennis-simulator` | `21b84d24-18bd-42bf-bab3-636541adb628` — "Tennis Predictor - US Open" | none | 2026-09-08 |
+| `nascar-predictor` | `c977eba7-c752-4fbb-b717-caf17a5c013a` — "NASCAR Season Predictor 2026" | none | 2026-09-08 |
+| `lineup-optimizer` | `f4b7ee33-7a8a-49f7-a88d-dcc2efea7a95` — "NFL DFS Optimizer" | 5 | 2026-09-08 |
 
 `page_text_content` is the entry's `data_subpage_info` after
 `sanitize_article_contents($c, false)`, with the FAQs appended by
@@ -160,7 +167,11 @@ what `addPageMetadata()` would have assembled. The one difference: the helper
 strips every `\n`, while the hardcoded blocks keep the line breaks between tags
 for source readability (insignificant whitespace between block-level elements).
 
-`ultimate-simulator` and `free-agency-simulator` also gain
+`tennis-simulator`'s CMS entry has an empty `data_subpage_info` and no FAQs, so
+it sets no `page_text_content` / `faq` at all. `nascar-predictor` has page copy
+but no FAQs.
+
+`ultimate-simulator`, `free-agency-simulator` and `lineup-optimizer` also gain
 `templates/common/faq/faq-schema.tpl` in their `head_fragments` —
 `addPageMetadata()` appended that fragment whenever the entry had FAQs, but in
 both parent handlers the very next line reassigns `head_fragments` wholesale and
@@ -178,7 +189,7 @@ change for no gain.
 for it, so its metadata was already inline. `mockdraft-simulator-widget` is
 excluded by design — it is a `NOINDEX` iframe with no SEO metadata or schemas.
 
-### Templates — `templates/` (217 `.tpl` + data)
+### Templates — `templates/` (249 `.tpl` + data)
 
 Full transitive `{include}` closure of the render path (main render template,
 PFN layout/header/footer/nav, ads, schemas, and the four tool template trees).
@@ -192,6 +203,15 @@ Notable trees:
 - `templates/pages/static/tools/nfl/{playoff-predictor,ultimate-gm-simulator,fifa-world-cup-simulator,free-agency-simulator}/` — those four tools' markup
   (free-agency-simulator = `index.tpl` + `styles.tpl` + `fetch-data.tpl` + `js.tpl`,
   its only outside include being `templates/utils/script.tpl`)
+- `templates/pages/static/tools/{tennis-simulator,nascar-predictor}/` — `index.tpl`
+  + `styles.tpl` + `js.tpl` each, fully self-contained (no outside includes)
+- `templates/pages/static/tools/nfl/lineup-optimizer/` — `index.tpl` + `desktop.tpl`
+  + `mobile.tpl` + `styles.tpl` + `js.tpl` + `common/{templates.tpl,filters/}`; its
+  outside includes are `templates/utils/carousal.tpl` and the feedback CTA
+  (`third-party/proxy/pfn/common/feedback-cta/index.tpl` + the
+  `feedback-cta-styles.tpl` pulled in by the tool's proxy `styles.tpl`). The whole
+  optimizer runs from the inline script in `js.tpl` — it has no JS bundle — and
+  fetches its slates/players from `https://lineup-optimizer.sportskeeda.com/`
 - `templates/common/widgets/`, `templates/ads/`, `templates/pages/common/` — shared chrome pulled in transitively
 
 Three templates are referenced **dynamically via PHP** (not static `{include}`),
@@ -218,6 +238,8 @@ found during verification and copied:
 | `js/fragments/playoff-predictor.js` | playoff-predictor bundle source |
 | `js/fragments/fifa-world-cup-simulator.js` | fifa-world-cup-simulator bundle source |
 | `js/fragments/free-agency-simulator.js` | free-agency-simulator (Offseason Manager) bundle source |
+| `js/fragments/tennis-simulator.js` | tennis-simulator bundle source |
+| `js/fragments/nascar-predictor.js` | nascar-predictor bundle source |
 | `scripts/build-bundles.js` | Minifies each source into `js/production/pfn-proxy/*-bundle.js` (matches the parent's `MergeIntoSingleFilePlugin` + minify transform — no module wrapper, globals preserved) |
 | `package.json` | `npm run build` → the above (dep: `terser`) |
 
