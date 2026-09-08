@@ -24,3 +24,5 @@ define('ULTIMATE_SIMULATOR_SCRIPT_LOCATION',  '/js/dev/ultimate-simulator-bundle
 define('PLAYOFF_PREDICTOR_SCRIPT_LOCATION',   '/js/dev/playoff-predictor-bundle.js');
 define('FIFA_WORLD_CUP_SIMULATOR_SCRIPT_LOCATION', '/js/dev/fifa-world-cup-simulator-bundle.js');
 define('FREE_AGENCY_SIMULATOR_SCRIPT_LOCATION', '/js/dev/free-agency-simulator-bundle.js');
+define('TENNIS_SIMULATOR_SCRIPT_LOCATION', '/js/dev/tennis-simulator-bundle.js');
+define('NASCAR_PREDICTOR_SCRIPT_LOCATION',  '/js/dev/nascar-predictor-bundle.js');
