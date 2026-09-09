@@ -476,8 +476,8 @@ $app->get("/sk-proxy/:brand/ultimate-simulator", function ($brand) use ($app) {
     ],
     'current_year' => '2026',
     'upcoming_year' => '2027',
-    'current_season' => '2025-26',
-    'upcoming_season' => '2026-27',
+    'current_season' => '2026-27',
+    'upcoming_season' => '2027-28',
     'js_bundle_location' => ULTIMATE_SIMULATOR_SCRIPT_LOCATION,
     'ultimate_sim_data_source_path' => generateDataIntegrationAssetsPath("tools/ultimate-gm-simulator/ultimateSimulatorData.json"),
     'is_desktop' => $app->is_desktop,
@@ -488,7 +488,10 @@ $app->get("/sk-proxy/:brand/ultimate-simulator", function ($brand) use ($app) {
     'logo_cache_buster' => "?ver=" . PFN_NFL_LOGO_CACHE_BUSTER,
   );
 
-  $template_data["standings_header_text"] = "Predicted NFL Standings 2026-27";
+  // The playoff predictor container is rendered once and reused for both passes: the
+  // pre-offseason run (current season) and the post-MDS run (upcoming season), where
+  // initializePlayoffPredictorTool() retitles it.
+  $template_data["standings_header_text"] = "Predicted NFL Standings " . $template_data["current_season"];
 
   preparePFNMenuData($template_data, "Tools", "NFL Ultimate GM Simulator");
   preparePFNSecondaryNav($template_data, "Football", "NFL Ultimate GM Simulator");

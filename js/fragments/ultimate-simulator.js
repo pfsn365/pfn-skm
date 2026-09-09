@@ -7862,6 +7862,19 @@ async function initializePlayoffPredictorTool(setEventListeners) {
     if (yearText) {
       yearText.innerHTML = upcomingSeason + " Predictions";
     }
+
+    // Same container as the pre-offseason pass, so its standings header still carries
+    // the current season rendered by the template — this pass predicts the next one.
+    const standingsHeaderText = $("#screen-predict-playoffs .standings-section-header-text");
+    if (standingsHeaderText) {
+      standingsHeaderText.innerHTML = "Predicted NFL Standings " + upcomingSeason;
+    }
+
+    const mwebStandingsHeaderText = $("#screen-predict-playoffs .playoff--standings-popup-header-text span");
+    if (mwebStandingsHeaderText) {
+      mwebStandingsHeaderText.innerHTML = "Predicted NFL Standings " + upcomingSeason;
+    }
+
     const bottomInfoContainer = $(".info-text-continue-btn-container");
     if (bottomInfoContainer) {
       removeClass(bottomInfoContainer, "hidden");
