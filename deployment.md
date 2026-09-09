@@ -41,6 +41,11 @@ This guide shows how to create a new project in Coolify and deploy an applicatio
 1. Click **Deploy** and follow the build logs.
 2. When the deployment succeeds, open the domain to verify the app.
 
+## 6. Change Branch
+1. Choose git source option under Deploy on the left hand side.
+2. Enter the branch name.
+3. On top right corner click on Actions dropdown and choose deploy.
+
 
 ## Changing the branch later
 
