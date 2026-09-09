@@ -15377,7 +15377,6 @@ function showFinalPredictionsSection() {
 
   // Free ultimateSimData properties only needed up to MDS
   delete ultimateSimData.compensatory_picks;
-  delete ultimateSimData.mds_picks_new;
 
   const playoffPredictor = $("#screen-predict-playoffs");
   if (playoffPredictor) {
