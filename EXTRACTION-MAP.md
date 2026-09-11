@@ -162,7 +162,7 @@ CMS entry changes:
 
 | Route | CMS entry (`getPFNToolSubpageSlug`) | FAQs | Fetched |
 |-------|-------------------------------------|------|---------|
-| `playoff-predictor` | `c6e9b54f-008a-42b8-b5b1-0e70d8efd572` — "Playoff Predictor" | none | 2026-08-05 |
+| `playoff-predictor` | `c6e9b54f-008a-42b8-b5b1-0e70d8efd572` — "Playoff Predictor" | none as fetched; 5 added 2026-09-11 (see below) | 2026-08-05 |
 | `ultimate-simulator` | `b2c4d786-00f8-4dfc-9bef-fb27a1c3b6e1` — "NFL Ultimate GM Simulator" | 6 | 2026-08-05 |
 | `fifa-world-cup-simulator` | `ad168211-5952-4e25-bad3-b46e8a1b93b3` — "FIFA World Cup Simulator" | none | 2026-08-05 |
 | `free-agency-simulator` | `bcbe7791-2f06-4d66-9673-4a1467412bae` — "NFL Offseason Manager" | 6 | 2026-08-06 |
@@ -199,7 +199,85 @@ change for no gain.
 for it, so its metadata was already inline. `mockdraft-simulator-widget` is
 excluded by design — it is a `NOINDEX` iframe with no SEO metadata or schemas.
 
-### Templates — `templates/` (249 `.tpl` + data)
+### `playoff-predictor` FAQ + schema additions (2026-09-11, owner-approved divergence)
+
+Unlike the other four hardcoded-metadata routes above, `playoff-predictor`'s CMS
+snapshot genuinely had no FAQs, so the parent behaviour it inherited was an empty
+`faq` array feeding `templates/common/faq/faq-schema.tpl` into an empty
+`FAQPage.mainEntity` — sitting directly above five real H2 FAQ headings already
+present in `page_text_content`. The owner approved closing that gap and adding
+tool-type schema the page never had:
+
+- `routes/tools.php`'s `playoff-predictor` block now populates `faq` with those
+  five existing headings, paired with the prose already under each one in
+  `page_text_content`, copied verbatim (trimmed only — no new sentences, no
+  rewording, no fact-checking of the dates/Super Bowl number/playoff format
+  already there). The shape mirrors the only other populated `faq` array in this
+  file, `ultimate-simulator`'s (`routes/tools.php`, `$template_data["faq"]` block
+  starting ~line 602): array of `{question, answer (nowdoc HTML), url}`.
+- One new schema template, a new file with no parent counterpart, added to
+  `playoff-predictor`'s `schemas` array only (not to any other route):
+  - `templates/third-party/proxy/pfn/common/schemas/breadcrumbList.tpl` — reads a
+    new `$template_data["breadcrumb_items"]` set inline in the route
+    (`[{name: "Home", url: "https://www.profootballnetwork.com/"}, {name: "NFL
+    Playoff Predictor", url: canonical_url}]`). Kept to two nodes deliberately:
+    neither `preparePFNMenuData`'s `"Tools"` category nor
+    `preparePFNSecondaryNav`'s `"Football"` category resolves to a real hub URL
+    anywhere in this codebase (`"Tools"` in `secondary-nav-data.json` is a flyout
+    list of sibling tools, not a landing page; `"Football"` is a grey-bar grouping
+    label from the remote `navData.json` sheet with no URL of its own), so no
+    intermediate crumb URL was guessed. The whole `<script>` block is guarded
+    with `{if !empty($breadcrumb_items)}` so a future route that includes this
+    template but forgets to set `breadcrumb_items` gets nothing rather than a
+    hollow `"itemListElement": []` — the same empty-schema defect this whole
+    change exists to remove.
+  - `webApplication.tpl` was drafted for this route and deliberately **not**
+    shipped: Google's SoftwareApplication/WebApplication structured-data spec
+    requires `aggregateRating` or `review` alongside `name`/`offers.price`, and
+    this page has no legitimate rating or review data to populate it with
+    (fabricating one is a Google policy violation and was explicitly ruled out
+    by the owner). Shipping it anyway would fail Rich Results validation and
+    open a permanent Search Console error on the site's highest-traffic tool
+    page, with no possible rich-result upside. Do not re-add a WebApplication/
+    SoftwareApplication schema to this route without also sourcing real
+    `aggregateRating`/`review` data.
+- Escaping: `faq-schema.tpl` already runs `question`/`answer` through
+  `strip_tags:true|strip|trim|escape:'htmlall'|replace:'\\':'\\\\'` — untouched,
+  and this addition relies on it rather than pre-escaping in PHP. Also fixed in
+  the same pass: `faq-schema.tpl`'s `{$title}` (the FAQPage `headline`) was never
+  assigned by any route, so it silently rendered `""`; harmless while `mainEntity`
+  was empty, but not once `faq` is populated. `routes/tools.php`'s
+  `playoff-predictor` block now sets `$template_data["title"] = $template_data["seo_title"]`
+  locally (not in `faq-schema.tpl` itself, which is shared by `ultimate-simulator`,
+  `free-agency-simulator` and others).
+  The new `breadcrumbList.tpl` template interpolates `{$breadcrumb_items}`
+  **unescaped**. Checked against the
+  actual sibling files in `templates/third-party/proxy/pfn/common/schemas/`
+  before writing this:
+  - `website.tpl` interpolates no variables at all — it is not a precedent for
+    anything.
+  - `newsMediaOrganization.tpl` interpolates only `{$smarty.const.STATIC_URL}`,
+    a config constant, not request- or feed-derived — also not a precedent.
+  - `webpage.tpl` is the only genuine precedent: it interpolates `{$seo_title}`,
+    `{$meta_description}`, `{$meta_keywords}`, `{$canonical_url}` and
+    `{$updated_timestamp}` unescaped.
+  That's a pre-existing, unaddressed gap in this repo (Rule 4), not something
+  this change introduces; the new templates deliberately match it because every
+  input it interpolates is a compile-time PHP array literal hardcoded in the
+  `playoff-predictor` route, not request-, cookie-, or feed-derived.
+  It is not fully dormant, though: of `webpage.tpl`'s five unescaped variables,
+  two — `seo_title` and `meta_description` — are also assigned from a **remote**
+  CMS JSON response by `addPageMetadata()` (`helpers.php:433`/`452` and
+  `:435`/`453`, fetched via `do_curl()`). `addPageMetadata()` has zero callers in
+  this extraction today (a known, already-logged issue), which is *why* the
+  pattern is dormant rather than safe. If any route ever wires the taxonomy API
+  back in, `webpage.tpl` (and, by the same reasoning, `breadcrumbList.tpl` if its
+  input stops being hardcoded) becomes a `</script>`-injection point inside
+  `<head>`. This decision — ship unescaped — must be revisited the moment
+  `breadcrumbList.tpl`'s `breadcrumb_items` input becomes feed- or
+  request-derived instead of a route literal.
+
+### Templates — `templates/` (250 `.tpl` + data)
 
 Full transitive `{include}` closure of the render path (main render template,
 PFN layout/header/footer/nav, ads, schemas, and the four tool template trees).

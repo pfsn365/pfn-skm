@@ -128,9 +128,16 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
   // renders without a blocking call to the (VPC-internal) taxonomy API. Values
   // mirror the CMS entry c6e9b54f-008a-42b8-b5b1-0e70d8efd572 as of 2026-08-05
   // (GET API_ENDPOINT_DOMAIN/v1/taxonomy/<slug>). `page_text_content` is that
-  // entry's `data_subpage_info` after sanitize_article_contents(), with no FAQs to
-  // append (the CMS entry has none, so `faq` is empty and the faq-schema.tpl
-  // fragment in head_fragments below emits an empty FAQPage, exactly as before).
+  // entry's `data_subpage_info` after sanitize_article_contents().
+  //
+  // DIVERGENCE FROM PARENT skm (2026-09-11): the CMS entry ships no `faq` data,
+  // so the parent behaviour is an empty `faq` array and faq-schema.tpl emitting
+  // an empty FAQPage `mainEntity` directly above five real H2 FAQ headings in
+  // page_text_content below. That mismatch was flagged as a competitive SEO gap
+  // (Google requires the schema answer text to match visible page text) and the
+  // owner approved populating `faq` below with the five existing headings paired
+  // with the prose already under them in page_text_content, copied verbatim/
+  // trimmed-only, not reworded or fact-checked. See EXTRACTION-MAP.md.
   //
   // `header_text` is load-bearing: third-party/proxy/pfn/index.tpl gates BOTH
   // the <h1> header-wrapper and the desktop-tools-top-adv-container (the Raptive
@@ -142,6 +149,13 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
   $template_data["seo_robots_tag"] = "index, follow, max-image-preview:large";
   $template_data["allow_site_scaling"] = true;
   $template_data["setHtmlLangAttribute"] = true;
+  // FIX (2026-09-11, security review): faq-schema.tpl interpolates `$title` into the
+  // FAQPage `headline`, but no route in this codebase (parent or extraction) ever
+  // assigns it — addPageMetadata() in helpers.php, the only place that sets FAQ-adjacent
+  // fields, doesn't set $title either. With `faq` now populated below, an unset $title
+  // would ship a live FAQPage with an empty headline. Reusing seo_title here matches
+  // this page's existing metadata rather than inventing new copy.
+  $template_data["title"] = $template_data["seo_title"];
   $template_data["page_text_content"] = <<<'PAGE_TEXT'
 <h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-0">What Is PFSN’s NFL Playoff Predictor?</h2>
 <p>PFSN’s NFL Playoff Predictor is a one-of-a-kind tool that gives you the ability to simulate the entire NFL season right up until the Super Bowl. Not only do you get to see how each game impacts the NFL playoff picture, but you also get to see what next year’s <a href="https://www.profootballnetwork.com/nfl-draft-order/" target="_blank" rel="noopener nofollow">draft order</a> will look like based on the outcomes of the games.</p>
@@ -163,13 +177,81 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
 <p><br></p>
 PAGE_TEXT;
 
-  $template_data["faq"] = array();
+  // DIVERGENCE FROM PARENT skm (2026-09-11): answers below are copied verbatim
+  // (trimmed only, never reworded or fact-checked, per repo rule against asserting
+  // sports facts) from the H2 sections of page_text_content above, so the schema
+  // stays in sync with what the page actually shows.
+  $template_data["faq"] = array(
+    array(
+      "question" => "What Is PFSN’s NFL Playoff Predictor?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>PFSN’s NFL Playoff Predictor is a one-of-a-kind tool that gives you the ability to simulate the entire NFL season right up until the Super Bowl. Not only do you get to see how each game impacts the NFL playoff picture, but you also get to see what next year’s draft order will look like based on the outcomes of the games.</p>
+<p>PFSN’s Playoff Machine is updated within minutes of the conclusion of each NFL game to allow you to test out an unlimited number of playoff scenarios in real time to see how your favorite team is impacted in the NFL playoff picture.</p>
+<p>PFSN’s NFL Playoff Predictor allows you to play out various weekly scenarios to see how the playoff picture changes with each scenario. The combination of actual game results from the NFL season, along with user-selected game picks and AI-simulated results, provides you with a unique NFL playoff bracket.</p>
+<p>Now that the NFL season is here, play out every game and determine who will be heading to Super Bowl LXI in Inglewood.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+    array(
+      "question" => "How Does PFSN’s NFL Playoff Machine Work?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>The PFSN NFL Playoff Picture Predictor is updated in near-real time at the conclusion of every NFL game. From there, you can choose to pick every remaining game yourself or select only the games that interest you. Once you make your picks, you can choose to simulate that week only or the rest of the season. PFSN’s Playoff Predictor includes a proprietary, state-of-the-art algorithm that will simulate and predict the outcomes of the games you have not already selected.</p>
+<p>From there, you can see the projected playoff picture and can manipulate any of the game results to see how it changes the NFL playoff bracket. Once your NFL playoff bracket predictor is finished, you can select the winners of each playoff matchup from Wild Card Weekend through the Super Bowl.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+    array(
+      "question" => "How Many Teams Make the NFL Playoffs?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>A total of 14 teams make it into the playoffs. The 14-team field consists of seven teams from the AFC and seven teams from the NFC. There are four division winners and three Wild Card teams from each conference. The three Wild Card teams are those with the best regular-season records among the teams that did not win their respective division.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+    array(
+      "question" => "How Do the NFL Playoffs Work?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>The NFL regular season is an 18-week schedule consisting of 17 games for each of the 32 NFL teams. At the conclusion of Week 18, the playoff field is set.</p>
+<p>The four division winners in each conference are seeded one through four in their respective playoff brackets based on their winning percentage. Three additional teams from each conference, known as Wild Card teams, also advance to the playoffs and are seeded five through seven. In the first round, the No. 1 seed from each conference gets a bye week and automatically advances to the second round. The six other teams in each conference face off: 2 vs. 7, 3 vs. 6, and 4 vs. 5.</p>
+<p>The winners advance to the second round. The lowest remaining seed in each conference must face the No. 1 seed. The other two remaining teams in each conference face off as well. Two teams from each conference that win their games advance to the Conference Championship round.</p>
+<p>The winners of the AFC Championship Game and NFC Championship Game face off two weeks later in the Super Bowl.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+    array(
+      "question" => "When Do the NFL Playoffs Start?",
+      "answer" => <<<'FAQ_ANSWER'
+<p>The 2026-27 NFL Playoffs begin with Wild Card Weekend from Saturday, January 16, through Monday, January 18. Two games are slated for Saturday, with three additional games on Sunday. The round wraps up with a Monday Night Football game on January 18. Super Bowl 61 will be played on Sunday, February 14, at SoFi Stadium in Inglewood.</p>
+FAQ_ANSWER,
+      "url" => "",
+    ),
+  );
+
+  // DIVERGENCE FROM PARENT skm (2026-09-11): breadcrumbList.tpl is a new addition
+  // (see its own header comment and EXTRACTION-MAP.md) — this page previously
+  // emitted no breadcrumb schema. breadcrumb_items is deliberately just Home +
+  // this page: neither preparePFNMenuData's "Tools" category nor
+  // preparePFNSecondaryNav's "Football" category below resolves to a real hub URL
+  // anywhere in this codebase, so no intermediate crumb was guessed.
+  //
+  // A WebApplication schema was also drafted for this route but deliberately not
+  // shipped: Google's SoftwareApplication/WebApplication structured-data spec
+  // requires `aggregateRating` or `review` alongside `name`/`offers.price`, and
+  // this page has no legitimate rating or review data to supply (fabricating one
+  // is a Google policy violation and was ruled out). Without it the item would
+  // fail Rich Results validation and open a permanent Search Console error on
+  // the site's highest-traffic tool page for no possible rich-result benefit.
+  // See EXTRACTION-MAP.md before re-adding this.
+  $template_data["breadcrumb_items"] = array(
+    array("name" => "Home", "url" => "https://www.profootballnetwork.com/"),
+    array("name" => "NFL Playoff Predictor", "url" => $template_data['canonical_url']),
+  );
 
   $template_data["schemas"] = array(
     "third-party/proxy/pfn/common/schemas/webpage.tpl",
     "third-party/proxy/pfn/common/schemas/newsMediaOrganization.tpl",
     "third-party/proxy/pfn/common/schemas/siteNavigationElement.tpl",
     "third-party/proxy/pfn/common/schemas/website.tpl",
+    "third-party/proxy/pfn/common/schemas/breadcrumbList.tpl",
   );
 
   preparePFNMenuData($template_data, "Tools", "NFL Playoff Predictor");
