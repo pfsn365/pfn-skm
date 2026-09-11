@@ -16,6 +16,7 @@
       "url": "https://www.profootballnetwork.com/"
     },
     "inLanguage": "en-US",
-    "lastReviewed": "{$updated_timestamp}"
+    "lastReviewed": "{$updated_timestamp}"{if !empty($updated_timestamp_iso)},
+    "dateModified": "{$updated_timestamp_iso}"{/if}
   }
 </script>

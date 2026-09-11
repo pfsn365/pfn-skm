@@ -57,6 +57,31 @@ $app->get('/sk-proxy/:brand/login', function ($brand) use ($app) {
 $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
   restrictAccess($app);
 
+  // The tool's data feed is also fetched client-side by playoff-predictor.js, but we read
+  // `updatedTime` here too so the served HTML carries a real modified date: the JS-injected
+  // timestamp lands after render and is not a dependable crawler signal. The feed is ~29KB
+  // uncompressed behind CloudFront/Cloudflare; do_curl's 2s timeout caps the downside, and a
+  // failed or malformed fetch falls through to the "---" placeholder this page shipped before,
+  // so the header still renders (index.tpl gates the span on a truthy value).
+  $ppDataUrl = "https://staticj.profootballnetwork.com/assets/sheets/tools/playoff_predictor/playoffPredictorData.json";
+  $ppData = json_decode(do_curl($ppDataUrl, $ppStatusCode), true);
+
+  $updatedTimestamp = "---";
+  $updatedTimestampISO = null;
+  if ($ppStatusCode == 200 && !empty($ppData["updatedTime"])) {
+    try {
+      $ppUpdatedAt = new DateTime($ppData["updatedTime"], new DateTimeZone('UTC'));
+      $ppUpdatedAt->setTimezone(new DateTimeZone('America/New_York'));
+      // Mirrors the format playoff-predictor.js writes into .updated-timestamp-container
+      // ("mmm d, yyyy , hh:MM TT"), so the server render matches what the JS replaces it with.
+      // NOTE: the JS hardcodes " EDT"; `T` here correctly resolves to EST outside DST.
+      $updatedTimestamp = $ppUpdatedAt->format('M j, Y , h:i A T');
+      $updatedTimestampISO = $ppUpdatedAt->format('c');
+    } catch (Exception $e) {
+      // Unparseable date: keep the "---" placeholder and emit no dateModified.
+    }
+  }
+
   $template_data = array(
     'meta_keywords' => 'nfl playoff predictor, playoff predictor',
     'brand' => $brand,
@@ -68,7 +93,8 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
     'add_header_navigation' => true,
     'include_right_sidebar' => false,
     'content_width' => 'full-width',
-    'updated_timestamp' => "---",
+    'updated_timestamp' => $updatedTimestamp,
+    'updated_timestamp_iso' => $updatedTimestampISO,
     'logo_cache_buster' => "?ver=" . PFN_NFL_LOGO_CACHE_BUSTER,
     'nfl_teams' => [
       'ARI','ATL','BAL','BUF','CAR','CHI','CIN','CLE','DAL','DEN','DET','GB',
@@ -117,13 +143,13 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
   $template_data["allow_site_scaling"] = true;
   $template_data["setHtmlLangAttribute"] = true;
   $template_data["page_text_content"] = <<<'PAGE_TEXT'
-<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-0">What Is PFSN&rsquo;s NFL Playoff Predictor?</h2>
-<p>PFSN&rsquo;s NFL Playoff Predictor is a one-of-a-kind tool that gives you the ability to simulate the entire NFL season right up until the Super Bowl. Not only do you get to see how each game impacts the NFL playoff picture, but you also get to see what next year&rsquo;s <a href="https://www.profootballnetwork.com/nfl-draft-order/" target="_blank" rel="noopener nofollow">draft order</a> will look like based on the outcomes of the games.</p>
-<p>PFSN&rsquo;s Playoff Machine is updated within minutes of the conclusion of each NFL game to allow you to test out an unlimited number of playoff scenarios in real time to see how your favorite team is impacted in the NFL playoff picture.</p>
-<p>PFSN&rsquo;s NFL Playoff Predictor allows you to play out various weekly scenarios to see how the playoff picture changes with each scenario. The combination of actual game results from the NFL season, along with user-selected game picks and AI-simulated results, provides you with a unique NFL playoff bracket.</p>
+<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-0">What Is PFSN’s NFL Playoff Predictor?</h2>
+<p>PFSN’s NFL Playoff Predictor is a one-of-a-kind tool that gives you the ability to simulate the entire NFL season right up until the Super Bowl. Not only do you get to see how each game impacts the NFL playoff picture, but you also get to see what next year’s <a href="https://www.profootballnetwork.com/nfl-draft-order/" target="_blank" rel="noopener nofollow">draft order</a> will look like based on the outcomes of the games.</p>
+<p>PFSN’s Playoff Machine is updated within minutes of the conclusion of each NFL game to allow you to test out an unlimited number of playoff scenarios in real time to see how your favorite team is impacted in the NFL playoff picture.</p>
+<p>PFSN’s NFL Playoff Predictor allows you to play out various weekly scenarios to see how the playoff picture changes with each scenario. The combination of actual game results from the NFL season, along with user-selected game picks and AI-simulated results, provides you with a unique NFL playoff bracket.</p>
 <p>Now that the NFL season is here, play out every game and determine who will be heading to Super Bowl LXI in Inglewood.</p>
-<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-1">How Does PFSN&rsquo;s NFL Playoff Machine Work?</h2>
-<p>The PFSN NFL Playoff Picture Predictor is updated in near-real time at the conclusion of every NFL game. From there, you can choose to pick every remaining game yourself or select only the games that interest you. Once you make your picks, you can choose to simulate that week only or the rest of the season. PFSN&rsquo;s Playoff Predictor includes a proprietary, state-of-the-art algorithm that will simulate and predict the outcomes of the games you have not already selected.</p>
+<h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-1">How Does PFSN’s NFL Playoff Machine Work?</h2>
+<p>The PFSN NFL Playoff Picture Predictor is updated in near-real time at the conclusion of every NFL game. From there, you can choose to pick every remaining game yourself or select only the games that interest you. Once you make your picks, you can choose to simulate that week only or the rest of the season. PFSN’s Playoff Predictor includes a proprietary, state-of-the-art algorithm that will simulate and predict the outcomes of the games you have not already selected.</p>
 <p>From there, you can see the projected playoff picture and can manipulate any of the game results to see how it changes the NFL playoff bracket. Once your NFL playoff bracket predictor is finished, you can select the winners of each playoff matchup from Wild Card Weekend through the Super Bowl.</p>
 <h2 id="c6e9b54f-008a-42b8-b5b1-0e70d8efd572-2">How Many Teams Make the NFL Playoffs?</h2>
 <p>A total of 14 teams make it into the playoffs. The 14-team field consists of seven teams from the AFC and seven teams from the NFC. There are four division winners and three Wild Card teams from each conference. The three Wild Card teams are those with the best regular-season records among the teams that did not win their respective division.</p>
@@ -515,8 +541,8 @@ $app->get("/sk-proxy/:brand/ultimate-simulator", function ($brand) use ($app) {
   $template_data["allow_site_scaling"] = true;
   $template_data["setHtmlLangAttribute"] = true;
   $template_data["page_text_content"] = <<<'PAGE_TEXT'
-<p>Do you think you can manage your favorite team&rsquo;s roster better than the real-life general managers? Well, the PFSN Ultimate GM Simulator is here to help you prove it. Whether it&rsquo;s making those tough cuts, re-signing your own pending free agents, hitting the free agent market, or running your team's draft, you can build your ideal roster, see how next season plays out, and share it with the world.</p>
-<h2 id="b2c4d786-00f8-4dfc-9bef-fb27a1c3b6e1-0">How To Play PFSN&rsquo;s NFL Ultimate GM Simulator</h2>
+<p>Do you think you can manage your favorite team’s roster better than the real-life general managers? Well, the PFSN Ultimate GM Simulator is here to help you prove it. Whether it’s making those tough cuts, re-signing your own pending free agents, hitting the free agent market, or running your team's draft, you can build your ideal roster, see how next season plays out, and share it with the world.</p>
+<h2 id="b2c4d786-00f8-4dfc-9bef-fb27a1c3b6e1-0">How To Play PFSN’s NFL Ultimate GM Simulator</h2>
 <p>There are multiple elements to the PFSN Offseason Manager. Firstly, you can either simulate the remaining games or pick how you see them playing out, which will set the draft order for the 2026 NFL Mock Draft Simulator.<br><br>In the initial phase of the offseason, you decide which of the players who are under contract you want to keep, who you want to cut, and whose contracts to restructure to save cap space. When it comes to cutting players, you must navigate the cap implications of each move and decide which decisions are right and which are wrong.</p>
 <p>In the second stage of the offseason, you decide which of your pending free agents to re-sign, transition tag, or franchise tag. You can only franchise tag or transition tag one player in total, but you can re-sign as many players as you deem necessary and have cap space to do so. Each player has a programmed minimum value of the contract in terms of money, years, and guarantees that they will accept.</p>
 <p>The third stage of the NFL offseason allows you to sign any free agents that you believe will improve your roster. The process here is largely the same as re-signing your own free agents, where each player has minimum values in terms of money, years, and guarantees that you must meet before they will sign with you.</p>
@@ -790,8 +816,8 @@ $app->get('/sk-proxy/:brand/free-agency-simulator', function ($brand) use ($app)
   $template_data["allow_site_scaling"] = true;
   $template_data["setHtmlLangAttribute"] = true;
   $template_data["page_text_content"] = <<<'PAGE_TEXT'
-<p>Do you think you can manage your favorite team&rsquo;s roster better than the real-life general managers? Well, the PFSN Offseason Manager is here to help you prove it. Whether it&rsquo;s making those tough cuts, re-signing your own pending free agents, or hitting the free agent market, you can build your ideal roster and share it with the world.</p>
-<h2 id="bcbe7791-2f06-4d66-9673-4a1467412bae-0">How To Play PFSN&rsquo;s NFL Offseason Manager</h2>
+<p>Do you think you can manage your favorite team’s roster better than the real-life general managers? Well, the PFSN Offseason Manager is here to help you prove it. Whether it’s making those tough cuts, re-signing your own pending free agents, or hitting the free agent market, you can build your ideal roster and share it with the world.</p>
+<h2 id="bcbe7791-2f06-4d66-9673-4a1467412bae-0">How To Play PFSN’s NFL Offseason Manager</h2>
 <p>There are multiple elements to the PFSN Offseason Manager. In the initial phase, you decide which of the players who are under contract you want to keep, who you want to cut, and whose contracts to restructure in order to save cap space. When it comes to cutting players, you have to navigate through the cap implications of each move and decide which are the right and wrong decisions to make.</p>
 <p>In the second stage, you decide which of your pending free agents to re-sign, transition tag, or franchise tag. You can only franchise tag or transition tag one player in total, but you can re-sign as many players as you deem necessary and have cap space to do so. Each player has a programmed minimum value of the contract in terms of money, years, and guarantees that they will accept.</p>
 <p>The final stage of the NFL Offseason Manager allows you to sign any free agents that you believe will improve your roster. The process here is largely the same as re-signing your own free agents, where each player has minimum values in terms of money, years, and guarantees that you must meet before they will sign with you.</p>
@@ -1079,13 +1105,13 @@ $app->get('/sk-proxy/:brand/nascar-predictor', function ($brand) use ($app) {
   $template_data["allow_site_scaling"] = true;
   $template_data["setHtmlLangAttribute"] = true;
   $template_data["page_text_content"] = <<<'PAGE_TEXT'
-<p>Predict the entire 2026 NASCAR Cup Series season race by race. Our NASCAR season simulator lets you pick winners for all 36 events&mdash;from the Daytona 500 through the championship finale at Homestead-Miami&mdash;and watch the standings update in real time. Set stage results, award fastest-lap points, and see exactly how your predictions play out when The Chase begins. Whether you&rsquo;re testing a bold prediction or mapping out your fantasy NASCAR strategy, this is the most complete Cup Series simulator available.</p>
+<p>Predict the entire 2026 NASCAR Cup Series season race by race. Our NASCAR season simulator lets you pick winners for all 36 events&mdash;from the Daytona 500 through the championship finale at Homestead-Miami&mdash;and watch the standings update in real time. Set stage results, award fastest-lap points, and see exactly how your predictions play out when The Chase begins. Whether you’re testing a bold prediction or mapping out your fantasy NASCAR strategy, this is the most complete Cup Series simulator available.</p>
 <h2 id="c977eba7-c752-4fbb-b717-caf17a5c013a-0">How NASCAR Cup Series Points Work in 2026</h2>
-<p>NASCAR overhauled its points system for 2026, placing more emphasis on winning races. Here&rsquo;s the breakdown:<br>Race Points: The race winner now earns 55 points&mdash;up from 40 under the old system. Second place receives 35 points, third gets 34, and points decrease from there through 40th position. Every driver who starts earns at least one point.</p>
+<p>NASCAR overhauled its points system for 2026, placing more emphasis on winning races. Here’s the breakdown:<br>Race Points: The race winner now earns 55 points&mdash;up from 40 under the old system. Second place receives 35 points, third gets 34, and points decrease from there through 40th position. Every driver who starts earns at least one point.</p>
 <p>Stage Points: Each race is divided into three segments (except for the Coca-Cola 600, which is divided into 4). The top 10 finishers in Stage 1 and Stage 2 (and stage 3 for the Coca-Cola 600) earn stage points (10 for first, 9 for second, down to 1 for tenth). A driver who wins both stages and the race can earn a maximum of 75 points in a single event. If he also has the fastest lap, he could earn 76.</p>
 <p>No More Playoff Points: Unlike the previous format, there are no &ldquo;playoff points&rdquo; that carry into the postseason. The Chase uses a clean points reset with seeding based on regular-season finish.</p>
 <h2 id="c977eba7-c752-4fbb-b717-caf17a5c013a-1">The Chase Format in 2026</h2>
-<p>NASCAR brought back The Chase for 2026, but it works differently from both the old Chase (2004-2013) and the elimination playoffs (2014-2025). Here&rsquo;s how it works:<br>Qualifying: The top 16 drivers in regular-season points after 26 races make The Chase. There&rsquo;s no more &ldquo;win and you&rsquo;re in&rdquo;&mdash;you have to earn your spot through consistent points finishes.</p>
+<p>NASCAR brought back The Chase for 2026, but it works differently from both the old Chase (2004-2013) and the elimination playoffs (2014-2025). Here’s how it works:<br>Qualifying: The top 16 drivers in regular-season points after 26 races make The Chase. There’s no more &ldquo;win and you’re in&rdquo;&mdash;you have to earn your spot through consistent points finishes.</p>
 <p>Points Reset: Chase drivers start with reset point totals based on their regular-season finish. The regular-season champion starts with 2,100 points. Second place gets 2,075, third gets 2,065, and each position after drops by 5 points. This gives the top seed a 25-point cushion.</p>
 <p>No Eliminations: Unlike the 2014-2025 playoffs, there are no elimination rounds. All 16 Chase drivers compete across all 10 races, accumulating points the entire way.</p>
 <p>Championship: The driver with the most points after the 10th Chase race at Homestead-Miami Speedway wins the championship. No knockout rounds, no winner-take-all finale&mdash;just the best points total over the full Chase.</p>
@@ -1181,17 +1207,17 @@ $app->get('/sk-proxy/:brand/lineup-optimizer', function ($brand) use ($app) {
   $template_data["page_text_content"] = <<<'PAGE_TEXT'
 <h2 id="f4b7ee33-7a8a-49f7-a88d-dcc2efea7a95-0">Best Super Bowl DFS Picks From PFSN's NFL DFS Lineup Optimizer</h2>
 <p><strong>Kenneth Walker III, RB, Seattle Seahawks</strong></p>
-<p>Kenneth Walker III has always been capable of catching passes. But he&rsquo;s never been a pass-catching back. All season, he was regularly pulled on passing downs for Zach Charbonnet. He only saw a 7.9% target share. Unsurprisingly, there hasn&rsquo;t been a single game all season where Walker&rsquo;s receiving yardage total surpassed his rushing yards. Here&rsquo;s why it just might happen in the Super Bowl.</p>
+<p>Kenneth Walker III has always been capable of catching passes. But he’s never been a pass-catching back. All season, he was regularly pulled on passing downs for Zach Charbonnet. He only saw a 7.9% target share. Unsurprisingly, there hasn’t been a single game all season where Walker’s receiving yardage total surpassed his rushing yards. Here’s why it just might happen in the Super Bowl.</p>
 <p>The New England Patriots are an elite run defense. They allowed the fourth-fewest rushing yards this season. As a result, they faced a target share of over 20% to running backs. Teams attacked this defense and &ldquo;ran&rdquo; the ball with more designed passes to backs, as opposed to straight handoffs.</p>
 <p>Walker has seen an uptick in usage as a receiver lately. He has 114 receiving yards over his last three games. That ticks up to 184 over his last five. Walker now sees at least a couple of pass plays specifically designed to him each game, usually in the first quarter. </p>
 <p><strong>Drake Maye, QB, New England Patriots</strong></p>
-<p>It&rsquo;s the Super Bowl. There&rsquo;s no more protecting players or holding back plays. It&rsquo;s all or nothing. Every player and coach is going to put everything on the line and pull out every stop to try and win this game.</p>
-<p>Drake Maye is not a rushing quarterback in the mold of Lamar Jackson or Josh Allen. But he can run. And he&rsquo;s done it more than ever in the postseason.</p>
-<p>Maye&rsquo;s two highest single-game rushing totals have come in the postseason. He ran for 66 yards against the Chargers and 65 yards against the Broncos. He eclipsed 60 yards just once in the regular season.</p>
-<p>Both of these teams have very good run defenses. I discussed above why I think Walker might struggle on the ground. Likely negative game script and Seattle&rsquo;s elite run-stopping unit should limit Rhamondre Stevenson&rsquo;s volume and effectiveness. TreVeyon Henderson is not part of the offense (he played four snaps in the AFC Championship Game).</p>
-<p>I&rsquo;m expecting 40+ dropbacks for Maye. That presents a lot of opportunities for not only designed runs, but scrambles as well.</p>
+<p>It’s the Super Bowl. There’s no more protecting players or holding back plays. It’s all or nothing. Every player and coach is going to put everything on the line and pull out every stop to try and win this game.</p>
+<p>Drake Maye is not a rushing quarterback in the mold of Lamar Jackson or Josh Allen. But he can run. And he’s done it more than ever in the postseason.</p>
+<p>Maye’s two highest single-game rushing totals have come in the postseason. He ran for 66 yards against the Chargers and 65 yards against the Broncos. He eclipsed 60 yards just once in the regular season.</p>
+<p>Both of these teams have very good run defenses. I discussed above why I think Walker might struggle on the ground. Likely negative game script and Seattle’s elite run-stopping unit should limit Rhamondre Stevenson’s volume and effectiveness. TreVeyon Henderson is not part of the offense (he played four snaps in the AFC Championship Game).</p>
+<p>I’m expecting 40+ dropbacks for Maye. That presents a lot of opportunities for not only designed runs, but scrambles as well.</p>
 <h2 id="f4b7ee33-7a8a-49f7-a88d-dcc2efea7a95-1">Best DFS Tips and Tricks</h2>
-<p>There are only 100,000 different views on how to play DFS. Whether you&rsquo;re chasing a big prize or trying to grind out "cash games" (where nearly half the field gets paid), your personal goals dictate the game you play and thus the strategies you employ.</p>
+<p>There are only 100,000 different views on how to play DFS. Whether you’re chasing a big prize or trying to grind out "cash games" (where nearly half the field gets paid), your personal goals dictate the game you play and thus the strategies you employ.</p>
 <p>Playing the flagship contests is fun, but understand that, even with an optimizer, your expected value per lineup isn't going to be great. The most important note for new DFS players is to target the single-entry or three-entry max tournaments.</p>
 <p>You want a fair shot at creating the best lineup, and while our optimizer will give you a good chance, the variance game makes your one lineup going against 150 others an equation that won't work in your favor.</p>
 <p>As far as lineup construction goes, here is my overarching advice:</p>
