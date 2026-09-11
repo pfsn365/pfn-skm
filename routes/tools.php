@@ -65,6 +65,9 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
   // so the header still renders (index.tpl gates the span on a truthy value).
   $ppDataUrl = "https://staticj.profootballnetwork.com/assets/sheets/tools/playoff_predictor/playoffPredictorData.json";
   $ppData = json_decode(do_curl($ppDataUrl, $ppStatusCode), true);
+  // Captured immediately after the fetch above, for the inline-payload freshness
+  // stamp built further down -- see the "HTML cache staleness" comment there.
+  $ppFetchedAtISO = (new DateTime('now', new DateTimeZone('UTC')))->format('c');
 
   $updatedTimestamp = "---";
   $updatedTimestampISO = null;
@@ -82,6 +85,87 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
     }
   }
 
+  // DIVERGENCE FROM PARENT skm (2026-09-11, owner-approved, perf): the parent
+  // (and this extraction until now) only read `updatedTime` out of $ppData above
+  // and discarded the rest, so playoff-predictor.js re-fetched the identical
+  // ~29KB JSON from the browser before it could render anything -- and the whole
+  // page sits behind a full-viewport "Loading..." overlay until that finishes.
+  // That duplicate round trip was identified as the primary LCP driver (19.6s
+  // measured vs. 5.8-6.3s on sibling tools serving a smaller JS bundle). We now
+  // also hand the already-decoded payload to the client inline, and
+  // playoff-predictor.js prefers it, falling back to its own fetch() when it is
+  // absent or invalid -- so a feed timeout or a malformed response degrades
+  // exactly the way it does today (do_curl's 2s timeout still caps the downside,
+  // nothing here removes that fallback path). See EXTRACTION-MAP.md.
+  //
+  // Serialised with JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT |
+  // JSON_UNESCAPED_SLASHES rather than Smarty's |escape:'javascript' modifier:
+  // that modifier maps `'` to `\'`, which is not a legal JSON escape and would
+  // silently ship invalid JSON. JSON_HEX_TAG in particular rewrites the literal
+  // characters "<" and ">" to the six-character JSON escapes "\u003C" and
+  // "\u003E", which
+  // neutralises a `</script>` sequence anywhere in this remote, feed-derived
+  // (therefore untrusted, per Rule 4) payload before it is ever emitted with
+  // `nofilter` in index.tpl -- this comment is the only written justification
+  // for that `nofilter` use, so if you are reading this to decide whether the
+  // flag is load-bearing: it is, do not remove it. `is_array` + a `collections`
+  // key check (the shape playoff-predictor.js's prepareToolData() actually
+  // consumes) guards against embedding a truncated or unexpected response.
+  //
+  // Size cap (security review, 2026-09-11): do_curl()'s 2s timeout bounds fetch
+  // *time*, not payload *size* -- there is no CURLOPT_MAXFILESIZE in the shared
+  // do_curl() (helpers.php), and that function is verbatim-from-parent code
+  // shared by all nine tools, so it is deliberately not touched here (would be
+  // a much wider-blast-radius divergence than this route needs). Instead this
+  // route refuses to inline anything above 512KB -- generously above the
+  // feed's normal ~29KB -- so a runaway/misconfigured sheet export can't
+  // multiply the HTML egress of this page's every response across all traffic
+  // on the site's highest-volume tool page. Over the cap, $ppInlinePayloadJson
+  // stays '', index.tpl emits nothing, and the client falls back to fetch(),
+  // same as any other failure mode here. The cap is applied to the whole
+  // {fetchedAt, payload} envelope below, not just the feed payload.
+  //
+  // HTML-cache staleness (security review, 2026-09-11): this route is served
+  // with `Cache-Control: max-age=600, s-maxage=600,
+  // stale-while-revalidate=14400` (measured against the live response
+  // headers). Before this inline payload existed, a page reload always issued
+  // its own network fetch for the feed regardless of the HTML cache, so the
+  // tool's data was never older than the feed itself. Once the feed is
+  // inlined, an HTML response served from cache -- up to 600s fresh, or up to
+  // 14400s (4h) under stale-while-revalidate -- would otherwise make the tool
+  // silently render whatever snapshot was baked into that cached HTML, with
+  // prepareToolData() writing that same stale time into the visible "UPDATED
+  // ON" text so nothing would look wrong. That specifically undermines this
+  // page's one differentiator over every competitor measured: real,
+  // near-real-time "updated within minutes of each game" data with a
+  // dateModified to match. So the envelope below carries `fetchedAt`
+  // (captured immediately after do_curl(), as $ppFetchedAtISO above), and
+  // playoff-predictor.js's readInlinePlayoffData() bounds how long it trusts
+  // the inline payload against that stamp.
+  //
+  // THE REAL PROPERTY (security review correction, 2026-09-11): a reload
+  // served from that cache more than 5 minutes after the response was
+  // generated falls through to a live fetch. Within the first 5 minutes the
+  // inline payload IS used and may be up to 5 minutes stale; that bound is
+  // the accepted tradeoff, replacing the unbounded 600s / 14400s exposure the
+  // raw HTML cache would otherwise allow -- it does NOT mean every
+  // cached-HTML reload gets live data. 5 minutes was chosen because it sits
+  // within this page's own "updated within minutes of each game" promise,
+  // not because it eliminates staleness. See the freshness check in
+  // playoff-predictor.js's readInlinePlayoffData() for the full reasoning,
+  // including the deliberate 60s clock-skew tolerance and its limits.
+  $ppInlinePayloadJson = '';
+  if ($ppStatusCode == 200 && is_array($ppData) && !empty($ppData['collections']) && is_array($ppData['collections'])) {
+    $ppInlineEnvelope = array(
+      'fetchedAt' => $ppFetchedAtISO,
+      'payload' => $ppData,
+    );
+    $ppEncoded = json_encode($ppInlineEnvelope, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES);
+    if ($ppEncoded !== false && strlen($ppEncoded) <= 512 * 1024) {
+      $ppInlinePayloadJson = $ppEncoded;
+    }
+  }
+
   $template_data = array(
     'meta_keywords' => 'nfl playoff predictor, playoff predictor',
     'brand' => $brand,
@@ -95,6 +179,7 @@ $app->get('/sk-proxy/:brand/playoff-predictor', function ($brand) use ($app) {
     'content_width' => 'full-width',
     'updated_timestamp' => $updatedTimestamp,
     'updated_timestamp_iso' => $updatedTimestampISO,
+    'playoff_predictor_inline_data' => $ppInlinePayloadJson,
     'logo_cache_buster' => "?ver=" . PFN_NFL_LOGO_CACHE_BUSTER,
     'nfl_teams' => [
       'ARI','ATL','BAL','BUF','CAR','CHI','CIN','CLE','DAL','DEN','DET','GB',

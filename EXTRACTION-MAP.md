@@ -277,6 +277,205 @@ tool-type schema the page never had:
   `breadcrumbList.tpl`'s `breadcrumb_items` input becomes feed- or
   request-derived instead of a route literal.
 
+### `playoff-predictor` inline data payload + deprioritized logo preloads (2026-09-11, owner-approved divergence, perf)
+
+The live page measured LCP 19.6s / Speed Index 29.1s, roughly 3x the sibling
+tools (`ultimate-gm-simulator` 5.8s, `mockdraft` 6.3s) on the same CDN/ad stack,
+despite shipping the *smallest* of the three JS bundles (124 KiB) — so bundle
+weight was ruled out and a review identified two root causes, both fixed here:
+
+- **Duplicate fetch.** `routes/tools.php`'s `playoff-predictor` block already
+  called `do_curl()` on `playoffPredictorData.json` (~29KB) and used only
+  `updatedTime` from it; `js/fragments/playoff-predictor.js` then fetched the
+  identical file again client-side before building any UI, and the whole page
+  sits behind index.tpl's full-viewport "Loading..." overlay until that
+  finishes. `routes/tools.php` now also wraps the already-decoded `$ppData` in
+  an envelope, `array('fetchedAt' => $ppFetchedAtISO, 'payload' => $ppData)`
+  (`$ppFetchedAtISO` captured immediately after the `do_curl()` call — see the
+  "HTML-cache staleness" bullet below for why), and serialises that envelope
+  with `json_encode($ppInlineEnvelope, JSON_HEX_TAG | JSON_HEX_AMP |
+  JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES)` into
+  `$template_data['playoff_predictor_inline_data']`, guarded on
+  `$ppStatusCode == 200 && is_array($ppData) && !empty($ppData['collections'])`
+  (the shape the client's `prepareToolData()` actually consumes) **and** on
+  `strlen($ppEncoded) <= 512 * 1024` applied to the whole envelope —
+  `do_curl()`'s 2s timeout (helpers.php, shared verbatim by all nine tools,
+  deliberately not touched here) bounds fetch *time*, not payload *size*, so
+  this route-local cap stops a runaway or misconfigured feed export from
+  multiplying HTML egress on this page's every response. Any of these checks
+  failing leaves `$ppInlinePayloadJson = ''`.
+
+  `templates/pages/static/tools/nfl/playoff-predictor/index.tpl` emits it, when
+  non-empty, as `<script type="application/json" id="pp-inline-data">...</script>`
+  — deliberately **data**, not a `var X = {...}` JS object literal (security
+  review, 2026-09-11): a JS object-literal assignment and `JSON.parse()`
+  disagree on a `__proto__` key in untrusted feed data (one sets the object's
+  prototype, the other makes it an own property), and the bundle always reads
+  this element through `JSON.parse()` (`readInlinePlayoffData()` in
+  playoff-predictor.js) so the inline and fallback-fetch paths can never
+  silently diverge on that. Printed with `nofilter` (deliberately NOT Smarty's
+  `|escape:'javascript'`, which maps `'` to `\'` — not a legal JSON escape, and
+  would silently ship broken JSON — this exact wrong suggestion has recurred
+  across this audit; see the `breadcrumbList.tpl` note above for the JSON-LD
+  case of the same mistake). `JSON_HEX_TAG` rewrites the literal characters `<`
+  and `>` to the escapes `\u003C` and `\u003E`, neutralising any `</script>` in
+  this remote, feed-derived (untrusted, Rule 4) payload before it's printed
+  unescaped.
+
+  `js/fragments/playoff-predictor.js`'s IIFE uses `readInlinePlayoffData()`'s
+  result when present, and falls back to its original
+  `fetchData(playoffPredictorDataURL)` otherwise — so a feed outage/timeout, a
+  decode failure, exceeding the 512KB cap, or simply this PHP shipping without
+  the corresponding bundle (see the Bundle-label note below) all degrade to
+  exactly today's behavior, never worse.
+
+  **Execution-order correction (security review, 2026-09-11):** the first cut
+  of this IIFE only `await`ed the fallback-fetch branch, not the inline-data
+  branch:
+  ```js
+  var data = inlineData ? inlineData : await fetchData(playoffPredictorDataURL);
+  ```
+  Because the IIFE is `async () => { ... }`, taking the inline branch meant the
+  function body ran to completion **synchronously**, before the rest of this
+  module's ~9,150-line top-level body had finished executing — in particular
+  before `init()` (defined at ~line 9423, called at ~line 9549), whose `setWeekCarousel()` call creates the
+  `.week{N}-holder` elements. `prepareToolData()`/`initializeTool()` (called
+  from inside the IIFE) reach `changeWeek()`, which queries
+  `.week{N}-holder` — with `init()` not yet run, that query matches nothing,
+  so the carousel's auto-scroll-to-current-week silently no-ops and the
+  carousel stays parked on week 1 while later-week matches are shown. The fix
+  is to `await` both branches: `await Promise.resolve(inlineData)` on the
+  inline path suspends the async function at zero network/timing cost, so its
+  continuation resumes at the next microtask checkpoint — after the module
+  body (and `init()`) have run — reproducing the original fetch()-based
+  version's relative ordering exactly. Do not "simplify" this back to a bare
+  synchronous read.
+
+  **HTML-cache staleness correction (security review, 2026-09-11):** this
+  route is served `Cache-Control: max-age=600, s-maxage=600,
+  stale-while-revalidate=14400` (measured against the live response headers).
+  Before the inline payload existed, a page reload always issued its own
+  network fetch for the feed regardless of the HTML cache, so the tool's data
+  was never older than the feed itself. Once the feed is inlined, an HTML
+  response served from that cache — fresh for up to 600s, or up to 14400s
+  (4h) under `stale-while-revalidate` — would otherwise make the tool
+  silently render whatever feed snapshot was baked into that cached HTML,
+  with `prepareToolData()` writing that same stale time into the visible
+  "UPDATED ON" text, so nothing would look wrong to a user. That specifically
+  undermines this page's one differentiator over every competitor measured:
+  real, near-real-time "updated within minutes of each game" data with a
+  matching `dateModified`. Fixed by stamping `fetchedAt` into the envelope
+  (above) and having `readInlinePlayoffData()` (`js/fragments/playoff-predictor.js`)
+  bound how long it trusts the inline payload against that stamp.
+
+  **THE REAL PROPERTY THIS GUARANTEES — corrected (security review, second
+  pass, 2026-09-11):** the original wording here claimed a reload served from
+  cache "reliably falls through to a live fetch," which is false for the
+  first 300 seconds of every 600-second cache generation. Worked example:
+  HTML generated at T=0 with the payload baked in; a game ends and the feed
+  updates at T=90s; a user reloads at T=120s; the browser serves the cached
+  HTML, `ageMs=120000` is within the 5-minute window, so the (now ~2-minute
+  stale) inline payload is used — "UPDATED ON" included. The actual
+  guarantee: a reload served from that cache **more than 5 minutes** after
+  the response was generated falls through to a live fetch; **within** the
+  first 5 minutes the inline payload is used and may be up to 5 minutes
+  stale. That bound is the accepted tradeoff, replacing the unbounded
+  600s / 14400s exposure the raw HTML cache would otherwise allow — not a
+  guarantee of always-live data. 5 minutes was chosen because it sits within
+  this page's own "updated within minutes of each game" promise. This repo
+  has no test suite, and a wrong comment here is the only specification a
+  future reader has — get it right or don't write it.
+
+  **Clock-skew tolerance — corrected (security review, second pass,
+  2026-09-11):** the freshness check's first cut rejected any negative age
+  (`ageMs < 0`) — i.e. any client clock reading even one second behind the
+  server — as stale. Ordinary consumer clock drift of a few seconds is
+  routine, so this silently sent an unknown but potentially large share of
+  real users through the live-fetch fallback on every single load, forever,
+  with nothing logged to reveal it: they paid for the inline payload's HTML
+  weight and got none of its benefit. Changed to tolerate the client clock
+  running up to 60 seconds *ahead* of the stamp (`ageMs >= -60000`) before
+  treating it as implausible, while the upper bound (`ageMs <=
+  FRESHNESS_WINDOW_MS`, 5 minutes) is unchanged. This guard is inherently
+  client-clock-relative, not a general fix for skew: a client whose clock
+  runs hours slow will compute a small or negative age for a stamp that is
+  actually hours old by server time, and read it as fresh — there is no
+  server-relative signal available to this client-side check to correct for
+  that. Written down explicitly because the pre-correction comment implied
+  the check was robust against skew in general, and it was not, and still
+  isn't beyond the tolerance window.
+
+  **Missing-`collections` guard (security review, second pass, 2026-09-11):**
+  `readInlinePlayoffData()` also now requires `envelope.payload.collections`
+  to be present, not just `envelope.payload` and `envelope.fetchedAt`. No
+  live bug today — `routes/tools.php` already refuses to inline anything
+  whose `$ppData['collections']` is empty — but this is defense in depth: if
+  that server-side guard is ever loosened independently of this file,
+  `prepareToolData()`'s unconditional `Object.keys(data["collections"])`
+  would throw inside the IIFE's `try`, the `catch` only `console.error`s, and
+  the full-viewport loading overlay — removed only inside `initializeTool()`,
+  which would never be reached — would stay up forever with nothing visible
+  in the console. Cheap to guard against now rather than to debug blind
+  later.
+
+  No path is worse than pre-Fix-A behavior: first load gets the perf win, a
+  cached-HTML reload within 5 minutes gets the (bounded-stale, accepted)
+  inline payload, a reload past 5 minutes or with an implausible timestamp
+  gets a live fetch (today's behavior), and a down/malformed/oversized feed
+  still gets the pre-existing soft-fail.
+- **Eager logo preloads.** `templates/pages/static/tools/nfl/playoff-predictor/desktop/index.tpl`
+  and `.../mobile/index.tpl` each render a 32-team `{foreach}` of team-logo
+  `<img>` tags (~12KB each, 64 total across both variants since only one is
+  CSS-hidden per breakpoint, not omitted from the DOM). Added
+  `fetchpriority="low"` to both loops. `width`/`height` (28x18) and the
+  pre-existing `crossorigin="anonymous"` were left exactly as they were, so no
+  CLS risk was introduced.
+
+  **`loading="lazy"` was tried first and rejected — do not reintroduce it.**
+  The factual premise that led to trying it is correct: every image in both
+  loops carries `class="hidden"`, the site's global `display:none!important`
+  utility class, so none of these 64 images is ever visible/above-the-fold in
+  either variant at any breakpoint. But that fact argues for the opposite
+  conclusion. Native lazy-loading decides whether to fetch an image based on
+  its distance from the viewport, computed from its layout box — a
+  `display:none` element has **no layout box**, so the browser's intersection
+  logic never fires and the image may never be fetched at all. That matters
+  because these 64 tags are not decoration to defer: the bundle never queries,
+  clones or references them. Every logo actually shown in the UI is built
+  separately by `js/fragments/playoff-predictor.js` via
+  `document.createElement("img")` with a freshly constructed `src` pointing at
+  the identical URL (e.g. `standingsTeamLogo`, `divisionteamLogo`,
+  `wildcardteamLogo` — search the bundle for `.setAttribute("src", ...logo...)`
+  calls). The hidden tags exist solely to get those 32 URLs into the browser's
+  HTTP cache before the JS-driven UI requests them. Lazy-loading them leaves
+  that cache cold when `initializeTool()` runs, so every standings row,
+  bracket cell and matchup card would fire a first-time network request at the
+  exact moment the user is looking at it — visible logo pop-in that does not
+  happen today. The owner explicitly ruled out that UX regression.
+  `fetchpriority="low"` was used instead: it still guarantees the request is
+  issued regardless of layout or visibility, it only schedules it behind
+  higher-priority resources — which is the actual goal (warm the cache without
+  competing with the LCP-critical fetches for early bandwidth).
+
+  Also deliberately **not** changed: `crossorigin="anonymous"` was already
+  present on these hidden preload tags before this fix and must stay. Several
+  of the JS-created *visible* logo `<img>` elements also call
+  `.setAttribute("crossorigin", "anonymous")` (e.g. `standingsTeamLogo`,
+  `superbowlTeamLogo`, `wildcardteamLogo`, `divisionteamLogo`,
+  `conferenceteamLogo` in `js/fragments/playoff-predictor.js`) — a CORS-mode
+  request and a no-CORS request for the same URL land in **different** HTTP
+  cache entries. Adding `crossorigin` to a preload that lacked it, or removing
+  it from one that has it, would silently split the cache entry from the one
+  the visible `<img>` actually reads and defeat the warming this fix exists to
+  provide, while looking like an improvement. Match `crossorigin` presence
+  between a preload tag and its corresponding consumer before ever touching
+  this attribute here.
+- **Deploy note (Rule 2):** the `js/fragments/playoff-predictor.js` change only
+  reaches production behind the `Bundle`/`bundle` PR label. If the PHP/template
+  changes merge without it, the inline payload is emitted into the page but the
+  live (old) bundle ignores it and keeps calling its own `fetchData()` — a no-op
+  regression risk, not a breakage, because of the fallback path above.
+
 ### Templates — `templates/` (250 `.tpl` + data)
 
 Full transitive `{include}` closure of the render path (main render template,

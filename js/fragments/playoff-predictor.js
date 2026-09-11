@@ -239,6 +239,96 @@ var predictor = (function () {
 		return data;
 	}
 
+	// DIVERGENCE FROM PARENT skm (2026-09-11, owner-approved, perf): reads the
+	// data feed index.tpl already inlined server-side (see routes/tools.php),
+	// emitted as an `application/json` script block -- NOT a JS object literal
+	// -- specifically so this always goes through JSON.parse(), the same
+	// deserialiser the fallback fetchData() path uses. A JS object-literal
+	// assignment (`var X = {...}`) and JSON.parse() disagree on a `__proto__`
+	// key in untrusted feed data (one sets the object's prototype, the other
+	// makes it an own property); reading it as data instead of executing it as
+	// code removes that whole question class. Returns null (never throws) when
+	// the element is absent, empty, fails to parse, or fails the freshness
+	// check below, so the caller falls back to the original fetch() exactly as
+	// before this change.
+	//
+	// Freshness check (security review, 2026-09-11): this route is served with
+	// `Cache-Control: max-age=600, s-maxage=600, stale-while-revalidate=14400`
+	// (measured against the live response headers). Before the inline payload
+	// existed, a reload always issued its own fetch() for the feed regardless
+	// of the HTML cache, so the tool's data was never older than the feed
+	// itself. Once the feed is inlined, a reload served from that HTML cache
+	// (fresh for up to 600s, or up to 14400s/4h under
+	// stale-while-revalidate) would otherwise make the tool silently render
+	// whatever snapshot was baked into that cached HTML -- and
+	// prepareToolData() below writes that same stale time into the visible
+	// "UPDATED ON" text, so nothing would look wrong. That directly undermines
+	// this page's one differentiator over every competitor measured: real,
+	// near-real-time "updated within minutes of each game" data with a
+	// dateModified to match. So the envelope's `fetchedAt` (stamped
+	// server-side immediately after its do_curl() call, see
+	// $ppFetchedAtISO in routes/tools.php) bounds how long the inline payload
+	// is trusted for.
+	//
+	// THE REAL PROPERTY THIS GUARANTEES (security review correction,
+	// 2026-09-11): a reload served from that cache MORE than 5 minutes after
+	// the response was generated falls through to a live fetch(). Within the
+	// first 5 minutes, the inline payload IS used and may be up to 5 minutes
+	// stale -- that bound is the accepted tradeoff, replacing the unbounded
+	// 600s / 14400s exposure the raw HTML cache would otherwise allow. It does
+	// NOT mean every cached-HTML reload gets live data -- worked example: HTML
+	// generated at T=0 with the payload baked in; a game ends and the feed
+	// updates at T=90s; a user reloads at T=120s; the browser serves the
+	// cached HTML, ageMs=120000 is within the window, so the (now ~2-minute
+	// stale) inline payload is used, "UPDATED ON" included. 5 minutes was
+	// chosen because it is within this page's own "updated within minutes of
+	// each game" promise, not because it eliminates staleness.
+	//
+	// CLOCK-SKEW TOLERANCE (security review correction, 2026-09-11): the first
+	// cut of this check rejected ANY negative age (`ageMs < 0`), which looks
+	// defensive but is not: ordinary consumer clock drift of a few seconds is
+	// routine, and a client clock that is even 3 seconds behind the server
+	// would fail every single load, forever, silently falling back to fetch()
+	// on every page view -- paying the inline payload's HTML weight and still
+	// making the round trip, with nothing logged anywhere. `ageMs` is now
+	// allowed down to -60s (a full minute of tolerated skew) before being
+	// treated as implausible and rejected. This guard is inherently
+	// client-clock-relative, not a fix for skew in general: a client whose
+	// clock is hours slow will compute a small/negative age for an
+	// hours-old-by-server-time stamp and read it as fresh. There is no
+	// server-relative signal available here to correct for that -- writing
+	// this down so a future reader does not assume the check is robust
+	// against skew beyond the tolerance below.
+	function readInlinePlayoffData() {
+		var el = document.getElementById("pp-inline-data");
+		if (!el || !el.textContent) return null;
+		var envelope;
+		try {
+			envelope = JSON.parse(el.textContent);
+		} catch (error) {
+			return null;
+		}
+		// `payload.collections` is required here, not just `payload`+`fetchedAt`
+		// above: prepareToolData() below does Object.keys(data["collections"])
+		// unconditionally. routes/tools.php already guards on `collections` being
+		// present before it ever inlines anything, so this is defense in depth --
+		// but if that server-side guard is ever loosened, an un-checked payload
+		// here would throw inside the IIFE's try, the catch only console.errors,
+		// and the loading-overlay (removed only inside initializeTool(), never
+		// reached) would stay up forever with nothing visible in the console.
+		if (!envelope || typeof envelope !== "object" || !envelope.payload ||
+			!envelope.payload.collections || !envelope.fetchedAt) {
+			return null;
+		}
+		var fetchedAtMs = Date.parse(envelope.fetchedAt);
+		if (isNaN(fetchedAtMs)) return null;
+		var FRESHNESS_WINDOW_MS = 5 * 60 * 1000; // 5 minutes; see comment above re: the 600s HTML cache
+		var CLOCK_SKEW_TOLERANCE_MS = 60 * 1000; // tolerate up to 1 minute of client clock being *ahead* of server
+		var ageMs = Date.now() - fetchedAtMs;
+		if (ageMs < -CLOCK_SKEW_TOLERANCE_MS || ageMs > FRESHNESS_WINDOW_MS) return null;
+		return envelope.payload;
+	}
+
 	function prepareToolData(data) {
 		Object.keys(data["collections"]).forEach(index => {
 			if (data["collections"][index]["sheetName"] === "schedule") {
@@ -265,9 +355,37 @@ var predictor = (function () {
 
 	(async () => {
 		try {
-			await fetchData(playoffPredictorDataURL)
-				.then(prepareToolData)
-				.then(initializeTool);
+			// DIVERGENCE FROM PARENT skm (2026-09-11, owner-approved, perf): use the
+			// inline payload read by readInlinePlayoffData() when present, so the
+			// page doesn't sit behind a second fetch of the identical ~29KB file;
+			// fall back to the original fetchData() otherwise (feed was down or
+			// malformed server-side, the payload exceeded routes/tools.php's size
+			// cap, the payload failed the 5-minute freshness check inside
+			// readInlinePlayoffData() -- e.g. this HTML was served from the page's
+			// own HTTP cache -- or this bundle predates the inline payload -- see
+			// EXTRACTION-MAP.md on the Bundle-label deploy gap).
+			//
+			// CORRECTNESS-CRITICAL: both branches are `await`ed, including the
+			// inline one via `await Promise.resolve(...)`, even though it needs no
+			// actual I/O. This async IIFE runs interleaved with the rest of this
+			// module's synchronous top-level body (which defines init() at ~line
+			// 9423 and calls it at ~line 9549; init() -> setWeekCarousel() is what
+			// creates the `.week{N}-holder` elements that changeWeek() -- reached
+			// from prepareToolData()/initializeTool() below -- queries). Without an
+			// `await` on the inline branch, this IIFE never suspends and runs to
+			// completion synchronously, BEFORE init() has run, so changeWeek()'s
+			// carousel query matches nothing and the week carousel silently stays
+			// parked at week 1. `await Promise.resolve(x)` suspends the function at
+			// zero network/timing cost, so the continuation resumes at the next
+			// microtask checkpoint -- after the module body (and init()) have run,
+			// preserving the original relative order of the parent's fetch()-based
+			// version. Do not remove this await as a "no-op simplification".
+			var inlineData = readInlinePlayoffData();
+			var data = inlineData
+				? await Promise.resolve(inlineData)
+				: await fetchData(playoffPredictorDataURL);
+			prepareToolData(data);
+			initializeTool();
 		} catch (error) {
 			console.error(error);
 		}
