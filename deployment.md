@@ -30,10 +30,10 @@ This guide shows how to create a new project in Coolify and deploy an applicatio
 
 ## 4. Configure the build
 
-- **Build Pack** – Dockerfile.
-- **Port** – 80.
+- **Build Pack** – Dockerfile(SKM), Nixpacks(Vercel apps).
+- **Port** – 80(SKM), 3000(Vercel apps).
 - **Base Directory** – set this if the app lives in a subfolder (monorepo).
-- **Environment Variables** – ENVIRONMENT (value=> STAGING).
+- **Environment Variables** – ENVIRONMENT (value=> STAGING)(SKM).
 - **Domain** – set your own domain (Coolify provisions HTTPS automatically) or keep the generated one.
 
 ## 5. Deploy
