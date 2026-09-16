@@ -120,5 +120,8 @@ if (ENVIRONMENT === 'staging') {
 }
 
 define('LANG', 'en');
-define('IS_MOBILE', FALSE);
-define('IS_DESKTOP', TRUE);
+// Was hardcoded FALSE/TRUE when this repo had no device detection; now derived
+// from the CloudFront-Is-Mobile-Viewer header the Cloudflare worker forwards
+// (helpers.php: isMobileViewer()), matching $app->is_mobile/$app->is_desktop.
+define('IS_MOBILE', isMobileViewer());
+define('IS_DESKTOP', !IS_MOBILE);

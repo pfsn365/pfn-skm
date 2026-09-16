@@ -19,6 +19,50 @@
       .catch(err => console.log(err))
   }
 
+  // TEMPORARY: one-time forced logout. Login state is read from the fw_* cookies,
+  // so clearing them signs the user out. This runs on the first MDS page view per
+  // browser and never again -- the flag is claimed up front, whether or not anyone
+  // was logged in, so a user who signs in later is left alone. Delete this block
+  // (and FORCED_LOGOUT_FLAG) once the rollout is done.
+  const FORCED_LOGOUT_FLAG = "PFN_MDS_FORCED_LOGOUT_V1";
+
+  (function forceOneTimeLogout() {
+    try {
+      if (getLocalStorageData(FORCED_LOGOUT_FLAG)) return;
+      setLocalStorageData(FORCED_LOGOUT_FLAG, "1");
+    } catch (e) {
+      // Without localStorage there is no way to keep this to a single run, so
+      // do nothing rather than log the user out on every visit.
+      return;
+    }
+
+    // Nobody logged in: nothing to clear, and the flag above means we never look again.
+    if (!getCookie("{$smarty.const.COOKIE_USER_ID}")) return;
+
+    // The cookies are written on .profootballnetwork.com, but expire them against
+    // the host and every parent domain too so none of them survives.
+    var domains = [""];
+    var hostParts = location.hostname.split(".");
+    while (hostParts.length > 1) {
+      domains.push(";domain=" + hostParts.join("."));
+      domains.push(";domain=." + hostParts.join("."));
+      hostParts.shift();
+    }
+
+    document.cookie.split(";").forEach(function(cookie) {
+      var name = cookie.split("=")[0].trim();
+      if (name.indexOf("fw_") !== 0) return;
+
+      domains.forEach(function(domain) {
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/" + domain;
+      });
+    });
+
+    removeFromLocalStorage("PFN_MDS_USER_IMAGE");
+    removeFromLocalStorage("PFN_MDS_USER_NAME");
+    window.location.reload();
+  })();
+
   function showMDSLogoutButton() {
     const mdsLogoutBtn = $(".draft-option-btn .mds-logout-btn");
     if (mdsLogoutBtn) {

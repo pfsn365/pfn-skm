@@ -22,6 +22,29 @@ function NTernary() {
     return false;
 }
 
+// Device detection for this repo.
+//
+// The parent skm app never sniffs the device in PHP: nginx turns the incoming
+// `CloudFront-Is-Mobile-Viewer` header into the DEVICE_TYPE fastcgi param
+// (dev/config/nginx/common/backend-php.conf:21), setLangParam() reads it into
+// $app->environment()[IS_MOBILE] (redirect-url-and-response-filter.php:168) and
+// the UrlRedirectAndTmpReplaceStaticWithStaticsGCP middleware flips
+// $app->is_desktop from it (same file, :293-306).
+//
+// This repo runs on Apache with none of that middleware, but the Cloudflare
+// worker in front of the origin forwards the same header
+// (`CloudFront-Is-Mobile-Viewer: device === "mobile" || device === "tablet"`),
+// so read it straight off $_SERVER. Note the worker serializes the boolean, so
+// a desktop request carries the literal string "false" — a non-empty value.
+// Compare against "true" rather than using empty().
+function isMobileViewer() {
+  if (empty($_SERVER['HTTP_CLOUDFRONT_IS_MOBILE_VIEWER'])) {
+    return false;
+  }
+
+  return strtolower(trim($_SERVER['HTTP_CLOUDFRONT_IS_MOBILE_VIEWER'])) === 'true';
+}
+
 // from routes/sk-proxy.php:12
 function restrictAccess($app) {
   $queryParam = $app->request->params("debug__proxy_tools");
