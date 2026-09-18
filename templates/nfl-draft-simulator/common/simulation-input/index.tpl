@@ -81,6 +81,7 @@
           <select name="list-selector" id="players-lists" onchange="selectMDSPlayersList(event)" aria-label="players-list">
             <option value="pfsn">PFSN</option>
             <option value="jacob_infante">Jacob Infante</option>
+            <option value="ian_cummings">Ian Cummings</option>
             {* <option value="consensus">Consensus</option>
             {if !isset($mds_widget_distinction)}
               <option value="espn">ESPN</option>
