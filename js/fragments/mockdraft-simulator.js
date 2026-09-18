@@ -309,7 +309,7 @@ function revertLastPick() {
       showPauseDraftBtn();
       disablePauseDraftBtn();
       disableShowOffersBtn();
-      if (!IS_DESKTOP) {
+      if (isSimViewTabbed()) {
         toggleSimView("pool", true);
       }
       calculateTrades(pickContainer);
@@ -928,6 +928,37 @@ function getTradeGradeForTeam(tradeIndex, teamShortName) {
   return null;
 }
 
+// Sets the full-result list's column count on mobile: one column with grades
+// on, two without. The count comes from the inline max-height cap -- the list
+// is a column-wrap flex box, so capping it at half its content is what makes
+// the second column, and removing the cap is what collapses it to one.
+//
+// showFullResult() and changeRoundData() both apply this cap as they render.
+// This exists for the case neither of them covers: see toggleGrades().
+// Height that splits a pick list into two columns. The rows are 34px tall with
+// a 6px gap (.final-trades-holder .pic-container in
+// templates/nfl-draft-simulator/common/final-result/styles.tpl), so the pitch
+// is 40 and half the stack is the second column's break point.
+function finalTradesColumnCap(rowCount) {
+  return (16 + (40 * rowCount) + 80) / 2;
+}
+
+function applyFinalTradesColumns() {
+  var holder = $(".final-trades-container .final-trades-holder");
+  if (!holder) return;
+
+  if (multiUserDraft && !IS_DESKTOP) {
+    holder.setAttribute("style", `max-height:2600px !important`);
+    return;
+  }
+
+  if (!IS_DESKTOP && isGradesToggleActive()) {
+    holder.removeAttribute("style");
+  } else {
+    holder.setAttribute("style", `max-height:${finalTradesColumnCap(holder.children.length)}px !important`);
+  }
+}
+
 function toggleGrades() {
   var allToggles = $all(".grade-toggle");
   if (allToggles) {
@@ -947,6 +978,17 @@ function toggleGrades() {
       const selectedRoundBtn = $(".round-selector.selected");
       if (selectedRoundBtn) {
         changeRoundData(selectedRoundBtn);
+      } else {
+        // createRoundsSelector() builds the round buttons without selecting
+        // one, and showFullResult() opens on round 1 by filtering the picks
+        // rather than clicking a button -- so until the user picks a round by
+        // hand there is nothing here for changeRoundData() to re-render, and
+        // the cap it would have recomputed is left at whatever the previous
+        // state needed. The class flips above still run, so the rows go full
+        // width while the two-column cap stays: 32 full-width rows wrap into a
+        // second column that sits outside the card, and the page scrolls
+        // sideways. Apply the cap directly for that case.
+        applyFinalTradesColumns();
       }
     } else {
       setMyDraftPicksHeight();
@@ -1748,7 +1790,7 @@ function hideOffers(event) {
       disablePauseDraftBtn();
     }
 
-    if (!IS_DESKTOP) {
+    if (isSimViewTabbed()) {
       if (offersContainer.dataset.autopopulated === "true") {
         offersContainer.dataset.autopopulated = false;
         if (currentSection !== "pool") {
@@ -3132,7 +3174,7 @@ function addPlayerToPick(e) {
     hideUserSelectionIcon();
     disableShowOffersBtn();
     sendMultiUserSelectedPlayerInfo(target);
-    if (!IS_DESKTOP) {
+    if (isSimViewTabbed()) {
       toggleSimView("result", true);
     }
 
@@ -3369,7 +3411,7 @@ async function addPlayerToPickHelper(target, pickNumber, player) {
     );
   }
 
-  if (!IS_DESKTOP) {
+  if (isSimViewTabbed()) {
     toggleSimView("result", true);
   } else {
     let myPicksBtn = $(".mypicks-btn-holder .my-picks-btn");
@@ -3891,13 +3933,13 @@ function clearOffers(check) {
       addClass(offersOverlay, "hidden");
     }
 
-    if (!IS_DESKTOP && !check) {
+    if (isSimViewTabbed() && !check) {
       hideResumeDraftBtn();
       if (offerContainer && offerContainer.dataset.autopopulated === "true") {
-        offerContainer.dataset.autopopulated === "false";
+        offerContainer.dataset.autopopulated = "false";
         toggleSimView("pool", true);
       }
-    } else if (!IS_DESKTOP && check) {
+    } else if (isSimViewTabbed() && check) {
       hideResumeDraftBtn();
       toggleSimView("result", true);
     }
@@ -3921,12 +3963,12 @@ function clearOffers(check) {
         addClass(offersOverlay, "hidden");
       }
 
-      if (!IS_DESKTOP && !check) {
+      if (isSimViewTabbed() && !check) {
         if (offerContainer && offerContainer.dataset.autopopulated === "true") {
-          offerContainer.dataset.autopopulated === "false";
+          offerContainer.dataset.autopopulated = "false";
           toggleSimView("pool", true);
         }
-      } else if (!IS_DESKTOP && check) {
+      } else if (isSimViewTabbed() && check) {
         toggleSimView("result", true);
       }
 
@@ -7095,15 +7137,24 @@ function setMyDraftPicksHeight() {
   var upperPicksHolder = resultListContainer.querySelector(".upper-picks-holder");
   if (!upperPicksHolder) return;
 
+  // Two things have to agree for a second column: .mobile-multi-column supplies
+  // the wrapping flex column, and the height cap is what splits the stack. They
+  // used to be set in different places under different conditions -- the class
+  // in listTeamTrades() for lists longer than five, the cap here only for lists
+  // longer than eight -- so a normal team of six to eight picks got the class
+  // and no cap, and once grades had been switched on and cleared the inline
+  // style, switching them back off restored nothing and the list stayed in one
+  // column. The cap was also built on a 30+6 row pitch while these rows are
+  // 34+6. Both now come from one rule, off the real measurements.
   if (gradesOn) {
+    removeClass(upperPicksHolder, "mobile-multi-column");
     upperPicksHolder.removeAttribute("style");
   } else {
-    var finalPicks = upperPicksHolder.children;
-    if (finalPicks.length > 8) {
-      var bufferHeight = 52;
-      var height = ((finalPicks.length * 30) + (finalPicks.length * 6)) / 2 + bufferHeight;
-      upperPicksHolder.setAttribute("style", "max-height:" + height + "px !important");
-    }
+    addClass(upperPicksHolder, "mobile-multi-column");
+    upperPicksHolder.setAttribute(
+      "style",
+      "max-height:" + finalTradesColumnCap(upperPicksHolder.children.length) + "px !important"
+    );
   }
 }
 
@@ -7388,13 +7439,13 @@ function listTeamTrades(teamName) {
       upperPicksHolder.appendChild(playerContainer);
     }
 
-    var upperItemCount = upperPicksHolder.children.length;
-    if (upperItemCount > 5 && !IS_DESKTOP) {
-      addClass(upperPicksHolder, "mobile-multi-column");
-      var colHeight = Math.ceil(upperItemCount / 2) * 34;
-      upperPicksHolder.style.maxHeight = colHeight + "px";
-    }
     tradesHolder.appendChild(upperPicksHolder);
+
+    // First paint has to follow the grades toggle too: this used to lay the
+    // list out in columns regardless, so the default grades-on view rendered
+    // full-width rows wrapped into columns. setMyDraftPicksHeight() owns the
+    // rule, and it needs the holder in the DOM to find it.
+    setMyDraftPicksHeight();
 
     // Show traded away picks and players below the column layout
     var allTradedAwayPicks = [];
@@ -9658,6 +9709,24 @@ function toggleTeams(group) {
   }
 }
 
+// True when the simulation screen shows one pane at a time, so that switching
+// panes actually means something. Two layouts qualify: the mobile slider, and
+// the revamped layout below the tablet edge, where the board and the pool stack
+// and a third tab selects between them. A wide desktop shows both side by side
+// and there is nothing to switch.
+//
+// This replaces the !IS_DESKTOP checks that used to guard the calls below. On
+// the mobile host and on a wide desktop it answers exactly as !IS_DESKTOP did;
+// it differs only on the narrowed desktop window, which is the case those
+// checks predate. The revamped layout answers through a hook rather than by
+// class name, because its markup and classes belong to the PFN theme layer
+// (templates/third-party/proxy/pfn/tools/mockdraft-simulator/enhance.tpl) and
+// this file is shared with skm and the widget.
+function isSimViewTabbed() {
+  if ($(".sim-content-slider")) return true;
+  return typeof window.mdsSimViewTabbed === "function" && !!window.mdsSimViewTabbed();
+}
+
 function toggleSimView(view, isRedirected) {
   var draftBtn = $(".draft-result");
   var poolBtn = $(".player-pool");
@@ -9692,6 +9761,16 @@ function toggleSimView(view, isRedirected) {
       contentSlider.className = "sim-content-slider show-mypics-container";
       fillMyPicks();
     }
+    return;
+  }
+
+  // No slider: the revamped layout handles the swap itself. currentSection is
+  // shared state that several callers read, so it is set here either way.
+  if (typeof window.mdsToggleSimViewFallback === "function") {
+    if (view === "pool" || view === "mypicks" || view === "result") {
+      currentSection = view;
+    }
+    window.mdsToggleSimViewFallback(view, isRedirected);
   }
 }
 

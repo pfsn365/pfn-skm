@@ -214,6 +214,19 @@
         .pfn-hero-banner .updated-timestamp-container { font-size: 12px; padding: 4px 16px 0; text-align: center; }
     }
 
+    /* Reserve the tools ad slot's height.
+
+       third-party/proxy/pfn/styles.tpl reserves 150px via
+       `.header-wrapper .desktop-tools-top-adv-container`. That works in the
+       non-sidebar layout, where the slot is a child of .header-wrapper. Here
+       the slot has to sit below the promo bar, so it is a SIBLING of
+       .header-wrapper and the selector never matches it -- the slot starts at
+       0 and the ad script's injected div shifts the whole page down. Same
+       150px the other branch reserves, so both layouts behave identically. */
+    .has-sidebar-nav > .desktop-tools-top-adv-container {
+        min-height: 150px;
+    }
+
     /* Sidebar shifts main content on desktop */
     .pfn-content-wrapper.has-sidebar-nav {
         width: calc(100% - var(--sidebar-width)) !important;

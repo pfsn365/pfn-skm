@@ -1,6 +1,4 @@
-{if !$is_desktop}
-  {function getMDSHomeMobileCSS}
-    <style>
+{function getMDSHomeMobileCSS}
       #sticky-ad-container,
       #sticky-ad-container>div {
         bottom: 0px;
@@ -713,9 +711,7 @@
       .team-needs-picks-container-sticky {
         top: 80px;
       }
-    </style>
-  {/function}
-{/if}
+{/function}
 <style>
   :root {
     --tab-width: 600px;
@@ -3219,6 +3215,26 @@
   }
 </style>
 
-{if !$is_desktop}
-  {call getMDSHomeMobileCSS}
+{* Mobile stylesheet.
+
+   Width-based on the desktop host, unconditional on the mobile host. m.* has
+   no tablet or desktop regime -- a phone in landscape is still a phone -- so
+   it takes this sheet whole, exactly as it always has; the output there is
+   byte-identical to before. A desktop browser narrowed past the mobile edge
+   now gets the same CSS through a media query, instead of the half-applied
+   desktop layout it used to fall back to.
+
+   The <style> tag is here rather than inside the function so that the call
+   site can wrap the body in a media query. 767px is the mobile edge from the
+   breakpoint table in third-party/proxy/pfn/tools/mockdraft-simulator/theme.tpl. *}
+{if $is_desktop}
+  <style>
+    @media (max-width: 767px) {
+      {call getMDSHomeMobileCSS}
+    }
+  </style>
+{else}
+  <style>
+    {call getMDSHomeMobileCSS}
+  </style>
 {/if}

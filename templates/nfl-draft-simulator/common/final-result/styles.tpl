@@ -1,6 +1,4 @@
-{if !$is_desktop}
-  {function getMDSFinalResultMobileCSS}
-    <style>
+{function getMDSFinalResultMobileCSS}
       .final-trades-container {
         display: flex;
         flex-direction: column;
@@ -329,9 +327,7 @@
         padding: 0;
         align-self: center;
       }
-    </style>
-  {/function}
-{/if}
+{/function}
 <style>
   .final-trades-container {
     width: 100%;
@@ -563,6 +559,7 @@
   section.quick-links-widget {
     display: none;
     margin-bottom: 20px;
+    padding: 14px 22px;
   }
 
   .final-result-container .final-result-holder {
@@ -1276,6 +1273,26 @@
   /* === END GRADING SYSTEM STYLES === */
 </style>
 
-{if !$is_desktop}
-  {call getMDSFinalResultMobileCSS}
+{* Mobile stylesheet.
+
+   Width-based on the desktop host, unconditional on the mobile host. m.* has
+   no tablet or desktop regime -- a phone in landscape is still a phone -- so
+   it takes this sheet whole, exactly as it always has; the output there is
+   byte-identical to before. A desktop browser narrowed past the mobile edge
+   now gets the same CSS through a media query, instead of the half-applied
+   desktop layout it used to fall back to.
+
+   The <style> tag is here rather than inside the function so that the call
+   site can wrap the body in a media query. 767px is the mobile edge from the
+   breakpoint table in third-party/proxy/pfn/tools/mockdraft-simulator/theme.tpl. *}
+{if $is_desktop}
+  <style>
+    @media (max-width: 767px) {
+      {call getMDSFinalResultMobileCSS}
+    }
+  </style>
+{else}
+  <style>
+    {call getMDSFinalResultMobileCSS}
+  </style>
 {/if}
