@@ -46,6 +46,14 @@ This guide shows how to create a new project in Coolify and deploy an applicatio
 2. Enter the branch name.
 3. On top right corner click on Actions dropdown and choose deploy.
 
+## 6. No indexing of staging/internal sub-domains
+1. Click on "Domains" button on the left.
+2. Choose settings option and change the "Search engine indexing" option to "NoIndex".
+3. This will stop the internal url from getting indexed on google.
+<img width="3652" height="1144" alt="Screenshot 2026-09-22 at 12 02 30" src="https://github.com/user-attachments/assets/8e3f3736-5ee2-4ccf-8339-ef6e8856939d" />
+<img width="675" height="382" alt="Screenshot 2026-09-22 at 2 46 48 PM" src="https://github.com/user-attachments/assets/13f5307e-d1fa-4d51-8015-9b51c2bb8498" />
+
+
 
 ## Changing the branch later
 
