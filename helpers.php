@@ -931,3 +931,53 @@ function fetch_data_with_curl_multi($urls, $auth_key)
 
   return $responses;
 }
+
+/**
+ * Applies the PFN tools sidebar-nav layout (left rail + blue hero banner + yellow
+ * promo bar) used by the NFL Playoff Predictor and the NFL Mock Draft Simulator.
+ *
+ * $activeKey marks the current page so the sidebar highlights it and neither the
+ * promo bar nor the promo nav links point back at the page you are already on.
+ */
+function preparePFNToolSidebarNav(&$templateData, $activeKey) {
+  if (!isset($templateData["brand"]) || $templateData["brand"] !== "pfn") {
+    return;
+  }
+
+  $promos = [
+    'mockdraft' => [
+      'url' => 'https://www.profootballnetwork.com/mockdraft',
+      'eyebrow' => 'PFSN Mock Draft Simulator',
+      'cta' => 'Mock Now',
+    ],
+    'playoff-predictor' => [
+      'url' => 'https://www.profootballnetwork.com/nfl-playoff-predictor',
+      'eyebrow' => 'PFSN NFL Playoff Predictor',
+      'cta' => 'Predict Now',
+    ],
+  ];
+
+  $navLinkCatalog = [
+    ['key' => 'mockdraft', 'text' => 'Mock Draft Simulator', 'url' => 'https://www.profootballnetwork.com/mockdraft'],
+    ['key' => 'playoff-predictor', 'text' => 'NFL Playoff Predictor', 'url' => 'https://www.profootballnetwork.com/nfl-playoff-predictor'],
+    ['key' => 'nfl-hq', 'text' => 'HQ', 'url' => 'https://www.profootballnetwork.com/nfl-hq/'],
+    ['key' => 'ultimate-gm', 'text' => 'Ultimate GM', 'url' => 'https://www.profootballnetwork.com/nfl-ultimate-gm-simulator/'],
+    ['key' => 'cfb-playoff-predictor', 'text' => 'CFB Playoff Predictor', 'url' => 'https://www.profootballnetwork.com/cfb-playoff-predictor/', 'desktop_only' => true],
+  ];
+
+  $promoKey = $activeKey === 'mockdraft' ? 'playoff-predictor' : 'mockdraft';
+
+  $navLinks = [];
+  foreach ($navLinkCatalog as $navLink) {
+    if ($navLink['key'] === $activeKey) {
+      continue;
+    }
+    $navLinks[] = $navLink;
+  }
+
+  $templateData['show_sidebar_nav'] = true;
+  $templateData['include_right_sidebar'] = false;
+  $templateData['sidebar_nav_active_key'] = $activeKey;
+  $templateData['sidebar_promo'] = $promos[$promoKey];
+  $templateData['sidebar_promo_nav_links'] = $navLinks;
+}

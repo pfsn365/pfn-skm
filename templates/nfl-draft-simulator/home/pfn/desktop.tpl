@@ -65,6 +65,15 @@
 					<div class="teams-filters-container">
 						{include file="templates/nfl-draft-simulator/common/teams/index.tpl"}
 						{include file="templates/nfl-draft-simulator/common/simulation-input/index.tpl"}
+						{* Second CTA, in the position mobile.tpl uses -- a sibling after both
+						   panels rather than inside the settings card. Exactly one of the two is
+						   ever visible: below the desktop breakpoint the lobby stacks and the
+						   button belongs under the teams, at and above it the button belongs at
+						   the foot of the Draft Settings card. Both call startDraft(this), which
+						   only uses the element as a 200ms double-click guard before handing off
+						   to the argument-less startDraftHelper(), so either copy drives the same
+						   code. *}
+						<button class="start-draft-btn" onclick="startDraft(this)">{$start_draft_btn_text}</button>
 					</div>
 					<div class="multi-user-create-join-room-container hidden">
 						<div class="join-room-container"></div>
@@ -90,6 +99,13 @@
 					<div class="mypicks-btn-container">
 						<div class="mypicks-btn-holder">
 							<button class="draft-result-btn selected" onclick="toggleMyPicks(this)">Draft Results</button>
+							{* Third tab for widths below the mobile edge, where the board and the
+							   pool stack instead of sitting side by side. Hidden above it, and wired
+							   in tools/mockdraft-simulator/enhance.tpl rather than with an inline
+							   onclick -- the handler is part of the PFN theme layer, not of
+							   js/fragments/mockdraft-simulator.js, which skm and the widget share.
+							   Ordered between the two existing tabs to match mobile.tpl. *}
+							<button class="player-pool-btn" type="button">Player Pool</button>
 							<button class="my-picks-btn" onclick="toggleMyPicks(this)">My Picks</button>
 						</div>
 					</div>

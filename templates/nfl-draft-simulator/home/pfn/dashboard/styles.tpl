@@ -196,6 +196,14 @@
       width: 100%;
     }
 
+    /* .dashboard-section-data turns into a column just above, but the widget
+       columns inside it keep the 33% they need while they sit side by side --
+       so stacked, every section rendered a third of the screen wide with two
+       thirds of empty space beside it. The width has to follow the direction. */
+    .dashboard-holder .dashboard-section-data .widgets-container {
+      width: 100%;
+    }
+
     .dashboard-header .header-text-container {
       width: 100%;
       display: flex;
