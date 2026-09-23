@@ -67,7 +67,7 @@
 					<div class="desktop-pages-top-adv-container"></div>
 				{/if}
 
-				{if !$is_desktop && !$hide_mobile_top_adv_container}
+				{if !$is_desktop && !$hide_mobile_top_adv_container && (!isset($disable_ads) || !$disable_ads)}
 					<div class="mobile-top-adv-container raptive-pfn-header"></div>
 				{/if}
 
@@ -128,11 +128,21 @@
 					<div class="desktop-tools-top-adv-container {if isset($raptive_header_90_class)}{$raptive_header_90_class}{/if}"></div>
 				{/if}
 				<div class="header-container">
-					<div class="left-header-border"></div>
-					<h1 class="header-text">
-						{$header_text}
-					</h1>
-					<div class="right-header-border"></div>
+					{if isset($show_logo_in_h2)}
+						<img class="pfn-shield-logo" src="{$smarty.const.STATIC_URL}{$pfn_logo_path}" alt="pfn logo" width="50" height="50" />
+						{* <img class="third-party-logo" src="{$smarty.const.STATIC_URL}{$third_party_logo_path}" alt="hail mary logo" width="50" height="50" /> *}
+					{/if}
+					<div class="header-border-text-container">
+						<div class="left-header-border"></div>
+						<h1 class="header-text">
+							{$header_text}
+						</h1>
+						<div class="right-header-border"></div>
+					</div>
+					{if isset($show_logo_in_h2)}
+						<img class="third-party-logo" src="{$smarty.const.STATIC_URL}{$third_party_logo_path}" alt="hail mary logo" width="50" height="50" />
+						{* <img class="pfn-shield-logo" src="{$smarty.const.STATIC_URL}{$pfn_logo_path}" alt="pfn logo" width="50" height="50" /> *}
+					{/if}
 				</div>
 				{if $updated_timestamp}
 				<span class="updated-timestamp-container">{if isset($initially_hide_updated_timestamp)}{else}UPDATED ON {$updated_timestamp}{/if}</span>
@@ -145,7 +155,7 @@
 					<div class="desktop-pages-top-adv-container"></div>
 				{/if}
 
-				{if !$is_desktop && !$hide_mobile_top_adv_container}
+				{if !$is_desktop && !$hide_mobile_top_adv_container && (!isset($disable_ads) || !$disable_ads)}
 					<div class="mobile-top-adv-container raptive-pfn-header"></div>
 				{/if}
 

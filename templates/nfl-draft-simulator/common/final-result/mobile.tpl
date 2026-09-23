@@ -106,7 +106,8 @@
       <div class="login-container-overlay">
         <div class="login-container">
           <span class="view-performance-text">Log in to track your MDS statistics</span>
-          <button class="dashboard-login-btn" onclick="navigateToLoginScreen()">Login</button>
+          {* <button class="dashboard-login-btn" onclick="navigateToLoginScreen()">Login</button> *}
+          <button class="dashboard-login-btn" onclick="">Login</button>
         </div>
       </div>
     </div>

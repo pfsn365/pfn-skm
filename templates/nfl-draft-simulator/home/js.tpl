@@ -168,46 +168,46 @@
     stats: {},
   };
 
-  if (brand) {
-    var trackGAEventForPage = function(eventName, eventParams) {
-      eventParams = eventParams || {};
-      trackGAEvent(eventName, {
-        ...eventParams,
-        "tool": "mockdraft_simulator"
-      });
-    };
+  // if (brand) {
+  //   var trackGAEventForPage = function(eventName, eventParams) {
+  //     eventParams = eventParams || {};
+  //     trackGAEvent(eventName, {
+  //       ...eventParams,
+  //       "tool": "mockdraft_simulator"
+  //     });
+  //   };
 
-    var proDBSimulationNumUrl = "https://qhy62as4g2.execute-api.us-east-1.amazonaws.com/get_pfn_sim_num";
-    pureJSAjaxGet(proDBSimulationNumUrl, function(data) {
-      data = JSON.parse(data);
-      if (data.body) {
-        prodDBSimNum = data.body[0] + 1;
-      }
-    }, function() {}, false);
+  //   var proDBSimulationNumUrl = "https://qhy62as4g2.execute-api.us-east-1.amazonaws.com/get_pfn_sim_num";
+  //   pureJSAjaxGet(proDBSimulationNumUrl, function(data) {
+  //     data = JSON.parse(data);
+  //     if (data.body) {
+  //       prodDBSimNum = data.body[0] + 1;
+  //     }
+  //   }, function() {}, false);
 
-    (function() {
-      var userTotalTimeSpent = 0;
-      var timerId;
+  //   (function() {
+  //     var userTotalTimeSpent = 0;
+  //     var timerId;
 
-      function trackTimeSpent() {
-        userTotalTimeSpent += 10;
-        trackGAEventForPage("time_spent", {
-          "value": userTotalTimeSpent,
-        });
-      }
+  //     function trackTimeSpent() {
+  //       userTotalTimeSpent += 10;
+  //       trackGAEventForPage("time_spent", {
+  //         "value": userTotalTimeSpent,
+  //       });
+  //     }
 
-      function handleVisibilityChange() {
-        if (document.visibilityState === "visible") {
-          timerId = setInterval(trackTimeSpent, 10000);
-        } else if (timerId) {
-          clearInterval(timerId);
-        }
-      }
+  //     function handleVisibilityChange() {
+  //       if (document.visibilityState === "visible") {
+  //         timerId = setInterval(trackTimeSpent, 10000);
+  //       } else if (timerId) {
+  //         clearInterval(timerId);
+  //       }
+  //     }
 
-      document.addEventListener("visibilitychange", handleVisibilityChange);
-      handleVisibilityChange();
-    })();
-  }
+  //     document.addEventListener("visibilitychange", handleVisibilityChange);
+  //     handleVisibilityChange();
+  //   })();
+  // }
 
   var overlay = document.createElement("div");
   addClass(overlay, "loading-overlay");

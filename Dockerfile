@@ -5,6 +5,7 @@ RUN composer install --no-dev --no-interaction --no-scripts --optimize-autoloade
 
 # js/dev/*-bundle.js are not committed (see .gitignore) — staging builds its own,
 # so the image has to build them too. dev-config.php points the bundled tool script
+
 # tags at /js/dev/, which 404s without this stage. Production reads the hashed
 # CDN URLs out of js-side-menu-config.php and never touches js/dev.
 FROM node:18-alpine AS bundles

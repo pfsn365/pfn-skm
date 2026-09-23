@@ -591,5 +591,13 @@
       display: flex;
       align-items: center;
    }
+
+   .playoff-section-header-container .third-party-logo {
+      width: 35px;
+      height: 35px;
+      position: absolute;
+      left: 10px;
+      background: transparent;
+   }
 }
 </style>

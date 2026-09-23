@@ -8,7 +8,8 @@
         <button class="my-draft-btn selected" onclick="showSelectedTeamsResult()">MY DRAFT</button>
         <button class="full-results-btn" onclick="showAllRoundsResult()">FULL RESULTS</button>
         {if $show_dashboard_btn_final_result == true}
-          <button class="dashboard-btn" onclick="showResultScreenDashboard()">
+          {* <button class="dashboard-btn" onclick="showResultScreenDashboard()"> *}
+          <button class="dashboard-btn" onclick="">
           <span>DASHBOARD</span>
           <span class="new-text">New</span>
           </button>

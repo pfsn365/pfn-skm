@@ -6,6 +6,10 @@
     --section-bg-color: #fff;
   }
 
+  .playoff-predictor .playoff-predictor-tool-wrapper {
+    margin-top: 20px;
+  }
+
   .playoff-predictor .week-matches-simulation-wrapper .wrapper-header {
     background-color: #0050A0;
   }

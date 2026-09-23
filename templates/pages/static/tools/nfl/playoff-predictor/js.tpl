@@ -17,6 +17,7 @@
         });
     };
 
+    {if !isset($disable_ga_events) || !$disable_ga_events}
     (function() {
         var userTotalTimeSpent = 0;
         var timerId;
@@ -39,6 +40,7 @@
         document.addEventListener("visibilitychange", handleVisibilityChange);
         handleVisibilityChange();
     })();
+    {/if}
 
 
     var STATIC_URL = "{$smarty.const.STATIC_URL}";
@@ -63,10 +65,12 @@
             value: "PLAYOFF_PREDICTOR_BUNDLE_SCRIPT",
         }, ],
     })
+    {if !isset($disable_ads) || !$disable_ads}
     if (!IS_DESKTOP && INCLUDE_SK_ADS) {
         registerAdUnit("NFL_Playoff_Predictor_Top");
         registerAdUnit("NFL_Playoff_Predictor_2");
     }
+    {/if}
 
     (function() {
         var BREAKPOINT = 950;
