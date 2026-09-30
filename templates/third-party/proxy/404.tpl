@@ -16,6 +16,6 @@
 </style>
 
 <div class="error-404">
-  <img src='https://static.sportskeeda.com/skm/assets/images/404.png' width="360"
+  <img src='https://static.profootballnetwork.com/skm/assets/images/404.png' width="360"
     height="100" alt="404 image">
 </div>

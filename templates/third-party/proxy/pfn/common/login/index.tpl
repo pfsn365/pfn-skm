@@ -261,12 +261,12 @@
     var passwordInput = parent.querySelector('.form-input');
     if (hasClass(ele, 'show')) {
       removeClass(ele, 'show');
-      ele.src = 'https://statics.sportskeeda.com/skm/assets/affiliate/reads_icon.svg';
+      ele.src = 'https://staticj.profootballnetwork.com/skm/assets/affiliate/reads_icon.svg';
       ele.setAttribute('title', 'Show password');
       passwordInput.setAttribute('type', 'password');
     } else {
       addClass(ele, 'show');
-      ele.src = 'https://statics.sportskeeda.com/skm/assets/images/hide.svg';
+      ele.src = 'https://staticj.profootballnetwork.com/skm/assets/images/hide.svg';
       ele.setAttribute('title', 'Hide password');
       passwordInput.setAttribute('type', 'text');
     }
