@@ -537,7 +537,7 @@ function getPFNToolSubpageSlug($tool) {
 
 // from routes/sk-proxy.php:5170
 function getPFNSecondaryNavigationData() {
-  $dataUrl = "https://statics.sportskeeda.com/assets/sheets/nav-data/navData.json";
+  $dataUrl = "https://staticj.profootballnetwork.com/assets/sheets/nav-data/navData.json";
   $staticData = do_curl($dataUrl, $status_code);
   $decodedData = json_decode($staticData, TRUE);
 
