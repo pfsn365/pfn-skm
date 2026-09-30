@@ -18,11 +18,11 @@
 
     function setCookie(cname, cvalue, cexpiry) {
         var expiry = typeof cexpiry === 'string' ? cexpiry : cexpiry.toGMTString();
-        document.cookie = cname + '=' + cvalue + ';domain=.sportskeeda.com;path=/;expires=' + expiry;
+        document.cookie = cname + '=' + cvalue + ';domain=.profootballnetwork.com;path=/;expires=' + expiry;
     }
 
     function unsetCookie(cname) {
-        document.cookie = cname + '=;domain=.sportskeeda.com;path=/;expires=Thu, 01 Jan 1971 00:00:01 GMT;';
+        document.cookie = cname + '=;domain=.profootballnetwork.com;path=/;expires=Thu, 01 Jan 1971 00:00:01 GMT;';
     }
 
 {/if}

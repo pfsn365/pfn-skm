@@ -25,7 +25,6 @@ define('PROFOOTBALLNETWORK', true);
 define('BUNDLE_STATIC_URL', '//static.profootballnetwork.com');
 // } else {
 // 	define('PROFOOTBALLNETWORK', false);
-// 	define('BUNDLE_STATIC_URL', '//staticg.sportskeeda.com');
 // }
 
 	define('GOTHAM_URL', 'http://gotham-bigscoots.profootballnetwork.com');

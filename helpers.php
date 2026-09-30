@@ -774,19 +774,7 @@ function getFeaturedToolsQuickLinksWidgetForPFN() {
 
 // from functions.php:15860
 function getStaticUrlConfig() {
-    if (defined("ONLYWORDGAMES") && ONLYWORDGAMES) {
-        return "//static.onlywordgames.com";
-    }
-
-    if (defined("CricRocketOriginHeader") && CricRocketOriginHeader) {
-        return "//static.cricrocket.com";
-    }
-
-    if (defined("PROFOOTBALLNETWORK") && PROFOOTBALLNETWORK) {
-        return "//staticd.profootballnetwork.com";
-    }
-
-    return "//static.sportskeeda.com";
+    return "//staticd.profootballnetwork.com";
 }
 
 // from routes/article.php:2793

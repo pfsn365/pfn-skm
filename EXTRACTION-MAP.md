@@ -270,8 +270,8 @@ the `SlimGoesSlimmer` middleware). Run `composer install`.
   served from the CDN (`//staticd.profootballnetwork.com`). They load at runtime
   unchanged.
 - **Remote data/APIs used at runtime** (unchanged from parent):
-  - `statics.sportskeeda.com/assets/sheets/tools/mockdraft-simulator/mockdraftSimulatorData.json` (live MDS data; local JSONs are the fallback)
-  - `statics.sportskeeda.com/assets/sheets/nav-data/navData.json` (secondary nav)
+  - `staticj.profootballnetwork.com/assets/sheets/tools/mockdraft-simulator/mockdraftSimulatorData.json` (live MDS data; local JSONs are the fallback)
+  - `staticj.profootballnetwork.com/assets/sheets/nav-data/navData.json` (secondary nav)
   - `API_ENDPOINT_DOMAIN/v1/taxonomy/<slug>` (page SEO metadata)
   - `generateDataIntegrationAssetsPath(...)` asset paths (playoff/ultimate/fifa data,
     and `tools/free_agency_simulator/{final,team_level_data}.json` for the Offseason Manager)

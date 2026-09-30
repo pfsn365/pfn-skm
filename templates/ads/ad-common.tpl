@@ -52,7 +52,7 @@ and we don't have awkwardly large padding in case a small creative appears inste
 {elseif !empty($ad_units.$slotId.inhouse)}
     {include file='ads/ad-inhouse.tpl'}
 {elseif !empty($ad_units.$slotId.sticky)}
-    {include file='ads/ad-sticky.tpl'} {* TODO: FLAG – this will mess things up, fix later : sankalp@sportskeeda.com *}
+    {include file='ads/ad-sticky.tpl'}
 {elseif !empty($ad_units.$slotId.interstitial)}
     {include file='ads/ad-interstitial.tpl'}
 {elseif !empty($ad_units.$slotId.native)}

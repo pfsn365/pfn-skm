@@ -375,7 +375,7 @@ $app->get('/sk-proxy/:brand/mockdraft-simulator-widget', function ($brand) use (
     $trackingURL = "https://www.profootballnetwork.com/mockdraft?utm_medium=referral&utm_source=fansided";
   }
 
-  $mdsDataUrl = "https://statics.sportskeeda.com/assets/sheets/tools/mockdraft-simulator/mockdraftSimulatorData.json";
+  $mdsDataUrl = "https://staticj.profootballnetwork.com/assets/sheets/tools/mockdraft-simulator/mockdraftSimulatorData.json";
 
   $filesData = do_curl($mdsDataUrl, $statuscode);
   $filesData = json_decode($filesData, true);
