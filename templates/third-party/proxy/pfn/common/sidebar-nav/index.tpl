@@ -8,7 +8,7 @@
         </svg>
     </label>
     <a href="https://www.profootballnetwork.com" class="mobile-logo">
-        <img src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfn-logos/pfn-logo-white-2026-v1.png?w=25&h=25" alt="PFSN">
+        <img src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfn-logos/pfn-logo-white-2026-v1.png?w=25&h=25" alt="PFN">
     </a>
     <span class="right-spacer"></span>
 </div>
@@ -16,7 +16,7 @@
 <aside class="pfn-sidebar-wrapper">
     <a class="pfn-sidebar-logo" href="https://www.profootballnetwork.com">
         <img src="{$smarty.const.STATIC_URL}/skm/assets/pfn/pfn-logos/pfn-logo-white-2026-v1.png?w=58&h=58"
-             alt="PFSN" width="58" height="58">
+             alt="PFN" width="58" height="58">
     </a>
 
     <div class="pfn-sidebar-featured">

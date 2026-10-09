@@ -79,7 +79,7 @@
         <div class="players-list-selection-container-holder">
           <span class="list-selection-text">Select Big Board:</span>
           <select name="list-selector" id="players-lists" onchange="selectMDSPlayersList(event)" aria-label="players-list">
-            <option value="pfsn">PFSN</option>
+            <option value="pfn">PFN</option>
             <option value="jacob_infante">Jacob Infante</option>
             <option value="ian_cummings">Ian Cummings</option>
             {* <option value="consensus">Consensus</option>
