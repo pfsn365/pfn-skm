@@ -47,7 +47,7 @@
   };
   const sendPageViewEvent = "{$send_page_view_event}";
   const playerRankingProvidersMap = {
-    "pfsn": "PFSN",
+    "pfn": "PFN",
     "espn": "ESPN",
     "pff": "PFF",
     "the_athletic": "The Athletic",
@@ -55,7 +55,7 @@
   }
 
   let playerBoardsList = {
-    "pfsn": JSON.parse(JSON.stringify(playersList)),
+    "pfn": JSON.parse(JSON.stringify(playersList)),
     "consensus": "",
     "espn": "",
     "pff": "",
