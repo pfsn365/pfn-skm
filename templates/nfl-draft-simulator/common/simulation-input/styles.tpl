@@ -1,6 +1,4 @@
-{if !$is_desktop}
-  {function getMDSSimulationInputMobileCSS}
-    <style>
+{function getMDSSimulationInputMobileCSS}
       .teams-filters-container {
         padding: 0px 12px;
         display: flex;
@@ -91,9 +89,7 @@
         width: 100px;
         height: 18px;
       }
-    </style>
-  {/function}
-{/if}
+{/function}
 <style>
   .simulator-content-holder .filters-container {
     border-radius: 8px;
@@ -290,6 +286,26 @@
   }
 </style>
 
-{if !$is_desktop}
-  {call getMDSSimulationInputMobileCSS}
+{* Mobile stylesheet.
+
+   Width-based on the desktop host, unconditional on the mobile host. m.* has
+   no tablet or desktop regime -- a phone in landscape is still a phone -- so
+   it takes this sheet whole, exactly as it always has; the output there is
+   byte-identical to before. A desktop browser narrowed past the mobile edge
+   now gets the same CSS through a media query, instead of the half-applied
+   desktop layout it used to fall back to.
+
+   The <style> tag is here rather than inside the function so that the call
+   site can wrap the body in a media query. 767px is the mobile edge from the
+   breakpoint table in third-party/proxy/pfn/tools/mockdraft-simulator/theme.tpl. *}
+{if $is_desktop}
+  <style>
+    @media (max-width: 767px) {
+      {call getMDSSimulationInputMobileCSS}
+    }
+  </style>
+{else}
+  <style>
+    {call getMDSSimulationInputMobileCSS}
+  </style>
 {/if}

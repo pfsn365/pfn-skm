@@ -77,7 +77,7 @@
 		{/if}
 	</head>
 
-	<body class="{$tool} {$bodyClasses}">
+	<body class="{$tool} {$bodyClasses}{if isset($show_sidebar_nav) && $show_sidebar_nav} pfn-has-sidebar-nav{/if}">
 		<main class="sk-proxied-page">
 			{if !empty($layout_fragment)}
 				{include file=$layout_fragment}

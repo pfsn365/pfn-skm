@@ -44,20 +44,21 @@
 				{/if}
 			</div>
 		{/if}
-		<div class="pfn-promo-bar">
-			<div class="pfn-promo-link" onclick="window.open('https://www.profootballnetwork.com/mockdraft', '_blank')" role="link" tabindex="0">
-				<span class="pfn-promo-inner">
-					<span class="pfn-promo-eyebrow">PFSN Mock Draft Simulator</span>
-					<span class="pfn-promo-cta">Mock Now <span class="pfn-promo-arrow">→</span></span>
-				</span>
+		{if isset($sidebar_promo)}
+			<div class="pfn-promo-bar">
+				<div class="pfn-promo-link" onclick="window.open('{$sidebar_promo.url}', '_blank')" role="link" tabindex="0">
+					<span class="pfn-promo-inner">
+						<span class="pfn-promo-eyebrow">{$sidebar_promo.eyebrow}</span>
+						<span class="pfn-promo-cta">{$sidebar_promo.cta} <span class="pfn-promo-arrow">→</span></span>
+					</span>
+				</div>
+				<div class="pfn-promo-nav-links">
+					{foreach $sidebar_promo_nav_links as $promoNavLink}
+						<a{if !empty($promoNavLink.desktop_only)} class="pfn-promo-nav-desktop"{/if} href="{$promoNavLink.url}">{$promoNavLink.text}</a>
+					{/foreach}
+				</div>
 			</div>
-			<div class="pfn-promo-nav-links">
-				<a href="https://www.profootballnetwork.com/mockdraft">Mock Draft Simulator</a>
-				<a href="https://www.profootballnetwork.com/nfl-hq/">HQ</a>
-				<a href="https://www.profootballnetwork.com/nfl-ultimate-gm-simulator/">Ultimate GM</a>
-				<a class="pfn-promo-nav-desktop" href="https://www.profootballnetwork.com/cfb-playoff-predictor/">CFB Playoff Predictor</a>
-			</div>
-		</div>
+		{/if}
 		{if $is_desktop && $show_desktop_tools_top_adv_container}
 			<div class="desktop-tools-top-adv-container {if isset($raptive_header_90_class)}{$raptive_header_90_class}{/if}"></div>
 		{/if}
